@@ -212,7 +212,7 @@
           <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
         <button id="connBtn" class="conn-btn" onclick="toggleOfflineMode()" title="التبديل بين وضع الاتصال المباشر ووضع عدم الاتصال">
-          <span id="connLabel">✓ متصل ومُحدَّث</span>
+          <span id="connLabel">متصل ومُحدَّث</span>
         </button>
       </div>
     </div>
@@ -259,9 +259,9 @@
         <span>المصدر: الجهاز المركزي للإحصاء الفلسطيني وOCHA</span>
       </div>
       <div class="metrics-strip">
-        <div class="metric-cell metric-cell-ok"><span class="metric-label">✓ متوفر / سعر مدعوم</span><span id="countGreen" class="metric-num">0</span></div>
-        <div class="metric-cell metric-cell-warn"><span class="metric-label">! تذبذب / كمية محدودة</span><span id="countAmber" class="metric-num">0</span></div>
-        <div class="metric-cell metric-cell-danger"><span class="metric-label">× شحيح حالياً</span><span id="countRed" class="metric-num">0</span></div>
+        <div class="metric-cell metric-cell-ok"><span class="metric-label">متوفر / سعر مدعوم</span><span id="countGreen" class="metric-num">0</span></div>
+        <div class="metric-cell metric-cell-warn"><span class="metric-label">تذبذب / كمية محدودة</span><span id="countAmber" class="metric-num">0</span></div>
+        <div class="metric-cell metric-cell-danger"><span class="metric-label">شحيح حالياً</span><span id="countRed" class="metric-num">0</span></div>
       </div>
       <div class="controls-bar">
         <div class="controls-row">
@@ -274,9 +274,9 @@
         </div>
         <div class="filter-group" id="statusFilters">
           <button class="filter-pill active" onclick="setStatusFilter('all', this)">جميع الحالات</button>
-          <button class="filter-pill" onclick="setStatusFilter('green', this)">✓ متوفر / سعر مدعوم</button>
-          <button class="filter-pill" onclick="setStatusFilter('amber', this)">! تذبذب / كمية محدودة</button>
-          <button class="filter-pill" onclick="setStatusFilter('red', this)">× شحيح حالياً</button>
+          <button class="filter-pill" onclick="setStatusFilter('green', this)">متوفر / سعر مدعوم</button>
+          <button class="filter-pill" onclick="setStatusFilter('amber', this)">تذبذب / كمية محدودة</button>
+          <button class="filter-pill" onclick="setStatusFilter('red', this)">شحيح حالياً</button>
         </div>
       </div>
       <div class="surface-box">
@@ -303,7 +303,7 @@
       </div>
       <div class="sync-strip">
         <div class="sync-info">
-          <h2><span>النسخة المحفوظة على ذاكرة الجهاز</span><span class="accred-stamp">✓ اعتماد النسخة: بيانات رسمية موثقة</span></h2>
+          <h2><span>النسخة المحفوظة على ذاكرة الجهاز</span><span class="accred-stamp">اعتماد النسخة: بيانات رسمية موثقة</span></h2>
           <p>يجلب التطبيق التحديثات تلقائياً من ملف البيانات الرسمي ويحفظها محلياً للعمل عند انقطاع الشبكة.</p>
         </div>
         <div class="sync-actions">
@@ -326,8 +326,8 @@
             <div class="controls-row">
               <div class="filter-group" id="verdictFilters">
                 <button class="filter-pill active" onclick="setVerdictFilter('all', this)">الكل</button>
-                <button class="filter-pill" onclick="setVerdictFilter('false', this)">× ادعاءات مضللة</button>
-                <button class="filter-pill" onclick="setVerdictFilter('true', this)">✓ توضيحات رسمية</button>
+                <button class="filter-pill" onclick="setVerdictFilter('false', this)">ادعاءات مضللة</button>
+                <button class="filter-pill" onclick="setVerdictFilter('true', this)">توضيحات رسمية</button>
               </div>
               <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
             </div>
@@ -487,32 +487,32 @@
 
     function getOutletAccreditation(item) {
       const text = (item.items || '') + ' ' + (item.address || '');
-      if (text.includes('WFP') && (text.includes('UNRWA') || text.includes('الأونروا'))) return '✓ معتمد: WFP والأونروا';
-      if (text.includes('WFP') || text.includes('الأغذية العالمي')) return '✓ معتمد: برنامج الأغذية (WFP)';
-      if (text.includes('UNRWA') || text.includes('الأونروا')) return '✓ معتمد: وكالة الأونروا';
-      return '✓ معتمد: تنسيق إنساني ميداني';
+      if (text.includes('WFP') && (text.includes('UNRWA') || text.includes('الأونروا'))) return 'معتمد: WFP والأونروا';
+      if (text.includes('WFP') || text.includes('الأغذية العالمي')) return 'معتمد: برنامج الأغذية (WFP)';
+      if (text.includes('UNRWA') || text.includes('الأونروا')) return 'معتمد: وكالة الأونروا';
+      return 'معتمد: تنسيق إنساني ميداني';
     }
 
     function getMarketAccreditation(item) {
       const src = item.source || '';
-      if (src.includes('الإحصاء')) return '✓ معتمد: الإحصاء الفلسطيني';
-      if (src.includes('OCHA')) return '✓ معتمد: تقارير OCHA';
-      return '✓ معتمد: رصد رسمي';
+      if (src.includes('الإحصاء')) return 'معتمد: الإحصاء الفلسطيني';
+      if (src.includes('OCHA')) return 'معتمد: تقارير OCHA';
+      return 'معتمد: رصد رسمي';
     }
 
     function getAlertAccreditation(alert) {
       const title = alert.title || '';
-      if (title.includes('الاقتصاد')) return '✓ اعتماد النشرة: وزارة الاقتصاد الوطني';
-      if (title.includes('الإحصاء')) return '✓ اعتماد النشرة: الإحصاء الفلسطيني';
-      if (title.includes('OCHA')) return '✓ اعتماد النشرة: مكتب OCHA';
-      return '✓ اعتماد النشرة: بيان رسمي';
+      if (title.includes('الاقتصاد')) return 'اعتماد النشرة: وزارة الاقتصاد الوطني';
+      if (title.includes('الإحصاء')) return 'اعتماد النشرة: الإحصاء الفلسطيني';
+      if (title.includes('OCHA')) return 'اعتماد النشرة: مكتب OCHA';
+      return 'اعتماد النشرة: بيان رسمي';
     }
 
     function getRumorAccreditation(rumor) {
       const meta = rumor.meta || '';
-      if (meta.includes('مسبار')) return '✓ اعتماد التحقق: منصة مسبار';
-      if (meta.includes('الاقتصاد')) return '✓ اعتماد التحقق: وزارة الاقتصاد';
-      return '✓ اعتماد التحقق: مصدر رسمي';
+      if (meta.includes('مسبار')) return 'اعتماد التحقق: منصة مسبار';
+      if (meta.includes('الاقتصاد')) return 'اعتماد التحقق: وزارة الاقتصاد';
+      return 'اعتماد التحقق: مصدر رسمي';
     }
 
     function formatLastUpdated(isoDateString) {
@@ -617,10 +617,10 @@
         body.innerHTML = '<tr><td colspan="6" class="empty-row">لا توجد سلع مطابقة لخيارات التصفية الحالية.</td></tr>';
         return;
       }
-      const availMap = { green: { cls: 'avail-ok', mark: '✓' }, amber: { cls: 'avail-warn', mark: '!' }, red: { cls: 'avail-danger', mark: '×' } };
+      const availMap = { green: 'avail-ok', amber: 'avail-warn', red: 'avail-danger' };
       body.innerHTML = filtered.map(item => {
-        const st = availMap[item.status] || availMap.amber;
-        return `<tr><td><span class="cell-main">${escapeHtml(item.name)}</span><span class="cell-sub">${escapeHtml(item.source)}</span></td><td data-label="النطاق الجغرافي">${escapeHtml(item.area)}</td><td data-label="المقارنة المرجعية"><span class="price-ref">${escapeHtml(item.ref)}</span></td><td data-label="متوسط السعر"><span class="price-official">${escapeHtml(item.fair)}</span></td><td data-label="حالة التوفر"><span class="avail-tag ${st.cls}">${st.mark} ${escapeHtml(item.label)}</span></td><td data-label="الاعتماد"><span class="accred-stamp">${escapeHtml(getMarketAccreditation(item))}</span></td></tr>`;
+        const cls = availMap[item.status] || 'avail-warn';
+        return `<tr><td><span class="cell-main">${escapeHtml(item.name)}</span><span class="cell-sub">${escapeHtml(item.source)}</span></td><td data-label="النطاق الجغرافي">${escapeHtml(item.area)}</td><td data-label="المقارنة المرجعية"><span class="price-ref">${escapeHtml(item.ref)}</span></td><td data-label="متوسط السعر"><span class="price-official">${escapeHtml(item.fair)}</span></td><td data-label="حالة التوفر"><span class="avail-tag ${cls}">${escapeHtml(item.label)}</span></td><td data-label="الاعتماد"><span class="accred-stamp">${escapeHtml(getMarketAccreditation(item))}</span></td></tr>`;
       }).join('');
     }
 
@@ -645,7 +645,7 @@
       }
       list.innerHTML = filtered.map((r, idx) => {
         const isFalse = r.verdict === 'false';
-        return `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag ${isFalse ? 'avail-danger' : 'avail-ok'}">${isFalse ? '×' : '✓'} ${escapeHtml(r.tag)}</span><span class="accred-stamp">${escapeHtml(getRumorAccreditation(r))}</span></div><button class="btn-outline" onclick="copyFact(${idx})">نسخ النص</button></div><div class="rumor-claim">"${escapeHtml(r.claim)}"</div><div class="rumor-fact"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div><div class="rumor-meta">${escapeHtml(r.meta)}</div></article>`;
+        return `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag ${isFalse ? 'avail-danger' : 'avail-ok'}">${escapeHtml(r.tag)}</span><span class="accred-stamp">${escapeHtml(getRumorAccreditation(r))}</span></div><button class="btn-outline" onclick="copyFact(${idx})">نسخ النص</button></div><div class="rumor-claim">"${escapeHtml(r.claim)}"</div><div class="rumor-fact"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div><div class="rumor-meta">${escapeHtml(r.meta)}</div></article>`;
       }).join('');
     }
 
@@ -693,14 +693,14 @@
       const container = document.getElementById('userReportsContainer');
       const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
       if (!saved.length) { container.innerHTML = ''; return; }
-      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div><div class="surface-box">' + saved.map((rep, idx) => `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag avail-warn">! ${escapeHtml(rep.area)}</span><span class="accred-stamp">حفظ محلي</span></div><button class="btn-danger-link" onclick="deleteUserReport(${idx})">حذف</button></div><div class="rumor-claim">${escapeHtml(rep.text)}</div><div class="rumor-meta">${escapeHtml(rep.status)}</div></article>`).join('') + '</div>';
+      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div><div class="surface-box">' + saved.map((rep, idx) => `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag avail-warn">${escapeHtml(rep.area)}</span><span class="accred-stamp">حفظ محلي</span></div><button class="btn-danger-link" onclick="deleteUserReport(${idx})">حذف</button></div><div class="rumor-claim">${escapeHtml(rep.text)}</div><div class="rumor-meta">${escapeHtml(rep.status)}</div></article>`).join('') + '</div>';
     }
 
     function updateConnUI(offline) {
       const btn = document.getElementById('connBtn');
       const label = document.getElementById('connLabel');
-      if (offline) { btn.classList.add('offline-state'); label.textContent = '! وضع بدون إنترنت'; }
-      else { btn.classList.remove('offline-state'); label.textContent = '✓ متصل ومُحدَّث'; }
+      if (offline) { btn.classList.add('offline-state'); label.textContent = 'وضع بدون إنترنت'; }
+      else { btn.classList.remove('offline-state'); label.textContent = 'متصل ومُحدَّث'; }
     }
 
     function toggleOfflineMode() {
