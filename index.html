@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta id="themeColorMeta" name="theme-color" content="#FFFFFF" />
+  <meta id="themeColorMeta" name="theme-color" content="#F7F6F2" />
   <title>برهان — دليل الأسعار والتحقق الميداني</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" href="icon-192.png" />
@@ -13,182 +13,187 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-page: #F5F5F4;
+      --bg-page: #F7F6F2;
       --bg-surface: #FFFFFF;
-      --bg-subtle: #FAFAF9;
-      --bg-hover: #F5F5F4;
-      --border: #E7E5E4;
-      --border-strong: #D6D3D1;
+      --bg-subtle: #F1EFEA;
+      --bg-hover: #ECEAE3;
+      --border: rgba(28, 25, 23, 0.08);
       --text-primary: #1C1917;
       --text-secondary: #57534E;
       --text-muted: #78716C;
       --accent: #1E3A5F;
+      --accent-soft: rgba(30, 58, 95, 0.08);
       --on-accent: #FFFFFF;
       --ok-color: #166534;
-      --ok-bg: #F0FDF4;
-      --ok-border: #BBF7D0;
+      --ok-bg: #ECFDF5;
       --warn-color: #92400E;
-      --warn-bg: #FFFBEB;
-      --warn-border: #FDE68A;
+      --warn-bg: #FEF3C7;
       --danger-color: #991B1B;
-      --danger-bg: #FEF2F2;
-      --danger-border: #FECACA;
-      --accred-color: #1E3A5F;
-      --accred-bg: #F8FAFC;
-      --accred-border: #CBD5E1;
+      --danger-bg: #FEE2E2;
+      --card-shadow: 0 2px 10px rgba(28, 25, 23, 0.035);
       --fs-xs: 12px;
       --fs-sm: 13px;
       --fs-base: 14px;
-      --fs-md: 15px;
-      --fs-lg: 18px;
+      --fs-md: 15.5px;
+      --fs-lg: 19px;
     }
     [data-theme="dark"] {
-      --bg-page: #121212;
-      --bg-surface: #1A1A1A;
-      --bg-subtle: #212121;
-      --bg-hover: #242424;
-      --border: #2E2E2E;
-      --border-strong: #3F3F3F;
-      --text-primary: #F4F4F5;
-      --text-secondary: #A1A1AA;
-      --text-muted: #71717A;
-      --accent: #E4E4E7;
-      --on-accent: #121212;
+      --bg-page: #131312;
+      --bg-surface: #1C1C1A;
+      --bg-subtle: #252522;
+      --bg-hover: #2D2D29;
+      --border: rgba(255, 255, 255, 0.07);
+      --text-primary: #F4F4F2;
+      --text-secondary: #A8A59E;
+      --text-muted: #78756E;
+      --accent: #93C5FD;
+      --accent-soft: rgba(147, 197, 253, 0.12);
+      --on-accent: #111827;
       --ok-color: #86EFAC;
-      --ok-bg: rgba(22, 101, 52, 0.18);
-      --ok-border: rgba(134, 239, 172, 0.3);
+      --ok-bg: rgba(22, 101, 52, 0.24);
       --warn-color: #FCD34D;
-      --warn-bg: rgba(146, 64, 14, 0.2);
-      --warn-border: rgba(252, 211, 77, 0.3);
+      --warn-bg: rgba(146, 64, 14, 0.26);
       --danger-color: #FCA5A5;
-      --danger-bg: rgba(153, 27, 27, 0.2);
-      --danger-border: rgba(252, 165, 165, 0.3);
-      --accred-color: #CBD5E1;
-      --accred-bg: #23272F;
-      --accred-border: #3B4252;
+      --danger-bg: rgba(153, 27, 27, 0.26);
+      --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
-    html, body { width: 100%; overflow-x: hidden; font-size: var(--fs-base); line-height: 1.6; font-variant-numeric: tabular-nums; }
+    html, body { width: 100%; overflow-x: hidden; font-size: var(--fs-base); line-height: 1.65; font-variant-numeric: tabular-nums; }
     body { background-color: var(--bg-page); color: var(--text-primary); min-height: 100vh; }
+
+    /* الشريط العلوي */
     .topbar { width: 100%; background-color: var(--bg-surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 30; }
-    .topbar-inner { width: 100%; padding: 0 clamp(14px, 3vw, 32px); height: 54px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .top-tabs { display: none; align-items: stretch; height: 100%; gap: 4px; }
-    .top-tab { background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--text-secondary); padding: 0 14px; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
-    .top-tab svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; flex-shrink: 0; }
-    .top-tab:hover { color: var(--text-primary); }
-    .top-tab.active { color: var(--text-primary); border-bottom-color: var(--accent); font-weight: 700; }
+    .topbar-inner { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 clamp(14px, 3vw, 28px); height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand-mini { display: flex; align-items: center; gap: 9px; }
+    .brand-dot { width: 10px; height: 10px; border-radius: 50%; background-color: #166534; flex-shrink: 0; }
     .mobile-heading { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+
+    .top-tabs { display: none; align-items: center; gap: 6px; }
+    .top-tab { background: transparent; border: none; color: var(--text-secondary); padding: 7px 14px; border-radius: 999px; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: background-color 0.15s, color 0.15s; }
+    .top-tab svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; flex-shrink: 0; }
+    .top-tab:hover { background-color: var(--bg-subtle); color: var(--text-primary); }
+    .top-tab.active { background-color: var(--accent-soft); color: var(--accent); font-weight: 700; }
+
     .topbar-tools { display: flex; align-items: center; gap: 8px; margin-right: auto; }
-    .icon-btn { width: 34px; height: 34px; background-color: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-primary); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
-    .icon-btn:hover { border-color: var(--border-strong); background-color: var(--bg-hover); }
+    .icon-btn { width: 36px; height: 36px; background-color: var(--bg-subtle); border: none; color: var(--text-primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+    .icon-btn:hover { background-color: var(--bg-hover); }
     .icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .conn-btn { height: 34px; background-color: var(--ok-bg); border: 1px solid var(--ok-border); border-right: 3px solid var(--ok-color); color: var(--ok-color); padding: 0 11px; border-radius: 3px; font-size: var(--fs-xs); font-weight: 700; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; }
-    .conn-btn.offline-state { background-color: var(--warn-bg); border-color: var(--warn-border); border-right-color: var(--warn-color); color: var(--warn-color); }
-    .accred-stamp { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; background-color: var(--accred-bg); border: 1px solid var(--accred-border); border-right: 3px solid var(--accred-color); border-radius: 3px; font-size: var(--fs-xs); font-weight: 700; color: var(--accred-color); white-space: nowrap; line-height: 1.4; }
-    .avail-tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 3px; border: 1px solid transparent; border-right-width: 3px; font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; line-height: 1.4; }
-    .avail-ok { background-color: var(--ok-bg); border-color: var(--ok-border); border-right-color: var(--ok-color); color: var(--ok-color); }
-    .avail-warn { background-color: var(--warn-bg); border-color: var(--warn-border); border-right-color: var(--warn-color); color: var(--warn-color); }
-    .avail-danger { background-color: var(--danger-bg); border-color: var(--danger-border); border-right-color: var(--danger-color); color: var(--danger-color); }
-    .container { width: 100%; padding: 20px clamp(14px, 3vw, 32px) 84px; }
+
+    .conn-pill { height: 34px; background-color: var(--ok-bg); border: none; color: var(--ok-color); padding: 0 13px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; white-space: nowrap; }
+    .conn-pill .status-dot { width: 7px; height: 7px; border-radius: 50%; background-color: currentColor; }
+    .conn-pill.offline-state { background-color: var(--warn-bg); color: var(--warn-color); }
+
+    /* كبسولات الحالة والاعتماد الناعمة */
+    .soft-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; line-height: 1.4; }
+    .pill-accred { background-color: var(--accent-soft); color: var(--accent); }
+    .pill-ok { background-color: var(--ok-bg); color: var(--ok-color); }
+    .pill-warn { background-color: var(--warn-bg); color: var(--warn-color); }
+    .pill-danger { background-color: var(--danger-bg); color: var(--danger-color); }
+
+    /* الحاوية الرئيسية */
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 20px clamp(14px, 3vw, 28px) 88px; }
     .panel { display: none; width: 100%; }
     .panel.active { display: block; }
-    .section-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-    .section-top h1 { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); line-height: 1.35; }
+
+    .section-top { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
+    .section-top h1 { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); line-height: 1.4; }
     .section-top span { font-size: var(--fs-xs); color: var(--text-muted); }
-    .metrics-strip { display: grid; grid-template-columns: repeat(3, 1fr); background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 16px; overflow: hidden; }
-    .metric-cell { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-left: 1px solid var(--border); }
-    .metric-cell:last-child { border-left: none; }
-    .metric-cell-ok { border-right: 3px solid var(--ok-color); }
-    .metric-cell-warn { border-right: 3px solid var(--warn-color); }
-    .metric-cell-danger { border-right: 3px solid var(--danger-color); }
-    .metric-label { font-size: var(--fs-sm); font-weight: 700; color: var(--text-secondary); }
-    .metric-num { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); }
-    .controls-bar { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 10px; }
+
+    /* بطاقات الإحصائيات السريعة */
+    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .metric-card { padding: 13px 15px; border-radius: 14px; display: flex; flex-direction: column; gap: 4px; }
+    .metric-card.ok { background-color: var(--ok-bg); color: var(--ok-color); }
+    .metric-card.warn { background-color: var(--warn-bg); color: var(--warn-color); }
+    .metric-card.danger { background-color: var(--danger-bg); color: var(--danger-color); }
+    .metric-label { font-size: var(--fs-xs); font-weight: 600; opacity: 0.9; }
+    .metric-num { font-size: 20px; font-weight: 700; }
+
+    /* شريط البحث والتصفية */
+    .controls-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
     .controls-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
-    .filter-group { display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+    .filter-group { display: flex; align-items: center; gap: 7px; overflow-x: auto; scrollbar-width: none; max-width: 100%; padding-bottom: 2px; }
     .filter-group::-webkit-scrollbar { display: none; }
-    .filter-pill { background-color: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-secondary); padding: 5px 12px; border-radius: 4px; font-size: var(--fs-sm); font-weight: 600; white-space: nowrap; cursor: pointer; }
-    .filter-pill:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .filter-pill { background-color: var(--bg-surface); border: 1px solid var(--border); color: var(--text-secondary); padding: 6px 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.15s; }
+    .filter-pill:hover { background-color: var(--bg-subtle); color: var(--text-primary); }
     .filter-pill.active { background-color: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-    .field-input { width: 100%; height: 36px; background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 4px; padding: 0 12px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; }
-    .field-input:focus { border-color: var(--accent); background-color: var(--bg-surface); }
-    .surface-box { width: 100%; background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-    .data-table { width: 100%; border-collapse: collapse; text-align: right; }
-    .data-table thead { background-color: var(--bg-subtle); border-bottom: 1px solid var(--border); }
-    .data-table th { padding: 11px 16px; font-size: var(--fs-xs); font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
-    .data-table tbody tr { border-bottom: 1px solid var(--border); }
-    .data-table tbody tr:last-child { border-bottom: none; }
-    .data-table tbody tr:hover { background-color: var(--bg-hover); }
-    .data-table td { padding: 13px 16px; font-size: var(--fs-base); color: var(--text-primary); vertical-align: middle; }
-    .cell-main { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); display: block; }
-    .cell-sub { font-size: var(--fs-xs); color: var(--text-secondary); display: block; margin-top: 2px; }
-    .price-official { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); white-space: nowrap; }
-    .price-ref { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
-    .sync-strip { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
-    .sync-info h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .sync-info p { font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; }
+
+    .field-input { width: 100%; height: 40px; background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; transition: border-color 0.15s; }
+    .field-input:focus { border-color: var(--accent); }
+
+    /* قائمة البطاقات البشرية الانسيابية */
+    .cards-stack { display: flex; flex-direction: column; gap: 12px; }
+    .item-card { background-color: var(--bg-surface); border-radius: 16px; padding: 16px 18px; box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 10px; }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+    .card-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.45; }
+    .card-sub { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
+    .card-meta-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 2px; }
+    .card-detail { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    .price-block { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .price-main { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+    .price-ref { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    /* بطاقة التخزين المحلي */
+    .sync-card { background-color: var(--bg-surface); border-radius: 16px; padding: 18px; box-shadow: var(--card-shadow); margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+    .sync-info { display: flex; flex-direction: column; gap: 6px; max-width: 600px; }
+    .sync-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .sync-title-row h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+    .sync-info p { font-size: var(--fs-sm); color: var(--text-secondary); }
     .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .feed-row { padding: 15px 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
-    .feed-row:last-child { border-bottom: none; }
-    .feed-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; }
-    .feed-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
-    .feed-time { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
-    .feed-body { font-size: var(--fs-base); color: var(--text-secondary); line-height: 1.65; }
-    .feed-foot { display: flex; align-items: center; gap: 8px; padding-top: 2px; }
+
+    /* قسم التحقق من الشائعات */
     .rumors-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
-    .rumor-entry { padding: 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
-    .rumor-entry:last-child { border-bottom: none; }
-    .rumor-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .rumor-badges { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .rumor-claim { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.5; }
-    .rumor-fact { background-color: var(--bg-subtle); border-right: 3px solid var(--border-strong); padding: 10px 12px; font-size: var(--fs-base); color: var(--text-secondary); line-height: 1.65; }
-    .rumor-fact strong { color: var(--text-primary); font-weight: 700; }
-    .rumor-meta { font-size: var(--fs-xs); color: var(--text-muted); }
-    .btn-outline { height: 32px; background-color: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 0 12px; border-radius: 4px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
-    .btn-outline:hover { border-color: var(--border-strong); background-color: var(--bg-hover); }
-    .btn-danger-link { background: transparent; border: none; color: var(--danger-color); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 2px 4px; }
-    .btn-submit { width: 100%; height: 38px; background-color: var(--accent); color: var(--on-accent); border: none; border-radius: 4px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; }
-    .form-box { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-    .form-box h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
-    .form-box p { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
-    .saved-header { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); margin: 16px 0 8px; }
-    .empty-row { padding: 24px 16px; text-align: center; font-size: var(--fs-base); color: var(--text-secondary); }
-    .app-footer { margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: var(--fs-xs); color: var(--text-muted); }
-    .app-footer a { color: var(--text-primary); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--border-strong); padding-bottom: 1px; }
-    .app-footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-    .bottom-tabs { position: fixed; bottom: 0; right: 0; left: 0; width: 100%; height: 60px; background-color: var(--bg-surface); border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); z-index: 30; }
-    .bottom-tab { background: transparent; border: none; border-top: 2px solid transparent; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 11px; font-weight: 600; cursor: pointer; }
-    .bottom-tab svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-    .bottom-tab.active { color: var(--text-primary); border-top-color: var(--accent); font-weight: 700; }
-    .toast { position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: var(--bg-surface); padding: 8px 16px; border-radius: 4px; font-size: var(--fs-xs); font-weight: 600; display: none; z-index: 50; white-space: nowrap; }
-    @media (max-width: 860px) {
-      .metrics-strip { grid-template-columns: 1fr; }
-      .metric-cell { border-left: none; border-bottom: 1px solid var(--border); }
-      .metric-cell:last-child { border-bottom: none; }
-      .data-table thead { display: none; }
-      .data-table, .data-table tbody, .data-table tr, .data-table td { display: block; width: 100%; }
-      .data-table tbody tr { padding: 13px 14px; }
-      .data-table td { padding: 4px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-      .data-table td:first-child { display: block; padding-bottom: 6px; }
-      .data-table td[data-label]::before { content: attr(data-label); font-size: var(--fs-xs); color: var(--text-muted); font-weight: 600; }
+    .fact-callout { background-color: var(--bg-subtle); border-radius: 12px; padding: 12px 14px; font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
+    .fact-callout strong { color: var(--text-primary); font-weight: 700; }
+
+    .btn-soft { height: 34px; background-color: var(--bg-subtle); border: none; color: var(--text-primary); padding: 0 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; transition: background-color 0.15s; }
+    .btn-soft:hover { background-color: var(--bg-hover); }
+    .btn-danger-text { background: transparent; border: none; color: var(--danger-color); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 8px; }
+    .btn-submit { width: 100%; height: 42px; background-color: var(--accent); color: var(--on-accent); border: none; border-radius: 12px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; }
+
+    .form-card { background-color: var(--bg-surface); border-radius: 16px; padding: 18px; box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 11px; }
+    .form-card h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+    .form-card p { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
+    .saved-header { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); margin: 18px 0 10px; }
+    .empty-state { background-color: var(--bg-surface); border-radius: 16px; padding: 28px 16px; text-align: center; font-size: var(--fs-sm); color: var(--text-secondary); }
+
+    /* التذييل */
+    .app-footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: var(--fs-xs); color: var(--text-muted); }
+    .app-footer a { color: var(--accent); font-weight: 700; text-decoration: none; }
+    .app-footer a:hover { text-decoration: underline; }
+
+    /* شريط التنقل السفلي للهاتف */
+    .bottom-tabs { position: fixed; bottom: 0; right: 0; left: 0; width: 100%; height: 64px; background-color: var(--bg-surface); border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); z-index: 30; padding: 4px 6px; }
+    .bottom-tab { background: transparent; border: none; border-radius: 12px; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .bottom-tab svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .bottom-tab.active { color: var(--accent); background-color: var(--accent-soft); font-weight: 700; }
+
+    .toast { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: var(--bg-surface); padding: 9px 18px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; display: none; z-index: 50; white-space: nowrap; }
+
+    @media (max-width: 600px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+      .metric-card { flex-direction: row; align-items: center; justify-content: space-between; }
     }
-    @media (min-width: 680px) { .controls-bar .field-input { max-width: 300px; } }
+    @media (min-width: 680px) { .controls-wrap .field-input { max-width: 310px; } }
     @media (min-width: 820px) {
       .top-tabs { display: flex; }
-      .mobile-heading, .bottom-tabs { display: none; }
-      .container { padding-bottom: 32px; }
+      .brand-mini, .bottom-tabs { display: none; }
+      .container { padding-bottom: 36px; }
       .toast { bottom: 24px; }
     }
     @media (min-width: 960px) {
       .rumors-grid { grid-template-columns: 1.75fr 1fr; }
-      .sidebar-sticky { position: sticky; top: 72px; }
+      .sidebar-sticky { position: sticky; top: 76px; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <div id="mobileHeading" class="mobile-heading">الأسواق المعتمدة</div>
+      <div class="brand-mini">
+        <span class="brand-dot"></span>
+        <div id="mobileHeading" class="mobile-heading">الأسواق المعتمدة</div>
+      </div>
       <nav class="top-tabs" aria-label="الأقسام الرئيسية">
         <button class="top-tab active" data-tab="outlets" onclick="switchView('outlets')">
           <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -211,8 +216,9 @@
         <button id="themeToggle" class="icon-btn" onclick="toggleTheme()" title="تفعيل الوضع المظلم" aria-label="تبديل المظهر">
           <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
-        <button id="connBtn" class="conn-btn" onclick="toggleOfflineMode()" title="التبديل بين وضع الاتصال المباشر ووضع عدم الاتصال">
-          <span id="connLabel">متصل ومُحدَّث</span>
+        <button id="connBtn" class="conn-pill" onclick="toggleOfflineMode()" title="التبديل بين وضع الاتصال المباشر ووضع عدم الاتصال">
+          <span class="status-dot"></span>
+          <span id="connLabel">متصل ومحدث</span>
         </button>
       </div>
     </div>
@@ -223,10 +229,10 @@
   <main class="container">
     <section id="view-outlets" class="panel active">
       <div class="section-top">
-        <h1>نقاط التوزيع ومكاتب المساعدة المعتمدة بالشوارع والمعالم الدقيقة</h1>
+        <h1>نقاط التوزيع ومكاتب المساعدة المعتمدة</h1>
         <span>المصدر: برنامج الأغذية العالمي (WFP)، وكالة الأونروا (UNRWA)، وتقارير OCHA</span>
       </div>
-      <div class="controls-bar">
+      <div class="controls-wrap">
         <div class="controls-row">
           <div class="filter-group" id="outletAreaFilters">
             <button class="filter-pill active" onclick="setOutletArea('الكل', this)">كل المحافظات</button>
@@ -238,32 +244,20 @@
           <input type="text" id="outletSearch" class="field-input" placeholder="ابحث بالشارع أو المعلم أو الجهة المشرفة..." oninput="renderOutlets()" />
         </div>
       </div>
-      <div class="surface-box">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>نقطة التوزيع والشارع والمعلم الدقيق</th>
-              <th>الجهة المشرفة والشريك المنفذ</th>
-              <th>التواصل ونظام العمل</th>
-              <th>الاعتماد</th>
-            </tr>
-          </thead>
-          <tbody id="outletsBody"></tbody>
-        </table>
-      </div>
+      <div class="cards-stack" id="outletsList"></div>
     </section>
 
     <section id="view-market" class="panel">
       <div class="section-top">
-        <h1>متوسطات أسعار السلع الأساسية والمحروقات في قطاع غزة</h1>
+        <h1>متوسطات أسعار السلع الأساسية والمحروقات</h1>
         <span>المصدر: الجهاز المركزي للإحصاء الفلسطيني وOCHA</span>
       </div>
-      <div class="metrics-strip">
-        <div class="metric-cell metric-cell-ok"><span class="metric-label">متوفر / سعر مدعوم</span><span id="countGreen" class="metric-num">0</span></div>
-        <div class="metric-cell metric-cell-warn"><span class="metric-label">تذبذب / كمية محدودة</span><span id="countAmber" class="metric-num">0</span></div>
-        <div class="metric-cell metric-cell-danger"><span class="metric-label">شحيح حالياً</span><span id="countRed" class="metric-num">0</span></div>
+      <div class="metrics-grid">
+        <div class="metric-card ok"><span class="metric-label">متوفر / سعر مدعوم</span><span id="countGreen" class="metric-num">0</span></div>
+        <div class="metric-card warn"><span class="metric-label">تذبذب / كمية محدودة</span><span id="countAmber" class="metric-num">0</span></div>
+        <div class="metric-card danger"><span class="metric-label">شحيح حاليا</span><span id="countRed" class="metric-num">0</span></div>
       </div>
-      <div class="controls-bar">
+      <div class="controls-wrap">
         <div class="controls-row">
           <div class="filter-group" id="areaFilters">
             <button class="filter-pill active" onclick="setAreaFilter('الكل', this)">كل النطاقات</button>
@@ -276,43 +270,32 @@
           <button class="filter-pill active" onclick="setStatusFilter('all', this)">جميع الحالات</button>
           <button class="filter-pill" onclick="setStatusFilter('green', this)">متوفر / سعر مدعوم</button>
           <button class="filter-pill" onclick="setStatusFilter('amber', this)">تذبذب / كمية محدودة</button>
-          <button class="filter-pill" onclick="setStatusFilter('red', this)">شحيح حالياً</button>
+          <button class="filter-pill" onclick="setStatusFilter('red', this)">شحيح حاليا</button>
         </div>
       </div>
-      <div class="surface-box">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>السلعة ومصدر البيانات الرسمي</th>
-              <th>النطاق الجغرافي</th>
-              <th>المقارنة المرجعية</th>
-              <th>متوسط السعر المسجل</th>
-              <th>حالة التوفر</th>
-              <th>الاعتماد</th>
-            </tr>
-          </thead>
-          <tbody id="marketBody"></tbody>
-        </table>
-      </div>
+      <div class="cards-stack" id="marketList"></div>
     </section>
 
     <section id="view-offline" class="panel">
       <div class="section-top">
-        <h1>النشرة الإحصائية والتقارير الرسمية وحالة التخزين المحلي</h1>
+        <h1>النشرة الإحصائية والتقارير الرسمية وحالة التخزين</h1>
         <span id="sourceStatusBadge">مزامنة تلقائية مع المصادر الرسمية</span>
       </div>
-      <div class="sync-strip">
+      <div class="sync-card">
         <div class="sync-info">
-          <h2><span>النسخة المحفوظة على ذاكرة الجهاز</span><span class="accred-stamp">اعتماد النسخة: بيانات رسمية موثقة</span></h2>
-          <p>يجلب التطبيق التحديثات تلقائياً من ملف البيانات الرسمي ويحفظها محلياً للعمل عند انقطاع الشبكة.</p>
+          <div class="sync-title-row">
+            <h2>النسخة المحفوظة على ذاكرة الجهاز</h2>
+            <span class="soft-pill pill-accred">بيانات رسمية موثقة</span>
+          </div>
+          <p>يجلب التطبيق التحديثات تلقائيا من ملف البيانات الرسمي ويحفظها محليا للعمل عند انقطاع الشبكة.</p>
+          <span class="card-detail">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
         </div>
         <div class="sync-actions">
-          <span class="rumor-meta">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
-          <button class="btn-outline" onclick="manualSync()">فحص التحديثات الآن</button>
-          <a href="./privacy.html" class="btn-outline">سياسة الخصوصية</a>
+          <button class="btn-soft" onclick="manualSync()">فحص التحديثات الآن</button>
+          <a href="./privacy.html" class="btn-soft">سياسة الخصوصية</a>
         </div>
       </div>
-      <div class="surface-box" id="alertsList"></div>
+      <div class="cards-stack" id="alertsList"></div>
     </section>
 
     <section id="view-rumors" class="panel">
@@ -322,7 +305,7 @@
       </div>
       <div class="rumors-grid">
         <div>
-          <div class="controls-bar">
+          <div class="controls-wrap">
             <div class="controls-row">
               <div class="filter-group" id="verdictFilters">
                 <button class="filter-pill active" onclick="setVerdictFilter('all', this)">الكل</button>
@@ -332,12 +315,12 @@
               <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
             </div>
           </div>
-          <div class="surface-box" id="rumorsList"></div>
+          <div class="cards-stack" id="rumorsList"></div>
         </div>
         <aside class="sidebar-sticky">
-          <div class="form-box">
+          <div class="form-card">
             <h2>حفظ خبر متداول للتحقق</h2>
-            <p>أدخل نص الخبر المتداول لحفظه محلياً على جهازك ومراجعته مقابل المصادر الرسمية.</p>
+            <p>أدخل نص الخبر المتداول لحفظه محليا على جهازك ومراجعته مقابل المصادر الرسمية.</p>
             <input type="text" id="reportInput" class="field-input" placeholder="اكتب نص الخبر المراد التحقق منه..." />
             <select id="reportArea" class="field-input">
               <option value="خان يونس">المحافظة: خان يونس</option>
@@ -361,19 +344,19 @@
   <nav class="bottom-tabs" aria-label="التنقل السفلي">
     <button class="bottom-tab active" data-tab="outlets" onclick="switchView('outlets')">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>الأسواق المعتمدة</span>
+      <span>الأسواق</span>
     </button>
     <button class="bottom-tab" data-tab="market" onclick="switchView('market')">
       <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg>
-      <span>الأسعار والوفرة</span>
+      <span>الأسعار</span>
     </button>
     <button class="bottom-tab" data-tab="offline" onclick="switchView('offline')">
       <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      <span>التنبيه والتخزين</span>
+      <span>التنبيهات</span>
     </button>
     <button class="bottom-tab" data-tab="rumors" onclick="switchView('rumors')">
       <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      <span>التحقق من الشائعات</span>
+      <span>التحقق</span>
     </button>
   </nav>
 
@@ -389,12 +372,12 @@
       if (theme === 'dark') {
         root.setAttribute('data-theme', 'dark');
         icon.innerHTML = SUN_SVG;
-        meta.setAttribute('content', '#1A1A1A');
+        meta.setAttribute('content', '#131312');
         btn.setAttribute('title', 'تفعيل الوضع الفاتح');
       } else {
         root.removeAttribute('data-theme');
         icon.innerHTML = MOON_SVG;
-        meta.setAttribute('content', '#FFFFFF');
+        meta.setAttribute('content', '#F7F6F2');
         btn.setAttribute('title', 'تفعيل الوضع المظلم');
       }
     }
@@ -410,17 +393,17 @@
 
     const FALLBACK_DATASET = {
       lastUpdated: "2026-11-23T10:00:00Z",
-      lastSourceStatus: "مُحدَّث من تقارير OCHA و WFP و UNRWA",
+      lastSourceStatus: "محدث من تقارير OCHA و WFP و UNRWA",
       outlets: [
         { name: "نقطة القرارة – شارع الحية", area: "خان يونس", address: "خان يونس – القرارة – شارع الحية", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "نقطة شرق سجن أصداء – شارع 5", area: "خان يونس", address: "خان يونس – شارع 5 – شرق سجن أصداء بـ 500 متر", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "نقطة شرق سجن أصداء – شارع 5", area: "خان يونس", address: "خان يونس – شارع 5 – شرق سجن أصداء بمسافة 500 متر", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "نقطة مفترق أصداء – بناشر علوش (ربيع الأغا)", area: "خان يونس", address: "خان يونس – مفترق أصداء – بناشر علوش (نقطة ربيع الأغا)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "نقطة محطة طبريا – المجايدة", area: "خان يونس", address: "خان يونس – محطة طبريا – نقطة المجايدة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "نقطة حي البطن السمين – البرقي", area: "خان يونس", address: "خان يونس – حي البطن السمين – نقطة البرقي", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة أكتيد (ACTED)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مواصي خان يونس – شارع النص (بركس الفرا)", area: "خان يونس", address: "مواصي خان يونس – شارع النص – بركس الفرا مقابل عيادة الوكالة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "مواصي خان يونس – بعد مشتل التحرير بـ 20 متراً", area: "خان يونس", address: "مواصي خان يونس – بعد مشتل التحرير بـ 20 متراً – بركس أم عايش الشاعر", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "مواصي خان يونس – نقطة النجار (مقابل نادي الوكالة)", area: "خان يونس", address: "مواصي خان يونس – نقطة النجار – مقابل نادي الوكالة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "مواصي خان يونس – شمال مسجد القبة بـ 200 متر", area: "خان يونس", address: "مواصي خان يونس – شمال مسجد القبة بـ 200 متر – مخازن عامر الأقرط", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – بعد مشتل التحرير بمسافة 20 مترا", area: "خان يونس", address: "مواصي خان يونس – بعد مشتل التحرير بمسافة 20 مترا – بركس أم عايش الشاعر", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – نقطة النجار (مقابل نادي الوكالة)", area: "خان يونس", address: "مواصي خان يونس – نقطة النجار – مقابل نادي الوكالة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معا (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – شمال مسجد القبة بمسافة 200 متر", area: "خان يونس", address: "مواصي خان يونس – شمال مسجد القبة بمسافة 200 متر – مخازن عامر الأقرط", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معا (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مواصي خان يونس – حي النجار (مقابل حديقة حياة)", area: "خان يونس", address: "مواصي خان يونس – حي النجار – مقابل حديقة حياة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز شؤون المرأة (WAC)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مواصي خان يونس / رفح – نقطة فيش فريش (مسجد مطر)", area: "خان يونس", address: "مواصي خان يونس / رفح – نقطة فيش فريش – مسجد مطر – مخازن أبو الأمير بريكة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مواصي خان يونس – مقابل المحكمة الشرعية", area: "خان يونس", address: "مواصي خان يونس – مقابل المحكمة الشرعية", items: "نقطة توزيع ميدانية للمساعدات الإغاثية المجدولة", hours: "09:00 ص – 01:00 م (حسب الكشوفات)" },
@@ -429,40 +412,40 @@
         { name: "دير البلح – شارع 17 (مقابل ديوان آل بركة)", area: "دير البلح", address: "دير البلح – شارع 17 – مقابل ديوان آل بركة (نقطة عبد الرحمن بركة)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة أكتيد (ACTED)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "دير البلح – عزبة البشايرة (شارع عبد الكريم العكلوك)", area: "دير البلح", address: "دير البلح – عزبة البشايرة – شارع عبد الكريم العكلوك", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "دير البلح – جنوب المشاعلة", area: "دير البلح", address: "دير البلح – جنوب المشاعلة – نقطة دير البلح", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "دير البلح – شارع البيئة (منزل نجيب البحيصي)", area: "دير البلح", address: "دير البلح – شارع البيئة – منزل نجيب البحيصي", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "دير البلح – منطقة البصة (غرب كلية فلسطين التقنية)", area: "دير البلح", address: "دير البلح – منطقة البصة – غرب كلية فلسطين التقنية (بيت أبو طارق الحواجري)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "دير البلح – شارع البيئة (منزل نجيب البحيصي)", area: "دير البلح", address: "دير البلح – شارع البيئة – منزل نجيب البحيصي", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معا (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "دير البلح – منطقة البصة (غرب كلية فلسطين التقنية)", area: "دير البلح", address: "دير البلح – منطقة البصة – غرب كلية فلسطين التقنية (بيت أبو طارق الحواجري)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معا (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "دير البلح – شارع أبو حسني (عمارة العيماوي)", area: "دير البلح", address: "دير البلح – شارع أبو حسني – عمارة العيماوي", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز شؤون المرأة (WAC)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "النصيرات – شارع مخيم 2 ومراكز توزيع الأونروا", area: "المحافظة الوسطى", address: "النصيرات – شارع مخيم 2 (قرب مخبز الحاج - بركس بيدس) ومركزا الأونروا في مخيم النصيرات", items: "إشراف برنامج الأغذية العالمي (WFP) / مجتمعات عالمية، ووكالة الأونروا (UNRWA)", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "البريج – مدخل البريج (عمارة وسوبرماركت البابا)", area: "المحافظة الوسطى", address: "البريج – بعد مدخل البريج بـ 500 متر – عمارة وسوبرماركت البابا", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "البريج – مدخل البريج (عمارة وسوبرماركت البابا)", area: "المحافظة الوسطى", address: "البريج – بعد مدخل البريج بمسافة 500 متر – عمارة وسوبرماركت البابا", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مخيم المغازي – بجوار سوبرماركت نهاد التلباني", area: "المحافظة الوسطى", address: "مخيم المغازي – بجوار سوبرماركت نهاد التلباني", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة كير (CARE)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "الزوايدة – شارع خالد بن الوليد ومقابل منتزه البلدية", area: "المحافظة الوسطى", address: "الزوايدة – شارع خالد بن الوليد (محلات أبو جبارة) ومقابل منتزه البلدية (محطة الأغا)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: منظمة كير (CARE) وإنقاذ المستقبل الشبابي", hours: "الخط المجاني WFP: 1800124126" },
-        { name: "المصدر – شارع مدخل المصدر الرئيسي (حواصل كمال المصدر)", area: "المحافظة الوسطى", address: "المصدر – شارع مدخل المصدر الرئيسي – جهة الشرق بـ 100 متر (حواصل كمال المصدر)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة كير (CARE)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "المصدر – شارع مدخل المصدر الرئيسي (حواصل كمال المصدر)", area: "المحافظة الوسطى", address: "المصدر – شارع مدخل المصدر الرئيسي – جهة الشرق بمسافة 100 متر (حواصل كمال المصدر)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة كير (CARE)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مدينة غزة – الرمال الشمالي (العائلة المقدسة وشارع عايدية)", area: "مدينة غزة", address: "مدينة غزة – الرمال الشمالي – نقطة العائلة المقدسة وشارع عايدية (بركس اليعقوبي)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: أكتيد (ACTED) والرؤيا الشبابية", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مدينة غزة – الصبرة (شارع الثلاثيني) وعسقولة (بركس أبو سمعان)", area: "مدينة غزة", address: "مدينة غزة – الصبرة (شارع الثلاثيني) وعسقولة (بركس أبو سمعان)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: أكتيد (ACTED) والإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مدينة غزة – الدرج (مفترق المعامل) والزيتون (شرق الشافعي)", area: "مدينة غزة", address: "مدينة غزة – الدرج (مفترق المعامل - بركس الأشرم) والزيتون (شرق مسجد الإمام الشافعي - بجوار سوبرماركت أبو عمر الدحدوح)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "مدينة غزة – تل الهوى (قرب مكتب العمل) ومخيم الشاطئ (ميدان الشهداء)", area: "مدينة غزة", address: "مدينة غزة – تل الهوى (بجوار ملعب المحبة - نقطة أبو حبل) ومخيم الشاطئ (ميدان الشهداء - مطبعة مقداد)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: مجتمعات عالمية وإنقاذ المستقبل الشبابي", hours: "الخط المجاني WFP: 1800124126" }
       ],
       market: [
-        { name: "ربطة خبز مدعومة (وزن 2 كغم)", area: "خان يونس", status: "green", label: "سعر مدعوم", fair: "3 شيكل", ref: "أكثر من 30 شيكل (تجاري سابق)", source: "المتاجر المتعاقدة مع المخابز المدعومة أممياً (OCHA)" },
-        { name: "بطاطا (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهرياً", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
-        { name: "بصل ناشف (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهرياً", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
+        { name: "ربطة خبز مدعومة (وزن 2 كغم)", area: "خان يونس", status: "green", label: "سعر مدعوم", fair: "3 شيكل", ref: "أكثر من 30 شيكل (تجاري سابق)", source: "المتاجر المتعاقدة مع المخابز المدعومة أمميا (OCHA)" },
+        { name: "بطاطا (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهريا", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
+        { name: "بصل ناشف (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهريا", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
         { name: "فلفل أخضر حار (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "green", label: "متوفر بالأسواق", fair: "7 شيكل", ref: "متوسط رصد تشرين أول 2026", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
         { name: "زيت ذرة (عبوة 3 لتر)", area: "قطاع غزة (متوسط عام)", status: "green", label: "متوفر بالأسواق", fair: "38 شيكل", ref: "36 شيكل (متوسط 2024)", source: "الجهاز المركزي للإحصاء الفلسطيني (جدول غلاء المعيشة)" },
         { name: "أسطوانة غاز طهي (12 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "كمية محدودة", fair: "94 شيكل", ref: "126 شيكل (متوسط 2025)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
         { name: "بنزين 95 أوكتان (1 لتر)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "كمية محدودة", fair: "7.92 شيكل", ref: "7.90 شيكل (آذار 2026)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
-        { name: "سولار / ديزل (1 لتر)", area: "قطاع غزة (متوسط عام)", status: "red", label: "شحيح حالياً", fair: "8.99 شيكل", ref: "8.40 شيكل (آذار 2026)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" }
+        { name: "سولار / ديزل (1 لتر)", area: "قطاع غزة (متوسط عام)", status: "red", label: "شحيح حاليا", fair: "8.99 شيكل", ref: "8.40 شيكل (آذار 2026)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" }
       ],
       alerts: [
-        { title: "تقرير أعمال وزارة الاقتصاد الوطني في غزة لشهر أكتوبر 2026", time: "9 نوفمبر 2026", body: "أفادت الوزارة بإدخال 3,839 شاحنة إلى قطاع غزة خلال شهر أكتوبر 2026، ونشرت قائمة الأسعار الاسترشادية للمواد الأساسية والخضار، واستقبلت وحدة الرقابة والشكاوى 163 شكوى واستفساراً عبر الرقم المجاني." },
+        { title: "تقرير أعمال وزارة الاقتصاد الوطني في غزة لشهر أكتوبر 2026", time: "9 نوفمبر 2026", body: "أفادت الوزارة بإدخال 3,839 شاحنة إلى قطاع غزة خلال شهر أكتوبر 2026، ونشرت قائمة الأسعار الاسترشادية للمواد الأساسية والخضار، واستقبلت وحدة الرقابة والشكاوى 163 شكوى واستفسارا عبر الرقم المجاني." },
         { title: "نشرة الرقم القياسي لأسعار المستهلك في قطاع غزة (تشرين أول 2026)", time: "12 نوفمبر 2026", body: "أعلن الجهاز المركزي للإحصاء الفلسطيني أن الرقم القياسي لأسعار المستهلك في قطاع غزة بلغ 316.95 نقطة بارتفاع نسبته 4.11% مقارنة بشهر أيلول 2026، وارتفعت أسعار مجموعة المواد الغذائية والمشروبات بنسبة 6.67%." },
-        { title: "تحديث الاستجابة الإنسانية في محافظات قطاع غزة (OCHA)", time: "18 نوفمبر 2026", body: "وثّق مكتب الأمم المتحدة لتنسيق الشؤون الإنسانية استمرار الأنشطة الإغاثية في 77 موقعاً في خان يونس، و54 موقعاً في مدينة غزة، و13 في شمال غزة، و10 في دير البلح، و8 في رفح." },
-        { title: "تشغيل 15 مخبزاً مدعوماً أممياً لتوفير الخبز بسعر 3 شيكل (OCHA)", time: "تقرير OCHA #336", body: "تنتج 15 مخبزاً مدعوماً من الأمم المتحدة (9 في دير البلح وخان يونس و6 في مدينة غزة) أكثر من 130,000 ربطة خبز (2 كغم) يومياً لتوزيعها مجاناً أو بيعها بسعر مدعوم يبلغ 3 شيكل في المتاجر المتعاقدة." }
+        { title: "تحديث الاستجابة الإنسانية في محافظات قطاع غزة (OCHA)", time: "18 نوفمبر 2026", body: "وثق مكتب الأمم المتحدة لتنسيق الشؤون الإنسانية استمرار الأنشطة الإغاثية في 77 موقعا في خان يونس، و54 موقعا في مدينة غزة، و13 في شمال غزة، و10 في دير البلح، و8 في رفح." },
+        { title: "تشغيل 15 مخبزا مدعوما أمميا لتوفير الخبز بسعر 3 شيكل (OCHA)", time: "تقرير OCHA #336", body: "تنتج 15 مخبزا مدعوما من الأمم المتحدة (9 في دير البلح وخان يونس و6 في مدينة غزة) أكثر من 130,000 ربطة خبز (2 كغم) يوميا لتوزيعها مجانا أو بيعها بسعر مدعوم يبلغ 3 شيكل في المتاجر المتعاقدة." }
       ],
       rumors: [
-        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.", truth: "بالتحقق من الادعاء وجد فريق (مسبار) أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثاً.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025" },
-        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدّعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.", truth: "كشف فريق (مسبار) أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نُفذت في يوليو 2024، وليس لمساعدات وصلت حديثاً.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025" },
-        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدّعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.", truth: "أوضح تحقيق (مسبار) أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025" },
-        { verdict: "true", tag: "توضيح رسمي موثق", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحاً أن ما حدث كان خللاً مؤقتاً في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
+        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.", truth: "بالتحقق من الادعاء وجد فريق (مسبار) أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025" },
+        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.", truth: "كشف فريق (مسبار) أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نفذت في يوليو 2024، وليس لمساعدات وصلت حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025" },
+        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.", truth: "أوضح تحقيق (مسبار) أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025" },
+        { verdict: "true", tag: "توضيح رسمي موثق", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحا أن ما حدث كان خللا مؤقتا في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
       ]
     };
 
@@ -495,24 +478,24 @@
 
     function getMarketAccreditation(item) {
       const src = item.source || '';
-      if (src.includes('الإحصاء')) return 'معتمد: الإحصاء الفلسطيني';
-      if (src.includes('OCHA')) return 'معتمد: تقارير OCHA';
-      return 'معتمد: رصد رسمي';
+      if (src.includes('الإحصاء')) return 'الإحصاء الفلسطيني';
+      if (src.includes('OCHA')) return 'تقارير OCHA';
+      return 'رصد رسمي';
     }
 
     function getAlertAccreditation(alert) {
       const title = alert.title || '';
-      if (title.includes('الاقتصاد')) return 'اعتماد النشرة: وزارة الاقتصاد الوطني';
-      if (title.includes('الإحصاء')) return 'اعتماد النشرة: الإحصاء الفلسطيني';
-      if (title.includes('OCHA')) return 'اعتماد النشرة: مكتب OCHA';
-      return 'اعتماد النشرة: بيان رسمي';
+      if (title.includes('الاقتصاد')) return 'وزارة الاقتصاد الوطني';
+      if (title.includes('الإحصاء')) return 'الإحصاء الفلسطيني';
+      if (title.includes('OCHA')) return 'مكتب OCHA';
+      return 'بيان رسمي';
     }
 
     function getRumorAccreditation(rumor) {
       const meta = rumor.meta || '';
-      if (meta.includes('مسبار')) return 'اعتماد التحقق: منصة مسبار';
-      if (meta.includes('الاقتصاد')) return 'اعتماد التحقق: وزارة الاقتصاد';
-      return 'اعتماد التحقق: مصدر رسمي';
+      if (meta.includes('مسبار')) return 'منصة مسبار';
+      if (meta.includes('الاقتصاد')) return 'وزارة الاقتصاد';
+      return 'مصدر رسمي';
     }
 
     function formatLastUpdated(isoDateString) {
@@ -547,7 +530,7 @@
         applyDataset(FALLBACK_DATASET);
       }
       if (isOfflineMode) {
-        if (isManual) showToast('أنت في وضع عدم الاتصال: تُعرض النسخة المحفوظة');
+        if (isManual) showToast('أنت في وضع عدم الاتصال: تعرض النسخة المحفوظة');
         return;
       }
       try {
@@ -580,13 +563,25 @@
 
     function renderOutlets() {
       const q = document.getElementById('outletSearch').value.trim();
-      const body = document.getElementById('outletsBody');
+      const list = document.getElementById('outletsList');
       const filtered = outletsData.filter(o => (selectedOutletArea === 'الكل' || o.area === selectedOutletArea) && (!q || o.name.includes(q) || o.address.includes(q) || o.items.includes(q)));
       if (!filtered.length) {
-        body.innerHTML = '<tr><td colspan="4" class="empty-row">لا توجد نقاط توزيع مطابقة لخيارات البحث الحالية.</td></tr>';
+        list.innerHTML = '<div class="empty-state">لا توجد نقاط توزيع مطابقة لخيارات البحث الحالية.</div>';
         return;
       }
-      body.innerHTML = filtered.map(o => `<tr><td><span class="cell-main">${escapeHtml(o.name)}</span><span class="cell-sub">${escapeHtml(o.address)}</span></td><td data-label="الجهة المشرفة">${escapeHtml(o.items)}</td><td data-label="التواصل ونظام العمل">${escapeHtml(o.hours)}</td><td data-label="الاعتماد"><span class="accred-stamp">${escapeHtml(getOutletAccreditation(o))}</span></td></tr>`).join('');
+      list.innerHTML = filtered.map(o => `
+        <article class="item-card">
+          <div class="card-header">
+            <h2 class="card-title">${escapeHtml(o.name)}</h2>
+            <span class="soft-pill pill-accred">${escapeHtml(getOutletAccreditation(o))}</span>
+          </div>
+          <p class="card-sub">${escapeHtml(o.address)}</p>
+          <div class="card-meta-row">
+            <span class="card-detail">${escapeHtml(o.items)}</span>
+            <span class="card-detail">${escapeHtml(o.hours)}</span>
+          </div>
+        </article>
+      `).join('');
     }
 
     function updateMetrics() {
@@ -611,21 +606,47 @@
 
     function renderMarket() {
       const q = document.getElementById('marketSearch').value.trim();
-      const body = document.getElementById('marketBody');
+      const list = document.getElementById('marketList');
       const filtered = marketData.filter(item => (selectedMarketArea === 'الكل' || item.area === selectedMarketArea) && (selectedMarketStatus === 'all' || item.status === selectedMarketStatus) && (!q || item.name.includes(q) || item.source.includes(q)));
       if (!filtered.length) {
-        body.innerHTML = '<tr><td colspan="6" class="empty-row">لا توجد سلع مطابقة لخيارات التصفية الحالية.</td></tr>';
+        list.innerHTML = '<div class="empty-state">لا توجد سلع مطابقة لخيارات التصفية الحالية.</div>';
         return;
       }
-      const availMap = { green: 'avail-ok', amber: 'avail-warn', red: 'avail-danger' };
-      body.innerHTML = filtered.map(item => {
-        const cls = availMap[item.status] || 'avail-warn';
-        return `<tr><td><span class="cell-main">${escapeHtml(item.name)}</span><span class="cell-sub">${escapeHtml(item.source)}</span></td><td data-label="النطاق الجغرافي">${escapeHtml(item.area)}</td><td data-label="المقارنة المرجعية"><span class="price-ref">${escapeHtml(item.ref)}</span></td><td data-label="متوسط السعر"><span class="price-official">${escapeHtml(item.fair)}</span></td><td data-label="حالة التوفر"><span class="avail-tag ${cls}">${escapeHtml(item.label)}</span></td><td data-label="الاعتماد"><span class="accred-stamp">${escapeHtml(getMarketAccreditation(item))}</span></td></tr>`;
+      const availMap = { green: 'pill-ok', amber: 'pill-warn', red: 'pill-danger' };
+      list.innerHTML = filtered.map(item => {
+        const cls = availMap[item.status] || 'pill-warn';
+        return `
+          <article class="item-card">
+            <div class="card-header">
+              <h2 class="card-title">${escapeHtml(item.name)}</h2>
+              <span class="soft-pill ${cls}">${escapeHtml(item.label)}</span>
+            </div>
+            <div class="price-block">
+              <span class="price-main">${escapeHtml(item.fair)}</span>
+              <span class="price-ref">${escapeHtml(item.ref)}</span>
+            </div>
+            <div class="card-meta-row">
+              <span class="card-detail">${escapeHtml(item.area)} · ${escapeHtml(item.source)}</span>
+              <span class="soft-pill pill-accred">${escapeHtml(getMarketAccreditation(item))}</span>
+            </div>
+          </article>
+        `;
       }).join('');
     }
 
     function renderAlerts() {
-      document.getElementById('alertsList').innerHTML = alertsData.map(a => `<article class="feed-row"><div class="feed-head"><h2 class="feed-title">${escapeHtml(a.title)}</h2><span class="feed-time">${escapeHtml(a.time)}</span></div><p class="feed-body">${escapeHtml(a.body)}</p><div class="feed-foot"><span class="accred-stamp">${escapeHtml(getAlertAccreditation(a))}</span></div></article>`).join('');
+      document.getElementById('alertsList').innerHTML = alertsData.map(a => `
+        <article class="item-card">
+          <div class="card-header">
+            <h2 class="card-title">${escapeHtml(a.title)}</h2>
+            <span class="card-detail">${escapeHtml(a.time)}</span>
+          </div>
+          <p class="card-sub">${escapeHtml(a.body)}</p>
+          <div class="card-meta-row">
+            <span class="soft-pill pill-accred">${escapeHtml(getAlertAccreditation(a))}</span>
+          </div>
+        </article>
+      `).join('');
     }
 
     function setVerdictFilter(verdict, btn) {
@@ -640,12 +661,25 @@
       const list = document.getElementById('rumorsList');
       const filtered = rumorsData.filter(r => (selectedVerdict === 'all' || r.verdict === selectedVerdict) && (!q || r.claim.includes(q) || r.truth.includes(q)));
       if (!filtered.length) {
-        list.innerHTML = '<div class="empty-row">لا توجد نتائج مطابقة في سجل التحقق.</div>';
+        list.innerHTML = '<div class="empty-state">لا توجد نتائج مطابقة في سجل التحقق.</div>';
         return;
       }
       list.innerHTML = filtered.map((r, idx) => {
         const isFalse = r.verdict === 'false';
-        return `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag ${isFalse ? 'avail-danger' : 'avail-ok'}">${escapeHtml(r.tag)}</span><span class="accred-stamp">${escapeHtml(getRumorAccreditation(r))}</span></div><button class="btn-outline" onclick="copyFact(${idx})">نسخ النص</button></div><div class="rumor-claim">"${escapeHtml(r.claim)}"</div><div class="rumor-fact"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div><div class="rumor-meta">${escapeHtml(r.meta)}</div></article>`;
+        return `
+          <article class="item-card">
+            <div class="card-header">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <span class="soft-pill ${isFalse ? 'pill-danger' : 'pill-ok'}">${escapeHtml(r.tag)}</span>
+                <span class="soft-pill pill-accred">${escapeHtml(getRumorAccreditation(r))}</span>
+              </div>
+              <button class="btn-soft" onclick="copyFact(${idx})">نسخ النص</button>
+            </div>
+            <div class="card-title">"${escapeHtml(r.claim)}"</div>
+            <div class="fact-callout"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div>
+            <div class="card-detail">${escapeHtml(r.meta)}</div>
+          </article>
+        `;
       }).join('');
     }
 
@@ -672,13 +706,13 @@
       const input = document.getElementById('reportInput');
       const area = document.getElementById('reportArea').value;
       const val = input.value.trim();
-      if (!val) { showToast('يرجى كتابة نص الخبر أولاً'); return; }
+      if (!val) { showToast('يرجى كتابة نص الخبر أولا'); return; }
       const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      saved.unshift({ text: val, area: area, status: 'محفوظ محلياً على الجهاز' });
+      saved.unshift({ text: val, area: area, status: 'محفوظ محليا على الجهاز' });
       localStorage.setItem('burhan_reports', JSON.stringify(saved));
       input.value = '';
       renderUserReports();
-      showToast('تم حفظ الخبر محلياً بنجاح');
+      showToast('تم حفظ الخبر محليا بنجاح');
     }
 
     function deleteUserReport(idx) {
@@ -693,14 +727,23 @@
       const container = document.getElementById('userReportsContainer');
       const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
       if (!saved.length) { container.innerHTML = ''; return; }
-      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div><div class="surface-box">' + saved.map((rep, idx) => `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag avail-warn">${escapeHtml(rep.area)}</span><span class="accred-stamp">حفظ محلي</span></div><button class="btn-danger-link" onclick="deleteUserReport(${idx})">حذف</button></div><div class="rumor-claim">${escapeHtml(rep.text)}</div><div class="rumor-meta">${escapeHtml(rep.status)}</div></article>`).join('') + '</div>';
+      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div><div class="cards-stack">' + saved.map((rep, idx) => `
+        <article class="item-card">
+          <div class="card-header">
+            <span class="soft-pill pill-warn">${escapeHtml(rep.area)}</span>
+            <button class="btn-danger-text" onclick="deleteUserReport(${idx})">حذف</button>
+          </div>
+          <div class="card-title">${escapeHtml(rep.text)}</div>
+          <div class="card-detail">${escapeHtml(rep.status)}</div>
+        </article>
+      `).join('') + '</div>';
     }
 
     function updateConnUI(offline) {
       const btn = document.getElementById('connBtn');
       const label = document.getElementById('connLabel');
       if (offline) { btn.classList.add('offline-state'); label.textContent = 'وضع بدون إنترنت'; }
-      else { btn.classList.remove('offline-state'); label.textContent = 'متصل ومُحدَّث'; }
+      else { btn.classList.remove('offline-state'); label.textContent = 'متصل ومحدث'; }
     }
 
     function toggleOfflineMode() {
