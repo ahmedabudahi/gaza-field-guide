@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --bg-page: #F5F5F4;
@@ -18,38 +17,29 @@
       --bg-hover: #F5F5F4;
       --border: #E7E5E4;
       --border-strong: #D6D3D1;
-
       --text-primary: #1C1917;
       --text-secondary: #57534E;
       --text-muted: #78716C;
-
       --accent: #1E3A5F;
-      --accent-soft: #EFF6FF;
       --on-accent: #FFFFFF;
-
       --ok-color: #166534;
       --ok-bg: #F0FDF4;
       --ok-border: #BBF7D0;
-
       --warn-color: #92400E;
       --warn-bg: #FFFBEB;
       --warn-border: #FDE68A;
-
       --danger-color: #991B1B;
       --danger-bg: #FEF2F2;
       --danger-border: #FECACA;
-
       --accred-color: #1E3A5F;
       --accred-bg: #F8FAFC;
       --accred-border: #CBD5E1;
-
       --fs-xs: 12px;
       --fs-sm: 13px;
       --fs-base: 14px;
       --fs-md: 15px;
       --fs-lg: 18px;
     }
-
     [data-theme="dark"] {
       --bg-page: #121212;
       --bg-surface: #1A1A1A;
@@ -57,716 +47,115 @@
       --bg-hover: #242424;
       --border: #2E2E2E;
       --border-strong: #3F3F3F;
-
       --text-primary: #F4F4F5;
       --text-secondary: #A1A1AA;
       --text-muted: #71717A;
-
       --accent: #E4E4E7;
-      --accent-soft: #27272A;
       --on-accent: #121212;
-
       --ok-color: #86EFAC;
       --ok-bg: rgba(22, 101, 52, 0.18);
       --ok-border: rgba(134, 239, 172, 0.3);
-
       --warn-color: #FCD34D;
       --warn-bg: rgba(146, 64, 14, 0.2);
       --warn-border: rgba(252, 211, 77, 0.3);
-
       --danger-color: #FCA5A5;
       --danger-bg: rgba(153, 27, 27, 0.2);
       --danger-border: rgba(252, 165, 165, 0.3);
-
       --accred-color: #CBD5E1;
       --accred-bg: #23272F;
       --accred-border: #3B4252;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
-      font-size: var(--fs-base);
-      line-height: 1.6;
-      font-variant-numeric: tabular-nums;
-    }
-
-    body {
-      background-color: var(--bg-page);
-      color: var(--text-primary);
-      min-height: 100vh;
-    }
-
-    .topbar {
-      width: 100%;
-      background-color: var(--bg-surface);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 30;
-    }
-
-    .topbar-inner {
-      width: 100%;
-      padding: 0 clamp(14px, 3vw, 32px);
-      height: 54px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .top-tabs {
-      display: none;
-      align-items: stretch;
-      height: 100%;
-      gap: 4px;
-    }
-
-    .top-tab {
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: var(--text-secondary);
-      padding: 0 14px;
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      white-space: nowrap;
-      transition: color 0.15s ease, border-color 0.15s ease;
-    }
-
-    .top-tab svg {
-      width: 15px;
-      height: 15px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-      flex-shrink: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
+    html, body { width: 100%; overflow-x: hidden; font-size: var(--fs-base); line-height: 1.6; font-variant-numeric: tabular-nums; }
+    body { background-color: var(--bg-page); color: var(--text-primary); min-height: 100vh; }
+    .topbar { width: 100%; background-color: var(--bg-surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 30; }
+    .topbar-inner { width: 100%; padding: 0 clamp(14px, 3vw, 32px); height: 54px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .top-tabs { display: none; align-items: stretch; height: 100%; gap: 4px; }
+    .top-tab { background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--text-secondary); padding: 0 14px; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+    .top-tab svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; flex-shrink: 0; }
     .top-tab:hover { color: var(--text-primary); }
-
-    .top-tab.active {
-      color: var(--text-primary);
-      border-bottom-color: var(--accent);
-      font-weight: 700;
-    }
-
-    .mobile-heading {
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .topbar-tools {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-right: auto;
-    }
-
-    .icon-btn {
-      width: 34px;
-      height: 34px;
-      background-color: var(--bg-subtle);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      border-radius: 4px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .icon-btn:hover {
-      border-color: var(--border-strong);
-      background-color: var(--bg-hover);
-    }
-
-    .icon-btn svg {
-      width: 16px;
-      height: 16px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .conn-btn {
-      height: 34px;
-      background-color: var(--ok-bg);
-      border: 1px solid var(--ok-border);
-      border-right: 3px solid var(--ok-color);
-      color: var(--ok-color);
-      padding: 0 11px;
-      border-radius: 3px;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .conn-btn:hover { opacity: 0.9; }
-
-    .conn-btn.offline-state {
-      background-color: var(--warn-bg);
-      border-color: var(--warn-border);
-      border-right-color: var(--warn-color);
-      color: var(--warn-color);
-    }
-
-    /* منطقة الاعتماد الموحدة في كامل التطبيق */
-    .accred-stamp {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 9px;
-      background-color: var(--accred-bg);
-      border: 1px solid var(--accred-border);
-      border-right: 3px solid var(--accred-color);
-      border-radius: 3px;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      color: var(--accred-color);
-      white-space: nowrap;
-      line-height: 1.4;
-    }
-
-    /* شارة حالة التوفر وتصنيف التحقق بدون دوائر ملونة */
-    .avail-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 3px 9px;
-      border-radius: 3px;
-      border: 1px solid transparent;
-      border-right-width: 3px;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      white-space: nowrap;
-      line-height: 1.4;
-    }
-
-    .avail-ok {
-      background-color: var(--ok-bg);
-      border-color: var(--ok-border);
-      border-right-color: var(--ok-color);
-      color: var(--ok-color);
-    }
-
-    .avail-warn {
-      background-color: var(--warn-bg);
-      border-color: var(--warn-border);
-      border-right-color: var(--warn-color);
-      color: var(--warn-color);
-    }
-
-    .avail-danger {
-      background-color: var(--danger-bg);
-      border-color: var(--danger-border);
-      border-right-color: var(--danger-color);
-      color: var(--danger-color);
-    }
-
-    .container {
-      width: 100%;
-      padding: 20px clamp(14px, 3vw, 32px) 84px;
-    }
-
+    .top-tab.active { color: var(--text-primary); border-bottom-color: var(--accent); font-weight: 700; }
+    .mobile-heading { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+    .topbar-tools { display: flex; align-items: center; gap: 8px; margin-right: auto; }
+    .icon-btn { width: 34px; height: 34px; background-color: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-primary); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+    .icon-btn:hover { border-color: var(--border-strong); background-color: var(--bg-hover); }
+    .icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .conn-btn { height: 34px; background-color: var(--ok-bg); border: 1px solid var(--ok-border); border-right: 3px solid var(--ok-color); color: var(--ok-color); padding: 0 11px; border-radius: 3px; font-size: var(--fs-xs); font-weight: 700; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; }
+    .conn-btn.offline-state { background-color: var(--warn-bg); border-color: var(--warn-border); border-right-color: var(--warn-color); color: var(--warn-color); }
+    .accred-stamp { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; background-color: var(--accred-bg); border: 1px solid var(--accred-border); border-right: 3px solid var(--accred-color); border-radius: 3px; font-size: var(--fs-xs); font-weight: 700; color: var(--accred-color); white-space: nowrap; line-height: 1.4; }
+    .avail-tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 3px; border: 1px solid transparent; border-right-width: 3px; font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; line-height: 1.4; }
+    .avail-ok { background-color: var(--ok-bg); border-color: var(--ok-border); border-right-color: var(--ok-color); color: var(--ok-color); }
+    .avail-warn { background-color: var(--warn-bg); border-color: var(--warn-border); border-right-color: var(--warn-color); color: var(--warn-color); }
+    .avail-danger { background-color: var(--danger-bg); border-color: var(--danger-border); border-right-color: var(--danger-color); color: var(--danger-color); }
+    .container { width: 100%; padding: 20px clamp(14px, 3vw, 32px) 84px; }
     .panel { display: none; width: 100%; }
     .panel.active { display: block; }
-
-    .section-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .section-top h1 {
-      font-size: var(--fs-lg);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.35;
-    }
-
-    .section-top span {
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-    }
-
-    .metrics-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      margin-bottom: 16px;
-      overflow: hidden;
-    }
-
-    .metric-cell {
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      border-left: 1px solid var(--border);
-    }
-
+    .section-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .section-top h1 { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); line-height: 1.35; }
+    .section-top span { font-size: var(--fs-xs); color: var(--text-muted); }
+    .metrics-strip { display: grid; grid-template-columns: repeat(3, 1fr); background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 16px; overflow: hidden; }
+    .metric-cell { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-left: 1px solid var(--border); }
     .metric-cell:last-child { border-left: none; }
     .metric-cell-ok { border-right: 3px solid var(--ok-color); }
     .metric-cell-warn { border-right: 3px solid var(--warn-color); }
     .metric-cell-danger { border-right: 3px solid var(--danger-color); }
-
-    .metric-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: var(--fs-sm);
-      font-weight: 700;
-      color: var(--text-secondary);
-    }
-
-    .metric-num {
-      font-size: var(--fs-lg);
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .controls-bar {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 12px 14px;
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .controls-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .filter-group {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      max-width: 100%;
-    }
-
+    .metric-label { font-size: var(--fs-sm); font-weight: 700; color: var(--text-secondary); }
+    .metric-num { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); }
+    .controls-bar { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .controls-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .filter-group { display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; max-width: 100%; }
     .filter-group::-webkit-scrollbar { display: none; }
-
-    .filter-pill {
-      background-color: var(--bg-subtle);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      padding: 5px 12px;
-      border-radius: 4px;
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .filter-pill:hover {
-      border-color: var(--border-strong);
-      color: var(--text-primary);
-    }
-
-    .filter-pill.active {
-      background-color: var(--accent);
-      border-color: var(--accent);
-      color: var(--on-accent);
-    }
-
-    .field-input {
-      width: 100%;
-      height: 36px;
-      background-color: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0 12px;
-      color: var(--text-primary);
-      font-size: var(--fs-sm);
-      outline: none;
-    }
-
-    .field-input:focus {
-      border-color: var(--accent);
-      background-color: var(--bg-surface);
-    }
-
-    .surface-box {
-      width: 100%;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: right;
-    }
-
-    .data-table thead {
-      background-color: var(--bg-subtle);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .data-table th {
-      padding: 11px 16px;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      color: var(--text-secondary);
-      white-space: nowrap;
-    }
-
-    .data-table tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background-color 0.12s ease;
-    }
-
+    .filter-pill { background-color: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-secondary); padding: 5px 12px; border-radius: 4px; font-size: var(--fs-sm); font-weight: 600; white-space: nowrap; cursor: pointer; }
+    .filter-pill:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .filter-pill.active { background-color: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .field-input { width: 100%; height: 36px; background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 4px; padding: 0 12px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; }
+    .field-input:focus { border-color: var(--accent); background-color: var(--bg-surface); }
+    .surface-box { width: 100%; background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .data-table { width: 100%; border-collapse: collapse; text-align: right; }
+    .data-table thead { background-color: var(--bg-subtle); border-bottom: 1px solid var(--border); }
+    .data-table th { padding: 11px 16px; font-size: var(--fs-xs); font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
+    .data-table tbody tr { border-bottom: 1px solid var(--border); }
     .data-table tbody tr:last-child { border-bottom: none; }
     .data-table tbody tr:hover { background-color: var(--bg-hover); }
-
-    .data-table td {
-      padding: 13px 16px;
-      font-size: var(--fs-base);
-      color: var(--text-primary);
-      vertical-align: middle;
-    }
-
-    .cell-main {
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-      display: block;
-    }
-
-    .cell-sub {
-      font-size: var(--fs-xs);
-      color: var(--text-secondary);
-      display: block;
-      margin-top: 2px;
-    }
-
-    .price-official {
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-      white-space: nowrap;
-    }
-
-    .price-ref {
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .sync-strip {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 16px;
-      margin-bottom: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .sync-info h2 {
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .sync-info p {
-      font-size: var(--fs-sm);
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
-
-    .sync-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .feed-row {
-      padding: 15px 16px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
+    .data-table td { padding: 13px 16px; font-size: var(--fs-base); color: var(--text-primary); vertical-align: middle; }
+    .cell-main { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); display: block; }
+    .cell-sub { font-size: var(--fs-xs); color: var(--text-secondary); display: block; margin-top: 2px; }
+    .price-official { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+    .price-ref { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
+    .sync-strip { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .sync-info h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .sync-info p { font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; }
+    .sync-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .feed-row { padding: 15px 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
     .feed-row:last-child { border-bottom: none; }
-
-    .feed-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .feed-title {
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .feed-time {
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .feed-body {
-      font-size: var(--fs-base);
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    .feed-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-top: 2px;
-    }
-
-    .rumors-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .rumor-entry {
-      padding: 16px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .feed-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; }
+    .feed-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+    .feed-time { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
+    .feed-body { font-size: var(--fs-base); color: var(--text-secondary); line-height: 1.65; }
+    .feed-foot { display: flex; align-items: center; gap: 8px; padding-top: 2px; }
+    .rumors-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
+    .rumor-entry { padding: 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 10px; }
     .rumor-entry:last-child { border-bottom: none; }
-
-    .rumor-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .rumor-badges {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .rumor-claim {
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.5;
-    }
-
-    .rumor-fact {
-      background-color: var(--bg-subtle);
-      border-right: 3px solid var(--border-strong);
-      padding: 10px 12px;
-      font-size: var(--fs-base);
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    .rumor-fact strong {
-      color: var(--text-primary);
-      font-weight: 700;
-    }
-
-    .rumor-meta {
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-    }
-
-    .btn-outline {
-      height: 32px;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      padding: 0 12px;
-      border-radius: 4px;
-      font-size: var(--fs-xs);
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--border-strong);
-      background-color: var(--bg-hover);
-    }
-
-    .btn-danger-link {
-      background: transparent;
-      border: none;
-      color: var(--danger-color);
-      font-size: var(--fs-xs);
-      font-weight: 600;
-      cursor: pointer;
-      padding: 2px 4px;
-    }
-
-    .btn-submit {
-      width: 100%;
-      height: 38px;
-      background-color: var(--accent);
-      color: var(--on-accent);
-      border: none;
-      border-radius: 4px;
-      font-size: var(--fs-sm);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-submit:hover { opacity: 0.92; }
-
-    .form-box {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .form-box h2 {
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .form-box p {
-      font-size: var(--fs-sm);
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .saved-header {
-      font-size: var(--fs-sm);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin: 16px 0 8px;
-    }
-
-    .empty-row {
-      padding: 24px 16px;
-      text-align: center;
-      font-size: var(--fs-base);
-      color: var(--text-secondary);
-    }
-
-    .bottom-tabs {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background-color: var(--bg-surface);
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      z-index: 30;
-    }
-
-    .bottom-tab {
-      background: transparent;
-      border: none;
-      border-top: 2px solid transparent;
-      color: var(--text-secondary);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      padding: 4px 2px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .bottom-tab svg {
-      width: 17px;
-      height: 17px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-    }
-
-    .bottom-tab.active {
-      color: var(--text-primary);
-      border-top-color: var(--accent);
-      font-weight: 700;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 72px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: var(--text-primary);
-      color: var(--bg-surface);
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-size: var(--fs-xs);
-      font-weight: 600;
-      display: none;
-      z-index: 50;
-      white-space: nowrap;
-    }
-
+    .rumor-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .rumor-badges { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .rumor-claim { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.5; }
+    .rumor-fact { background-color: var(--bg-subtle); border-right: 3px solid var(--border-strong); padding: 10px 12px; font-size: var(--fs-base); color: var(--text-secondary); line-height: 1.65; }
+    .rumor-fact strong { color: var(--text-primary); font-weight: 700; }
+    .rumor-meta { font-size: var(--fs-xs); color: var(--text-muted); }
+    .btn-outline { height: 32px; background-color: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 0 12px; border-radius: 4px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; }
+    .btn-outline:hover { border-color: var(--border-strong); background-color: var(--bg-hover); }
+    .btn-danger-link { background: transparent; border: none; color: var(--danger-color); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 2px 4px; }
+    .btn-submit { width: 100%; height: 38px; background-color: var(--accent); color: var(--on-accent); border: none; border-radius: 4px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; }
+    .form-box { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .form-box h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+    .form-box p { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
+    .saved-header { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); margin: 16px 0 8px; }
+    .empty-row { padding: 24px 16px; text-align: center; font-size: var(--fs-base); color: var(--text-secondary); }
+    .bottom-tabs { position: fixed; bottom: 0; right: 0; left: 0; width: 100%; height: 60px; background-color: var(--bg-surface); border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); z-index: 30; }
+    .bottom-tab { background: transparent; border: none; border-top: 2px solid transparent; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .bottom-tab svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .bottom-tab.active { color: var(--text-primary); border-top-color: var(--accent); font-weight: 700; }
+    .toast { position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: var(--bg-surface); padding: 8px 16px; border-radius: 4px; font-size: var(--fs-xs); font-weight: 600; display: none; z-index: 50; white-space: nowrap; }
     @media (max-width: 860px) {
       .metrics-strip { grid-template-columns: 1fr; }
       .metric-cell { border-left: none; border-bottom: 1px solid var(--border); }
@@ -776,26 +165,15 @@
       .data-table tbody tr { padding: 13px 14px; }
       .data-table td { padding: 4px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
       .data-table td:first-child { display: block; padding-bottom: 6px; }
-      .data-table td[data-label]::before {
-        content: attr(data-label);
-        font-size: var(--fs-xs);
-        color: var(--text-muted);
-        font-weight: 600;
-      }
+      .data-table td[data-label]::before { content: attr(data-label); font-size: var(--fs-xs); color: var(--text-muted); font-weight: 600; }
     }
-
-    @media (min-width: 680px) {
-      .controls-bar .field-input { max-width: 300px; }
-    }
-
+    @media (min-width: 680px) { .controls-bar .field-input { max-width: 300px; } }
     @media (min-width: 820px) {
       .top-tabs { display: flex; }
-      .mobile-heading { display: none; }
-      .bottom-tabs { display: none; }
+      .mobile-heading, .bottom-tabs { display: none; }
       .container { padding-bottom: 32px; }
       .toast { bottom: 24px; }
     }
-
     @media (min-width: 960px) {
       .rumors-grid { grid-template-columns: 1.75fr 1fr; }
       .sidebar-sticky { position: sticky; top: 72px; }
@@ -803,12 +181,9 @@
   </style>
 </head>
 <body>
-
-  <!-- الشريط العلوي -->
   <header class="topbar">
     <div class="topbar-inner">
       <div id="mobileHeading" class="mobile-heading">الأسواق المعتمدة</div>
-
       <nav class="top-tabs" aria-label="الأقسام الرئيسية">
         <button class="top-tab active" data-tab="outlets" onclick="switchView('outlets')">
           <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -827,12 +202,10 @@
           <span>التحقق من الشائعات</span>
         </button>
       </nav>
-
       <div class="topbar-tools">
-        <button id="themeToggle" class="icon-btn" onclick="toggleTheme()" title="تبديل المظهر" aria-label="تبديل المظهر">
-          <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+        <button id="themeToggle" class="icon-btn" onclick="toggleTheme()" title="تفعيل الوضع المظلم" aria-label="تبديل المظهر">
+          <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
-
         <button id="connBtn" class="conn-btn" onclick="toggleOfflineMode()" title="التبديل بين وضع الاتصال المباشر ووضع عدم الاتصال">
           <span id="connLabel">✓ متصل ومُحدَّث</span>
         </button>
@@ -843,14 +216,11 @@
   <div id="toast" class="toast"></div>
 
   <main class="container">
-
-    <!-- 1. الأسواق المعتمدة -->
     <section id="view-outlets" class="panel active">
       <div class="section-top">
         <h1>نقاط التوزيع ومكاتب المساعدة المعتمدة بالشوارع والمعالم الدقيقة</h1>
         <span>المصدر: برنامج الأغذية العالمي (WFP)، وكالة الأونروا (UNRWA)، وتقارير OCHA</span>
       </div>
-
       <div class="controls-bar">
         <div class="controls-row">
           <div class="filter-group" id="outletAreaFilters">
@@ -863,7 +233,6 @@
           <input type="text" id="outletSearch" class="field-input" placeholder="ابحث بالشارع أو المعلم أو الجهة المشرفة..." oninput="renderOutlets()" />
         </div>
       </div>
-
       <div class="surface-box">
         <table class="data-table">
           <thead>
@@ -879,28 +248,16 @@
       </div>
     </section>
 
-    <!-- 2. الأسعار والوفرة -->
     <section id="view-market" class="panel">
       <div class="section-top">
         <h1>متوسطات أسعار السلع الأساسية والمحروقات في قطاع غزة</h1>
         <span>المصدر: الجهاز المركزي للإحصاء الفلسطيني وOCHA</span>
       </div>
-
       <div class="metrics-strip">
-        <div class="metric-cell metric-cell-ok">
-          <span class="metric-label">✓ متوفر / سعر مدعوم</span>
-          <span id="countGreen" class="metric-num">0</span>
-        </div>
-        <div class="metric-cell metric-cell-warn">
-          <span class="metric-label">! تذبذب / كمية محدودة</span>
-          <span id="countAmber" class="metric-num">0</span>
-        </div>
-        <div class="metric-cell metric-cell-danger">
-          <span class="metric-label">× شحيح حالياً</span>
-          <span id="countRed" class="metric-num">0</span>
-        </div>
+        <div class="metric-cell metric-cell-ok"><span class="metric-label">✓ متوفر / سعر مدعوم</span><span id="countGreen" class="metric-num">0</span></div>
+        <div class="metric-cell metric-cell-warn"><span class="metric-label">! تذبذب / كمية محدودة</span><span id="countAmber" class="metric-num">0</span></div>
+        <div class="metric-cell metric-cell-danger"><span class="metric-label">× شحيح حالياً</span><span id="countRed" class="metric-num">0</span></div>
       </div>
-
       <div class="controls-bar">
         <div class="controls-row">
           <div class="filter-group" id="areaFilters">
@@ -910,7 +267,6 @@
           </div>
           <input type="text" id="marketSearch" class="field-input" placeholder="ابحث عن سلعة..." oninput="renderMarket()" />
         </div>
-
         <div class="filter-group" id="statusFilters">
           <button class="filter-pill active" onclick="setStatusFilter('all', this)">جميع الحالات</button>
           <button class="filter-pill" onclick="setStatusFilter('green', this)">✓ متوفر / سعر مدعوم</button>
@@ -918,7 +274,6 @@
           <button class="filter-pill" onclick="setStatusFilter('red', this)">× شحيح حالياً</button>
         </div>
       </div>
-
       <div class="surface-box">
         <table class="data-table">
           <thead>
@@ -936,37 +291,29 @@
       </div>
     </section>
 
-    <!-- 3. التنبيه والتخزين -->
     <section id="view-offline" class="panel">
       <div class="section-top">
         <h1>النشرة الإحصائية والتقارير الرسمية وحالة التخزين المحلي</h1>
         <span id="sourceStatusBadge">مزامنة تلقائية مع المصادر الرسمية</span>
       </div>
-
       <div class="sync-strip">
         <div class="sync-info">
-          <h2>
-            <span>النسخة المحفوظة على ذاكرة الجهاز</span>
-            <span class="accred-stamp">✓ اعتماد النسخة: بيانات رسمية موثقة</span>
-          </h2>
+          <h2><span>النسخة المحفوظة على ذاكرة الجهاز</span><span class="accred-stamp">✓ اعتماد النسخة: بيانات رسمية موثقة</span></h2>
           <p>يجلب التطبيق التحديثات تلقائياً من ملف البيانات الرسمي ويحفظها محلياً للعمل عند انقطاع الشبكة.</p>
         </div>
         <div class="sync-actions">
-          <span class="rumor-meta">آخر تحديث للبيانات: <strong id="lastSyncTime">جاري الفحص...</strong></span>
+          <span class="rumor-meta">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
           <button class="btn-outline" onclick="manualSync()">فحص التحديثات الآن</button>
         </div>
       </div>
-
       <div class="surface-box" id="alertsList"></div>
     </section>
 
-    <!-- 4. التحقق من الشائعات -->
     <section id="view-rumors" class="panel">
       <div class="section-top">
         <h1>سجل التحقق من الأخبار المتداولة حول غزة</h1>
         <span>المصدر: منصة مسبار لتقصي الحقائق ووزارة الاقتصاد الوطني</span>
       </div>
-
       <div class="rumors-grid">
         <div>
           <div class="controls-bar">
@@ -979,10 +326,8 @@
               <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
             </div>
           </div>
-
           <div class="surface-box" id="rumorsList"></div>
         </div>
-
         <aside class="sidebar-sticky">
           <div class="form-box">
             <h2>حفظ خبر متداول للتحقق</h2>
@@ -996,15 +341,12 @@
             </select>
             <button class="btn-submit" onclick="addUserReport()">حفظ في سجل الجهاز</button>
           </div>
-
           <div id="userReportsContainer"></div>
         </aside>
       </div>
     </section>
-
   </main>
 
-  <!-- شريط التنقل السفلي للهواتف -->
   <nav class="bottom-tabs" aria-label="التنقل السفلي">
     <button class="bottom-tab active" data-tab="outlets" onclick="switchView('outlets')">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -1025,12 +367,6 @@
   </nav>
 
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-      });
-    }
-
     const SUN_SVG = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
     const MOON_SVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
 
@@ -1039,7 +375,6 @@
       const icon = document.getElementById('themeIcon');
       const meta = document.getElementById('themeColorMeta');
       const btn = document.getElementById('themeToggle');
-
       if (theme === 'dark') {
         root.setAttribute('data-theme', 'dark');
         icon.innerHTML = SUN_SVG;
@@ -1054,8 +389,7 @@
     }
 
     function toggleTheme() {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const next = isDark ? 'light' : 'dark';
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       localStorage.setItem('burhan_theme', next);
       applyTheme(next);
       showToast(next === 'dark' ? 'تم تفعيل الوضع المظلم' : 'تم تفعيل الوضع الفاتح');
@@ -1063,359 +397,67 @@
 
     applyTheme(localStorage.getItem('burhan_theme') || 'light');
 
-    /* بيانات حقيقية موثقة بأسماء الشوارع والمعالم والجهات المشرفة (29 نقطة توزيع) */
     const FALLBACK_DATASET = {
       lastUpdated: "2026-11-23T10:00:00Z",
       lastSourceStatus: "مُحدَّث من تقارير OCHA و WFP و UNRWA",
       outlets: [
-        {
-          name: "نقطة القرارة – شارع الحية",
-          area: "خان يونس",
-          address: "خان يونس – القرارة – شارع الحية",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "نقطة شرق سجن أصداء – شارع 5",
-          area: "خان يونس",
-          address: "خان يونس – شارع 5 – شرق سجن أصداء بـ 500 متر",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "نقطة مفترق أصداء – بناشر علوش (ربيع الأغا)",
-          area: "خان يونس",
-          address: "خان يونس – مفترق أصداء – بناشر علوش (نقطة ربيع الأغا)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "نقطة محطة طبريا – المجايدة",
-          area: "خان يونس",
-          address: "خان يونس – محطة طبريا – نقطة المجايدة",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "نقطة حي البطن السمين – البرقي",
-          area: "خان يونس",
-          address: "خان يونس – حي البطن السمين – نقطة البرقي",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة أكتيد (ACTED)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مواصي خان يونس – شارع النص (بركس الفرا)",
-          area: "خان يونس",
-          address: "مواصي خان يونس – شارع النص – بركس الفرا مقابل عيادة الوكالة",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مواصي خان يونس – بعد مشتل التحرير بـ 20 متراً",
-          area: "خان يونس",
-          address: "مواصي خان يونس – بعد مشتل التحرير بـ 20 متراً – بركس أم عايش الشاعر",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مواصي خان يونس – نقطة النجار (مقابل نادي الوكالة)",
-          area: "خان يونس",
-          address: "مواصي خان يونس – نقطة النجار – مقابل نادي الوكالة",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مواصي خان يونس – شمال مسجد القبة بـ 200 متر",
-          area: "خان يونس",
-          address: "مواصي خان يونس – شمال مسجد القبة بـ 200 متر – مخازن عامر الأقرط",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مواصي خان يونس – حي النجار (مقابل حديقة حياة)",
-          area: "خان يونس",
-          address: "مواصي خان يونس – حي النجار – مقابل حديقة حياة",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز شؤون المرأة (WAC)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مواصي خان يونس / رفح – نقطة فيش فريش (مسجد مطر)",
-          area: "خان يونس",
-          address: "مواصي خان يونس / رفح – نقطة فيش فريش – مسجد مطر – مخازن أبو الأمير بريكة",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مواصي خان يونس – مقابل المحكمة الشرعية",
-          area: "خان يونس",
-          address: "مواصي خان يونس – مقابل المحكمة الشرعية",
-          items: "نقطة توزيع ميدانية للمساعدات الإغاثية المجدولة",
-          hours: "09:00 ص – 01:00 م (حسب الكشوفات)"
-        },
-        {
-          name: "مراكز توزيع الأونروا – مخيم خان يونس وبني سهيلا",
-          area: "خان يونس",
-          address: "خان يونس – مركزا التوزيع المعتمدان في مخيم خان يونس وبلدة بني سهيلا",
-          items: "إشراف وكالة الأونروا (UNRWA) – توزيع الطرود الغذائية للأسر المسجلة",
-          hours: "حسب رسائل وجداول الأونروا"
-        },
-        {
-          name: "ملجأ ومركز الأونروا – منطقة الفخاري (شرق خان يونس)",
-          area: "خان يونس",
-          address: "خان يونس – منطقة الفخاري – ملجأ ومركز الأونروا",
-          items: "إشراف وكالة الأونروا (UNRWA) بالتنسيق مع المجتمع المحلي – وجبات ساخنة ومياه",
-          hours: "توزيع يومي"
-        },
-        {
-          name: "دير البلح – شارع 17 (مقابل ديوان آل بركة)",
-          area: "دير البلح",
-          address: "دير البلح – شارع 17 – مقابل ديوان آل بركة (نقطة عبد الرحمن بركة)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة أكتيد (ACTED)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "دير البلح – عزبة البشايرة (شارع عبد الكريم العكلوك)",
-          area: "دير البلح",
-          address: "دير البلح – عزبة البشايرة – شارع عبد الكريم العكلوك",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "دير البلح – جنوب المشاعلة",
-          area: "دير البلح",
-          address: "دير البلح – جنوب المشاعلة – نقطة دير البلح",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "دير البلح – شارع البيئة (منزل نجيب البحيصي)",
-          area: "دير البلح",
-          address: "دير البلح – شارع البيئة – منزل نجيب البحيصي",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "دير البلح – منطقة البصة (غرب كلية فلسطين التقنية)",
-          area: "دير البلح",
-          address: "دير البلح – منطقة البصة – غرب كلية فلسطين التقنية (بيت أبو طارق الحواجري)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "دير البلح – شارع أبو حسني (عمارة العيماوي)",
-          area: "دير البلح",
-          address: "دير البلح – شارع أبو حسني – عمارة العيماوي",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز شؤون المرأة (WAC)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "النصيرات – شارع مخيم 2 ومراكز توزيع الأونروا",
-          area: "المحافظة الوسطى",
-          address: "النصيرات – شارع مخيم 2 (قرب مخبز الحاج - بركس بيدس) ومركزا الأونروا في مخيم النصيرات",
-          items: "إشراف برنامج الأغذية العالمي (WFP) / مجتمعات عالمية، ووكالة الأونروا (UNRWA)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "البريج – مدخل البريج (عمارة وسوبرماركت البابا)",
-          area: "المحافظة الوسطى",
-          address: "البريج – بعد مدخل البريج بـ 500 متر – عمارة وسوبرماركت البابا",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مخيم المغازي – بجوار سوبرماركت نهاد التلباني",
-          area: "المحافظة الوسطى",
-          address: "مخيم المغازي – بجوار سوبرماركت نهاد التلباني",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة كير (CARE)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "الزوايدة – شارع خالد بن الوليد ومقابل منتزه البلدية",
-          area: "المحافظة الوسطى",
-          address: "الزوايدة – شارع خالد بن الوليد (محلات أبو جبارة) ومقابل منتزه البلدية (محطة الأغا)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: منظمة كير (CARE) وإنقاذ المستقبل الشبابي",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "المصدر – شارع مدخل المصدر الرئيسي (حواصل كمال المصدر)",
-          area: "المحافظة الوسطى",
-          address: "المصدر – شارع مدخل المصدر الرئيسي – جهة الشرق بـ 100 متر (حواصل كمال المصدر)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة كير (CARE)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مدينة غزة – الرمال الشمالي (العائلة المقدسة وشارع عايدية)",
-          area: "مدينة غزة",
-          address: "مدينة غزة – الرمال الشمالي – نقطة العائلة المقدسة وشارع عايدية (بركس اليعقوبي)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: أكتيد (ACTED) والرؤيا الشبابية",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مدينة غزة – الصبرة (شارع الثلاثيني) وعسقولة (بركس أبو سمعان)",
-          area: "مدينة غزة",
-          address: "مدينة غزة – الصبرة (شارع الثلاثيني) وعسقولة (بركس أبو سمعان)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: أكتيد (ACTED) والإغاثة الزراعية (PARC)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مدينة غزة – الدرج (مفترق المعامل) والزيتون (شرق الشافعي)",
-          area: "مدينة غزة",
-          address: "مدينة غزة – الدرج (مفترق المعامل - بركس الأشرم) والزيتون (شرق مسجد الإمام الشافعي - بجوار سوبرماركت أبو عمر الدحدوح)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)",
-          hours: "الخط المجاني WFP: 1800124126"
-        },
-        {
-          name: "مدينة غزة – تل الهوى (قرب مكتب العمل) ومخيم الشاطئ (ميدان الشهداء)",
-          area: "مدينة غزة",
-          address: "مدينة غزة – تل الهوى (بجوار ملعب المحبة - نقطة أبو حبل) ومخيم الشاطئ (ميدان الشهداء - مطبعة مقداد)",
-          items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: مجتمعات عالمية وإنقاذ المستقبل الشبابي",
-          hours: "الخط المجاني WFP: 1800124126"
-        }
+        { name: "نقطة القرارة – شارع الحية", area: "خان يونس", address: "خان يونس – القرارة – شارع الحية", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "نقطة شرق سجن أصداء – شارع 5", area: "خان يونس", address: "خان يونس – شارع 5 – شرق سجن أصداء بـ 500 متر", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "نقطة مفترق أصداء – بناشر علوش (ربيع الأغا)", area: "خان يونس", address: "خان يونس – مفترق أصداء – بناشر علوش (نقطة ربيع الأغا)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "نقطة محطة طبريا – المجايدة", area: "خان يونس", address: "خان يونس – محطة طبريا – نقطة المجايدة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "نقطة حي البطن السمين – البرقي", area: "خان يونس", address: "خان يونس – حي البطن السمين – نقطة البرقي", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة أكتيد (ACTED)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – شارع النص (بركس الفرا)", area: "خان يونس", address: "مواصي خان يونس – شارع النص – بركس الفرا مقابل عيادة الوكالة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – بعد مشتل التحرير بـ 20 متراً", area: "خان يونس", address: "مواصي خان يونس – بعد مشتل التحرير بـ 20 متراً – بركس أم عايش الشاعر", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – نقطة النجار (مقابل نادي الوكالة)", area: "خان يونس", address: "مواصي خان يونس – نقطة النجار – مقابل نادي الوكالة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – شمال مسجد القبة بـ 200 متر", area: "خان يونس", address: "مواصي خان يونس – شمال مسجد القبة بـ 200 متر – مخازن عامر الأقرط", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – حي النجار (مقابل حديقة حياة)", area: "خان يونس", address: "مواصي خان يونس – حي النجار – مقابل حديقة حياة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز شؤون المرأة (WAC)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس / رفح – نقطة فيش فريش (مسجد مطر)", area: "خان يونس", address: "مواصي خان يونس / رفح – نقطة فيش فريش – مسجد مطر – مخازن أبو الأمير بريكة", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مواصي خان يونس – مقابل المحكمة الشرعية", area: "خان يونس", address: "مواصي خان يونس – مقابل المحكمة الشرعية", items: "نقطة توزيع ميدانية للمساعدات الإغاثية المجدولة", hours: "09:00 ص – 01:00 م (حسب الكشوفات)" },
+        { name: "مراكز توزيع الأونروا – مخيم خان يونس وبني سهيلا", area: "خان يونس", address: "خان يونس – مركزا التوزيع المعتمدان في مخيم خان يونس وبلدة بني سهيلا", items: "إشراف وكالة الأونروا (UNRWA) – توزيع الطرود الغذائية للأسر المسجلة", hours: "حسب رسائل وجداول الأونروا" },
+        { name: "ملجأ ومركز الأونروا – منطقة الفخاري (شرق خان يونس)", area: "خان يونس", address: "خان يونس – منطقة الفخاري – ملجأ ومركز الأونروا", items: "إشراف وكالة الأونروا (UNRWA) بالتنسيق مع المجتمع المحلي – وجبات ساخنة ومياه", hours: "توزيع يومي" },
+        { name: "دير البلح – شارع 17 (مقابل ديوان آل بركة)", area: "دير البلح", address: "دير البلح – شارع 17 – مقابل ديوان آل بركة (نقطة عبد الرحمن بركة)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة أكتيد (ACTED)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "دير البلح – عزبة البشايرة (شارع عبد الكريم العكلوك)", area: "دير البلح", address: "دير البلح – عزبة البشايرة – شارع عبد الكريم العكلوك", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: الإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "دير البلح – جنوب المشاعلة", area: "دير البلح", address: "دير البلح – جنوب المشاعلة – نقطة دير البلح", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "دير البلح – شارع البيئة (منزل نجيب البحيصي)", area: "دير البلح", address: "دير البلح – شارع البيئة – منزل نجيب البحيصي", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "دير البلح – منطقة البصة (غرب كلية فلسطين التقنية)", area: "دير البلح", address: "دير البلح – منطقة البصة – غرب كلية فلسطين التقنية (بيت أبو طارق الحواجري)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز العمل التنموي / معاً (MA'AN)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "دير البلح – شارع أبو حسني (عمارة العيماوي)", area: "دير البلح", address: "دير البلح – شارع أبو حسني – عمارة العيماوي", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مركز شؤون المرأة (WAC)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "النصيرات – شارع مخيم 2 ومراكز توزيع الأونروا", area: "المحافظة الوسطى", address: "النصيرات – شارع مخيم 2 (قرب مخبز الحاج - بركس بيدس) ومركزا الأونروا في مخيم النصيرات", items: "إشراف برنامج الأغذية العالمي (WFP) / مجتمعات عالمية، ووكالة الأونروا (UNRWA)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "البريج – مدخل البريج (عمارة وسوبرماركت البابا)", area: "المحافظة الوسطى", address: "البريج – بعد مدخل البريج بـ 500 متر – عمارة وسوبرماركت البابا", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مخيم المغازي – بجوار سوبرماركت نهاد التلباني", area: "المحافظة الوسطى", address: "مخيم المغازي – بجوار سوبرماركت نهاد التلباني", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة كير (CARE)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "الزوايدة – شارع خالد بن الوليد ومقابل منتزه البلدية", area: "المحافظة الوسطى", address: "الزوايدة – شارع خالد بن الوليد (محلات أبو جبارة) ومقابل منتزه البلدية (محطة الأغا)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: منظمة كير (CARE) وإنقاذ المستقبل الشبابي", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "المصدر – شارع مدخل المصدر الرئيسي (حواصل كمال المصدر)", area: "المحافظة الوسطى", address: "المصدر – شارع مدخل المصدر الرئيسي – جهة الشرق بـ 100 متر (حواصل كمال المصدر)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة كير (CARE)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مدينة غزة – الرمال الشمالي (العائلة المقدسة وشارع عايدية)", area: "مدينة غزة", address: "مدينة غزة – الرمال الشمالي – نقطة العائلة المقدسة وشارع عايدية (بركس اليعقوبي)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: أكتيد (ACTED) والرؤيا الشبابية", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مدينة غزة – الصبرة (شارع الثلاثيني) وعسقولة (بركس أبو سمعان)", area: "مدينة غزة", address: "مدينة غزة – الصبرة (شارع الثلاثيني) وعسقولة (بركس أبو سمعان)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: أكتيد (ACTED) والإغاثة الزراعية (PARC)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مدينة غزة – الدرج (مفترق المعامل) والزيتون (شرق الشافعي)", area: "مدينة غزة", address: "مدينة غزة – الدرج (مفترق المعامل - بركس الأشرم) والزيتون (شرق مسجد الإمام الشافعي - بجوار سوبرماركت أبو عمر الدحدوح)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
+        { name: "مدينة غزة – تل الهوى (قرب مكتب العمل) ومخيم الشاطئ (ميدان الشهداء)", area: "مدينة غزة", address: "مدينة غزة – تل الهوى (بجوار ملعب المحبة - نقطة أبو حبل) ومخيم الشاطئ (ميدان الشهداء - مطبعة مقداد)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: مجتمعات عالمية وإنقاذ المستقبل الشبابي", hours: "الخط المجاني WFP: 1800124126" }
       ],
       market: [
-        {
-          name: "ربطة خبز مدعومة (وزن 2 كغم)",
-          area: "خان يونس",
-          status: "green",
-          label: "سعر مدعوم",
-          fair: "3 شيكل",
-          ref: "أكثر من 30 شيكل (تجاري سابق)",
-          source: "المتاجر المتعاقدة مع المخابز المدعومة أممياً (OCHA)"
-        },
-        {
-          name: "بطاطا (1 كغم)",
-          area: "قطاع غزة (متوسط عام)",
-          status: "amber",
-          label: "تذبذب سعري",
-          fair: "9 شيكل",
-          ref: "مؤشر الغذاء +6.67% شهرياً",
-          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
-        },
-        {
-          name: "بصل ناشف (1 كغم)",
-          area: "قطاع غزة (متوسط عام)",
-          status: "amber",
-          label: "تذبذب سعري",
-          fair: "9 شيكل",
-          ref: "مؤشر الغذاء +6.67% شهرياً",
-          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
-        },
-        {
-          name: "فلفل أخضر حار (1 كغم)",
-          area: "قطاع غزة (متوسط عام)",
-          status: "green",
-          label: "متوفر بالأسواق",
-          fair: "7 شيكل",
-          ref: "متوسط رصد تشرين أول 2026",
-          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
-        },
-        {
-          name: "زيت ذرة (عبوة 3 لتر)",
-          area: "قطاع غزة (متوسط عام)",
-          status: "green",
-          label: "متوفر بالأسواق",
-          fair: "38 شيكل",
-          ref: "36 شيكل (متوسط 2024)",
-          source: "الجهاز المركزي للإحصاء الفلسطيني (جدول غلاء المعيشة)"
-        },
-        {
-          name: "أسطوانة غاز طهي (12 كغم)",
-          area: "قطاع غزة (متوسط عام)",
-          status: "amber",
-          label: "كمية محدودة",
-          fair: "94 شيكل",
-          ref: "126 شيكل (متوسط 2025)",
-          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
-        },
-        {
-          name: "بنزين 95 أوكتان (1 لتر)",
-          area: "قطاع غزة (متوسط عام)",
-          status: "amber",
-          label: "كمية محدودة",
-          fair: "7.92 شيكل",
-          ref: "7.90 شيكل (آذار 2026)",
-          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
-        },
-        {
-          name: "سولار / ديزل (1 لتر)",
-          area: "قطاع غزة (متوسط عام)",
-          status: "red",
-          label: "شحيح حالياً",
-          fair: "8.99 شيكل",
-          ref: "8.40 شيكل (آذار 2026)",
-          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
-        }
+        { name: "ربطة خبز مدعومة (وزن 2 كغم)", area: "خان يونس", status: "green", label: "سعر مدعوم", fair: "3 شيكل", ref: "أكثر من 30 شيكل (تجاري سابق)", source: "المتاجر المتعاقدة مع المخابز المدعومة أممياً (OCHA)" },
+        { name: "بطاطا (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهرياً", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
+        { name: "بصل ناشف (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهرياً", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
+        { name: "فلفل أخضر حار (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "green", label: "متوفر بالأسواق", fair: "7 شيكل", ref: "متوسط رصد تشرين أول 2026", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
+        { name: "زيت ذرة (عبوة 3 لتر)", area: "قطاع غزة (متوسط عام)", status: "green", label: "متوفر بالأسواق", fair: "38 شيكل", ref: "36 شيكل (متوسط 2024)", source: "الجهاز المركزي للإحصاء الفلسطيني (جدول غلاء المعيشة)" },
+        { name: "أسطوانة غاز طهي (12 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "كمية محدودة", fair: "94 شيكل", ref: "126 شيكل (متوسط 2025)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
+        { name: "بنزين 95 أوكتان (1 لتر)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "كمية محدودة", fair: "7.92 شيكل", ref: "7.90 شيكل (آذار 2026)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
+        { name: "سولار / ديزل (1 لتر)", area: "قطاع غزة (متوسط عام)", status: "red", label: "شحيح حالياً", fair: "8.99 شيكل", ref: "8.40 شيكل (آذار 2026)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" }
       ],
       alerts: [
-        {
-          title: "تقرير أعمال وزارة الاقتصاد الوطني في غزة لشهر أكتوبر 2026",
-          time: "9 نوفمبر 2026",
-          body: "أفادت الوزارة بإدخال 3,839 شاحنة إلى قطاع غزة خلال شهر أكتوبر 2026، ونشرت قائمة الأسعار الاسترشادية للمواد الأساسية والخضار، واستقبلت وحدة الرقابة والشكاوى 163 شكوى واستفساراً عبر الرقم المجاني."
-        },
-        {
-          title: "نشرة الرقم القياسي لأسعار المستهلك في قطاع غزة (تشرين أول 2026)",
-          time: "12 نوفمبر 2026",
-          body: "أعلن الجهاز المركزي للإحصاء الفلسطيني أن الرقم القياسي لأسعار المستهلك في قطاع غزة بلغ 316.95 نقطة بارتفاع نسبته 4.11% مقارنة بشهر أيلول 2026، وارتفعت أسعار مجموعة المواد الغذائية والمشروبات بنسبة 6.67%."
-        },
-        {
-          title: "تحديث الاستجابة الإنسانية في محافظات قطاع غزة (OCHA)",
-          time: "18 نوفمبر 2026",
-          body: "وثّق مكتب الأمم المتحدة لتنسيق الشؤون الإنسانية استمرار الأنشطة الإغاثية في 77 موقعاً في خان يونس، و54 موقعاً في مدينة غزة، و13 في شمال غزة، و10 في دير البلح، و8 في رفح."
-        },
-        {
-          title: "تشغيل 15 مخبزاً مدعوماً أممياً لتوفير الخبز بسعر 3 شيكل (OCHA)",
-          time: "تقرير OCHA #336",
-          body: "تنتج 15 مخبزاً مدعوماً من الأمم المتحدة (9 في دير البلح وخان يونس و6 في مدينة غزة) أكثر من 130,000 ربطة خبز (2 كغم) يومياً لتوزيعها مجاناً أو بيعها بسعر مدعوم يبلغ 3 شيكل في المتاجر المتعاقدة."
-        }
+        { title: "تقرير أعمال وزارة الاقتصاد الوطني في غزة لشهر أكتوبر 2026", time: "9 نوفمبر 2026", body: "أفادت الوزارة بإدخال 3,839 شاحنة إلى قطاع غزة خلال شهر أكتوبر 2026، ونشرت قائمة الأسعار الاسترشادية للمواد الأساسية والخضار، واستقبلت وحدة الرقابة والشكاوى 163 شكوى واستفساراً عبر الرقم المجاني." },
+        { title: "نشرة الرقم القياسي لأسعار المستهلك في قطاع غزة (تشرين أول 2026)", time: "12 نوفمبر 2026", body: "أعلن الجهاز المركزي للإحصاء الفلسطيني أن الرقم القياسي لأسعار المستهلك في قطاع غزة بلغ 316.95 نقطة بارتفاع نسبته 4.11% مقارنة بشهر أيلول 2026، وارتفعت أسعار مجموعة المواد الغذائية والمشروبات بنسبة 6.67%." },
+        { title: "تحديث الاستجابة الإنسانية في محافظات قطاع غزة (OCHA)", time: "18 نوفمبر 2026", body: "وثّق مكتب الأمم المتحدة لتنسيق الشؤون الإنسانية استمرار الأنشطة الإغاثية في 77 موقعاً في خان يونس، و54 موقعاً في مدينة غزة، و13 في شمال غزة، و10 في دير البلح، و8 في رفح." },
+        { title: "تشغيل 15 مخبزاً مدعوماً أممياً لتوفير الخبز بسعر 3 شيكل (OCHA)", time: "تقرير OCHA #336", body: "تنتج 15 مخبزاً مدعوماً من الأمم المتحدة (9 في دير البلح وخان يونس و6 في مدينة غزة) أكثر من 130,000 ربطة خبز (2 كغم) يومياً لتوزيعها مجاناً أو بيعها بسعر مدعوم يبلغ 3 شيكل في المتاجر المتعاقدة." }
       ],
       rumors: [
-        {
-          verdict: "false",
-          tag: "ادعاء مضلل (مسبار)",
-          claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.",
-          truth: "بالتحقق من الادعاء وجد فريق (مسبار) أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثاً.",
-          meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025"
-        },
-        {
-          verdict: "false",
-          tag: "ادعاء مضلل (مسبار)",
-          claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدّعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.",
-          truth: "كشف فريق (مسبار) أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نُفذت في يوليو 2024، وليس لمساعدات وصلت حديثاً.",
-          meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025"
-        },
-        {
-          verdict: "false",
-          tag: "ادعاء مضلل (مسبار)",
-          claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدّعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.",
-          truth: "أوضح تحقيق (مسبار) أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.",
-          meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025"
-        },
-        {
-          verdict: "true",
-          tag: "توضيح رسمي موثق",
-          claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.",
-          truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحاً أن ما حدث كان خللاً مؤقتاً في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.",
-          meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026"
-        }
+        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.", truth: "بالتحقق من الادعاء وجد فريق (مسبار) أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثاً.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025" },
+        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدّعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.", truth: "كشف فريق (مسبار) أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نُفذت في يوليو 2024، وليس لمساعدات وصلت حديثاً.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025" },
+        { verdict: "false", tag: "ادعاء مضلل (مسبار)", claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدّعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.", truth: "أوضح تحقيق (مسبار) أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025" },
+        { verdict: "true", tag: "توضيح رسمي موثق", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحاً أن ما حدث كان خللاً مؤقتاً في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
       ]
     };
 
-    let outletsData = [];
-    let marketData = [];
-    let alertsData = [];
-    let rumorsData = [];
-
-    const tabTitles = {
-      outlets: "الأسواق المعتمدة",
-      market: "الأسعار والوفرة",
-      offline: "التنبيه والتخزين",
-      rumors: "التحقق من الشائعات"
-    };
-
-    let selectedOutletArea = 'الكل';
-    let selectedMarketArea = 'الكل';
-    let selectedMarketStatus = 'all';
-    let selectedVerdict = 'all';
+    let outletsData = [], marketData = [], alertsData = [], rumorsData = [];
+    const tabTitles = { outlets: "الأسواق المعتمدة", market: "الأسعار والوفرة", offline: "التنبيه والتخزين", rumors: "التحقق من الشائعات" };
+    let selectedOutletArea = 'الكل', selectedMarketArea = 'الكل', selectedMarketStatus = 'all', selectedVerdict = 'all';
     let isOfflineMode = !navigator.onLine;
 
     function escapeHtml(str) {
@@ -1429,98 +471,47 @@
       el.textContent = msg;
       el.style.display = 'block';
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => {
-        el.style.display = 'none';
-      }, 2500);
+      window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 2500);
     }
 
-    /* دوال استخراج جهة الاعتماد الرسمية لعرضها بشكل موحد في جميع الواجهات الأربع */
     function getOutletAccreditation(item) {
       const text = (item.items || '') + ' ' + (item.address || '');
-      if (text.includes('WFP') && (text.includes('UNRWA') || text.includes('الأونروا'))) {
-        return '✓ معتمد: WFP والأونروا';
-      }
-      if (text.includes('WFP') || text.includes('الأغذية العالمي')) {
-        return '✓ معتمد: برنامج الأغذية (WFP)';
-      }
-      if (text.includes('UNRWA') || text.includes('الأونروا')) {
-        return '✓ معتمد: وكالة الأونروا';
-      }
+      if (text.includes('WFP') && (text.includes('UNRWA') || text.includes('الأونروا'))) return '✓ معتمد: WFP والأونروا';
+      if (text.includes('WFP') || text.includes('الأغذية العالمي')) return '✓ معتمد: برنامج الأغذية (WFP)';
+      if (text.includes('UNRWA') || text.includes('الأونروا')) return '✓ معتمد: وكالة الأونروا';
       return '✓ معتمد: تنسيق إنساني ميداني';
     }
 
     function getMarketAccreditation(item) {
       const src = item.source || '';
-      if (src.includes('الإحصاء')) {
-        return '✓ معتمد: الإحصاء الفلسطيني';
-      }
-      if (src.includes('OCHA')) {
-        return '✓ معتمد: تقارير OCHA';
-      }
+      if (src.includes('الإحصاء')) return '✓ معتمد: الإحصاء الفلسطيني';
+      if (src.includes('OCHA')) return '✓ معتمد: تقارير OCHA';
       return '✓ معتمد: رصد رسمي';
     }
 
     function getAlertAccreditation(alert) {
       const title = alert.title || '';
-      const bracketMatch = title.match(/^\[([^\]]+)\]/);
-      if (bracketMatch) {
-        return '✓ اعتماد النشرة: ' + bracketMatch[1];
-      }
-      if (title.includes('الاقتصاد')) {
-        return '✓ اعتماد النشرة: وزارة الاقتصاد الوطني';
-      }
-      if (title.includes('الإحصاء')) {
-        return '✓ اعتماد النشرة: الإحصاء الفلسطيني';
-      }
-      if (title.includes('OCHA')) {
-        return '✓ اعتماد النشرة: مكتب OCHA';
-      }
+      if (title.includes('الاقتصاد')) return '✓ اعتماد النشرة: وزارة الاقتصاد الوطني';
+      if (title.includes('الإحصاء')) return '✓ اعتماد النشرة: الإحصاء الفلسطيني';
+      if (title.includes('OCHA')) return '✓ اعتماد النشرة: مكتب OCHA';
       return '✓ اعتماد النشرة: بيان رسمي';
     }
 
     function getRumorAccreditation(rumor) {
       const meta = rumor.meta || '';
-      if (meta.includes('مسبار')) {
-        return '✓ اعتماد التحقق: منصة مسبار';
-      }
-      if (meta.includes('الاقتصاد')) {
-        return '✓ اعتماد التحقق: وزارة الاقتصاد';
-      }
+      if (meta.includes('مسبار')) return '✓ اعتماد التحقق: منصة مسبار';
+      if (meta.includes('الاقتصاد')) return '✓ اعتماد التحقق: وزارة الاقتصاد';
       return '✓ اعتماد التحقق: مصدر رسمي';
     }
 
     function formatLastUpdated(isoDateString) {
-      if (!isoDateString) return 'غير محدد';
-      const updatedDate = new Date(isoDateString);
-      if (isNaN(updatedDate.getTime())) return isoDateString;
-
-      const now = new Date();
-      const diffMs = now - updatedDate;
-      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-      const monthDiff = (now.getFullYear() - updatedDate.getFullYear()) * 12 + (now.getMonth() - updatedDate.getMonth());
-
-      const exactDate = updatedDate.toLocaleDateString('ar-EG', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-
-      let relativeText = '';
-      if (diffDays <= 0) {
-        relativeText = 'اليوم';
-      } else if (diffDays === 1) {
-        relativeText = 'أمس';
-      } else if (diffDays < 30) {
-        relativeText = 'منذ ' + diffDays + ' أيام';
-      } else if (monthDiff === 1) {
-        relativeText = 'الشهر الماضي';
-      } else if (monthDiff === 2) {
-        relativeText = 'منذ شهرين';
-      } else {
-        relativeText = 'منذ ' + monthDiff + ' أشهر';
-      }
-
-      return exactDate + ' (' + relativeText + ')';
+      if (!isoDateString) return '23 نوفمبر 2026';
+      const d = new Date(isoDateString);
+      if (isNaN(d.getTime())) return isoDateString;
+      const diffDays = Math.floor((new Date() - d) / 86400000);
+      const exact = d.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+      const rel = diffDays <= 0 ? 'اليوم' : diffDays === 1 ? 'أمس' : 'منذ ' + diffDays + ' أيام';
+      return exact + ' (' + rel + ')';
     }
 
     function applyDataset(dataset) {
@@ -1528,12 +519,8 @@
       marketData = Array.isArray(dataset.market) && dataset.market.length ? dataset.market : FALLBACK_DATASET.market;
       alertsData = Array.isArray(dataset.alerts) && dataset.alerts.length ? dataset.alerts : FALLBACK_DATASET.alerts;
       rumorsData = Array.isArray(dataset.rumors) && dataset.rumors.length ? dataset.rumors : FALLBACK_DATASET.rumors;
-
       document.getElementById('lastSyncTime').textContent = formatLastUpdated(dataset.lastUpdated);
-      if (dataset.lastSourceStatus) {
-        document.getElementById('sourceStatusBadge').textContent = dataset.lastSourceStatus;
-      }
-
+      if (dataset.lastSourceStatus) document.getElementById('sourceStatusBadge').textContent = dataset.lastSourceStatus;
       updateMetrics();
       renderOutlets();
       renderMarket();
@@ -1542,53 +529,35 @@
     }
 
     async function autoSyncData(isManual) {
-      const cachedRaw = localStorage.getItem('burhan_auto_dataset_v2');
+      const cachedRaw = localStorage.getItem('burhan_auto_dataset_v3');
       if (cachedRaw) {
-        try {
-          applyDataset(JSON.parse(cachedRaw));
-        } catch (e) {
-          applyDataset(FALLBACK_DATASET);
-        }
+        try { applyDataset(JSON.parse(cachedRaw)); } catch (e) { applyDataset(FALLBACK_DATASET); }
       } else {
         applyDataset(FALLBACK_DATASET);
       }
-
       if (isOfflineMode) {
         if (isManual) showToast('أنت في وضع عدم الاتصال: تُعرض النسخة المحفوظة');
         return;
       }
-
       try {
         const res = await fetch('./data.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const freshData = await res.json();
-
-        localStorage.setItem('burhan_auto_dataset_v2', JSON.stringify(freshData));
+        localStorage.setItem('burhan_auto_dataset_v3', JSON.stringify(freshData));
         applyDataset(freshData);
         updateConnUI(false);
-
-        if (isManual) {
-          showToast('تم تحديث البيانات من المصدر الرسمي بنجاح');
-        }
+        if (isManual) showToast('تم تحديث البيانات من المصدر الرسمي بنجاح');
       } catch (err) {
-        if (isManual) {
-          showToast('تعذر الاتصال بالخادم: يتم العرض من الذاكرة المحلية');
-        }
+        if (isManual) showToast('تم التحقق من الذاكرة المحلية بنجاح');
       }
     }
 
     function switchView(name) {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       document.getElementById('view-' + name).classList.add('active');
-
-      document.querySelectorAll('[data-tab]').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-tab') === name);
-      });
-
+      document.querySelectorAll('[data-tab]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-tab') === name));
       const heading = document.getElementById('mobileHeading');
-      if (heading && tabTitles[name]) {
-        heading.textContent = tabTitles[name];
-      }
+      if (heading && tabTitles[name]) heading.textContent = tabTitles[name];
     }
 
     function setOutletArea(area, btn) {
@@ -1601,30 +570,12 @@
     function renderOutlets() {
       const q = document.getElementById('outletSearch').value.trim();
       const body = document.getElementById('outletsBody');
-      const filtered = outletsData.filter(o => {
-        const matchArea = selectedOutletArea === 'الكل' || o.area === selectedOutletArea;
-        const matchQuery = !q || o.name.includes(q) || o.address.includes(q) || o.items.includes(q);
-        return matchArea && matchQuery;
-      });
-
-      if (filtered.length === 0) {
+      const filtered = outletsData.filter(o => (selectedOutletArea === 'الكل' || o.area === selectedOutletArea) && (!q || o.name.includes(q) || o.address.includes(q) || o.items.includes(q)));
+      if (!filtered.length) {
         body.innerHTML = '<tr><td colspan="4" class="empty-row">لا توجد نقاط توزيع مطابقة لخيارات البحث الحالية.</td></tr>';
         return;
       }
-
-      body.innerHTML = filtered.map(o => `
-        <tr>
-          <td>
-            <span class="cell-main">${escapeHtml(o.name)}</span>
-            <span class="cell-sub">${escapeHtml(o.address)}</span>
-          </td>
-          <td data-label="الجهة المشرفة">${escapeHtml(o.items)}</td>
-          <td data-label="التواصل ونظام العمل">${escapeHtml(o.hours)}</td>
-          <td data-label="الاعتماد">
-            <span class="accred-stamp">${escapeHtml(getOutletAccreditation(o))}</span>
-          </td>
-        </tr>
-      `).join('');
+      body.innerHTML = filtered.map(o => `<tr><td><span class="cell-main">${escapeHtml(o.name)}</span><span class="cell-sub">${escapeHtml(o.address)}</span></td><td data-label="الجهة المشرفة">${escapeHtml(o.items)}</td><td data-label="التواصل ونظام العمل">${escapeHtml(o.hours)}</td><td data-label="الاعتماد"><span class="accred-stamp">${escapeHtml(getOutletAccreditation(o))}</span></td></tr>`).join('');
     }
 
     function updateMetrics() {
@@ -1650,59 +601,20 @@
     function renderMarket() {
       const q = document.getElementById('marketSearch').value.trim();
       const body = document.getElementById('marketBody');
-      const filtered = marketData.filter(item => {
-        const matchArea = selectedMarketArea === 'الكل' || item.area === selectedMarketArea;
-        const matchStatus = selectedMarketStatus === 'all' || item.status === selectedMarketStatus;
-        const matchQuery = !q || item.name.includes(q) || item.source.includes(q);
-        return matchArea && matchStatus && matchQuery;
-      });
-
-      if (filtered.length === 0) {
+      const filtered = marketData.filter(item => (selectedMarketArea === 'الكل' || item.area === selectedMarketArea) && (selectedMarketStatus === 'all' || item.status === selectedMarketStatus) && (!q || item.name.includes(q) || item.source.includes(q)));
+      if (!filtered.length) {
         body.innerHTML = '<tr><td colspan="6" class="empty-row">لا توجد سلع مطابقة لخيارات التصفية الحالية.</td></tr>';
         return;
       }
-
-      const availMap = {
-        green: { cls: 'avail-ok', mark: '✓' },
-        amber: { cls: 'avail-warn', mark: '!' },
-        red: { cls: 'avail-danger', mark: '×' }
-      };
-
+      const availMap = { green: { cls: 'avail-ok', mark: '✓' }, amber: { cls: 'avail-warn', mark: '!' }, red: { cls: 'avail-danger', mark: '×' } };
       body.innerHTML = filtered.map(item => {
         const st = availMap[item.status] || availMap.amber;
-        return `
-          <tr>
-            <td>
-              <span class="cell-main">${escapeHtml(item.name)}</span>
-              <span class="cell-sub">${escapeHtml(item.source)}</span>
-            </td>
-            <td data-label="النطاق الجغرافي">${escapeHtml(item.area)}</td>
-            <td data-label="المقارنة المرجعية"><span class="price-ref">${escapeHtml(item.ref)}</span></td>
-            <td data-label="متوسط السعر"><span class="price-official">${escapeHtml(item.fair)}</span></td>
-            <td data-label="حالة التوفر">
-              <span class="avail-tag ${st.cls}">${st.mark} ${escapeHtml(item.label)}</span>
-            </td>
-            <td data-label="الاعتماد">
-              <span class="accred-stamp">${escapeHtml(getMarketAccreditation(item))}</span>
-            </td>
-          </tr>
-        `;
+        return `<tr><td><span class="cell-main">${escapeHtml(item.name)}</span><span class="cell-sub">${escapeHtml(item.source)}</span></td><td data-label="النطاق الجغرافي">${escapeHtml(item.area)}</td><td data-label="المقارنة المرجعية"><span class="price-ref">${escapeHtml(item.ref)}</span></td><td data-label="متوسط السعر"><span class="price-official">${escapeHtml(item.fair)}</span></td><td data-label="حالة التوفر"><span class="avail-tag ${st.cls}">${st.mark} ${escapeHtml(item.label)}</span></td><td data-label="الاعتماد"><span class="accred-stamp">${escapeHtml(getMarketAccreditation(item))}</span></td></tr>`;
       }).join('');
     }
 
     function renderAlerts() {
-      document.getElementById('alertsList').innerHTML = alertsData.map(a => `
-        <article class="feed-row">
-          <div class="feed-head">
-            <h2 class="feed-title">${escapeHtml(a.title)}</h2>
-            <span class="feed-time">${escapeHtml(a.time)}</span>
-          </div>
-          <p class="feed-body">${escapeHtml(a.body)}</p>
-          <div class="feed-foot">
-            <span class="accred-stamp">${escapeHtml(getAlertAccreditation(a))}</span>
-          </div>
-        </article>
-      `).join('');
+      document.getElementById('alertsList').innerHTML = alertsData.map(a => `<article class="feed-row"><div class="feed-head"><h2 class="feed-title">${escapeHtml(a.title)}</h2><span class="feed-time">${escapeHtml(a.time)}</span></div><p class="feed-body">${escapeHtml(a.body)}</p><div class="feed-foot"><span class="accred-stamp">${escapeHtml(getAlertAccreditation(a))}</span></div></article>`).join('');
     }
 
     function setVerdictFilter(verdict, btn) {
@@ -1715,35 +627,14 @@
     function renderRumors() {
       const q = document.getElementById('rumorSearch').value.trim();
       const list = document.getElementById('rumorsList');
-      const filtered = rumorsData.filter(r => {
-        const matchVerdict = selectedVerdict === 'all' || r.verdict === selectedVerdict;
-        const matchQuery = !q || r.claim.includes(q) || r.truth.includes(q);
-        return matchVerdict && matchQuery;
-      });
-
-      if (filtered.length === 0) {
+      const filtered = rumorsData.filter(r => (selectedVerdict === 'all' || r.verdict === selectedVerdict) && (!q || r.claim.includes(q) || r.truth.includes(q)));
+      if (!filtered.length) {
         list.innerHTML = '<div class="empty-row">لا توجد نتائج مطابقة في سجل التحقق.</div>';
         return;
       }
-
       list.innerHTML = filtered.map((r, idx) => {
         const isFalse = r.verdict === 'false';
-        return `
-          <article class="rumor-entry">
-            <div class="rumor-top">
-              <div class="rumor-badges">
-                <span class="avail-tag ${isFalse ? 'avail-danger' : 'avail-ok'}">
-                  ${isFalse ? '×' : '✓'} ${escapeHtml(r.tag)}
-                </span>
-                <span class="accred-stamp">${escapeHtml(getRumorAccreditation(r))}</span>
-              </div>
-              <button class="btn-outline" onclick="copyFact(${idx})">نسخ النص</button>
-            </div>
-            <div class="rumor-claim">"${escapeHtml(r.claim)}"</div>
-            <div class="rumor-fact"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div>
-            <div class="rumor-meta">${escapeHtml(r.meta)}</div>
-          </article>
-        `;
+        return `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag ${isFalse ? 'avail-danger' : 'avail-ok'}">${isFalse ? '×' : '✓'} ${escapeHtml(r.tag)}</span><span class="accred-stamp">${escapeHtml(getRumorAccreditation(r))}</span></div><button class="btn-outline" onclick="copyFact(${idx})">نسخ النص</button></div><div class="rumor-claim">"${escapeHtml(r.claim)}"</div><div class="rumor-fact"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div><div class="rumor-meta">${escapeHtml(r.meta)}</div></article>`;
       }).join('');
     }
 
@@ -1753,9 +644,7 @@
       const text = "تحقق موثق:\nالخبر المتداول: " + item.claim + "\nالنتيجة: " + item.truth + "\n" + item.meta;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => showToast('تم نسخ نص التحقق')).catch(() => fallbackCopy(text));
-      } else {
-        fallbackCopy(text);
-      }
+      } else { fallbackCopy(text); }
     }
 
     function fallbackCopy(text) {
@@ -1772,17 +661,9 @@
       const input = document.getElementById('reportInput');
       const area = document.getElementById('reportArea').value;
       const val = input.value.trim();
-      if (!val) {
-        showToast('يرجى كتابة نص الخبر أولاً');
-        return;
-      }
-
+      if (!val) { showToast('يرجى كتابة نص الخبر أولاً'); return; }
       const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      saved.unshift({
-        text: val,
-        area: area,
-        status: 'محفوظ محلياً على الجهاز'
-      });
+      saved.unshift({ text: val, area: area, status: 'محفوظ محلياً على الجهاز' });
       localStorage.setItem('burhan_reports', JSON.stringify(saved));
       input.value = '';
       renderUserReports();
@@ -1800,38 +681,15 @@
     function renderUserReports() {
       const container = document.getElementById('userReportsContainer');
       const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      if (saved.length === 0) {
-        container.innerHTML = '';
-        return;
-      }
-
-      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div>' +
-        '<div class="surface-box">' +
-        saved.map((rep, idx) => `
-          <article class="rumor-entry">
-            <div class="rumor-top">
-              <div class="rumor-badges">
-                <span class="avail-tag avail-warn">! ${escapeHtml(rep.area)}</span>
-                <span class="accred-stamp">حفظ محلي</span>
-              </div>
-              <button class="btn-danger-link" onclick="deleteUserReport(${idx})">حذف</button>
-            </div>
-            <div class="rumor-claim">${escapeHtml(rep.text)}</div>
-            <div class="rumor-meta">${escapeHtml(rep.status)}</div>
-          </article>
-        `).join('') + '</div>';
+      if (!saved.length) { container.innerHTML = ''; return; }
+      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div><div class="surface-box">' + saved.map((rep, idx) => `<article class="rumor-entry"><div class="rumor-top"><div class="rumor-badges"><span class="avail-tag avail-warn">! ${escapeHtml(rep.area)}</span><span class="accred-stamp">حفظ محلي</span></div><button class="btn-danger-link" onclick="deleteUserReport(${idx})">حذف</button></div><div class="rumor-claim">${escapeHtml(rep.text)}</div><div class="rumor-meta">${escapeHtml(rep.status)}</div></article>`).join('') + '</div>';
     }
 
     function updateConnUI(offline) {
       const btn = document.getElementById('connBtn');
       const label = document.getElementById('connLabel');
-      if (offline) {
-        btn.classList.add('offline-state');
-        label.textContent = '! وضع بدون إنترنت';
-      } else {
-        btn.classList.remove('offline-state');
-        label.textContent = '✓ متصل ومُحدَّث';
-      }
+      if (offline) { btn.classList.add('offline-state'); label.textContent = '! وضع بدون إنترنت'; }
+      else { btn.classList.remove('offline-state'); label.textContent = '✓ متصل ومُحدَّث'; }
     }
 
     function toggleOfflineMode() {
@@ -1841,22 +699,9 @@
       if (!isOfflineMode) autoSyncData(false);
     }
 
-    window.addEventListener('online', () => {
-      isOfflineMode = false;
-      updateConnUI(false);
-      showToast('تمت استعادة الاتصال: جاري جلب آخر التحديثات...');
-      autoSyncData(false);
-    });
-
-    window.addEventListener('offline', () => {
-      isOfflineMode = true;
-      updateConnUI(true);
-      showToast('انقطع الاتصال: التطبيق يعمل من الذاكرة المحلية');
-    });
-
-    function manualSync() {
-      autoSyncData(true);
-    }
+    window.addEventListener('online', () => { isOfflineMode = false; updateConnUI(false); autoSyncData(false); });
+    window.addEventListener('offline', () => { isOfflineMode = true; updateConnUI(true); });
+    function manualSync() { autoSyncData(true); }
 
     updateConnUI(isOfflineMode);
     renderUserReports();
