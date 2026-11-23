@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta id="themeColorMeta" name="theme-color" content="#FFFFFF" />
+  <title>دليل الأسعار والتحقق الميداني</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-page: #F5F5F4;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #FAFAF9;
+      --bg-hover: #F5F5F4;
+      --border: #E7E5E4;
+      --border-strong: #D6D3D1;
+
+      --text-primary: #1C1917;
+      --text-secondary: #57534E;
+      --text-muted: #78716C;
+
+      --accent: #1E3A5F;
+      --accent-soft: #EFF6FF;
+      --on-accent: #FFFFFF;
+
+      --ok-color: #15803D;
+      --ok-dot: #16A34A;
+      --warn-color: #B45309;
+      --warn-dot: #D97706;
+      --danger-color: #B91C1C;
+      --danger-dot: #DC2626;
+
+      --fs-xs: 12px;
+      --fs-sm: 13px;
+      --fs-base: 14px;
+      --fs-md: 15px;
+      --fs-lg: 18px;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #121212;
+      --bg-surface: #1A1A1A;
+      --bg-subtle: #212121;
+      --bg-hover: #242424;
+      --border: #2E2E2E;
+      --border-strong: #3F3F3F;
+
+      --text-primary: #F4F4F5;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+
+      --accent: #E4E4E7;
+      --accent-soft: #27272A;
+      --on-accent: #121212;
+
+      --ok-color: #4ADE80;
+      --ok-dot: #22C55E;
+      --warn-color: #FBBF24;
+      --warn-dot: #F59E0B;
+      --danger-color: #F87171;
+      --danger-dot: #EF4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      font-size: var(--fs-base);
+      line-height: 1.6;
+      font-variant-numeric: tabular-nums;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .topbar {
+      width: 100%;
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .topbar-inner {
+      width: 100%;
+      padding: 0 clamp(14px, 3vw, 32px);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .top-tabs {
+      display: none;
+      align-items: stretch;
+      height: 100%;
+      gap: 4px;
+    }
+
+    .top-tab {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-secondary);
+      padding: 0 14px;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .top-tab svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      flex-shrink: 0;
+    }
+
+    .top-tab:hover { color: var(--text-primary); }
+
+    .top-tab.active {
+      color: var(--text-primary);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .mobile-heading {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .topbar-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: auto;
+    }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--border-strong);
+      background-color: var(--bg-hover);
+    }
+
+    .icon-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .conn-btn {
+      height: 34px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0 11px;
+      border-radius: 6px;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .conn-btn:hover {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-ok { background-color: var(--ok-dot); }
+    .dot-warn { background-color: var(--warn-dot); }
+    .dot-danger { background-color: var(--danger-dot); }
+
+    .conn-btn.offline-state {
+      color: var(--warn-color);
+      border-color: var(--warn-dot);
+    }
+
+    .container {
+      width: 100%;
+      padding: 20px clamp(14px, 3vw, 32px) 84px;
+    }
+
+    .panel { display: none; width: 100%; }
+    .panel.active { display: block; }
+
+    .section-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .section-top h1 {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .section-top span {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .metric-cell {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-left: 1px solid var(--border);
+    }
+
+    .metric-cell:last-child { border-left: none; }
+
+    .metric-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .metric-num {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .controls-bar {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: 100%;
+    }
+
+    .filter-group::-webkit-scrollbar { display: none; }
+
+    .filter-pill {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .filter-pill.active {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .field-input {
+      width: 100%;
+      height: 36px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 12px;
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      outline: none;
+    }
+
+    .field-input:focus {
+      border-color: var(--accent);
+      background-color: var(--bg-surface);
+    }
+
+    .surface-box {
+      width: 100%;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+
+    .data-table thead {
+      background-color: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table th {
+      padding: 11px 16px;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .data-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.12s ease;
+    }
+
+    .data-table tbody tr:last-child { border-bottom: none; }
+    .data-table tbody tr:hover { background-color: var(--bg-hover); }
+
+    .data-table td {
+      padding: 13px 16px;
+      font-size: var(--fs-base);
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+
+    .cell-main {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      display: block;
+    }
+
+    .cell-sub {
+      font-size: var(--fs-xs);
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .status-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .text-ok { color: var(--ok-color); }
+    .text-warn { color: var(--warn-color); }
+    .text-danger { color: var(--danger-color); }
+
+    .price-official {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .price-ref {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .sync-strip {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .sync-info h2 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sync-info p {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .sync-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .feed-row {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .feed-row:last-child { border-bottom: none; }
+
+    .feed-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .feed-title {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .feed-time {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .feed-body {
+      font-size: var(--fs-base);
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .rumors-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .rumor-entry {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rumor-entry:last-child { border-bottom: none; }
+
+    .rumor-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rumor-claim {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .rumor-fact {
+      background-color: var(--bg-subtle);
+      border-right: 3px solid var(--border-strong);
+      padding: 10px 12px;
+      font-size: var(--fs-base);
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .rumor-fact strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .rumor-meta {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+
+    .btn-outline {
+      height: 32px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0 12px;
+      border-radius: 6px;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--border-strong);
+      background-color: var(--bg-hover);
+    }
+
+    .btn-danger-link {
+      background: transparent;
+      border: none;
+      color: var(--danger-color);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 4px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      height: 38px;
+      background-color: var(--accent);
+      color: var(--on-accent);
+      border: none;
+      border-radius: 6px;
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-submit:hover { opacity: 0.92; }
+
+    .form-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-box h2 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .form-box p {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .saved-header {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 16px 0 8px;
+    }
+
+    .empty-row {
+      padding: 24px 16px;
+      text-align: center;
+      font-size: var(--fs-base);
+      color: var(--text-secondary);
+    }
+
+    .bottom-tabs {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      z-index: 30;
+    }
+
+    .bottom-tab {
+      background: transparent;
+      border: none;
+      border-top: 2px solid transparent;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 4px 2px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .bottom-tab svg {
+      width: 17px;
+      height: 17px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    .bottom-tab.active {
+      color: var(--text-primary);
+      border-top-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--text-primary);
+      color: var(--bg-surface);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      display: none;
+      z-index: 50;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 767px) {
+      .metrics-strip { grid-template-columns: 1fr; }
+      .metric-cell { border-left: none; border-bottom: 1px solid var(--border); }
+      .metric-cell:last-child { border-bottom: none; }
+      .data-table thead { display: none; }
+      .data-table, .data-table tbody, .data-table tr, .data-table td { display: block; width: 100%; }
+      .data-table tbody tr { padding: 13px 14px; }
+      .data-table td { padding: 3px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+      .data-table td:first-child { display: block; padding-bottom: 6px; }
+      .data-table td[data-label]::before {
+        content: attr(data-label);
+        font-size: var(--fs-xs);
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+    }
+
+    @media (min-width: 680px) {
+      .controls-bar .field-input { max-width: 300px; }
+    }
+
+    @media (min-width: 820px) {
+      .top-tabs { display: flex; }
+      .mobile-heading { display: none; }
+      .bottom-tabs { display: none; }
+      .container { padding-bottom: 32px; }
+      .toast { bottom: 24px; }
+    }
+
+    @media (min-width: 960px) {
+      .rumors-grid { grid-template-columns: 1.75fr 1fr; }
+      .sidebar-sticky { position: sticky; top: 72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الشريط العلوي -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div id="mobileHeading" class="mobile-heading">الأسواق المعتمدة</div>
+
+      <nav class="top-tabs" aria-label="الأقسام الرئيسية">
+        <button class="top-tab active" data-tab="outlets" onclick="switchView('outlets')">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>الأسواق المعتمدة</span>
+        </button>
+        <button class="top-tab" data-tab="market" onclick="switchView('market')">
+          <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg>
+          <span>الأسعار والوفرة</span>
+        </button>
+        <button class="top-tab" data-tab="offline" onclick="switchView('offline')">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>التنبيه والتخزين</span>
+        </button>
+        <button class="top-tab" data-tab="rumors" onclick="switchView('rumors')">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span>التحقق من الشائعات</span>
+        </button>
+      </nav>
+
+      <div class="topbar-tools">
+        <button id="themeToggle" class="icon-btn" onclick="toggleTheme()" title="تبديل المظهر" aria-label="تبديل المظهر">
+          <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+        </button>
+
+        <button id="connBtn" class="conn-btn" onclick="toggleOfflineMode()" title="التبديل بين وضع الاتصال المباشر ووضع عدم الاتصال">
+          <span id="connDot" class="dot dot-ok"></span>
+          <span id="connLabel">متصل ومُحدَّث</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="toast" class="toast"></div>
+
+  <main class="container">
+
+    <!-- 1. الأسواق المعتمدة -->
+    <section id="view-outlets" class="panel active">
+      <div class="section-top">
+        <h1>نقاط التوزيع ومكاتب المساعدة المعتمدة بالشوارع والمعالم الدقيقة</h1>
+        <span>المصدر: برنامج الأغذية العالمي (WFP)، وكالة الأونروا (UNRWA)، وتقارير OCHA</span>
+      </div>
+
+      <div class="controls-bar">
+        <div class="controls-row">
+          <div class="filter-group" id="outletAreaFilters">
+            <button class="filter-pill active" onclick="setOutletArea('الكل', this)">كل المحافظات</button>
+            <button class="filter-pill" onclick="setOutletArea('خان يونس', this)">خان يونس والمواصي</button>
+            <button class="filter-pill" onclick="setOutletArea('دير البلح', this)">دير البلح</button>
+            <button class="filter-pill" onclick="setOutletArea('المحافظة الوسطى', this)">المحافظة الوسطى</button>
+            <button class="filter-pill" onclick="setOutletArea('مدينة غزة', this)">مدينة غزة</button>
+          </div>
+          <input type="text" id="outletSearch" class="field-input" placeholder="ابحث بالشارع أو المعلم أو الجهة المشرفة..." oninput="renderOutlets()" />
+        </div>
+      </div>
+
+      <div class="surface-box">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>نقطة التوزيع والشارع والمعلم الدقيق</th>
+              <th>الجهة المشرفة والشريك المنفذ</th>
+              <th>التواصل ونظام العمل</th>
+              <th>الاعتماد</th>
+            </tr>
+          </thead>
+          <tbody id="outletsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. الأسعار والوفرة -->
+    <section id="view-market" class="panel">
+      <div class="section-top">
+        <h1>متوسطات أسعار السلع الأساسية والمحروقات في قطاع غزة</h1>
+        <span>المصدر: الجهاز المركزي للإحصاء الفلسطيني وOCHA</span>
+      </div>
+
+      <div class="metrics-strip">
+        <div class="metric-cell">
+          <span class="metric-label"><span class="dot dot-ok"></span>متوفر / سعر مدعوم</span>
+          <span id="countGreen" class="metric-num">0</span>
+        </div>
+        <div class="metric-cell">
+          <span class="metric-label"><span class="dot dot-warn"></span>تذبذب / كمية محدودة</span>
+          <span id="countAmber" class="metric-num">0</span>
+        </div>
+        <div class="metric-cell">
+          <span class="metric-label"><span class="dot dot-danger"></span>شحيح حالياً</span>
+          <span id="countRed" class="metric-num">0</span>
+        </div>
+      </div>
+
+      <div class="controls-bar">
+        <div class="controls-row">
+          <div class="filter-group" id="areaFilters">
+            <button class="filter-pill active" onclick="setAreaFilter('الكل', this)">كل النطاقات</button>
+            <button class="filter-pill" onclick="setAreaFilter('قطاع غزة (متوسط عام)', this)">قطاع غزة (متوسط عام)</button>
+            <button class="filter-pill" onclick="setAreaFilter('خان يونس', this)">خان يونس</button>
+          </div>
+          <input type="text" id="marketSearch" class="field-input" placeholder="ابحث عن سلعة..." oninput="renderMarket()" />
+        </div>
+
+        <div class="filter-group" id="statusFilters">
+          <button class="filter-pill active" onclick="setStatusFilter('all', this)">جميع الحالات</button>
+          <button class="filter-pill" onclick="setStatusFilter('green', this)">متوفر / سعر مدعوم</button>
+          <button class="filter-pill" onclick="setStatusFilter('amber', this)">تذبذب / كمية محدودة</button>
+          <button class="filter-pill" onclick="setStatusFilter('red', this)">شحيح حالياً</button>
+        </div>
+      </div>
+
+      <div class="surface-box">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>السلعة ومصدر البيانات الرسمي</th>
+              <th>النطاق الجغرافي</th>
+              <th>المقارنة المرجعية</th>
+              <th>متوسط السعر المسجل</th>
+              <th>حالة التوفر</th>
+            </tr>
+          </thead>
+          <tbody id="marketBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. التنبيه والتخزين -->
+    <section id="view-offline" class="panel">
+      <div class="section-top">
+        <h1>النشرة الإحصائية والتقارير الرسمية وحالة التخزين المحلي</h1>
+        <span id="sourceStatusBadge">مزامنة تلقائية مع المصادر الرسمية</span>
+      </div>
+
+      <div class="sync-strip">
+        <div class="sync-info">
+          <h2>النسخة المحفوظة على ذاكرة الجهاز</h2>
+          <p>يجلب التطبيق التحديثات تلقائياً من ملف البيانات الرسمي ويحفظها محلياً للعمل عند انقطاع الشبكة.</p>
+        </div>
+        <div class="sync-actions">
+          <span class="rumor-meta">آخر تحديث للبيانات: <strong id="lastSyncTime">جاري الفحص...</strong></span>
+          <button class="btn-outline" onclick="manualSync()">فحص التحديثات الآن</button>
+        </div>
+      </div>
+
+      <div class="surface-box" id="alertsList"></div>
+    </section>
+
+    <!-- 4. التحقق من الشائعات -->
+    <section id="view-rumors" class="panel">
+      <div class="section-top">
+        <h1>سجل التحقق من الأخبار المتداولة حول غزة</h1>
+        <span>المصدر: منصة مسبار لتقصي الحقائق ووزارة الاقتصاد الوطني</span>
+      </div>
+
+      <div class="rumors-grid">
+        <div>
+          <div class="controls-bar">
+            <div class="controls-row">
+              <div class="filter-group" id="verdictFilters">
+                <button class="filter-pill active" onclick="setVerdictFilter('all', this)">الكل</button>
+                <button class="filter-pill" onclick="setVerdictFilter('false', this)">ادعاءات مضللة</button>
+                <button class="filter-pill" onclick="setVerdictFilter('true', this)">توضيحات رسمية</button>
+              </div>
+              <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
+            </div>
+          </div>
+
+          <div class="surface-box" id="rumorsList"></div>
+        </div>
+
+        <aside class="sidebar-sticky">
+          <div class="form-box">
+            <h2>حفظ خبر متداول للتحقق</h2>
+            <p>أدخل نص الخبر المتداول لحفظه محلياً على جهازك ومراجعته مقابل المصادر الرسمية.</p>
+            <input type="text" id="reportInput" class="field-input" placeholder="اكتب نص الخبر المراد التحقق منه..." />
+            <select id="reportArea" class="field-input">
+              <option value="خان يونس">المحافظة: خان يونس</option>
+              <option value="دير البلح">المحافظة: دير البلح</option>
+              <option value="المحافظة الوسطى">المحافظة: الوسطى</option>
+              <option value="مدينة غزة">المحافظة: مدينة غزة</option>
+            </select>
+            <button class="btn-submit" onclick="addUserReport()">حفظ في سجل الجهاز</button>
+          </div>
+
+          <div id="userReportsContainer"></div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- شريط التنقل السفلي للهواتف -->
+  <nav class="bottom-tabs" aria-label="التنقل السفلي">
+    <button class="bottom-tab active" data-tab="outlets" onclick="switchView('outlets')">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>الأسواق المعتمدة</span>
+    </button>
+    <button class="bottom-tab" data-tab="market" onclick="switchView('market')">
+      <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg>
+      <span>الأسعار والوفرة</span>
+    </button>
+    <button class="bottom-tab" data-tab="offline" onclick="switchView('offline')">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span>التنبيه والتخزين</span>
+    </button>
+    <button class="bottom-tab" data-tab="rumors" onclick="switchView('rumors')">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span>التحقق من الشائعات</span>
+    </button>
+  </nav>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    const SUN_SVG = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+    const MOON_SVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      const meta = document.getElementById('themeColorMeta');
+      const btn = document.getElementById('themeToggle');
+
+      if (theme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        icon.innerHTML = SUN_SVG;
+        meta.setAttribute('content', '#1A1A1A');
+        btn.setAttribute('title', 'تفعيل الوضع الفاتح');
+      } else {
+        root.removeAttribute('data-theme');
+        icon.innerHTML = MOON_SVG;
+        meta.setAttribute('content', '#FFFFFF');
+        btn.setAttribute('title', 'تفعيل الوضع المظلم');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      localStorage.setItem('burhan_theme', next);
+      applyTheme(next);
+      showToast(next === 'dark' ? 'تم تفعيل الوضع المظلم' : 'تم تفعيل الوضع الفاتح');
+    }
+
+    applyTheme(localStorage.getItem('burhan_theme') || 'light');
+
+    /* متغيرات البيانات الديناميكية (تُملأ تلقائياً من data.json أو الذاكرة المحلية) */
+    let outletsData = [];
+    let marketData = [];
+    let alertsData = [];
+    let rumorsData = [];
+
+    const tabTitles = {
+      outlets: "الأسواق المعتمدة",
+      market: "الأسعار والوفرة",
+      offline: "التنبيه والتخزين",
+      rumors: "التحقق من الشائعات"
+    };
+
+    let selectedOutletArea = 'الكل';
+    let selectedMarketArea = 'الكل';
+    let selectedMarketStatus = 'all';
+    let selectedVerdict = 'all';
+    let isOfflineMode = !navigator.onLine;
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function(ch) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+      });
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.style.display = 'block';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        el.style.display = 'none';
+      }, 2500);
+    }
+
+    /* دالة حساب وعرض تاريخ آخر تحديث بصيغة زمنية واضحة (اليوم، الشهر الماضي، منذ شهرين...) */
+    function formatLastUpdated(isoDateString) {
+      if (!isoDateString) return 'غير محدد';
+      const updatedDate = new Date(isoDateString);
+      if (isNaN(updatedDate.getTime())) return isoDateString;
+
+      const now = new Date();
+      const diffMs = now - updatedDate;
+      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const monthDiff = (now.getFullYear() - updatedDate.getFullYear()) * 12 + (now.getMonth() - updatedDate.getMonth());
+
+      const exactDate = updatedDate.toLocaleDateString('ar-EG', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      let relativeText = '';
+      if (diffDays <= 0) {
+        relativeText = 'اليوم';
+      } else if (diffDays === 1) {
+        relativeText = 'أمس';
+      } else if (diffDays < 30) {
+        relativeText = `منذ ${diffDays} أيام`;
+      } else if (monthDiff === 1) {
+        relativeText = 'الشهر الماضي';
+      } else if (monthDiff === 2) {
+        relativeText = 'منذ شهرين';
+      } else {
+        relativeText = `منذ ${monthDiff} أشهر`;
+      }
+
+      return `${exactDate} (${relativeText})`;
+    }
+
+    function applyDataset(dataset) {
+      outletsData = Array.isArray(dataset.outlets) ? dataset.outlets : [];
+      marketData = Array.isArray(dataset.market) ? dataset.market : [];
+      alertsData = Array.isArray(dataset.alerts) ? dataset.alerts : [];
+      rumorsData = Array.isArray(dataset.rumors) ? dataset.rumors : [];
+
+      document.getElementById('lastSyncTime').textContent = formatLastUpdated(dataset.lastUpdated);
+      if (dataset.lastSourceStatus) {
+        document.getElementById('sourceStatusBadge').textContent = dataset.lastSourceStatus;
+      }
+
+      updateMetrics();
+      renderOutlets();
+      renderMarket();
+      renderAlerts();
+      renderRumors();
+    }
+
+    async function autoSyncData(isManual = false) {
+      // 1. تحميل النسخة المخزنة محلياً فوراً حتى لا يظهر أي تأخير
+      const cachedRaw = localStorage.getItem('burhan_auto_dataset_v1');
+      if (cachedRaw) {
+        try {
+          applyDataset(JSON.parse(cachedRaw));
+        } catch (e) {}
+      }
+
+      // 2. إذا كان المستخدم في وضع عدم الاتصال اليدوي، نكتفي بالنسخة المحلية
+      if (isOfflineMode) {
+        if (isManual) showToast('أنت في وضع عدم الاتصال: تُعرض النسخة المحفوظة');
+        return;
+      }
+
+      // 3. جلب أحدث نسخة من ملف data.json المحدث آلياً عبر GitHub Actions
+      try {
+        const res = await fetch('./data.json?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const freshData = await res.json();
+
+        localStorage.setItem('burhan_auto_dataset_v1', JSON.stringify(freshData));
+        applyDataset(freshData);
+        updateConnUI(false);
+
+        if (isManual) {
+          showToast('تم تحديث البيانات من المصدر الرسمي بنجاح');
+        }
+      } catch (err) {
+        if (isManual) {
+          showToast('تعذر الاتصال بالخادم: يتم العرض من الذاكرة المحلية');
+        }
+      }
+    }
+
+    function switchView(name) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('view-' + name).classList.add('active');
+
+      document.querySelectorAll('[data-tab]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === name);
+      });
+
+      const heading = document.getElementById('mobileHeading');
+      if (heading && tabTitles[name]) {
+        heading.textContent = tabTitles[name];
+      }
+    }
+
+    function setOutletArea(area, btn) {
+      selectedOutletArea = area;
+      document.querySelectorAll('#outletAreaFilters .filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderOutlets();
+    }
+
+    function renderOutlets() {
+      const q = document.getElementById('outletSearch').value.trim();
+      const body = document.getElementById('outletsBody');
+      const filtered = outletsData.filter(o => {
+        const matchArea = selectedOutletArea === 'الكل' || o.area === selectedOutletArea;
+        const matchQuery = !q || o.name.includes(q) || o.address.includes(q) || o.items.includes(q);
+        return matchArea && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        body.innerHTML = '<tr><td colspan="4" class="empty-row">لا توجد نقاط توزيع مطابقة لخيارات البحث الحالية.</td></tr>';
+        return;
+      }
+
+      body.innerHTML = filtered.map(o => `
+        <tr>
+          <td>
+            <span class="cell-main">${escapeHtml(o.name)}</span>
+            <span class="cell-sub">${escapeHtml(o.address)}</span>
+          </td>
+          <td data-label="الجهة المشرفة">${escapeHtml(o.items)}</td>
+          <td data-label="التواصل ونظام العمل">${escapeHtml(o.hours)}</td>
+          <td data-label="الاعتماد">
+            <span class="status-inline text-ok"><span class="dot dot-ok"></span>معتمد رسمياً</span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function updateMetrics() {
+      document.getElementById('countGreen').textContent = marketData.filter(i => i.status === 'green').length;
+      document.getElementById('countAmber').textContent = marketData.filter(i => i.status === 'amber').length;
+      document.getElementById('countRed').textContent = marketData.filter(i => i.status === 'red').length;
+    }
+
+    function setAreaFilter(area, btn) {
+      selectedMarketArea = area;
+      document.querySelectorAll('#areaFilters .filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMarket();
+    }
+
+    function setStatusFilter(status, btn) {
+      selectedMarketStatus = status;
+      document.querySelectorAll('#statusFilters .filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMarket();
+    }
+
+    function renderMarket() {
+      const q = document.getElementById('marketSearch').value.trim();
+      const body = document.getElementById('marketBody');
+      const filtered = marketData.filter(item => {
+        const matchArea = selectedMarketArea === 'الكل' || item.area === selectedMarketArea;
+        const matchStatus = selectedMarketStatus === 'all' || item.status === selectedMarketStatus;
+        const matchQuery = !q || item.name.includes(q) || item.source.includes(q);
+        return matchArea && matchStatus && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        body.innerHTML = '<tr><td colspan="5" class="empty-row">لا توجد سلع مطابقة لخيارات التصفية الحالية.</td></tr>';
+        return;
+      }
+
+      const statusMap = {
+        green: { textClass: 'text-ok', dotClass: 'dot-ok' },
+        amber: { textClass: 'text-warn', dotClass: 'dot-warn' },
+        red: { textClass: 'text-danger', dotClass: 'dot-danger' }
+      };
+
+      body.innerHTML = filtered.map(item => {
+        const st = statusMap[item.status] || statusMap.amber;
+        return `
+          <tr>
+            <td>
+              <span class="cell-main">${escapeHtml(item.name)}</span>
+              <span class="cell-sub">${escapeHtml(item.source)}</span>
+            </td>
+            <td data-label="النطاق الجغرافي">${escapeHtml(item.area)}</td>
+            <td data-label="المقارنة المرجعية"><span class="price-ref">${escapeHtml(item.ref)}</span></td>
+            <td data-label="متوسط السعر"><span class="price-official">${escapeHtml(item.fair)}</span></td>
+            <td data-label="حالة التوفر">
+              <span class="status-inline ${st.textClass}"><span class="dot ${st.dotClass}"></span>${escapeHtml(item.label)}</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderAlerts() {
+      document.getElementById('alertsList').innerHTML = alertsData.map(a => `
+        <article class="feed-row">
+          <div class="feed-head">
+            <h2 class="feed-title">${escapeHtml(a.title)}</h2>
+            <span class="feed-time">${escapeHtml(a.time)}</span>
+          </div>
+          <p class="feed-body">${escapeHtml(a.body)}</p>
+        </article>
+      `).join('');
+    }
+
+    function setVerdictFilter(verdict, btn) {
+      selectedVerdict = verdict;
+      document.querySelectorAll('#verdictFilters .filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderRumors();
+    }
+
+    function renderRumors() {
+      const q = document.getElementById('rumorSearch').value.trim();
+      const list = document.getElementById('rumorsList');
+      const filtered = rumorsData.filter(r => {
+        const matchVerdict = selectedVerdict === 'all' || r.verdict === selectedVerdict;
+        const matchQuery = !q || r.claim.includes(q) || r.truth.includes(q);
+        return matchVerdict && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="empty-row">لا توجد نتائج مطابقة في سجل التحقق.</div>';
+        return;
+      }
+
+      list.innerHTML = filtered.map((r, idx) => {
+        const isFalse = r.verdict === 'false';
+        return `
+          <article class="rumor-entry">
+            <div class="rumor-top">
+              <span class="status-inline ${isFalse ? 'text-danger' : 'text-ok'}">
+                <span class="dot ${isFalse ? 'dot-danger' : 'dot-ok'}"></span>${escapeHtml(r.tag)}
+              </span>
+              <button class="btn-outline" onclick="copyFact(${idx})">نسخ النص</button>
+            </div>
+            <div class="rumor-claim">"${escapeHtml(r.claim)}"</div>
+            <div class="rumor-fact"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div>
+            <div class="rumor-meta">${escapeHtml(r.meta)}</div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function copyFact(index) {
+      const item = rumorsData[index];
+      if (!item) return;
+      const text = "تحقق موثق:\nالخبر المتداول: " + item.claim + "\nالنتيجة: " + item.truth + "\n" + item.meta;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ نص التحقق')).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const area = document.createElement('textarea');
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand('copy');
+      document.body.removeChild(area);
+      showToast('تم نسخ نص التحقق');
+    }
+
+    function addUserReport() {
+      const input = document.getElementById('reportInput');
+      const area = document.getElementById('reportArea').value;
+      const val = input.value.trim();
+      if (!val) {
+        showToast('يرجى كتابة نص الخبر أولاً');
+        return;
+      }
+
+      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
+      saved.unshift({
+        text: val,
+        area: area,
+        status: 'محفوظ محلياً على الجهاز'
+      });
+      localStorage.setItem('burhan_reports', JSON.stringify(saved));
+      input.value = '';
+      renderUserReports();
+      showToast('تم حفظ الخبر محلياً بنجاح');
+    }
+
+    function deleteUserReport(idx) {
+      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
+      saved.splice(idx, 1);
+      localStorage.setItem('burhan_reports', JSON.stringify(saved));
+      renderUserReports();
+      showToast('تم حذف البلاغ');
+    }
+
+    function renderUserReports() {
+      const container = document.getElementById('userReportsContainer');
+      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
+      if (saved.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div>' +
+        '<div class="surface-box">' +
+        saved.map((rep, idx) => `
+          <article class="rumor-entry">
+            <div class="rumor-top">
+              <span class="status-inline text-warn"><span class="dot dot-warn"></span>${escapeHtml(rep.area)}</span>
+              <button class="btn-danger-link" onclick="deleteUserReport(${idx})">حذف</button>
+            </div>
+            <div class="rumor-claim">${escapeHtml(rep.text)}</div>
+            <div class="rumor-meta">${escapeHtml(rep.status)}</div>
+          </article>
+        `).join('') + '</div>';
+    }
+
+    function updateConnUI(offline) {
+      const btn = document.getElementById('connBtn');
+      const dot = document.getElementById('connDot');
+      const label = document.getElementById('connLabel');
+      if (offline) {
+        btn.classList.add('offline-state');
+        dot.className = 'dot dot-warn';
+        label.textContent = 'وضع بدون إنترنت';
+      } else {
+        btn.classList.remove('offline-state');
+        dot.className = 'dot dot-ok';
+        label.textContent = 'متصل ومُحدَّث';
+      }
+    }
+
+    function toggleOfflineMode() {
+      isOfflineMode = !isOfflineMode;
+      updateConnUI(isOfflineMode);
+      showToast(isOfflineMode ? 'تم تفعيل وضع عدم الاتصال: القراءة من الذاكرة المحلية' : 'تمت العودة لوضع الاتصال المباشر');
+      if (!isOfflineMode) autoSyncData(false);
+    }
+
+    window.addEventListener('online', () => {
+      isOfflineMode = false;
+      updateConnUI(false);
+      showToast('تمت استعادة الاتصال: جاري جلب آخر التحديثات...');
+      autoSyncData(false);
+    });
+
+    window.addEventListener('offline', () => {
+      isOfflineMode = true;
+      updateConnUI(true);
+      showToast('انقطع الاتصال: التطبيق يعمل من الذاكرة المحلية');
+    });
+
+    function manualSync() {
+      autoSyncData(true);
+    }
+
+    updateConnUI(isOfflineMode);
+    renderUserReports();
+    autoSyncData(false);
+  </script>
+</body>
+</html>
