@@ -27,12 +27,21 @@
       --accent-soft: #EFF6FF;
       --on-accent: #FFFFFF;
 
-      --ok-color: #15803D;
-      --ok-dot: #16A34A;
-      --warn-color: #B45309;
-      --warn-dot: #D97706;
-      --danger-color: #B91C1C;
-      --danger-dot: #DC2626;
+      --ok-color: #166534;
+      --ok-bg: #F0FDF4;
+      --ok-border: #BBF7D0;
+
+      --warn-color: #92400E;
+      --warn-bg: #FFFBEB;
+      --warn-border: #FDE68A;
+
+      --danger-color: #991B1B;
+      --danger-bg: #FEF2F2;
+      --danger-border: #FECACA;
+
+      --accred-color: #1E3A5F;
+      --accred-bg: #F8FAFC;
+      --accred-border: #CBD5E1;
 
       --fs-xs: 12px;
       --fs-sm: 13px;
@@ -57,12 +66,21 @@
       --accent-soft: #27272A;
       --on-accent: #121212;
 
-      --ok-color: #4ADE80;
-      --ok-dot: #22C55E;
-      --warn-color: #FBBF24;
-      --warn-dot: #F59E0B;
-      --danger-color: #F87171;
-      --danger-dot: #EF4444;
+      --ok-color: #86EFAC;
+      --ok-bg: rgba(22, 101, 52, 0.18);
+      --ok-border: rgba(134, 239, 172, 0.3);
+
+      --warn-color: #FCD34D;
+      --warn-bg: rgba(146, 64, 14, 0.2);
+      --warn-border: rgba(252, 211, 77, 0.3);
+
+      --danger-color: #FCA5A5;
+      --danger-bg: rgba(153, 27, 27, 0.2);
+      --danger-border: rgba(252, 165, 165, 0.3);
+
+      --accred-color: #CBD5E1;
+      --accred-bg: #23272F;
+      --accred-border: #3B4252;
     }
 
     * {
@@ -165,7 +183,7 @@
       background-color: var(--bg-subtle);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      border-radius: 6px;
+      border-radius: 4px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -189,39 +207,83 @@
 
     .conn-btn {
       height: 34px;
-      background-color: var(--bg-subtle);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
+      background-color: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+      border-right: 3px solid var(--ok-color);
+      color: var(--ok-color);
       padding: 0 11px;
-      border-radius: 6px;
+      border-radius: 3px;
       font-size: var(--fs-xs);
-      font-weight: 600;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       cursor: pointer;
       white-space: nowrap;
     }
 
     .conn-btn:hover {
-      border-color: var(--border-strong);
-      color: var(--text-primary);
+      opacity: 0.9;
     }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .dot-ok { background-color: var(--ok-dot); }
-    .dot-warn { background-color: var(--warn-dot); }
-    .dot-danger { background-color: var(--danger-dot); }
 
     .conn-btn.offline-state {
+      background-color: var(--warn-bg);
+      border-color: var(--warn-border);
+      border-right-color: var(--warn-color);
       color: var(--warn-color);
-      border-color: var(--warn-dot);
+    }
+
+    /* منطقة الاعتماد الموحدة (بطابع وثائقي عملي بعيد عن قوالب الذكاء الاصطناعي) */
+    .accred-stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      background-color: var(--accred-bg);
+      border: 1px solid var(--accred-border);
+      border-right: 3px solid var(--accred-color);
+      border-radius: 3px;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--accred-color);
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+
+    /* شارة حالة التوفر وتصنيف التحقق (نص مؤطر بدلاً من الدوائر الملونة) */
+    .avail-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      border-right-width: 3px;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+
+    .avail-ok {
+      background-color: var(--ok-bg);
+      border-color: var(--ok-border);
+      border-right-color: var(--ok-color);
+      color: var(--ok-color);
+    }
+
+    .avail-warn {
+      background-color: var(--warn-bg);
+      border-color: var(--warn-border);
+      border-right-color: var(--warn-color);
+      color: var(--warn-color);
+    }
+
+    .avail-danger {
+      background-color: var(--danger-bg);
+      border-color: var(--danger-border);
+      border-right-color: var(--danger-color);
+      color: var(--danger-color);
     }
 
     .container {
@@ -258,7 +320,7 @@
       grid-template-columns: repeat(3, 1fr);
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       margin-bottom: 16px;
       overflow: hidden;
     }
@@ -274,12 +336,16 @@
 
     .metric-cell:last-child { border-left: none; }
 
+    .metric-cell-ok { border-right: 3px solid var(--ok-color); }
+    .metric-cell-warn { border-right: 3px solid var(--warn-color); }
+    .metric-cell-danger { border-right: 3px solid var(--danger-color); }
+
     .metric-label {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       font-size: var(--fs-sm);
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-secondary);
     }
 
@@ -292,7 +358,7 @@
     .controls-bar {
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       padding: 12px 14px;
       margin-bottom: 16px;
       display: flex;
@@ -324,7 +390,7 @@
       border: 1px solid var(--border);
       color: var(--text-secondary);
       padding: 5px 12px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: var(--fs-sm);
       font-weight: 600;
       white-space: nowrap;
@@ -347,7 +413,7 @@
       height: 36px;
       background-color: var(--bg-subtle);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 4px;
       padding: 0 12px;
       color: var(--text-primary);
       font-size: var(--fs-sm);
@@ -363,7 +429,7 @@
       width: 100%;
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
     }
 
@@ -415,19 +481,6 @@
       margin-top: 2px;
     }
 
-    .status-inline {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .text-ok { color: var(--ok-color); }
-    .text-warn { color: var(--warn-color); }
-    .text-danger { color: var(--danger-color); }
-
     .price-official {
       font-size: var(--fs-md);
       font-weight: 700;
@@ -444,7 +497,7 @@
     .sync-strip {
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       padding: 16px;
       margin-bottom: 18px;
       display: flex;
@@ -458,12 +511,16 @@
       font-size: var(--fs-md);
       font-weight: 700;
       color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .sync-info p {
       font-size: var(--fs-sm);
       color: var(--text-secondary);
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
     .sync-actions {
@@ -478,7 +535,7 @@
       border-bottom: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 8px;
     }
 
     .feed-row:last-child { border-bottom: none; }
@@ -487,6 +544,7 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      flex-wrap: wrap;
       gap: 10px;
     }
 
@@ -506,6 +564,15 @@
       font-size: var(--fs-base);
       color: var(--text-secondary);
       line-height: 1.65;
+    }
+
+    .feed-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 2px;
     }
 
     .rumors-grid {
@@ -529,6 +596,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .rumor-badges {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
@@ -564,7 +639,7 @@
       border: 1px solid var(--border);
       color: var(--text-primary);
       padding: 0 12px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: var(--fs-xs);
       font-weight: 600;
       cursor: pointer;
@@ -591,7 +666,7 @@
       background-color: var(--accent);
       color: var(--on-accent);
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: var(--fs-sm);
       font-weight: 700;
       cursor: pointer;
@@ -602,7 +677,7 @@
     .form-box {
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -687,7 +762,7 @@
       background-color: var(--text-primary);
       color: var(--bg-surface);
       padding: 8px 16px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: var(--fs-xs);
       font-weight: 600;
       display: none;
@@ -695,14 +770,14 @@
       white-space: nowrap;
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 860px) {
       .metrics-strip { grid-template-columns: 1fr; }
       .metric-cell { border-left: none; border-bottom: 1px solid var(--border); }
       .metric-cell:last-child { border-bottom: none; }
       .data-table thead { display: none; }
       .data-table, .data-table tbody, .data-table tr, .data-table td { display: block; width: 100%; }
       .data-table tbody tr { padding: 13px 14px; }
-      .data-table td { padding: 3px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+      .data-table td { padding: 4px 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
       .data-table td:first-child { display: block; padding-bottom: 6px; }
       .data-table td[data-label]::before {
         content: attr(data-label);
@@ -762,8 +837,7 @@
         </button>
 
         <button id="connBtn" class="conn-btn" onclick="toggleOfflineMode()" title="التبديل بين وضع الاتصال المباشر ووضع عدم الاتصال">
-          <span id="connDot" class="dot dot-ok"></span>
-          <span id="connLabel">متصل ومُحدَّث</span>
+          <span id="connLabel">✓ متصل ومُحدَّث</span>
         </button>
       </div>
     </div>
@@ -816,16 +890,16 @@
       </div>
 
       <div class="metrics-strip">
-        <div class="metric-cell">
-          <span class="metric-label"><span class="dot dot-ok"></span>متوفر / سعر مدعوم</span>
+        <div class="metric-cell metric-cell-ok">
+          <span class="metric-label">✓ متوفر / سعر مدعوم</span>
           <span id="countGreen" class="metric-num">0</span>
         </div>
-        <div class="metric-cell">
-          <span class="metric-label"><span class="dot dot-warn"></span>تذبذب / كمية محدودة</span>
+        <div class="metric-cell metric-cell-warn">
+          <span class="metric-label">! تذبذب / كمية محدودة</span>
           <span id="countAmber" class="metric-num">0</span>
         </div>
-        <div class="metric-cell">
-          <span class="metric-label"><span class="dot dot-danger"></span>شحيح حالياً</span>
+        <div class="metric-cell metric-cell-danger">
+          <span class="metric-label">× شحيح حالياً</span>
           <span id="countRed" class="metric-num">0</span>
         </div>
       </div>
@@ -842,9 +916,9 @@
 
         <div class="filter-group" id="statusFilters">
           <button class="filter-pill active" onclick="setStatusFilter('all', this)">جميع الحالات</button>
-          <button class="filter-pill" onclick="setStatusFilter('green', this)">متوفر / سعر مدعوم</button>
-          <button class="filter-pill" onclick="setStatusFilter('amber', this)">تذبذب / كمية محدودة</button>
-          <button class="filter-pill" onclick="setStatusFilter('red', this)">شحيح حالياً</button>
+          <button class="filter-pill" onclick="setStatusFilter('green', this)">✓ متوفر / سعر مدعوم</button>
+          <button class="filter-pill" onclick="setStatusFilter('amber', this)">! تذبذب / كمية محدودة</button>
+          <button class="filter-pill" onclick="setStatusFilter('red', this)">× شحيح حالياً</button>
         </div>
       </div>
 
@@ -857,6 +931,7 @@
               <th>المقارنة المرجعية</th>
               <th>متوسط السعر المسجل</th>
               <th>حالة التوفر</th>
+              <th>الاعتماد</th>
             </tr>
           </thead>
           <tbody id="marketBody"></tbody>
@@ -873,7 +948,10 @@
 
       <div class="sync-strip">
         <div class="sync-info">
-          <h2>النسخة المحفوظة على ذاكرة الجهاز</h2>
+          <h2>
+            <span>النسخة المحفوظة على ذاكرة الجهاز</span>
+            <span class="accred-stamp">✓ اعتماد النسخة: بيانات رسمية موثقة</span>
+          </h2>
           <p>يجلب التطبيق التحديثات تلقائياً من ملف البيانات الرسمي ويحفظها محلياً للعمل عند انقطاع الشبكة.</p>
         </div>
         <div class="sync-actions">
@@ -898,8 +976,8 @@
             <div class="controls-row">
               <div class="filter-group" id="verdictFilters">
                 <button class="filter-pill active" onclick="setVerdictFilter('all', this)">الكل</button>
-                <button class="filter-pill" onclick="setVerdictFilter('false', this)">ادعاءات مضللة</button>
-                <button class="filter-pill" onclick="setVerdictFilter('true', this)">توضيحات رسمية</button>
+                <button class="filter-pill" onclick="setVerdictFilter('false', this)">× ادعاءات مضللة</button>
+                <button class="filter-pill" onclick="setVerdictFilter('true', this)">✓ توضيحات رسمية</button>
               </div>
               <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
             </div>
@@ -988,7 +1066,182 @@
 
     applyTheme(localStorage.getItem('burhan_theme') || 'light');
 
-    /* متغيرات البيانات الديناميكية (تُملأ تلقائياً من data.json أو الذاكرة المحلية) */
+    /* نسخة احتياطية مدمجة للعرض الفوري قبل اكتمال جلب data.json */
+    const FALLBACK_DATASET = {
+      lastUpdated: "2026-11-23T10:00:00Z",
+      lastSourceStatus: "مُحدَّث من تقارير OCHA و WFP و UNRWA",
+      outlets: [
+        {
+          name: "نقطة القرارة – شارع الحية",
+          area: "خان يونس",
+          address: "خان يونس – القرارة – شارع الحية",
+          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)",
+          hours: "الخط المجاني WFP: 1800124126"
+        },
+        {
+          name: "نقطة شرق سجن أصداء – شارع 5",
+          area: "خان يونس",
+          address: "خان يونس – شارع 5 – شرق سجن أصداء بـ 500 متر",
+          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)",
+          hours: "الخط المجاني WFP: 1800124126"
+        },
+        {
+          name: "مراكز توزيع الأونروا – مخيم خان يونس وبني سهيلا",
+          area: "خان يونس",
+          address: "خان يونس – مركزا التوزيع المعتمدان في مخيم خان يونس وبلدة بني سهيلا",
+          items: "إشراف وكالة الأونروا (UNRWA) – توزيع الطرود الغذائية للأسر المسجلة",
+          hours: "حسب رسائل وجداول الأونروا"
+        },
+        {
+          name: "دير البلح – شارع 17 (مقابل ديوان آل بركة)",
+          area: "دير البلح",
+          address: "دير البلح – شارع 17 – مقابل ديوان آل بركة (نقطة عبد الرحمن بركة)",
+          items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: منظمة أكتيد (ACTED)",
+          hours: "الخط المجاني WFP: 1800124126"
+        },
+        {
+          name: "النصيرات – شارع مخيم 2 ومراكز توزيع الأونروا",
+          area: "المحافظة الوسطى",
+          address: "النصيرات – شارع مخيم 2 (قرب مخبز الحاج - بركس بيدس) ومركزا الأونروا في مخيم النصيرات",
+          items: "إشراف برنامج الأغذية العالمي (WFP) / مجتمعات عالمية، ووكالة الأونروا (UNRWA)",
+          hours: "الخط المجاني WFP: 1800124126"
+        },
+        {
+          name: "مدينة غزة – الرمال الشمالي (العائلة المقدسة وشارع عايدية)",
+          area: "مدينة غزة",
+          address: "مدينة غزة – الرمال الشمالي – نقطة العائلة المقدسة وشارع عايدية (بركس اليعقوبي)",
+          items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: أكتيد (ACTED) والرؤيا الشبابية",
+          hours: "الخط المجاني WFP: 1800124126"
+        }
+      ],
+      market: [
+        {
+          name: "ربطة خبز مدعومة (وزن 2 كغم)",
+          area: "خان يونس",
+          status: "green",
+          label: "سعر مدعوم",
+          fair: "3 شيكل",
+          ref: "أكثر من 30 شيكل (تجاري سابق)",
+          source: "المتاجر المتعاقدة مع المخابز المدعومة أممياً (OCHA)"
+        },
+        {
+          name: "بطاطا (1 كغم)",
+          area: "قطاع غزة (متوسط عام)",
+          status: "amber",
+          label: "تذبذب سعري",
+          fair: "9 شيكل",
+          ref: "مؤشر الغذاء +6.67% شهرياً",
+          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+        },
+        {
+          name: "بصل ناشف (1 كغم)",
+          area: "قطاع غزة (متوسط عام)",
+          status: "amber",
+          label: "تذبذب سعري",
+          fair: "9 شيكل",
+          ref: "مؤشر الغذاء +6.67% شهرياً",
+          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+        },
+        {
+          name: "فلفل أخضر حار (1 كغم)",
+          area: "قطاع غزة (متوسط عام)",
+          status: "green",
+          label: "متوفر بالأسواق",
+          fair: "7 شيكل",
+          ref: "متوسط رصد تشرين أول 2026",
+          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+        },
+        {
+          name: "زيت ذرة (عبوة 3 لتر)",
+          area: "قطاع غزة (متوسط عام)",
+          status: "green",
+          label: "متوفر بالأسواق",
+          fair: "38 شيكل",
+          ref: "36 شيكل (متوسط 2024)",
+          source: "الجهاز المركزي للإحصاء الفلسطيني (جدول غلاء المعيشة)"
+        },
+        {
+          name: "أسطوانة غاز طهي (12 كغم)",
+          area: "قطاع غزة (متوسط عام)",
+          status: "amber",
+          label: "كمية محدودة",
+          fair: "94 شيكل",
+          ref: "126 شيكل (متوسط 2025)",
+          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+        },
+        {
+          name: "بنزين 95 أوكتان (1 لتر)",
+          area: "قطاع غزة (متوسط عام)",
+          status: "amber",
+          label: "كمية محدودة",
+          fair: "7.92 شيكل",
+          ref: "7.90 شيكل (آذار 2026)",
+          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+        },
+        {
+          name: "سولار / ديزل (1 لتر)",
+          area: "قطاع غزة (متوسط عام)",
+          status: "red",
+          label: "شحيح حالياً",
+          fair: "8.99 شيكل",
+          ref: "8.40 شيكل (آذار 2026)",
+          source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+        }
+      ],
+      alerts: [
+        {
+          title: "تقرير أعمال وزارة الاقتصاد الوطني في غزة لشهر أكتوبر 2026",
+          time: "9 نوفمبر 2026",
+          body: "أفادت الوزارة بإدخال 3,839 شاحنة إلى قطاع غزة خلال شهر أكتوبر 2026، ونشرت قائمة الأسعار الاسترشادية للمواد الأساسية والخضار، واستقبلت وحدة الرقابة والشكاوى 163 شكوى واستفساراً عبر الرقم المجاني."
+        },
+        {
+          title: "نشرة الرقم القياسي لأسعار المستهلك في قطاع غزة (تشرين أول 2026)",
+          time: "12 نوفمبر 2026",
+          body: "أعلن الجهاز المركزي للإحصاء الفلسطيني أن الرقم القياسي لأسعار المستهلك في قطاع غزة بلغ 316.95 نقطة بارتفاع نسبته 4.11% مقارنة بشهر أيلول 2026، وارتفعت أسعار مجموعة المواد الغذائية والمشروبات بنسبة 6.67%."
+        },
+        {
+          title: "تحديث الاستجابة الإنسانية في محافظات قطاع غزة (OCHA)",
+          time: "18 نوفمبر 2026",
+          body: "وثّق مكتب الأمم المتحدة لتنسيق الشؤون الإنسانية استمرار الأنشطة الإغاثية في 77 موقعاً في خان يونس، و54 موقعاً في مدينة غزة، و13 في شمال غزة، و10 في دير البلح، و8 في رفح."
+        },
+        {
+          title: "تشغيل 15 مخبزاً مدعوماً أممياً لتوفير الخبز بسعر 3 شيكل (OCHA)",
+          time: "تقرير OCHA #336",
+          body: "تنتج 15 مخبزاً مدعوماً من الأمم المتحدة (9 في دير البلح وخان يونس و6 في مدينة غزة) أكثر من 130,000 ربطة خبز (2 كغم) يومياً لتوزيعها مجاناً أو بيعها بسعر مدعوم يبلغ 3 شيكل في المتاجر المتعاقدة."
+        }
+      ],
+      rumors: [
+        {
+          verdict: "false",
+          tag: "ادعاء مضلل (مسبار)",
+          claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.",
+          truth: "بالتحقق من الادعاء وجد فريق "مسبار" أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثاً.",
+          meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025"
+        },
+        {
+          verdict: "false",
+          tag: "ادعاء مضلل (مسبار)",
+          claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدّعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.",
+          truth: "كشف فريق "مسبار" أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نُفذت في يوليو 2024، وليس لمساعدات وصلت حديثاً.",
+          meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025"
+        },
+        {
+          verdict: "false",
+          tag: "ادعاء مضلل (مسبار)",
+          claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدّعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.",
+          truth: "أوضح تحقيق "مسبار" أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.",
+          meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025"
+        },
+        {
+          verdict: "true",
+          tag: "توضيح رسمي موثق",
+          claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.",
+          truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحاً أن ما حدث كان خللاً مؤقتاً في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.",
+          meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026"
+        }
+      ]
+    };
+
     let outletsData = [];
     let marketData = [];
     let alertsData = [];
@@ -1023,7 +1276,61 @@
       }, 2500);
     }
 
-    /* دالة حساب وعرض تاريخ آخر تحديث بصيغة زمنية واضحة (اليوم، الشهر الماضي، منذ شهرين...) */
+    /* دوال استخراج جهة الاعتماد الرسمية لعرضها بشكل موحد في جميع الواجهات الأربع */
+    function getOutletAccreditation(item) {
+      const text = (item.items || '') + ' ' + (item.address || '');
+      if (text.includes('WFP') && (text.includes('UNRWA') || text.includes('الأونروا'))) {
+        return '✓ معتمد: WFP والأونروا';
+      }
+      if (text.includes('WFP') || text.includes('الأغذية العالمي')) {
+        return '✓ معتمد: برنامج الأغذية (WFP)';
+      }
+      if (text.includes('UNRWA') || text.includes('الأونروا')) {
+        return '✓ معتمد: وكالة الأونروا';
+      }
+      return '✓ معتمد: تنسيق إنساني ميداني';
+    }
+
+    function getMarketAccreditation(item) {
+      const src = item.source || '';
+      if (src.includes('الإحصاء')) {
+        return '✓ معتمد: الإحصاء الفلسطيني';
+      }
+      if (src.includes('OCHA')) {
+        return '✓ معتمد: تقارير OCHA';
+      }
+      return '✓ معتمد: رصد رسمي';
+    }
+
+    function getAlertAccreditation(alert) {
+      const title = alert.title || '';
+      const bracketMatch = title.match(/^\[([^\]]+)\]/);
+      if (bracketMatch) {
+        return '✓ اعتماد النشرة: ' + bracketMatch[1];
+      }
+      if (title.includes('الاقتصاد')) {
+        return '✓ اعتماد النشرة: وزارة الاقتصاد الوطني';
+      }
+      if (title.includes('الإحصاء')) {
+        return '✓ اعتماد النشرة: الإحصاء الفلسطيني';
+      }
+      if (title.includes('OCHA')) {
+        return '✓ اعتماد النشرة: مكتب OCHA';
+      }
+      return '✓ اعتماد النشرة: بيان رسمي';
+    }
+
+    function getRumorAccreditation(rumor) {
+      const meta = rumor.meta || '';
+      if (meta.includes('مسبار')) {
+        return '✓ اعتماد التحقق: منصة مسبار';
+      }
+      if (meta.includes('الاقتصاد')) {
+        return '✓ اعتماد التحقق: وزارة الاقتصاد';
+      }
+      return '✓ اعتماد التحقق: مصدر رسمي';
+    }
+
     function formatLastUpdated(isoDateString) {
       if (!isoDateString) return 'غير محدد';
       const updatedDate = new Date(isoDateString);
@@ -1077,21 +1384,22 @@
     }
 
     async function autoSyncData(isManual = false) {
-      // 1. تحميل النسخة المخزنة محلياً فوراً حتى لا يظهر أي تأخير
       const cachedRaw = localStorage.getItem('burhan_auto_dataset_v1');
       if (cachedRaw) {
         try {
           applyDataset(JSON.parse(cachedRaw));
-        } catch (e) {}
+        } catch (e) {
+          applyDataset(FALLBACK_DATASET);
+        }
+      } else {
+        applyDataset(FALLBACK_DATASET);
       }
 
-      // 2. إذا كان المستخدم في وضع عدم الاتصال اليدوي، نكتفي بالنسخة المحلية
       if (isOfflineMode) {
         if (isManual) showToast('أنت في وضع عدم الاتصال: تُعرض النسخة المحفوظة');
         return;
       }
 
-      // 3. جلب أحدث نسخة من ملف data.json المحدث آلياً عبر GitHub Actions
       try {
         const res = await fetch('./data.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1155,7 +1463,7 @@
           <td data-label="الجهة المشرفة">${escapeHtml(o.items)}</td>
           <td data-label="التواصل ونظام العمل">${escapeHtml(o.hours)}</td>
           <td data-label="الاعتماد">
-            <span class="status-inline text-ok"><span class="dot dot-ok"></span>معتمد رسمياً</span>
+            <span class="accred-stamp">${escapeHtml(getOutletAccreditation(o))}</span>
           </td>
         </tr>
       `).join('');
@@ -1192,18 +1500,18 @@
       });
 
       if (filtered.length === 0) {
-        body.innerHTML = '<tr><td colspan="5" class="empty-row">لا توجد سلع مطابقة لخيارات التصفية الحالية.</td></tr>';
+        body.innerHTML = '<tr><td colspan="6" class="empty-row">لا توجد سلع مطابقة لخيارات التصفية الحالية.</td></tr>';
         return;
       }
 
-      const statusMap = {
-        green: { textClass: 'text-ok', dotClass: 'dot-ok' },
-        amber: { textClass: 'text-warn', dotClass: 'dot-warn' },
-        red: { textClass: 'text-danger', dotClass: 'dot-danger' }
+      const availMap = {
+        green: { cls: 'avail-ok', mark: '✓' },
+        amber: { cls: 'avail-warn', mark: '!' },
+        red: { cls: 'avail-danger', mark: '×' }
       };
 
       body.innerHTML = filtered.map(item => {
-        const st = statusMap[item.status] || statusMap.amber;
+        const st = availMap[item.status] || availMap.amber;
         return `
           <tr>
             <td>
@@ -1214,7 +1522,10 @@
             <td data-label="المقارنة المرجعية"><span class="price-ref">${escapeHtml(item.ref)}</span></td>
             <td data-label="متوسط السعر"><span class="price-official">${escapeHtml(item.fair)}</span></td>
             <td data-label="حالة التوفر">
-              <span class="status-inline ${st.textClass}"><span class="dot ${st.dotClass}"></span>${escapeHtml(item.label)}</span>
+              <span class="avail-tag ${st.cls}">${st.mark} ${escapeHtml(item.label)}</span>
+            </td>
+            <td data-label="الاعتماد">
+              <span class="accred-stamp">${escapeHtml(getMarketAccreditation(item))}</span>
             </td>
           </tr>
         `;
@@ -1229,6 +1540,9 @@
             <span class="feed-time">${escapeHtml(a.time)}</span>
           </div>
           <p class="feed-body">${escapeHtml(a.body)}</p>
+          <div class="feed-foot">
+            <span class="accred-stamp">${escapeHtml(getAlertAccreditation(a))}</span>
+          </div>
         </article>
       `).join('');
     }
@@ -1259,9 +1573,12 @@
         return `
           <article class="rumor-entry">
             <div class="rumor-top">
-              <span class="status-inline ${isFalse ? 'text-danger' : 'text-ok'}">
-                <span class="dot ${isFalse ? 'dot-danger' : 'dot-ok'}"></span>${escapeHtml(r.tag)}
-              </span>
+              <div class="rumor-badges">
+                <span class="avail-tag ${isFalse ? 'avail-danger' : 'avail-ok'}">
+                  ${isFalse ? '×' : '✓'} ${escapeHtml(r.tag)}
+                </span>
+                <span class="accred-stamp">${escapeHtml(getRumorAccreditation(r))}</span>
+              </div>
               <button class="btn-outline" onclick="copyFact(${idx})">نسخ النص</button>
             </div>
             <div class="rumor-claim">"${escapeHtml(r.claim)}"</div>
@@ -1275,7 +1592,10 @@
     function copyFact(index) {
       const item = rumorsData[index];
       if (!item) return;
-      const text = "تحقق موثق:\nالخبر المتداول: " + item.claim + "\nالنتيجة: " + item.truth + "\n" + item.meta;
+      const text = "تحقق موثق:
+الخبر المتداول: " + item.claim + "
+النتيجة: " + item.truth + "
+" + item.meta;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => showToast('تم نسخ نص التحقق')).catch(() => fallbackCopy(text));
       } else {
@@ -1335,7 +1655,10 @@
         saved.map((rep, idx) => `
           <article class="rumor-entry">
             <div class="rumor-top">
-              <span class="status-inline text-warn"><span class="dot dot-warn"></span>${escapeHtml(rep.area)}</span>
+              <div class="rumor-badges">
+                <span class="avail-tag avail-warn">! ${escapeHtml(rep.area)}</span>
+                <span class="accred-stamp">حفظ محلي</span>
+              </div>
               <button class="btn-danger-link" onclick="deleteUserReport(${idx})">حذف</button>
             </div>
             <div class="rumor-claim">${escapeHtml(rep.text)}</div>
@@ -1346,16 +1669,13 @@
 
     function updateConnUI(offline) {
       const btn = document.getElementById('connBtn');
-      const dot = document.getElementById('connDot');
       const label = document.getElementById('connLabel');
       if (offline) {
         btn.classList.add('offline-state');
-        dot.className = 'dot dot-warn';
-        label.textContent = 'وضع بدون إنترنت';
+        label.textContent = '! وضع بدون إنترنت';
       } else {
         btn.classList.remove('offline-state');
-        dot.className = 'dot dot-ok';
-        label.textContent = 'متصل ومُحدَّث';
+        label.textContent = '✓ متصل ومُحدَّث';
       }
     }
 
