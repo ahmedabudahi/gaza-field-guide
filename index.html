@@ -125,7 +125,7 @@
     .sync-strip { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 18px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
     .sync-info h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
     .sync-info p { font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 4px; }
-    .sync-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .feed-row { padding: 15px 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
     .feed-row:last-child { border-bottom: none; }
     .feed-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; }
@@ -142,7 +142,7 @@
     .rumor-fact { background-color: var(--bg-subtle); border-right: 3px solid var(--border-strong); padding: 10px 12px; font-size: var(--fs-base); color: var(--text-secondary); line-height: 1.65; }
     .rumor-fact strong { color: var(--text-primary); font-weight: 700; }
     .rumor-meta { font-size: var(--fs-xs); color: var(--text-muted); }
-    .btn-outline { height: 32px; background-color: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 0 12px; border-radius: 4px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; }
+    .btn-outline { height: 32px; background-color: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 0 12px; border-radius: 4px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
     .btn-outline:hover { border-color: var(--border-strong); background-color: var(--bg-hover); }
     .btn-danger-link { background: transparent; border: none; color: var(--danger-color); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 2px 4px; }
     .btn-submit { width: 100%; height: 38px; background-color: var(--accent); color: var(--on-accent); border: none; border-radius: 4px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; }
@@ -151,6 +151,9 @@
     .form-box p { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
     .saved-header { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); margin: 16px 0 8px; }
     .empty-row { padding: 24px 16px; text-align: center; font-size: var(--fs-base); color: var(--text-secondary); }
+    .app-footer { margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: var(--fs-xs); color: var(--text-muted); }
+    .app-footer a { color: var(--text-primary); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--border-strong); padding-bottom: 1px; }
+    .app-footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
     .bottom-tabs { position: fixed; bottom: 0; right: 0; left: 0; width: 100%; height: 60px; background-color: var(--bg-surface); border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(4, 1fr); z-index: 30; }
     .bottom-tab { background: transparent; border: none; border-top: 2px solid transparent; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 11px; font-weight: 600; cursor: pointer; }
     .bottom-tab svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; }
@@ -304,6 +307,7 @@
         <div class="sync-actions">
           <span class="rumor-meta">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
           <button class="btn-outline" onclick="manualSync()">فحص التحديثات الآن</button>
+          <a href="./privacy.html" class="btn-outline">سياسة الخصوصية</a>
         </div>
       </div>
       <div class="surface-box" id="alertsList"></div>
@@ -345,6 +349,11 @@
         </aside>
       </div>
     </section>
+
+    <footer class="app-footer">
+      <span>تطبيق برهان (Burhan) — دليل الأسعار والتحقق الميداني في قطاع غزة</span>
+      <a href="./privacy.html">سياسة الخصوصية وحماية البيانات</a>
+    </footer>
   </main>
 
   <nav class="bottom-tabs" aria-label="التنقل السفلي">
