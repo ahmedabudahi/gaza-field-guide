@@ -1,0 +1,25 @@
+{
+  "name": "برهان: دليل الأسعار والتحقق",
+  "short_name": "برهان",
+  "description": "دليل أسعار غزة ونقاط التوزيع المعتمدة وكشف الشائعات الميدانية بدون إنترنت.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1E3A5F",
+  "theme_color": "#1E3A5F",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
