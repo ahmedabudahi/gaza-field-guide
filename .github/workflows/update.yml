@@ -1,0 +1,33 @@
+name: التحديث التلقائي للبيانات من المصادر الرسمية
+
+on:
+  schedule:
+    # يعمل تلقائياً كل 12 ساعة (الساعة 06:00 صباحاً و 06:00 مساءً بتوقيت UTC)
+    - cron: '0 */12 * * *'
+  # يتيح لك تشغيل التحديث يدوياً بضغطة زر من تبويب Actions في GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: سحب ملفات المستودع
+        uses: actions/checkout@v4
+
+      - name: إعداد بيئة Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: تشغيل سكربت التحديث التلقائي
+        run: python update_data.py
+
+      - name: حفظ ونشر البيانات المحدثة تلقائياً
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions Auto-Updater"
+          git add data.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "تحديث تلقائي للبيانات الميدانية والأسعار" && git push)
