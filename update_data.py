@@ -15,27 +15,37 @@ MONTHS_AR = {
     9: "سبتمبر", 10: "أكتوبر", 11: "نوفمبر", 12: "ديسمبر"
 }
 
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "application/rss+xml, application/xml, text/xml, application/json, */*"
+}
+
 RSS_SOURCES = [
+    {
+        "label": "الأمم المتحدة (غزة)",
+        "urls": [
+            "https://news.un.org/feed/subscribe/ar/news/region/middle-east/feed/rss.xml",
+            "https://news.un.org/feed/subscribe/ar/news/topic/humanitarian-aid/feed/rss.xml"
+        ],
+        "limit": 4,
+        "gaza_only": True
+    },
     {
         "label": "OCHA",
         "urls": ["https://www.ochaopt.org/rss.xml"],
-        "limit": 4,
+        "limit": 3,
         "gaza_only": False
     },
     {
         "label": "UNRWA",
-        "urls": [
-            "https://www.unrwa.org/ar/news-reports/rss.xml",
-            "https://www.unrwa.org/news-reports/rss.xml"
-        ],
-        "limit": 4,
+        "urls": ["https://www.unrwa.org/ar/news-reports/rss.xml"],
+        "limit": 3,
         "gaza_only": True
     }
 ]
 
 
 def clean_html_text(raw_text):
-    """إزالة وسوم HTML والمسافات الزائدة من نصوص RSS"""
     if not raw_text:
         return ""
     unescaped = html.unescape(raw_text)
@@ -44,7 +54,6 @@ def clean_html_text(raw_text):
 
 
 def format_ar_date(date_str):
-    """تحويل تواريخ RSS أو ISO إلى صيغة عربية مقروءة"""
     if not date_str:
         now = datetime.now(timezone.utc)
         return f"{now.day} {MONTHS_AR[now.month]} {now.year}"
@@ -60,25 +69,20 @@ def format_ar_date(date_str):
 
 
 def fetch_rss_feed(url, source_label, limit=4, gaza_only=False):
-    """قراءة خلاصة RSS واستخراج أحدث التقارير والبيانات الرسمية"""
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0 (compatible; GazaFieldGuideBot/1.0)",
-            "Accept": "application/rss+xml, application/xml, text/xml, */*"
-        }
-    )
+    req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=20) as resp:
         xml_bytes = resp.read()
 
     root = ET.fromstring(xml_bytes)
     items = root.findall(".//item")
     if not items:
-        # دعم صيغة Atom في حال استخدامها
         items = root.findall(".//{http://www.w3.org/2005/Atom}entry")
 
     extracted = []
-    gaza_keywords = ("غزة", "خان يونس", "رفح", "الوسطى", "دير البلح", "النصيرات", "gaza", "khan younis", "rafah")
+    gaza_keywords = (
+        "غزة", "خان يونس", "رفح", "الوسطى", "دير البلح", "النصيرات",
+        "الأونروا", "أوتشا", "الغذاء العالمي", "gaza", "unrwa", "ocha", "wfp"
+    )
 
     for item in items:
         title_raw = item.findtext("title") or item.findtext("{http://www.w3.org/2005/Atom}title") or ""
@@ -97,7 +101,6 @@ def fetch_rss_feed(url, source_label, limit=4, gaza_only=False):
 
         title = clean_html_text(title_raw)
         body = clean_html_text(desc_raw)
-
         if not title:
             continue
 
@@ -119,14 +122,35 @@ def fetch_rss_feed(url, source_label, limit=4, gaza_only=False):
     return extracted
 
 
-def check_hdx_wfp_dataset():
-    """فحص تاريخ آخر تحديث لبيانات أسعار الغذاء في فلسطين على منصة HDX"""
-    url = "https://data.humdata.org/api/3/action/package_show?id=wfp-food-prices-for-state-of-palestine"
-    req = urllib.request.Request(url, headers={"User-Agent": "GazaFieldGuideBot/1.0"})
+def fetch_hdx_updates():
+    """جلب أحدث تحديثات مجموعات بيانات WFP و OCHA الخاصة بفلسطين من منصة HDX"""
+    url = "https://data.humdata.org/api/3/action/package_search?q=gaza+food+prices+OR+gaza+humanitarian&rows=3&sort=metadata_modified+desc"
+    req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=20) as resp:
         result = json.loads(resp.read().decode("utf-8"))
-    last_mod = result.get("result", {}).get("metadata_modified", "")
-    return format_ar_date(last_mod) if last_mod else ""
+
+    packages = result.get("result", {}).get("results", [])
+    hdx_alerts = []
+    latest_wfp_date = ""
+
+    for pkg in packages:
+        title = pkg.get("title", "").strip()
+        org = pkg.get("organization", {}).get("title", "HDX")
+        mod_date = format_ar_date(pkg.get("metadata_modified", ""))
+        notes = clean_html_text(pkg.get("notes", ""))
+        summary = (notes[:240] + "...") if len(notes) > 240 else notes
+
+        if "food-prices" in pkg.get("name", "") and not latest_wfp_date:
+            latest_wfp_date = mod_date
+
+        if title:
+            hdx_alerts.append({
+                "title": f"[{org}] تحديث بيانات: {title}",
+                "time": mod_date,
+                "body": summary or "تم تحديث مجموعة البيانات الرسمية على منصة البيانات الإنسانية المفتوحة (HDX)."
+            })
+
+    return hdx_alerts, latest_wfp_date
 
 
 def main():
@@ -138,8 +162,9 @@ def main():
 
     existing_titles = {a["title"] for a in data.get("alerts", [])}
     status_parts = []
+    total_added = 0
 
-    # 1. جلب أحدث التقارير من خلاصات RSS الرسمية لـ OCHA والأونروا
+    # 1. جلب الأخبار والتقارير من خلاصات RSS الرسمية
     for src in RSS_SOURCES:
         label = src["label"]
         fetched = []
@@ -152,30 +177,36 @@ def main():
                     gaza_only=src["gaza_only"]
                 )
                 if fetched:
+                    print(f"نجح جلب {len(fetched)} عناصر من {label}")
                     break
             except Exception as e:
-                print(f"تعذر قراءة خلاصة {label} من {feed_url}:", e)
+                print(f"تخطي {label} ({feed_url}): {e}")
 
-        added = 0
         for alert in reversed(fetched):
             if alert["title"] not in existing_titles:
                 data["alerts"].insert(0, alert)
                 existing_titles.add(alert["title"])
-                added += 1
+                total_added += 1
 
         if fetched:
-            status_parts.append(f"{label} RSS (جديد: {added})")
+            status_parts.append(f"{label} ({len(fetched)})")
 
-    # الاحتفاظ بأحدث 15 تقريراً في القائمة
-    data["alerts"] = data.get("alerts", [])[:15]
-
-    # 2. التحقق من تحديث بيانات أسعار WFP على منصة HDX
+    # 2. جلب تحديثات البيانات من HDX (WFP / OCHA)
     try:
-        hdx_date = check_hdx_wfp_dataset()
-        if hdx_date:
-            status_parts.append(f"نشرة أسعار WFP: {hdx_date}")
+        hdx_alerts, wfp_date = fetch_hdx_updates()
+        for alert in reversed(hdx_alerts[:2]):
+            if alert["title"] not in existing_titles:
+                data["alerts"].insert(0, alert)
+                existing_titles.add(alert["title"])
+                total_added += 1
+        if wfp_date:
+            status_parts.append(f"نشرة أسعار WFP: {wfp_date}")
+        elif hdx_alerts:
+            status_parts.append(f"بيانات HDX ({len(hdx_alerts)})")
     except Exception as e:
         print("تعذر الاتصال بـ HDX:", e)
+
+    data["alerts"] = data.get("alerts", [])[:15]
 
     if status_parts:
         data["lastSourceStatus"] = "تم الفحص التلقائي: " + " | ".join(status_parts)
@@ -183,7 +214,7 @@ def main():
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print("تم تحديث data.json بنجاح:", data["lastSourceStatus"])
+    print(f"اكتمل التحديث (إضافات جديدة: {total_added}) -> {data['lastSourceStatus']}")
 
 
 if __name__ == "__main__":
