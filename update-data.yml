@@ -1,0 +1,33 @@
+name: Auto Update Gaza Field Guide Data
+
+on:
+  schedule:
+    # يعمل تلقائياً كل 6 ساعات (4 مرات يومياً) لضمان تحديث البيانات على مدار الـ 24 ساعة
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run update_data.py
+        run: python update_data.py
+
+      - name: Commit and push updated data.json
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data.json
+          git diff --staged --quiet || git commit -m "تحديث تلقائي شامل للأسعار والبيانات الميدانية"
+          git push
