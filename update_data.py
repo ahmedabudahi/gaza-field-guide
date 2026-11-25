@@ -57,20 +57,370 @@ RUMOR_SOURCES = [
     }
 ]
 
-# خريطة ربط أسماء السلع الإنجليزية من بيانات WFP HDX بالسلع العربية في التطبيق
-WFP_COMMODITY_MAP = {
-    "wheat flour": {"name": "طحين أبيض (1 كغم)", "unit": "شيكل"},
-    "bread": {"name": "ربطة خبز (متوسط رصد WFP)", "unit": "شيكل"},
-    "potatoes": {"name": "بطاطا (1 كغم)", "unit": "شيكل"},
-    "onions": {"name": "بصل ناشف (1 كغم)", "unit": "شيكل"},
-    "tomatoes": {"name": "بندورة (1 كغم)", "unit": "شيكل"},
-    "oil": {"name": "زيت نباتي / ذرة (1 لتر)", "unit": "شيكل"},
-    "sugar": {"name": "سكر أبيض (1 كغم)", "unit": "شيكل"},
-    "rice": {"name": "أرز (1 كغم)", "unit": "شيكل"},
-    "fuel (gas)": {"name": "أسطوانة غاز طهي (12 كغم)", "unit": "شيكل"},
-    "fuel (petrol-gasoline)": {"name": "بنزين 95 أوكتان (1 لتر)", "unit": "شيكل"},
-    "fuel (diesel)": {"name": "سولار / ديزل (1 لتر)", "unit": "شيكل"}
-}
+# القائمة الشاملة للأصناف الغذائية والأساسية في قطاع غزة (26 صنفاً)
+COMMODITIES_CATALOG = [
+    # 1. الخبز والحبوب والنشويات
+    {
+        "key": "subsidized_bread",
+        "keywords": [],
+        "category": "الخبز والحبوب",
+        "name": "ربطة خبز مدعومة (وزن 2 كغم)",
+        "area": "قطاع غزة (المخابز المدعومة)",
+        "default_price": "3 شيكل",
+        "default_ref": "سعر مدعوم أممياً (أكثر من 30 شيكل تجاري سابق)",
+        "default_status": "green",
+        "default_label": "سعر مدعوم",
+        "source": "المتاجر المتعاقدة مع المخابز المدعومة أمميا (OCHA)"
+    },
+    {
+        "key": "wheat_flour",
+        "keywords": ["wheat flour", "flour"],
+        "category": "الخبز والحبوب",
+        "name": "طحين أبيض (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "4.5 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+    {
+        "key": "rice",
+        "keywords": ["rice"],
+        "category": "الخبز والحبوب",
+        "name": "أرز حبة قصيرة / متوسطة (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "8 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+    {
+        "key": "pasta",
+        "keywords": ["pasta", "macaroni"],
+        "category": "الخبز والحبوب",
+        "name": "معكرونة / شعرية (كيس 400–500 غم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "4 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+    },
+    {
+        "key": "semolina",
+        "keywords": ["semolina"],
+        "category": "الخبز والحبوب",
+        "name": "سميد (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "6 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+    {
+        "key": "yeast",
+        "keywords": ["yeast"],
+        "category": "الخبز والحبوب",
+        "name": "خميرة جافة (عبوة 500 غم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "15 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "amber",
+        "default_label": "كمية محدودة",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+
+    # 2. البقوليات والمعلبات الأساسية
+    {
+        "key": "lentils",
+        "keywords": ["lentils"],
+        "category": "البقوليات والمعلبات",
+        "name": "عدس مجروش / أصفر (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "9 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+    {
+        "key": "chickpeas_dry",
+        "keywords": ["chickpeas"],
+        "category": "البقوليات والمعلبات",
+        "name": "حمص حب جاف (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "10 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+    {
+        "key": "beans_white",
+        "keywords": ["beans"],
+        "category": "البقوليات والمعلبات",
+        "name": "فاصولياء بيضاء جافة (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "11 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+    {
+        "key": "fava_canned",
+        "keywords": ["fava", "broad beans"],
+        "category": "البقوليات والمعلبات",
+        "name": "فول مدمس معلب (علبة 400 غم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "4.5 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+    {
+        "key": "chickpeas_canned",
+        "keywords": ["hummus"],
+        "category": "البقوليات والمعلبات",
+        "name": "حمص حب جاهز معلب (علبة 400 غم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "4.5 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+
+    # 3. الزيوت والسكر والألبان
+    {
+        "key": "oil_3l",
+        "keywords": ["oil (vegetable)", "oil (sunflower)", "oil (maize)", "oil"],
+        "category": "الزيوت والألبان",
+        "name": "زيت ذرة / عباد الشمس (عبوة 3 لتر)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "38 شيكل",
+        "default_ref": "36 شيكل (متوسط 2024)",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP",
+        "multiplier": 3.0
+    },
+    {
+        "key": "olive_oil",
+        "keywords": ["olive oil"],
+        "category": "الزيوت والألبان",
+        "name": "زيت زيتون بلدي (1 لتر)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "45 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "amber",
+        "default_label": "كمية محدودة",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+    {
+        "key": "sugar",
+        "keywords": ["sugar"],
+        "category": "الزيوت والألبان",
+        "name": "سكر أبيض (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "6 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+    {
+        "key": "salt",
+        "keywords": ["salt"],
+        "category": "الزيوت والألبان",
+        "name": "ملح طعام يودي (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "2.5 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "برنامج الأغذية العالمي (WFP)"
+    },
+    {
+        "key": "milk_powder",
+        "keywords": ["milk"],
+        "category": "الزيوت والألبان",
+        "name": "حليب مجفف / بودرة (عبوة 400 غم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "22 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "amber",
+        "default_label": "تذبذب سعري",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+    },
+
+    # 4. الخضروات الأساسية
+    {
+        "key": "potatoes",
+        "keywords": ["potatoes"],
+        "category": "الخضروات",
+        "name": "بطاطا (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "9 شيكل",
+        "default_ref": "مؤشر الغذاء +6.67% شهريا",
+        "default_status": "amber",
+        "default_label": "تذبذب سعري",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+    },
+    {
+        "key": "tomatoes",
+        "keywords": ["tomatoes"],
+        "category": "الخضروات",
+        "name": "بندورة (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "8 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "amber",
+        "default_label": "تذبذب سعري",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+    {
+        "key": "onions",
+        "keywords": ["onions"],
+        "category": "الخضروات",
+        "name": "بصل ناشف (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "9 شيكل",
+        "default_ref": "مؤشر الغذاء +6.67% شهريا",
+        "default_status": "amber",
+        "default_label": "تذبذب سعري",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+    },
+    {
+        "key": "cucumbers",
+        "keywords": ["cucumbers"],
+        "category": "الخضروات",
+        "name": "خيار (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "7 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+    {
+        "key": "eggplants",
+        "keywords": ["eggplants"],
+        "category": "الخضروات",
+        "name": "باذنجان (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "6 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+    {
+        "key": "chili_pepper",
+        "keywords": ["peppers", "chili"],
+        "category": "الخضروات",
+        "name": "فلفل أخضر حار (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "7 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+
+    # 5. البروتينات والبدائل
+    {
+        "key": "eggs",
+        "keywords": ["eggs"],
+        "category": "البروتينات والبدائل",
+        "name": "كرتونة بيض مائدة (30 بيضة)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "35 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "amber",
+        "default_label": "كمية محدودة",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني",
+        "multiplier": 30.0
+    },
+    {
+        "key": "tuna",
+        "keywords": ["fish (tuna)", "tuna"],
+        "category": "البروتينات والبدائل",
+        "name": "تونة معلبة (علبة 160–185 غم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "6 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+    {
+        "key": "sardines",
+        "keywords": ["sardines"],
+        "category": "البروتينات والبدائل",
+        "name": "سردين معلب (علبة 125 غم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "4 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+    },
+    {
+        "key": "chicken",
+        "keywords": ["meat (chicken)", "chicken"],
+        "category": "البروتينات والبدائل",
+        "name": "دجاج طازج / مجمد (1 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "26 شيكل",
+        "default_ref": "متوسط رصد الأسواق",
+        "default_status": "red",
+        "default_label": "شحيح حاليا",
+        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+    },
+
+    # 6. المحروقات وغاز الطهي
+    {
+        "key": "lpg_gas",
+        "keywords": ["fuel (gas)"],
+        "category": "المحروقات",
+        "name": "أسطوانة غاز طهي (12 كغم)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "94 شيكل",
+        "default_ref": "126 شيكل (متوسط 2025)",
+        "default_status": "amber",
+        "default_label": "كمية محدودة",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+    },
+    {
+        "key": "petrol",
+        "keywords": ["fuel (petrol-gasoline)"],
+        "category": "المحروقات",
+        "name": "بنزين 95 أوكتان (1 لتر)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "7.92 شيكل",
+        "default_ref": "7.90 شيكل (آذار 2026)",
+        "default_status": "amber",
+        "default_label": "كمية محدودة",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+    },
+    {
+        "key": "diesel",
+        "keywords": ["fuel (diesel)"],
+        "category": "المحروقات",
+        "name": "سولار / ديزل (1 لتر)",
+        "area": "قطاع غزة (متوسط عام)",
+        "default_price": "8.99 شيكل",
+        "default_ref": "8.40 شيكل (آذار 2026)",
+        "default_status": "red",
+        "default_label": "شحيح حاليا",
+        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+    }
+]
 
 
 def clean_html_text(raw_text):
@@ -200,7 +550,7 @@ def fetch_misbar_rumors():
     return extracted_rumors
 
 
-def fetch_wfp_market_prices():
+def fetch_wfp_live_prices():
     """جلب أحدث أسعار السلع في قطاع غزة من بيانات برنامج الأغذية العالمي (WFP) على منصة HDX"""
     api_url = "https://data.humdata.org/api/3/action/package_show?id=wfp-food-prices-for-state-of-palestine"
     req = urllib.request.Request(api_url, headers=HEADERS)
@@ -216,7 +566,7 @@ def fetch_wfp_market_prices():
             break
 
     if not csv_url:
-        return [], ""
+        return {}, ""
 
     csv_req = urllib.request.Request(csv_url, headers=HEADERS)
     with urllib.request.urlopen(csv_req, timeout=30) as resp:
@@ -233,13 +583,12 @@ def fetch_wfp_market_prices():
             gaza_rows.append(row)
 
     if not gaza_rows:
-        return [], ""
+        return {}, ""
 
-    # تحديد أحدث شهر متوفر في بيانات غزة
     latest_date = max(r.get("date", "") for r in gaza_rows)
     latest_rows = [r for r in gaza_rows if r.get("date") == latest_date]
 
-    grouped = {}
+    live_prices = {}
     for r in latest_rows:
         comm = (r.get("commodity") or "").strip().lower()
         try:
@@ -248,33 +597,58 @@ def fetch_wfp_market_prices():
             continue
         if price <= 0:
             continue
-        for key, meta in WFP_COMMODITY_MAP.items():
-            if key in comm:
-                grouped.setdefault(key, {"meta": meta, "prices": []})["prices"].append(price)
+        for item in COMMODITIES_CATALOG:
+            if any(kw in comm for kw in item["keywords"]):
+                live_prices.setdefault(item["key"], []).append(price)
                 break
 
-    updated_market = []
-    ar_period = format_ar_date(latest_date)
-    for key, info in grouped.items():
-        avg_price = round(sum(info["prices"]) / len(info["prices"]), 2)
-        price_str = f"{int(avg_price) if avg_price.is_integer() else avg_price} {info['meta']['unit']}"
-        status = "red" if "diesel" in key else ("amber" if any(x in key for x in ("potatoes", "onions", "gas", "petrol")) else "green")
-        label = "شحيح حاليا" if status == "red" else ("تذبذب / كمية محدودة" if status == "amber" else "متوفر بالأسواق")
-        updated_market.append({
-            "name": info["meta"]["name"],
-            "area": "قطاع غزة (متوسط عام)",
+    averaged = {}
+    for k, vals in live_prices.items():
+        averaged[k] = sum(vals) / len(vals)
+
+    return averaged, format_ar_date(latest_date)
+
+
+def build_full_market_list(existing_market, live_prices, live_period):
+    """بناء قائمة الـ 29 صنفاً (26 غذائياً + 3 محروقات) مع دمج الأسعار الحية"""
+    existing_by_name = {m.get("name"): m for m in existing_market}
+    final_list = []
+    live_updated_count = 0
+
+    for item in COMMODITIES_CATALOG:
+        key = item["key"]
+        prev = existing_by_name.get(item["name"], {})
+        fair_price = prev.get("fair") or item["default_price"]
+        ref_text = prev.get("ref") or item["default_ref"]
+        status = prev.get("status") or item["default_status"]
+        label = prev.get("label") or item["default_label"]
+        source = prev.get("source") or item["source"]
+
+        if key in live_prices:
+            mult = item.get("multiplier", 1.0)
+            val = round(live_prices[key] * mult, 2)
+            # تجاهل القيم غير المنطقية لوحدات القياس المختلفة
+            if val > 0:
+                fair_price = f"{int(val) if val.is_integer() else val} شيكل"
+                ref_text = f"متوسط رصد WFP ({live_period})"
+                source = "برنامج الأغذية العالمي (WFP / HDX)"
+                live_updated_count += 1
+
+        final_list.append({
+            "name": item["name"],
+            "category": item["category"],
+            "area": item["area"],
             "status": status,
             "label": label,
-            "fair": price_str,
-            "ref": f"متوسط رصد WFP ({ar_period})",
-            "source": "برنامج الأغذية العالمي (WFP / HDX)"
+            "fair": fair_price,
+            "ref": ref_text,
+            "source": source
         })
 
-    return updated_market, ar_period
+    return final_list, live_updated_count
 
 
 def fetch_hdx_updates():
-    """جلب أحدث تحديثات مجموعات بيانات WFP و OCHA الخاصة بفلسطين من منصة HDX"""
     url = "https://data.humdata.org/api/3/action/package_search?q=gaza+food+prices+OR+gaza+humanitarian&rows=3&sort=metadata_modified+desc"
     req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=20) as resp:
@@ -304,8 +678,7 @@ def fetch_hdx_updates():
     return hdx_alerts, latest_wfp_date
 
 
-def sync_outlets_metadata(data, now_ar_date):
-    """تحديث حالة وسجل مراجعة نقاط التوزيع المعتمدة (outlets) والتحقق من اكتمال حقولها"""
+def sync_outlets_metadata(data):
     outlets = data.get("outlets", [])
     valid_outlets = []
     for o in outlets:
@@ -321,16 +694,13 @@ def main():
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    now_dt = datetime.now(timezone.utc)
-    now_iso = now_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
-    now_ar = format_ar_date(now_iso)
+    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     data["lastUpdated"] = now_iso
 
     existing_titles = {a["title"] for a in data.get("alerts", [])}
     status_parts = []
-    total_added = 0
 
-    # 1. تحديث قسم التنبيهات والتقارير (alerts) من خلاصات RSS الرسمية
+    # 1. تحديث التنبيهات والتقارير (alerts)
     for src in RSS_SOURCES:
         label = src["label"]
         fetched = []
@@ -343,7 +713,6 @@ def main():
                     gaza_only=src["gaza_only"]
                 )
                 if fetched:
-                    print(f"نجح جلب {len(fetched)} عناصر من {label}")
                     break
             except Exception as e:
                 print(f"تخطي {label} ({feed_url}): {e}")
@@ -352,24 +721,25 @@ def main():
             if alert["title"] not in existing_titles:
                 data["alerts"].insert(0, alert)
                 existing_titles.add(alert["title"])
-                total_added += 1
 
         if fetched:
             status_parts.append(f"{label} ({len(fetched)})")
 
-    # 2. تحديث قسم متوسطات الأسعار (market) من بيانات WFP على HDX
+    # 2. تحديث جميع الأصناف الغذائية والأساسية (market)
+    live_prices, live_period = {}, ""
     try:
-        new_market, market_period = fetch_wfp_market_prices()
-        if new_market:
-            # الإبقاء على الخبز المدعوم الثابت ودمجه مع الأسعار المحدثة تلقائياً
-            subsidized = [m for m in data.get("market", []) if "مدعومة" in m.get("name", "")]
-            data["market"] = subsidized + new_market
-            status_parts.append(f"أسعار WFP ({len(new_market)} سلع - {market_period})")
-            print(f"تم تحديث {len(new_market)} سلعة في قسم الأسعار")
+        live_prices, live_period = fetch_wfp_live_prices()
     except Exception as e:
-        print("تعذر تحديث جدول أسعار WFP (سيتم الاحتفاظ بالأسعار الحالية):", e)
+        print("تعذر سحب جدول WFP المباشر، سيتم استخدام آخر متوسطات محفوظة:", e)
 
-    # 3. تحديث قسم التحقق من الشائعات (rumors) من منصة مسبار
+    full_market, live_count = build_full_market_list(data.get("market", []), live_prices, live_period)
+    data["market"] = full_market
+    if live_count:
+        status_parts.append(f"السلع ({len(full_market)} صنفاً · تحديث حي: {live_count})")
+    else:
+        status_parts.append(f"السلع ({len(full_market)} صنفاً)")
+
+    # 3. تحديث التحقق من الشائعات (rumors)
     try:
         new_rumors = fetch_misbar_rumors()
         existing_claims = {r["claim"] for r in data.get("rumors", [])}
@@ -381,30 +751,27 @@ def main():
                 rumors_added += 1
         data["rumors"] = data.get("rumors", [])[:15]
         if rumors_added:
-            status_parts.append(f"تحققات مسبار (+{rumors_added})")
-            print(f"تمت إضافة {rumors_added} تحققات جديدة من مسبار")
+            status_parts.append(f"مسبار (+{rumors_added})")
     except Exception as e:
         print("تعذر جلب تحققات مسبار:", e)
 
-    # 4. فحص وتحديث بيانات نقاط التوزيع (outlets)
-    outlets_count = sync_outlets_metadata(data, now_ar)
-    status_parts.append(f"نقاط التوزيع ({outlets_count} نقطة)")
+    # 4. فحص نقاط التوزيع (outlets)
+    outlets_count = sync_outlets_metadata(data)
+    status_parts.append(f"المنافذ ({outlets_count})")
 
-    # 5. جلب إشعارات تحديث بيانات HDX
+    # 5. تحديثات HDX
     try:
         hdx_alerts, wfp_date = fetch_hdx_updates()
         for alert in reversed(hdx_alerts[:2]):
             if alert["title"] not in existing_titles:
                 data["alerts"].insert(0, alert)
                 existing_titles.add(alert["title"])
-                total_added += 1
         if wfp_date:
-            status_parts.append(f"نشرة HDX: {wfp_date}")
+            status_parts.append(f"HDX: {wfp_date}")
     except Exception as e:
         print("تعذر الاتصال بـ HDX:", e)
 
     data["alerts"] = data.get("alerts", [])[:15]
-
     if status_parts:
         data["lastSourceStatus"] = "مزامنة شاملة: " + " | ".join(status_parts)
 
