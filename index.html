@@ -315,10 +315,14 @@
       </div>
       <div class="controls-wrap">
         <div class="controls-row">
-          <div class="filter-group" id="areaFilters">
-            <button class="filter-pill active" onclick="setAreaFilter('الكل', this)">كل النطاقات</button>
-            <button class="filter-pill" onclick="setAreaFilter('قطاع غزة (متوسط عام)', this)">قطاع غزة (متوسط عام)</button>
-            <button class="filter-pill" onclick="setAreaFilter('خان يونس', this)">خان يونس</button>
+          <div class="filter-group" id="categoryFilters">
+            <button class="filter-pill active" onclick="setCategoryFilter('الكل', this)">جميع الأصناف (29)</button>
+            <button class="filter-pill" onclick="setCategoryFilter('الخبز والحبوب', this)">الخبز والحبوب</button>
+            <button class="filter-pill" onclick="setCategoryFilter('البقوليات والمعلبات', this)">البقوليات والمعلبات</button>
+            <button class="filter-pill" onclick="setCategoryFilter('الزيوت والألبان', this)">الزيوت والألبان</button>
+            <button class="filter-pill" onclick="setCategoryFilter('الخضروات', this)">الخضروات</button>
+            <button class="filter-pill" onclick="setCategoryFilter('البروتينات والبدائل', this)">البروتينات</button>
+            <button class="filter-pill" onclick="setCategoryFilter('المحروقات', this)">المحروقات</button>
           </div>
           <input type="text" id="marketSearch" class="field-input" placeholder="ابحث عن سلعة..." oninput="renderMarket()" />
         </div>
@@ -486,14 +490,296 @@
         { name: "مدينة غزة – تل الهوى (قرب مكتب العمل) ومخيم الشاطئ (ميدان الشهداء)", area: "مدينة غزة", address: "مدينة غزة – تل الهوى (بجوار ملعب المحبة - نقطة أبو حبل) ومخيم الشاطئ (ميدان الشهداء - مطبعة مقداد)", items: "إشراف برنامج الأغذية العالمي (WFP) | الشركاء: مجتمعات عالمية وإنقاذ المستقبل الشبابي", hours: "الخط المجاني WFP: 1800124126" }
       ],
       market: [
-        { name: "ربطة خبز مدعومة (وزن 2 كغم)", area: "خان يونس", status: "green", label: "سعر مدعوم", fair: "3 شيكل", ref: "أكثر من 30 شيكل (تجاري سابق)", source: "المتاجر المتعاقدة مع المخابز المدعومة أمميا (OCHA)" },
-        { name: "بطاطا (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهريا", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
-        { name: "بصل ناشف (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "تذبذب سعري", fair: "9 شيكل", ref: "مؤشر الغذاء +6.67% شهريا", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
-        { name: "فلفل أخضر حار (1 كغم)", area: "قطاع غزة (متوسط عام)", status: "green", label: "متوفر بالأسواق", fair: "7 شيكل", ref: "متوسط رصد تشرين أول 2026", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
-        { name: "زيت ذرة (عبوة 3 لتر)", area: "قطاع غزة (متوسط عام)", status: "green", label: "متوفر بالأسواق", fair: "38 شيكل", ref: "36 شيكل (متوسط 2024)", source: "الجهاز المركزي للإحصاء الفلسطيني (جدول غلاء المعيشة)" },
-        { name: "أسطوانة غاز طهي (12 كغم)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "كمية محدودة", fair: "94 شيكل", ref: "126 شيكل (متوسط 2025)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
-        { name: "بنزين 95 أوكتان (1 لتر)", area: "قطاع غزة (متوسط عام)", status: "amber", label: "كمية محدودة", fair: "7.92 شيكل", ref: "7.90 شيكل (آذار 2026)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" },
-        { name: "سولار / ديزل (1 لتر)", area: "قطاع غزة (متوسط عام)", status: "red", label: "شحيح حاليا", fair: "8.99 شيكل", ref: "8.40 شيكل (آذار 2026)", source: "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)" }
+              {
+                      "name": "ربطة خبز مدعومة (وزن 2 كغم)",
+                      "category": "الخبز والحبوب",
+                      "area": "قطاع غزة (المخابز المدعومة)",
+                      "status": "green",
+                      "label": "سعر مدعوم",
+                      "fair": "3 شيكل",
+                      "ref": "أكثر من 30 شيكل (تجاري سابق)",
+                      "source": "المتاجر المتعاقدة مع المخابز المدعومة أمميا (OCHA)"
+              },
+              {
+                      "name": "طحين أبيض (1 كغم)",
+                      "category": "الخبز والحبوب",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "4.5 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "أرز حبة قصيرة / متوسطة (1 كغم)",
+                      "category": "الخبز والحبوب",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "8 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "معكرونة / شعرية (كيس 400–500 غم)",
+                      "category": "الخبز والحبوب",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "4 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+              },
+              {
+                      "name": "سميد (1 كغم)",
+                      "category": "الخبز والحبوب",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "6 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "خميرة جافة (عبوة 500 غم)",
+                      "category": "الخبز والحبوب",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "كمية محدودة",
+                      "fair": "15 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "عدس مجروش / أصفر (1 كغم)",
+                      "category": "البقوليات والمعلبات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "9 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "حمص حب جاف (1 كغم)",
+                      "category": "البقوليات والمعلبات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "10 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "فاصولياء بيضاء جافة (1 كغم)",
+                      "category": "البقوليات والمعلبات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "11 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "فول مدمس معلب (علبة 400 غم)",
+                      "category": "البقوليات والمعلبات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "4.5 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "حمص حب جاهز معلب (علبة 400 غم)",
+                      "category": "البقوليات والمعلبات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "4.5 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "زيت ذرة / عباد الشمس (عبوة 3 لتر)",
+                      "category": "الزيوت والألبان",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "38 شيكل",
+                      "ref": "36 شيكل (متوسط 2024)",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني (جدول غلاء المعيشة)"
+              },
+              {
+                      "name": "زيت زيتون بلدي (1 لتر)",
+                      "category": "الزيوت والألبان",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "كمية محدودة",
+                      "fair": "45 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "سكر أبيض (1 كغم)",
+                      "category": "الزيوت والألبان",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "6 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "ملح طعام يودي (1 كغم)",
+                      "category": "الزيوت والألبان",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "2.5 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP)"
+              },
+              {
+                      "name": "حليب مجفف / بودرة (عبوة 400 غم)",
+                      "category": "الزيوت والألبان",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "تذبذب سعري",
+                      "fair": "22 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+              },
+              {
+                      "name": "بطاطا (1 كغم)",
+                      "category": "الخضروات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "تذبذب سعري",
+                      "fair": "9 شيكل",
+                      "ref": "مؤشر الغذاء +6.67% شهريا",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+              },
+              {
+                      "name": "بندورة (1 كغم)",
+                      "category": "الخضروات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "تذبذب سعري",
+                      "fair": "8 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "بصل ناشف (1 كغم)",
+                      "category": "الخضروات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "تذبذب سعري",
+                      "fair": "9 شيكل",
+                      "ref": "مؤشر الغذاء +6.67% شهريا",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+              },
+              {
+                      "name": "خيار (1 كغم)",
+                      "category": "الخضروات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "7 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "باذنجان (1 كغم)",
+                      "category": "الخضروات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "6 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "فلفل أخضر حار (1 كغم)",
+                      "category": "الخضروات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "7 شيكل",
+                      "ref": "متوسط رصد تشرين أول 2026",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+              },
+              {
+                      "name": "كرتونة بيض مائدة (30 بيضة)",
+                      "category": "البروتينات والبدائل",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "كمية محدودة",
+                      "fair": "35 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "تونة معلبة (علبة 160–185 غم)",
+                      "category": "البروتينات والبدائل",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "6 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "سردين معلب (علبة 125 غم)",
+                      "category": "البروتينات والبدائل",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "green",
+                      "label": "متوفر بالأسواق",
+                      "fair": "4 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني"
+              },
+              {
+                      "name": "دجاج طازج / مجمد (1 كغم)",
+                      "category": "البروتينات والبدائل",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "red",
+                      "label": "شحيح حاليا",
+                      "fair": "26 شيكل",
+                      "ref": "متوسط رصد الأسواق",
+                      "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+              },
+              {
+                      "name": "أسطوانة غاز طهي (12 كغم)",
+                      "category": "المحروقات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "كمية محدودة",
+                      "fair": "94 شيكل",
+                      "ref": "126 شيكل (متوسط 2025)",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+              },
+              {
+                      "name": "بنزين 95 أوكتان (1 لتر)",
+                      "category": "المحروقات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "amber",
+                      "label": "كمية محدودة",
+                      "fair": "7.92 شيكل",
+                      "ref": "7.90 شيكل (آذار 2026)",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+              },
+              {
+                      "name": "سولار / ديزل (1 لتر)",
+                      "category": "المحروقات",
+                      "area": "قطاع غزة (متوسط عام)",
+                      "status": "red",
+                      "label": "شحيح حاليا",
+                      "fair": "8.99 شيكل",
+                      "ref": "8.40 شيكل (آذار 2026)",
+                      "source": "الجهاز المركزي للإحصاء الفلسطيني (نشرة تشرين أول 2026)"
+              }
       ],
       alerts: [
         { title: "تقرير أعمال وزارة الاقتصاد الوطني في غزة لشهر أكتوبر 2026", time: "9 نوفمبر 2026", body: "أفادت الوزارة بإدخال 3,839 شاحنة إلى قطاع غزة خلال شهر أكتوبر 2026، ونشرت قائمة الأسعار الاسترشادية للمواد الأساسية والخضار، واستقبلت وحدة الرقابة والشكاوى 163 شكوى واستفسارا عبر الرقم المجاني." },
@@ -511,7 +797,7 @@
 
     let outletsData = [], marketData = [], alertsData = [], rumorsData = [];
     const tabTitles = { outlets: "الأسواق المعتمدة", market: "الأسعار والوفرة", offline: "التنبيه والتخزين", rumors: "التحقق من الشائعات" };
-    let selectedOutletArea = 'الكل', selectedMarketArea = 'الكل', selectedMarketStatus = 'all', selectedVerdict = 'all';
+    let selectedOutletArea = 'الكل', selectedMarketCategory = 'الكل', selectedMarketStatus = 'all', selectedVerdict = 'all';
     let isOfflineMode = !navigator.onLine;
 
     function escapeHtml(str) {
@@ -583,7 +869,7 @@
     }
 
     async function autoSyncData(isManual) {
-      const cachedRaw = localStorage.getItem('burhan_auto_dataset_v3');
+      const cachedRaw = localStorage.getItem('burhan_auto_dataset_v4');
       if (cachedRaw) {
         try { applyDataset(JSON.parse(cachedRaw)); } catch (e) { applyDataset(FALLBACK_DATASET); }
       } else {
@@ -597,7 +883,7 @@
         const res = await fetch('./data.json?v=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const freshData = await res.json();
-        localStorage.setItem('burhan_auto_dataset_v3', JSON.stringify(freshData));
+        localStorage.setItem('burhan_auto_dataset_v4', JSON.stringify(freshData));
         applyDataset(freshData);
         updateConnUI(false);
         if (isManual) showToast('تم تحديث البيانات من المصدر الرسمي بنجاح');
@@ -648,9 +934,9 @@
       document.getElementById('countRed').textContent = marketData.filter(i => i.status === 'red').length;
     }
 
-    function setAreaFilter(area, btn) {
-      selectedMarketArea = area;
-      document.querySelectorAll('#areaFilters .filter-pill').forEach(b => b.classList.remove('active'));
+    function setCategoryFilter(cat, btn) {
+      selectedMarketCategory = cat;
+      document.querySelectorAll('#categoryFilters .filter-pill').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderMarket();
     }
@@ -665,7 +951,7 @@
     function renderMarket() {
       const q = document.getElementById('marketSearch').value.trim();
       const list = document.getElementById('marketList');
-      const filtered = marketData.filter(item => (selectedMarketArea === 'الكل' || item.area === selectedMarketArea) && (selectedMarketStatus === 'all' || item.status === selectedMarketStatus) && (!q || item.name.includes(q) || item.source.includes(q)));
+      const filtered = marketData.filter(item => (selectedMarketCategory === 'الكل' || (item.category || 'أخرى') === selectedMarketCategory) && (selectedMarketStatus === 'all' || item.status === selectedMarketStatus) && (!q || item.name.includes(q) || item.source.includes(q)));
       if (!filtered.length) {
         list.innerHTML = '<div class="empty-state">لا توجد سلع مطابقة لخيارات التصفية الحالية.</div>';
         return;
@@ -685,7 +971,7 @@
             </div>
             <div class="card-divider"></div>
             <div class="card-meta-row">
-              <span class="card-detail">${escapeHtml(item.area)}</span>
+              <span class="card-detail">${escapeHtml(item.category ? item.category + " · " + item.area : item.area)}</span>
               <span class="source-note">${SHIELD_ICON}<span>${escapeHtml(getMarketAccreditation(item))}</span></span>
             </div>
           </article>
@@ -730,7 +1016,7 @@
           <article class="item-card">
             <div class="card-header">
               <span class="inline-status ${isFalse ? 'st-danger' : 'st-ok'}"><span class="status-dot"></span>${escapeHtml(r.tag)}</span>
-              <button class="btn-soft" onclick="copyFact(${idx})">نسخ النص</button>
+              <button class="btn-soft" onclick="copyFactByClaim(this)" data-claim="${escapeHtml(r.claim)}">نسخ النص</button>
             </div>
             <div class="card-title">"${escapeHtml(r.claim)}"</div>
             <div class="fact-callout"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div>
@@ -743,8 +1029,9 @@
       }).join('');
     }
 
-    function copyFact(index) {
-      const item = rumorsData[index];
+    function copyFactByClaim(btn) {
+      const claim = btn.getAttribute('data-claim');
+      const item = rumorsData.find(r => r.claim === claim);
       if (!item) return;
       const text = "تحقق موثق:\nالخبر المتداول: " + item.claim + "\nالنتيجة: " + item.truth + "\n" + item.meta;
       if (navigator.clipboard && navigator.clipboard.writeText) {
