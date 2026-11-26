@@ -1132,12 +1132,47 @@
       saved.unshift({
         text: val,
         area: area,
-        status: remoteSaved ? 'تم الإرسال للإدارة · قيد المراجعة' : 'محفوظ محلياً (سيُرسل عند توفر الإنترنت)'
+        report_type: reportType,
+        synced: remoteSaved,
+        status: remoteSaved ? 'تم الإرسال للإدارة · قيد المراجعة' : 'محفوظ محلياً (سيُرسل تلقائياً عند توفر الإنترنت)'
       });
       localStorage.setItem('burhan_reports', JSON.stringify(saved));
       input.value = '';
       renderUserReports();
-      showToast(remoteSaved ? 'تم إرسال بلاغك لإدارة برهان بنجاح' : 'تم حفظ البلاغ على جهازك لعدم توفر اتصال');
+      showToast(remoteSaved ? 'تم إرسال بلاغك لإدارة برهان بنجاح' : 'تم حفظ البلاغ على جهازك وسيُرسل تلقائياً عند عودة الشبكة');
+    }
+
+    async function syncPendingOfflineReports() {
+      if (!sbClient || isOfflineMode || !navigator.onLine) return;
+      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
+      const pendingItems = saved.filter(r => r.synced === false);
+      if (!pendingItems.length) return;
+
+      let sentCount = 0;
+      for (const item of pendingItems) {
+        try {
+          const { error } = await sbClient
+            .from('reports')
+            .insert([{
+              report_type: item.report_type || 'rumor',
+              area: item.area || 'خان يونس',
+              content: item.text,
+              status: 'pending'
+            }]);
+          if (!error) {
+            item.synced = true;
+            item.status = 'تم الإرسال تلقائياً للإدارة · قيد المراجعة';
+            sentCount++;
+          }
+        } catch (e) {
+          console.warn('تعذر مزامنة بلاغ معلق', e);
+        }
+      }
+      if (sentCount > 0) {
+        localStorage.setItem('burhan_reports', JSON.stringify(saved));
+        renderUserReports();
+        showToast('تمت مزامنة وإرسال ' + sentCount + ' بلاغ معلق للإدارة');
+      }
     }
 
     function deleteUserReport(idx) {
@@ -1175,20 +1210,41 @@
       isOfflineMode = !isOfflineMode;
       updateConnUI(isOfflineMode);
       showToast(isOfflineMode ? 'تم تفعيل وضع عدم الاتصال: القراءة من الذاكرة المحلية' : 'تمت العودة لوضع الاتصال المباشر');
-      if (!isOfflineMode) autoSyncData(false);
+      if (!isOfflineMode) {
+        autoSyncData(false);
+        syncPendingOfflineReports();
+        fetchApprovedCommunityReports();
+      }
     }
 
-    window.addEventListener('online', () => { isOfflineMode = false; updateConnUI(false); autoSyncData(false); });
+    window.addEventListener('online', () => {
+      isOfflineMode = false;
+      updateConnUI(false);
+      autoSyncData(false);
+      syncPendingOfflineReports();
+      fetchApprovedCommunityReports();
+    });
     window.addEventListener('offline', () => { isOfflineMode = true; updateConnUI(true); });
-    function manualSync() { autoSyncData(true); }
+    function manualSync() {
+      autoSyncData(true);
+      syncPendingOfflineReports();
+      fetchApprovedCommunityReports();
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.warn('SW registration failed:', err));
+      });
+    }
 
     updateConnUI(isOfflineMode);
     renderUserReports();
     const cachedApproved = JSON.parse(localStorage.getItem('burhan_approved_reports') || '[]');
-    autoSyncData(false).then(() => {{
+    autoSyncData(false).then(() => {
       mergeApprovedReportsIntoRumors(cachedApproved);
+      syncPendingOfflineReports();
       fetchApprovedCommunityReports();
-    }});
+    });
   </script>
 </body>
 </html>
