@@ -64,13 +64,12 @@
     .main-tab { padding: 9px 18px; border-radius: 12px; border: 1px solid var(--border); background-color: var(--bg-surface); font-size: 14px; font-weight: 700; color: var(--text-secondary); cursor: pointer; }
     .main-tab.active { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
-    /* بطاقة النشر المباشر من الإدارة */
     .publish-card { background-color: var(--bg-surface); border: 1px solid var(--border-strong); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
     .publish-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     .publish-header h2 { font-size: 16px; font-weight: 700; color: var(--accent); }
     .publish-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
     .metric { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-sm); }
     .metric span { font-size: 12px; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 4px; }
     .metric strong { font-size: 22px; font-weight: 700; }
@@ -81,11 +80,13 @@
 
     .cards { display: flex; flex-direction: column; gap: 12px; }
     .card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px; }
+    .card.admin-authored { border-right: 4px solid var(--accent); }
     .card-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     .pill { padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
     .pill-pending { background-color: var(--warn-bg); color: var(--warn-color); }
     .pill-approved { background-color: var(--ok-bg); color: var(--ok-color); }
     .pill-rejected { background-color: var(--danger-bg); color: var(--danger-color); }
+    .pill-admin { background-color: var(--accent-soft); color: var(--accent); }
     .card-content { font-size: 15.5px; font-weight: 700; color: var(--text-primary); }
     .reply-box { width: 100%; min-height: 64px; border-radius: 12px; border: 1px solid var(--border-strong); padding: 10px 12px; font-size: 13px; background-color: var(--bg-page); resize: vertical; outline: none; }
     .reply-box:focus { border-color: var(--accent); background-color: var(--bg-surface); }
@@ -94,8 +95,9 @@
     .empty { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: center; color: var(--text-secondary); }
     .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: #fff; padding: 9px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; display: none; z-index: 50; }
 
-    @media (max-width: 720px) {
-      .metrics, .publish-grid { grid-template-columns: 1fr; }
+    @media (max-width: 780px) {
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .publish-grid { grid-template-columns: 1fr; }
       .price-row { grid-template-columns: 1fr; }
     }
   </style>
@@ -127,17 +129,16 @@
 
     <section id="dashboardSection" style="display:none;">
       <div class="main-nav">
-        <button class="main-tab active" onclick="switchAdminTab('reports', this)">إدارة البلاغات والشائعات</button>
+        <button class="main-tab active" onclick="switchAdminTab('reports', this)">إدارة البلاغات وسجل المسؤول</button>
         <button class="main-tab" onclick="switchAdminTab('prices', this)">تحديث الأسعار الفوري</button>
       </div>
 
-      <!-- قسم البلاغات -->
+      <!-- قسم البلاغات وسجل المسؤول -->
       <div id="tab-reports">
-        <!-- نموذج نشر بلاغ أو تحقق مباشر من الإدارة -->
         <div class="publish-card">
           <div class="publish-header">
             <h2>نشر تحقق أو تنبيه جديد مباشرة للجميع</h2>
-            <span style="font-size:12px; color:var(--text-muted);">يُنشر فوراً في التطبيق العام دون انتظار مراجعة</span>
+            <span style="font-size:12px; color:var(--text-muted);">يُنشر فوراً ويُحفظ في سجل منشورات الإدارة</span>
           </div>
           <div class="publish-grid">
             <select id="newRepType" class="field">
@@ -155,24 +156,29 @@
           <input type="text" id="newRepContent" class="field" placeholder="نص الشائعة المتداولة أو عنوان التنبيه الميداني..." />
           <textarea id="newRepReply" class="reply-box" placeholder="نتيجة التحقق الرسمية أو تفاصيل التنبيه التي ستظهر للمواطنين..."></textarea>
           <div style="display:flex; justify-content:flex-end;">
-            <button id="publishDirectBtn" class="btn btn-primary" style="height:40px; padding:0 22px; border-radius:12px;" onclick="publishDirectReport()">نشر للجميع فوراً</button>
+            <button id="publishDirectBtn" class="btn btn-primary" style="height:40px; padding:0 22px; border-radius:12px;" onclick="publishDirectReport()">نشر للجميع وحفظ في السجل</button>
           </div>
         </div>
 
         <div class="metrics">
+          <div class="metric"><span>سجل منشورات الإدارة</span><strong id="mAdminLog">0</strong></div>
           <div class="metric"><span>بلاغات قيد المراجعة</span><strong id="mPending">0</strong></div>
-          <div class="metric"><span>بلاغات معتمدة ومنشورة</span><strong id="mApproved">0</strong></div>
+          <div class="metric"><span>إجمالي المنشور للجمهور</span><strong id="mApproved">0</strong></div>
           <div class="metric"><span>بلاغات مرفوضة</span><strong id="mRejected">0</strong></div>
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
           <div class="tabs" style="margin-bottom:0;">
-            <button class="tab active" onclick="setFilter('pending', this)">قيد المراجعة</button>
-            <button class="tab" onclick="setFilter('approved', this)">المعتمدة والمنشورة</button>
+            <button class="tab active" onclick="setFilter('admin_log', this)">سجل منشورات الإدارة</button>
+            <button class="tab" onclick="setFilter('pending', this)">بلاغات قيد المراجعة</button>
+            <button class="tab" onclick="setFilter('approved', this)">كافة المنشور للجميع</button>
             <button class="tab" onclick="setFilter('rejected', this)">المرفوضة</button>
             <button class="tab" onclick="setFilter('all', this)">الكل</button>
           </div>
-          <button class="btn" onclick="loadReports()">تحديث القائمة</button>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <input type="text" id="reportSearchInput" class="field" style="height:36px; width:210px;" placeholder="بحث في السجل..." oninput="renderReports()" />
+            <button class="btn" onclick="loadReports()">تحديث</button>
+          </div>
         </div>
 
         <div id="reportsList" class="cards"></div>
@@ -195,7 +201,7 @@
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let allReports = [];
-    let currentFilter = 'pending';
+    let currentFilter = 'admin_log';
     let baseMarketItems = [];
     let priceOverrides = {};
 
@@ -209,6 +215,20 @@
 
     function escapeHtml(str) {
       return String(str || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function getAdminLogContents() {
+      try {
+        return new Set(JSON.parse(localStorage.getItem('burhan_admin_authored_log') || '[]'));
+      } catch (e) {
+        return new Set();
+      }
+    }
+
+    function addToAdminLog(contentText) {
+      const set = getAdminLogContents();
+      set.add(contentText.trim());
+      localStorage.setItem('burhan_admin_authored_log', JSON.stringify([...set]));
     }
 
     function switchAdminTab(tab, btn) {
@@ -274,23 +294,32 @@
         status: 'approved'
       }]);
       btn.disabled = false;
-      btn.textContent = 'نشر للجميع فوراً';
+      btn.textContent = 'نشر للجميع وحفظ في السجل';
 
       if (error) {
         showToast('تعذر النشر: ' + error.message);
         return;
       }
 
+      addToAdminLog(content);
       document.getElementById('newRepContent').value = '';
       document.getElementById('newRepReply').value = '';
-      showToast('تم نشر التحقق للجميع في التطبيق بنجاح');
+      showToast('تم النشر للجميع وإضافته لسجل الإدارة');
       loadReports();
+    }
+
+    function isAdminAuthored(row, adminSet) {
+      return adminSet.has((row.content || '').trim()) || (row.status === 'approved' && Boolean(row.admin_reply));
     }
 
     async function loadReports() {
       const { data, error } = await sb.from('reports').select('*').order('created_at', { ascending: false });
-      if (error) { showToast('خطأ في جلب البلاغات: ' + error.message); return; }
+      if (error) { showToast('خطأ في جلب السجل: ' + error.message); return; }
       allReports = data || [];
+      localStorage.setItem('burhan_admin_reports_backup', JSON.stringify(allReports));
+
+      const adminSet = getAdminLogContents();
+      document.getElementById('mAdminLog').textContent = allReports.filter(r => isAdminAuthored(r, adminSet)).length;
       document.getElementById('mPending').textContent = allReports.filter(r => r.status === 'pending').length;
       document.getElementById('mApproved').textContent = allReports.filter(r => r.status === 'approved').length;
       document.getElementById('mRejected').textContent = allReports.filter(r => r.status === 'rejected').length;
@@ -304,36 +333,60 @@
       renderReports();
     }
 
+    function copyAdminItem(content, reply) {
+      const text = "برهان — توضيح رسمي:\n" + content + "\nالنتيجة: " + reply;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ نص المنشور'));
+      }
+    }
+
     function renderReports() {
       const container = document.getElementById('reportsList');
-      const filtered = allReports.filter(r => currentFilter === 'all' || r.status === currentFilter);
+      const q = (document.getElementById('reportSearchInput')?.value || '').trim();
+      const adminSet = getAdminLogContents();
+
+      const filtered = allReports.filter(r => {
+        const matchesTab = currentFilter === 'all'
+          ? true
+          : currentFilter === 'admin_log'
+            ? isAdminAuthored(r, adminSet)
+            : r.status === currentFilter;
+        const matchesSearch = !q || (r.content || '').includes(q) || (r.admin_reply || '').includes(q) || (r.area || '').includes(q);
+        return matchesTab && matchesSearch;
+      });
+
       if (!filtered.length) {
-        container.innerHTML = '<div class="empty">لا توجد بلاغات في هذا القسم حالياً.</div>';
+        container.innerHTML = '<div class="empty">لا توجد سجلات مطابقة في هذا القسم حالياً.</div>';
         return;
       }
+
       const statusMap = {
         pending: { cls: 'pill-pending', text: 'قيد المراجعة' },
         approved: { cls: 'pill-approved', text: 'معتمد ومنشور' },
         rejected: { cls: 'pill-rejected', text: 'مرفوض' }
       };
+
       container.innerHTML = filtered.map(r => {
         const st = statusMap[r.status] || statusMap.pending;
-        const typeLabel = r.report_type === 'price' ? 'بلاغ سعر' : 'تحقق من شائعة';
+        const typeLabel = r.report_type === 'price' ? 'بلاغ سعر ميداني' : 'تحقق من شائعة';
         const dateStr = new Date(r.created_at).toLocaleString('ar-EG', { dateStyle: 'medium', timeStyle: 'short' });
+        const byAdmin = isAdminAuthored(r, adminSet);
         return `
-          <article class="card">
+          <article class="card ${byAdmin ? 'admin-authored' : ''}">
             <div class="card-top">
               <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                 <span class="pill ${st.cls}">${st.text}</span>
+                ${byAdmin ? '<span class="pill pill-admin">منشور إدارة</span>' : ''}
                 <span style="font-size:12px; font-weight:700; color:var(--accent);">${typeLabel} · ${escapeHtml(r.area)}</span>
               </div>
               <span style="font-size:12px; color:var(--text-muted);">${dateStr}</span>
             </div>
             <div class="card-content">${escapeHtml(r.content)}</div>
-            <textarea id="reply_${r.id}" class="reply-box" placeholder="اكتب رد الإدارة أو نتيجة التحقق التي ستظهر للمستخدمين عند الاعتماد...">${escapeHtml(r.admin_reply || '')}</textarea>
+            <textarea id="reply_${r.id}" class="reply-box" placeholder="اكتب رد الإدارة أو نتيجة التحقق التي ستظهر للمستخدمين...">${escapeHtml(r.admin_reply || '')}</textarea>
             <div class="card-actions">
-              <button class="btn btn-ok" onclick="updateReportStatus(${r.id}, 'approved')">اعتماد ونشر للجميع</button>
-              <button class="btn" onclick="updateReportStatus(${r.id}, 'rejected')">رفض البلاغ</button>
+              <button class="btn" onclick="copyAdminItem(${JSON.stringify(r.content)}, document.getElementById('reply_${r.id}').value)">نسخ النص</button>
+              <button class="btn btn-ok" onclick="updateReportStatus(${r.id}, 'approved')">${r.status === 'approved' ? 'حفظ التعديل' : 'اعتماد ونشر للجميع'}</button>
+              ${r.status === 'pending' ? `<button class="btn" onclick="updateReportStatus(${r.id}, 'rejected')">رفض</button>` : ''}
               <button class="btn btn-danger" onclick="deleteReport(${r.id})">حذف نهائي</button>
             </div>
           </article>
@@ -344,16 +397,16 @@
     async function updateReportStatus(id, newStatus) {
       const replyText = document.getElementById('reply_' + id).value.trim();
       const { error } = await sb.from('reports').update({ status: newStatus, admin_reply: replyText }).eq('id', id);
-      if (error) { showToast('تعذر تحديث البلاغ: ' + error.message); return; }
-      showToast(newStatus === 'approved' ? 'تم اعتماد البلاغ ونشره في التطبيق' : 'تم رفض البلاغ');
+      if (error) { showToast('تعذر التحديث: ' + error.message); return; }
+      showToast(newStatus === 'approved' ? 'تم حفظ التعديلات ونشرها في التطبيق' : 'تم رفض البلاغ');
       loadReports();
     }
 
     async function deleteReport(id) {
-      if (!confirm('هل أنت متأكد من حذف هذا البلاغ نهائياً؟')) return;
+      if (!confirm('هل أنت متأكد من حذف هذا السجل نهائياً؟')) return;
       const { error } = await sb.from('reports').delete().eq('id', id);
       if (error) { showToast('تعذر الحذف: ' + error.message); return; }
-      showToast('تم حذف البلاغ');
+      showToast('تم الحذف من السجل');
       loadReports();
     }
 
