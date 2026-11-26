@@ -1,4 +1,4 @@
-const CACHE_NAME = 'burhan-pwa-v1';
+const CACHE_NAME = 'burhan-pwa-v2';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -49,7 +49,21 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // صفحات وملفات التطبيق: الذاكرة المحلية أولاً لفتح فوري حتى بدون إنترنت
+  // صفحات وملفات التطبيق: الشبكة أولاً لـ index.html لضمان وصول التحديثات فوراً
+  if (url.pathname.endsWith('/') || url.pathname.endsWith('index.html')) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
+          return res;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // بقية الملفات الثابتة: الذاكرة المحلية أولاً
   event.respondWith(
     caches.match(req).then((cached) => {
       if (cached) return cached;
@@ -60,6 +74,20 @@ self.addEventListener('fetch', (event) => {
         }
         return res;
       });
+    })
+  );
+});
+
+// فتح التطبيق عند النقر على الإشعار
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const targetUrl = (event.notification.data && event.notification.data.url) || './index.html';
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if ('focus' in client) return client.focus();
+      }
+      if (clients.openWindow) return clients.openWindow(targetUrl);
     })
   );
 });
