@@ -16,67 +16,71 @@
       --bg-page: #F7F6F2;
       --bg-surface: #FFFFFF;
       --bg-elevated: #FCFBF9;
-      --bg-subtle: #F0EFEA;
+      --bg-subtle: #F2F0EB;
       --bg-hover: #E7E5DE;
-      --border: rgba(28, 25, 23, 0.09);
-      --border-strong: rgba(28, 25, 23, 0.15);
+      --border: rgba(28, 25, 23, 0.08);
+      --border-strong: rgba(28, 25, 23, 0.14);
       --text-primary: #1C1917;
       --text-secondary: #57534E;
       --text-muted: #78716C;
       --accent: #1E3A5F;
       --accent-hover: #172E4C;
-      --accent-soft: rgba(30, 58, 95, 0.09);
+      --accent-soft: rgba(30, 58, 95, 0.08);
       --on-accent: #FFFFFF;
-      --ok-color: #166534;
+      --ok-color: #156032;
       --ok-dot: #16A34A;
-      --ok-bg: rgba(22, 101, 52, 0.08);
+      --ok-bg: #F1F9F4;
+      --ok-border: rgba(22, 101, 52, 0.16);
       --warn-color: #92400E;
       --warn-dot: #D97706;
       --warn-bg: rgba(217, 119, 6, 0.09);
-      --danger-color: #991B1B;
+      --danger-color: #9A2222;
       --danger-dot: #DC2626;
-      --danger-bg: rgba(220, 38, 38, 0.08);
-      --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.04);
-      --shadow-sm: 0 2px 5px -1px rgba(28, 25, 23, 0.06), 0 1px 2px -1px rgba(28, 25, 23, 0.04);
-      --shadow-md: 0 6px 14px -3px rgba(28, 25, 23, 0.08), 0 2px 4px -2px rgba(28, 25, 23, 0.04);
+      --danger-bg: #FDF4F4;
+      --danger-border: rgba(220, 38, 38, 0.16);
+      --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.03);
+      --shadow-sm: 0 3px 10px -2px rgba(28, 25, 23, 0.05), 0 1px 3px -1px rgba(28, 25, 23, 0.03);
+      --shadow-md: 0 10px 24px -6px rgba(28, 25, 23, 0.08), 0 3px 6px -2px rgba(28, 25, 23, 0.04);
       --shadow-nav: 0 -2px 10px rgba(28, 25, 23, 0.04);
       --fs-xs: 12px;
-      --fs-sm: 13px;
-      --fs-base: 14px;
-      --fs-md: 15.5px;
+      --fs-sm: 13.5px;
+      --fs-base: 14.5px;
+      --fs-md: 16px;
       --fs-lg: 19px;
     }
     [data-theme="dark"] {
       --bg-page: #131312;
       --bg-surface: #1D1D1B;
       --bg-elevated: #232320;
-      --bg-subtle: #272724;
+      --bg-subtle: #262623;
       --bg-hover: #30302C;
       --border: rgba(255, 255, 255, 0.08);
       --border-strong: rgba(255, 255, 255, 0.14);
       --text-primary: #F4F4F2;
-      --text-secondary: #A8A59E;
-      --text-muted: #78756E;
+      --text-secondary: #B5B2AA;
+      --text-muted: #84817A;
       --accent: #93C5FD;
       --accent-hover: #BFDBFE;
       --accent-soft: rgba(147, 197, 253, 0.14);
       --on-accent: #111827;
       --ok-color: #86EFAC;
       --ok-dot: #4ADE80;
-      --ok-bg: rgba(74, 222, 128, 0.11);
+      --ok-bg: rgba(74, 222, 128, 0.09);
+      --ok-border: rgba(74, 222, 128, 0.18);
       --warn-color: #FCD34D;
       --warn-dot: #FBBF24;
       --warn-bg: rgba(251, 191, 36, 0.11);
       --danger-color: #FCA5A5;
       --danger-dot: #F87171;
-      --danger-bg: rgba(248, 113, 113, 0.11);
+      --danger-bg: rgba(248, 113, 113, 0.09);
+      --danger-border: rgba(248, 113, 113, 0.18);
       --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.22);
-      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.28), 0 1px 2px rgba(0, 0, 0, 0.2);
-      --shadow-md: 0 8px 18px rgba(0, 0, 0, 0.36), 0 2px 4px rgba(0, 0, 0, 0.24);
+      --shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.28);
+      --shadow-md: 0 10px 22px rgba(0, 0, 0, 0.36);
       --shadow-nav: 0 -2px 12px rgba(0, 0, 0, 0.28);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
-    html, body { width: 100%; overflow-x: hidden; font-size: var(--fs-base); line-height: 1.65; font-variant-numeric: tabular-nums; }
+    html, body { width: 100%; overflow-x: hidden; font-size: var(--fs-base); line-height: 1.7; font-variant-numeric: tabular-nums; }
     body { background-color: var(--bg-page); color: var(--text-primary); min-height: 100vh; }
 
     .topbar { width: 100%; background-color: var(--bg-surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-xs); position: sticky; top: 0; z-index: 30; }
@@ -86,10 +90,10 @@
     .mobile-heading { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
 
     .top-tabs { display: none; align-items: center; gap: 6px; }
-    .top-tab { background: transparent; border: 1px solid transparent; color: var(--text-secondary); padding: 7px 14px; border-radius: 999px; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease; }
+    .top-tab { background: transparent; border: 1px solid transparent; color: var(--text-secondary); padding: 7px 14px; border-radius: 999px; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; transition: background-color 0.15s ease, color 0.15s ease; }
     .top-tab svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; flex-shrink: 0; }
     .top-tab:hover { background-color: var(--bg-subtle); color: var(--text-primary); }
-    .top-tab.active { background-color: var(--accent-soft); border-color: rgba(30, 58, 95, 0.14); color: var(--accent); font-weight: 700; box-shadow: var(--shadow-xs); }
+    .top-tab.active { background-color: var(--accent-soft); border-color: rgba(30, 58, 95, 0.14); color: var(--accent); font-weight: 700; }
     [data-theme="dark"] .top-tab.active { border-color: rgba(147, 197, 253, 0.2); }
 
     .topbar-tools { display: flex; align-items: center; gap: 8px; margin-right: auto; }
@@ -110,17 +114,17 @@
     .live-banner-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .live-banner-btn { background-color: rgba(255,255,255,0.18); color: inherit; border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: 4px 12px; font-size: var(--fs-xs); font-weight: 700; cursor: pointer; }
 
-    .inline-status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; padding: 4px 11px; border-radius: 999px; border: 1px solid transparent; }
+    .inline-status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; padding: 4px 12px; border-radius: 999px; border: 1px solid transparent; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .st-ok { color: var(--ok-color); background-color: var(--ok-bg); border-color: rgba(22, 101, 52, 0.18); }
+    .st-ok { color: var(--ok-color); background-color: var(--ok-bg); border-color: var(--ok-border); }
     .st-ok .status-dot { background-color: var(--ok-dot); }
     .st-warn { color: var(--warn-color); background-color: var(--warn-bg); border-color: rgba(217, 119, 6, 0.18); }
     .st-warn .status-dot { background-color: var(--warn-dot); }
-    .st-danger { color: var(--danger-color); background-color: var(--danger-bg); border-color: rgba(220, 38, 38, 0.2); }
+    .st-danger { color: var(--danger-color); background-color: var(--danger-bg); border-color: var(--danger-border); }
     .st-danger .status-dot { background-color: var(--danger-dot); }
 
-    .source-note { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; color: var(--accent); }
-    .source-note svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .source-note { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); }
+    .source-note svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; }
 
     .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 20px clamp(14px, 3vw, 28px) 88px; }
     .panel { display: none; width: 100%; }
@@ -131,7 +135,7 @@
     .section-top span { font-size: var(--fs-xs); color: var(--text-muted); }
 
     .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-bottom: 16px; }
-    .metric-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; padding: 13px 16px; border-radius: 14px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 6px; }
+    .metric-card { background-color: var(--bg-surface); border: 1px solid var(--border); padding: 13px 16px; border-radius: 16px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 6px; }
     .metric-top { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; width: fit-content; }
     .metric-num { font-size: 21px; font-weight: 700; color: var(--text-primary); padding-right: 4px; }
 
@@ -139,136 +143,158 @@
     .controls-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
     .filter-group { display: flex; align-items: center; gap: 7px; overflow-x: auto; scrollbar-width: none; max-width: 100%; padding: 2px 0; }
     .filter-group::-webkit-scrollbar { display: none; }
-    .filter-pill { background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-secondary); padding: 6px 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
+    .filter-pill { background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-secondary); padding: 6px 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.15s ease; }
     .filter-pill:hover { background-color: var(--bg-subtle); border-color: var(--border-strong); color: var(--text-primary); }
     .filter-pill.active { background-color: var(--accent); border-color: var(--accent); color: var(--on-accent); box-shadow: var(--shadow-sm); }
 
-    .field-input { width: 100%; height: 41px; background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 12px; padding: 0 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    .field-input { width: 100%; height: 42px; background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 13px; padding: 0 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
     .field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 
-    .cards-stack { display: flex; flex-direction: column; gap: 13px; }
+    .cards-stack { display: flex; flex-direction: column; gap: 15px; }
     .item-card {
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
-      border-bottom-width: 2px;
-      border-radius: 16px;
-      padding: 16px 18px;
+      border-radius: 18px;
+      padding: 18px 20px;
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      gap: 12px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
     .item-card:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
       box-shadow: var(--shadow-md);
       border-color: var(--border-strong);
     }
-    .item-card.rumor-false-card { border-color: rgba(220, 38, 38, 0.22); }
-    .item-card.rumor-true-card { border-color: rgba(22, 101, 52, 0.22); }
 
-    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-    .card-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.5; }
-    .card-sub { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
+    /* لمسة إنسانية دافئة لبطاقات التحقق */
+    .item-card.rumor-false-card {
+      border-top: 3px solid var(--danger-dot);
+    }
+    .item-card.rumor-true-card {
+      border-top: 3px solid var(--ok-dot);
+    }
+
+    .card-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .card-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.55; }
+    .card-sub { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
     .card-divider { height: 1px; background-color: var(--border); margin: 2px 0; }
-    .card-meta-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .card-meta-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 2px; }
     .card-detail { font-size: var(--fs-xs); color: var(--text-muted); }
 
-    .price-block { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-    .price-main { font-size: 17px; font-weight: 700; color: var(--text-primary); }
-    .price-ref { font-size: var(--fs-xs); color: var(--text-muted); }
+    /* فقاعة الخبر المتداول (تشبه الرسالة المتداولة بين الناس) */
+    .claim-quote {
+      background-color: var(--bg-subtle);
+      border-radius: 14px;
+      padding: 12px 15px;
+      position: relative;
+    }
+    .claim-quote-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .claim-quote-text {
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
 
-    .sync-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
-    .sync-info { display: flex; flex-direction: column; gap: 6px; max-width: 600px; }
-    .sync-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .sync-title-row h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
-    .sync-info p { font-size: var(--fs-sm); color: var(--text-secondary); }
-    .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-
-    .rumors-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
-
-    /* تصميم صندوق نتيجة التحقق (مضللة vs صحيحة وإيجابية) */
+    /* صندوق التوضيح الإنساني (مضلل vs صحيح ومؤكد) */
     .fact-callout {
-      border-radius: 13px;
-      padding: 13px 15px;
+      border-radius: 15px;
+      padding: 15px 17px;
       font-size: var(--fs-sm);
-      line-height: 1.7;
+      line-height: 1.75;
       display: flex;
       align-items: flex-start;
-      gap: 11px;
+      gap: 13px;
       border: 1px solid transparent;
-      border-right-width: 4px;
     }
     .fact-callout.verdict-false {
       background-color: var(--danger-bg);
-      border-color: rgba(220, 38, 38, 0.22);
-      border-right-color: var(--danger-dot);
-      color: var(--text-primary);
+      border-color: var(--danger-border);
     }
     .fact-callout.verdict-true {
       background-color: var(--ok-bg);
-      border-color: rgba(22, 101, 52, 0.22);
-      border-right-color: var(--ok-dot);
-      color: var(--text-primary);
+      border-color: var(--ok-border);
     }
     .fact-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 1px;
     }
     .verdict-false .fact-icon {
-      background-color: rgba(220, 38, 38, 0.15);
+      background-color: rgba(220, 38, 38, 0.12);
       color: var(--danger-color);
     }
     .verdict-true .fact-icon {
-      background-color: rgba(22, 101, 52, 0.15);
+      background-color: rgba(22, 101, 52, 0.12);
       color: var(--ok-color);
     }
     .fact-icon svg {
-      width: 14px;
-      height: 14px;
+      width: 17px;
+      height: 17px;
       stroke: currentColor;
       fill: none;
-      stroke-width: 2.3;
+      stroke-width: 2.2;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
     .fact-body {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
       flex: 1;
     }
     .fact-label {
-      font-size: var(--fs-xs);
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.1px;
     }
     .verdict-false .fact-label { color: var(--danger-color); }
     .verdict-true .fact-label { color: var(--ok-color); }
     .fact-text {
       color: var(--text-primary);
-      font-weight: 500;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.75;
     }
 
-    .btn-soft { height: 34px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); padding: 0 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; transition: background-color 0.15s ease, transform 0.12s ease; }
+    .price-block { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .price-main { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+    .price-ref { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    .sync-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+    .sync-info { display: flex; flex-direction: column; gap: 6px; max-width: 600px; }
+    .sync-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .sync-title-row h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+    .sync-info p { font-size: var(--fs-sm); color: var(--text-secondary); }
+    .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .rumors-grid { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+
+    .btn-soft { height: 34px; background-color: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-primary); padding: 0 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; transition: background-color 0.15s ease, transform 0.12s ease; }
     .btn-soft:hover { background-color: var(--bg-hover); }
     .btn-soft:active { transform: translateY(1px); }
-    .btn-danger-text { background: var(--danger-bg); border: 1px solid rgba(220, 38, 38, 0.14); color: var(--danger-color); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 4px 10px; border-radius: 999px; }
-    .btn-submit { width: 100%; height: 42px; background-color: var(--accent); color: var(--on-accent); border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2); box-shadow: var(--shadow-sm); border-radius: 12px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; transition: background-color 0.15s ease, transform 0.12s ease; }
+    .btn-danger-text { background: var(--danger-bg); border: 1px solid var(--danger-border); color: var(--danger-color); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 4px 10px; border-radius: 999px; }
+    .btn-submit { width: 100%; height: 44px; background-color: var(--accent); color: var(--on-accent); border: none; box-shadow: var(--shadow-sm); border-radius: 13px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; transition: background-color 0.15s ease, transform 0.12s ease; }
     .btn-submit:hover { background-color: var(--accent-hover); }
     .btn-submit:active { transform: translateY(1px); }
 
-    .form-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 11px; }
+    .form-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 18px; padding: 20px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 12px; }
     .form-card h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
-    .form-card p { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
+    .form-card p { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
     .saved-header { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); margin: 18px 0 10px; }
-    .empty-state { background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 16px; padding: 28px 16px; text-align: center; font-size: var(--fs-sm); color: var(--text-secondary); }
+    .empty-state { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 18px; padding: 32px 16px; text-align: center; font-size: var(--fs-sm); color: var(--text-secondary); }
 
     .app-footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: var(--fs-xs); color: var(--text-muted); }
     .app-footer a { color: var(--accent); font-weight: 700; text-decoration: none; }
@@ -444,8 +470,8 @@
 
     <section id="view-rumors" class="panel">
       <div class="section-top">
-        <h1>سجل التحقق من الأخبار المتداولة حول غزة</h1>
-        <span>المصدر: منصة مسبار لتقصي الحقائق ووزارة الاقتصاد الوطني</span>
+        <h1>التحقق من الأخبار والشائعات المتداولة</h1>
+        <span>نراجع ما يتم تداوله ميدانياً ونضع بين يديك المعلومة المؤكدة بوضوح</span>
       </div>
       <div class="rumors-grid">
         <div>
@@ -453,8 +479,8 @@
             <div class="controls-row">
               <div class="filter-group" id="verdictFilters">
                 <button class="filter-pill active" onclick="setVerdictFilter('all', this)">الكل</button>
-                <button class="filter-pill" onclick="setVerdictFilter('false', this)">ادعاءات مضللة</button>
-                <button class="filter-pill" onclick="setVerdictFilter('true', this)">معلومات صحيحة وتوضيحات</button>
+                <button class="filter-pill" onclick="setVerdictFilter('false', this)">أخبار غير دقيقة</button>
+                <button class="filter-pill" onclick="setVerdictFilter('true', this)">معلومات مؤكدة</button>
               </div>
               <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
             </div>
@@ -463,11 +489,11 @@
         </div>
         <aside class="sidebar-sticky">
           <div class="form-card">
-            <h2>إرسال بلاغ سعر أو خبر للتحقق</h2>
-            <p>أرسل بلاغاً عن سعر مخالف في السوق أو شائعة متداولة ليتم التحقق منه ونشره للجميع بعد المراجعة.</p>
+            <h2>هل وصلك خبر أو سعر وتود التأكد منه؟</h2>
+            <p>شاركنا نص الخبر أو سعر السلعة ومكانها، وسيقوم فريقنا بالتحقق الميداني ونشر التوضيح للجميع.</p>
             <select id="reportType" class="field-input">
-              <option value="rumor">النوع: خبر / شائعة للتحقق</option>
-              <option value="price">النوع: بلاغ سعر في السوق</option>
+              <option value="rumor">النوع: خبر أو شائعة متداولة</option>
+              <option value="price">النوع: بلاغ عن سعر في السوق</option>
             </select>
             <select id="reportArea" class="field-input">
               <option value="خان يونس">المحافظة: خان يونس</option>
@@ -475,8 +501,8 @@
               <option value="المحافظة الوسطى">المحافظة: الوسطى</option>
               <option value="مدينة غزة">المحافظة: مدينة غزة</option>
             </select>
-            <input type="text" id="reportInput" class="field-input" placeholder="اكتب تفاصيل الخبر أو السلعة وسعرها..." />
-            <button id="submitReportBtn" class="btn-submit" onclick="addUserReport()">إرسال للمراجعة والنشر</button>
+            <input type="text" id="reportInput" class="field-input" placeholder="اكتب ما سمعته أو شاهدته هنا..." />
+            <button id="submitReportBtn" class="btn-submit" onclick="addUserReport()">إرسال للفريق الميداني</button>
           </div>
           <div id="userReportsContainer"></div>
         </aside>
@@ -484,7 +510,7 @@
     </section>
 
     <footer class="app-footer">
-      <span>تطبيق برهان (Burhan) — دليل الأسعار والتحقق الميداني في قطاع غزة</span>
+      <span>تطبيق برهان (Burhan) — رفيقك الميداني للأسعار والتحقق من الأخبار في غزة</span>
       <div style="display:flex; gap:14px; align-items:center;">
         <a href="./privacy.html">سياسة الخصوصية وحماية البيانات</a>
         <a href="./admin.html" style="color:var(--text-muted); font-weight:600;">إدارة التطبيق</a>
@@ -515,8 +541,9 @@
     const SUN_SVG = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
     const MOON_SVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
     const SHIELD_ICON = '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
-    const FALSE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+    const FALSE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
     const TRUE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+    const COPY_ICON = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 
     function applyTheme(theme) {
       const root = document.documentElement;
@@ -691,10 +718,10 @@
         { title: "تشغيل 15 مخبزا مدعوما أمميا لتوفير الخبز بسعر 3 شيكل (OCHA)", time: "تقرير OCHA #336", body: "تنتج 15 مخبزا مدعوما من الأمم المتحدة (9 في دير البلح وخان يونس و6 في مدينة غزة) أكثر من 130,000 ربطة خبز (2 كغم) يوميا لتوزيعها مجانا أو بيعها بسعر مدعوم يبلغ 3 شيكل في المتاجر المتعاقدة." }
       ],
       rumors: [
-        { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.", truth: "بالتحقق من الادعاء وجد فريق (مسبار) أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025" },
-        { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.", truth: "كشف فريق (مسبار) أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نفذت في يوليو 2024، وليس لمساعدات وصلت حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025" },
-        { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.", truth: "أوضح تحقيق (مسبار) أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025" },
-        { verdict: "true", tag: "معلومة صحيحة وتوضيح رسمي", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحا أن ما حدث كان خللا مؤقتا في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
+        { verdict: "false", tag: "خبر غير دقيق", claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.", truth: "بعد مراجعة الفيديو والتحقق من تاريخه، تبيّن أن المقطع قديم ويعود إلى عملية إنزال مساعدات جوية جرت في أكتوبر 2024، وليس لعملية حديثة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025" },
+        { verdict: "false", tag: "خبر غير دقيق", claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.", truth: "هذا المقطع قديم ويعود إلى عملية إنزال جوي للمساعدات نُفذت في يوليو 2024، ولا يرتبط بأي مساعدات وصلت حديثاً.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025" },
+        { verdict: "false", tag: "خبر غير دقيق", claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.", truth: "الفيديو متداول منذ عام 2024 وهو قديم، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025" },
+        { verdict: "true", tag: "معلومة مؤكدة", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكدت وزارة الاقتصاد في غزة توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحة أن الارتفاع السابق كان نتيجة خلل مؤقت في التوريد وبدأت الأسعار بالتراجع الفعلي مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
       ]
     };
 
@@ -743,9 +770,9 @@
 
     function getRumorAccreditation(rumor) {
       const meta = rumor.meta || '';
-      if (meta.includes('مسبار')) return 'تحقق: منصة مسبار';
-      if (meta.includes('الاقتصاد')) return 'تحقق: وزارة الاقتصاد';
-      return 'مصدر رسمي';
+      if (meta.includes('مسبار')) return 'تدقيق: منصة مسبار لتقصي الحقائق';
+      if (meta.includes('الاقتصاد')) return 'توضيح: وزارة الاقتصاد الوطني';
+      return 'تمت المراجعة والتدقيق من فريق برهان الميداني';
     }
 
     function formatLastUpdated(isoDateString) {
@@ -923,358 +950,4 @@
     }
 
     function renderAlerts() {
-      document.getElementById('alertsList').innerHTML = alertsData.map(a => `
-        <article class="item-card">
-          <div class="card-header">
-            <h2 class="card-title">${escapeHtml(a.title)}</h2>
-            <span class="card-detail">${escapeHtml(a.time)}</span>
-          </div>
-          <p class="card-sub">${escapeHtml(a.body)}</p>
-          <div class="card-divider"></div>
-          <div class="card-meta-row">
-            <span class="source-note">${SHIELD_ICON}<span>${escapeHtml(getAlertAccreditation(a))}</span></span>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    function setVerdictFilter(verdict, btn) {
-      selectedVerdict = verdict;
-      document.querySelectorAll('#verdictFilters .filter-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderRumors();
-    }
-
-    function renderRumors() {
-      const q = document.getElementById('rumorSearch').value.trim();
-      const list = document.getElementById('rumorsList');
-      const filtered = rumorsData.filter(r => (selectedVerdict === 'all' || r.verdict === selectedVerdict) && (!q || r.claim.includes(q) || r.truth.includes(q)));
-      if (!filtered.length) {
-        list.innerHTML = '<div class="empty-state">لا توجد نتائج مطابقة في سجل التحقق.</div>';
-        return;
-      }
-      list.innerHTML = filtered.map((r) => {
-        const isFalse = r.verdict === 'false';
-        const boxClass = isFalse ? 'verdict-false' : 'verdict-true';
-        const cardClass = isFalse ? 'rumor-false-card' : 'rumor-true-card';
-        const iconSvg = isFalse ? FALSE_VERDICT_ICON : TRUE_VERDICT_ICON;
-        const boxHeading = isFalse ? 'نتيجة التحقق: ادعاء مضلل / غير صحيح' : 'نتيجة التحقق: معلومة صحيحة ومؤكدة';
-        return `
-          <article class="item-card ${cardClass}">
-            <div class="card-header">
-              <span class="inline-status ${isFalse ? 'st-danger' : 'st-ok'}"><span class="status-dot"></span>${escapeHtml(r.tag)}</span>
-              <button class="btn-soft" onclick="copyFactByClaim(this)" data-claim="${escapeHtml(r.claim)}">نسخ النص</button>
-            </div>
-            <div class="card-title">"${escapeHtml(r.claim)}"</div>
-            <div class="fact-callout ${boxClass}">
-              <span class="fact-icon">${iconSvg}</span>
-              <div class="fact-body">
-                <span class="fact-label">${boxHeading}</span>
-                <span class="fact-text">${escapeHtml(r.truth)}</span>
-              </div>
-            </div>
-            <div class="card-meta-row">
-              <span class="source-note">${SHIELD_ICON}<span>${escapeHtml(getRumorAccreditation(r))}</span></span>
-              <span class="card-detail">${escapeHtml(r.meta)}</span>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    function copyFactByClaim(btn) {
-      const claim = btn.getAttribute('data-claim');
-      const item = rumorsData.find(r => r.claim === claim);
-      if (!item) return;
-      const text = "تحقق موثق:\nالخبر المتداول: " + item.claim + "\nالنتيجة: " + item.truth + "\n" + item.meta;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ نص التحقق')).catch(() => fallbackCopy(text));
-      } else { fallbackCopy(text); }
-    }
-
-    function fallbackCopy(text) {
-      const area = document.createElement('textarea');
-      area.value = text;
-      document.body.appendChild(area);
-      area.select();
-      document.execCommand('copy');
-      document.body.removeChild(area);
-      showToast('تم نسخ نص التحقق');
-    }
-
-    const SUPABASE_URL = "https://oovenrpwpgbbarzumzqk.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_RRFHVFQ3IJeyOOO2Kd672w_rRhllhpZ";
-    const sbClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-
-    async function fetchLivePriceOverrides(notifyOnChange) {
-      if (!sbClient || isOfflineMode) return;
-      try {
-        const prevRaw = localStorage.getItem('burhan_price_overrides') || '[]';
-        const { data, error } = await sbClient.from('price_overrides').select('*');
-        if (error || !Array.isArray(data)) return;
-        const nextRaw = JSON.stringify(data);
-        localStorage.setItem('burhan_price_overrides', nextRaw);
-        applyPriceOverridesMap(data);
-
-        if (notifyOnChange && prevRaw !== nextRaw && data.length) {
-          const latest = [...data].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))[0];
-          if (latest) {
-            triggerSystemNotification(
-              'تحديث سعر في الأسواق · برهان',
-              latest.item_name + ': ' + latest.fair + ' (' + latest.label + ')',
-              'market'
-            );
-          }
-        }
-      } catch (e) {
-        console.warn('تعذر جلب تعديلات الأسعار الفورية', e);
-      }
-    }
-
-    async function fetchApprovedCommunityReports(notifyOnNew) {
-      if (!sbClient || isOfflineMode) return;
-      try {
-        const prevIds = new Set(JSON.parse(localStorage.getItem('burhan_approved_reports') || '[]').map(r => r.id));
-        const { data, error } = await sbClient
-          .from('reports')
-          .select('*')
-          .eq('status', 'approved')
-          .order('created_at', { ascending: false })
-          .limit(20);
-        if (error || !Array.isArray(data)) return;
-        localStorage.setItem('burhan_approved_reports', JSON.stringify(data));
-        mergeApprovedReportsIntoRumors(data);
-
-        if (notifyOnNew && prevIds.size > 0) {
-          const brandNew = data.find(r => !prevIds.has(r.id));
-          if (brandNew) {
-            const title = brandNew.report_type === 'price'
-              ? 'تنبيه سعر ميداني جديد · ' + (brandNew.area || 'غزة')
-              : 'تحقق رسمي جديد · ' + (brandNew.area || 'غزة');
-            triggerSystemNotification(title, brandNew.content, 'rumors');
-          }
-        }
-      } catch (e) {
-        console.warn('تعذر جلب البلاغات المعتمدة من Supabase', e);
-      }
-    }
-
-    function detectReportMisleading(row) {
-      const combined = ((row.content || '') + ' ' + (row.admin_reply || '')).trim();
-      const falseKeywords = ['كاذب', 'مضلل', 'غير صحيح', 'تحذير', 'شائعة', 'لا أساس له', 'وهمية', 'ارتفاع غير مبرر', 'مخالف'];
-      return falseKeywords.some(k => combined.includes(k));
-    }
-
-    function mergeApprovedReportsIntoRumors(approvedRows) {
-      if (!Array.isArray(approvedRows) || !approvedRows.length) return;
-      const existingClaims = new Set(rumorsData.map(r => r.claim));
-      const mapped = approvedRows.map(row => {
-        const isPrice = row.report_type === 'price';
-        const isFalse = detectReportMisleading(row);
-        const areaName = row.area || 'غزة';
-        const d = row.created_at ? new Date(row.created_at).toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }) : 'محدث';
-        const tagLabel = isPrice
-          ? (isFalse ? 'تنبيه سعر مخالف · ' + areaName : 'تحديث سعر معتمد · ' + areaName)
-          : (isFalse ? 'ادعاء مضلل · ' + areaName : 'معلومة صحيحة ومؤكدة · ' + areaName);
-
-        return {
-          verdict: isFalse ? 'false' : 'true',
-          tag: tagLabel,
-          claim: row.content,
-          truth: row.admin_reply || 'تمت مراجعة البلاغ واعتماده من إدارة تطبيق برهان.',
-          meta: 'المصدر: إدارة التحقق الميداني (برهان) | ' + d
-        };
-      });
-      mapped.reverse().forEach(item => {
-        if (!existingClaims.has(item.claim)) {
-          rumorsData.unshift(item);
-          existingClaims.add(item.claim);
-        }
-      });
-      renderRumors();
-    }
-
-    function subscribeRealtimeUpdates() {
-      if (!sbClient) return;
-      try {
-        sbClient
-          .channel('burhan-live-channel')
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'reports' }, (payload) => {
-            const row = payload.new;
-            if (row && row.status === 'approved') {
-              fetchApprovedCommunityReports(false);
-              const title = row.report_type === 'price'
-                ? 'تنبيه سعر ميداني جديد · ' + (row.area || 'غزة')
-                : 'تحقق رسمي جديد · ' + (row.area || 'غزة');
-              triggerSystemNotification(title, row.content, 'rumors');
-            }
-          })
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'price_overrides' }, (payload) => {
-            const row = payload.new;
-            if (row && row.item_name) {
-              fetchLivePriceOverrides(false);
-              triggerSystemNotification(
-                'تحديث سعر فوري · برهان',
-                row.item_name + ': ' + row.fair + ' (' + row.label + ')',
-                'market'
-              );
-            }
-          })
-          .subscribe();
-      } catch (e) {
-        console.warn('Realtime subscription fallback to polling:', e);
-      }
-    }
-
-    async function addUserReport() {
-      const input = document.getElementById('reportInput');
-      const area = document.getElementById('reportArea').value;
-      const reportType = document.getElementById('reportType').value;
-      const btn = document.getElementById('submitReportBtn');
-      const val = input.value.trim();
-      if (!val) { showToast('يرجى كتابة نص البلاغ أو الخبر أولاً'); return; }
-
-      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      let remoteSaved = false;
-
-      if (sbClient && !isOfflineMode) {
-        btn.disabled = true;
-        btn.textContent = 'جاري الإرسال...';
-        try {
-          const { error } = await sbClient
-            .from('reports')
-            .insert([{ report_type: reportType, area: area, content: val, status: 'pending' }]);
-          if (!error) remoteSaved = true;
-        } catch (e) {
-          console.warn('Supabase insert fallback to local', e);
-        } finally {
-          btn.disabled = false;
-          btn.textContent = 'إرسال للمراجعة والنشر';
-        }
-      }
-
-      saved.unshift({
-        text: val,
-        area: area,
-        report_type: reportType,
-        synced: remoteSaved,
-        status: remoteSaved ? 'تم الإرسال للإدارة · قيد المراجعة' : 'محفوظ محلياً (سيُرسل تلقائياً عند توفر الإنترنت)'
-      });
-      localStorage.setItem('burhan_reports', JSON.stringify(saved));
-      input.value = '';
-      renderUserReports();
-      showToast(remoteSaved ? 'تم إرسال بلاغك لإدارة برهان بنجاح' : 'تم حفظ البلاغ على جهازك وسيُرسل تلقائياً عند عودة الشبكة');
-    }
-
-    async function syncPendingOfflineReports() {
-      if (!sbClient || isOfflineMode || !navigator.onLine) return;
-      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      const pendingItems = saved.filter(r => r.synced === false);
-      if (!pendingItems.length) return;
-
-      let sentCount = 0;
-      for (const item of pendingItems) {
-        try {
-          const { error } = await sbClient
-            .from('reports')
-            .insert([{
-              report_type: item.report_type || 'rumor',
-              area: item.area || 'خان يونس',
-              content: item.text,
-              status: 'pending'
-            }]);
-          if (!error) {
-            item.synced = true;
-            item.status = 'تم الإرسال تلقائياً للإدارة · قيد المراجعة';
-            sentCount++;
-          }
-        } catch (e) {
-          console.warn('تعذر مزامنة بلاغ معلق', e);
-        }
-      }
-      if (sentCount > 0) {
-        localStorage.setItem('burhan_reports', JSON.stringify(saved));
-        renderUserReports();
-        showToast('تمت مزامنة وإرسال ' + sentCount + ' بلاغ معلق للإدارة');
-      }
-    }
-
-    function deleteUserReport(idx) {
-      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      saved.splice(idx, 1);
-      localStorage.setItem('burhan_reports', JSON.stringify(saved));
-      renderUserReports();
-      showToast('تم حذف البلاغ');
-    }
-
-    function renderUserReports() {
-      const container = document.getElementById('userReportsContainer');
-      const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      if (!saved.length) { container.innerHTML = ''; return; }
-      container.innerHTML = '<div class="saved-header">الأخبار المحفوظة على جهازك</div><div class="cards-stack">' + saved.map((rep, idx) => `
-        <article class="item-card">
-          <div class="card-header">
-            <span class="inline-status st-warn"><span class="status-dot"></span>${escapeHtml(rep.area)}</span>
-            <button class="btn-danger-text" onclick="deleteUserReport(${idx})">حذف</button>
-          </div>
-          <div class="card-title">${escapeHtml(rep.text)}</div>
-          <div class="card-detail">${escapeHtml(rep.status)}</div>
-        </article>
-      `).join('') + '</div>';
-    }
-
-    function updateConnUI(offline) {
-      const btn = document.getElementById('connBtn');
-      const label = document.getElementById('connLabel');
-      if (offline) { btn.classList.add('offline-state'); label.textContent = 'بدون انترنت · محفوظ'; }
-      else { btn.classList.remove('offline-state'); label.textContent = 'متصل · محدث'; }
-    }
-
-    function toggleOfflineMode() {
-      isOfflineMode = !isOfflineMode;
-      updateConnUI(isOfflineMode);
-      showToast(isOfflineMode ? 'تم تفعيل وضع عدم الاتصال: القراءة من الذاكرة المحلية' : 'تمت العودة لوضع الاتصال المباشر');
-      if (!isOfflineMode) {
-        autoSyncData(false);
-        syncPendingOfflineReports();
-        fetchApprovedCommunityReports(true);
-        fetchLivePriceOverrides(true);
-      }
-    }
-
-    window.addEventListener('online', () => {
-      isOfflineMode = false;
-      updateConnUI(false);
-      autoSyncData(false);
-      syncPendingOfflineReports();
-      fetchApprovedCommunityReports(true);
-      fetchLivePriceOverrides(true);
-    });
-    window.addEventListener('offline', () => { isOfflineMode = true; updateConnUI(true); });
-    function manualSync() {
-      autoSyncData(true);
-      syncPendingOfflineReports();
-      fetchApprovedCommunityReports(true);
-      fetchLivePriceOverrides(true);
-    }
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(err => console.warn('SW registration failed:', err));
-      });
-    }
-
-    updateNotifButtonUI();
-    updateConnUI(isOfflineMode);
-    renderUserReports();
-    const cachedApproved = JSON.parse(localStorage.getItem('burhan_approved_reports') || '[]');
-    autoSyncData(false).then(() => {
-      mergeApprovedReportsIntoRumors(cachedApproved);
-      syncPendingOfflineReports();
-      fetchApprovedCommunityReports(true);
-      fetchLivePriceOverrides(true);
-      subscribeRealtimeUpdates();
-    });
-  </script>
-</body>
-</html>
+      document.getElementById('alertsList').innerHTML = alerts
