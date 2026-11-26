@@ -28,7 +28,7 @@
       --ok-color: #166534;
       --ok-bg: rgba(22, 101, 52, 0.09);
       --warn-color: #92400E;
-      --warn-bg: rgba(217, 119, 6, 0.1);
+      --warn-bg: rgba(217, 119, 6, 0.11);
       --danger-color: #991B1B;
       --danger-bg: rgba(220, 38, 38, 0.09);
       --shadow-sm: 0 2px 5px -1px rgba(28, 25, 23, 0.06), 0 1px 2px -1px rgba(28, 25, 23, 0.04);
@@ -37,14 +37,15 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; }
     body { background-color: var(--bg-page); color: var(--text-primary); min-height: 100vh; font-size: 14px; line-height: 1.65; }
 
-    .topbar { background-color: var(--bg-surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
-    .topbar-inner { max-width: 1040px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .topbar { background-color: var(--bg-surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 25; }
+    .topbar-inner { max-width: 1060px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .brand { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--text-primary); }
     .brand-badge { background-color: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
-    .top-actions { display: flex; align-items: center; gap: 8px; }
+    .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
-    .btn { height: 36px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background-color: var(--bg-subtle); color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: 0.15s; }
+    .btn { height: 36px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background-color: var(--bg-subtle); color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: 0.15s; white-space: nowrap; }
     .btn:hover { background-color: var(--bg-hover); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
     .btn-primary { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
     .btn-primary:hover { background-color: var(--accent-hover); }
     .btn-ok { background-color: var(--ok-bg); color: var(--ok-color); border-color: rgba(22, 101, 52, 0.2); }
@@ -52,7 +53,7 @@
     .btn-danger { background-color: var(--danger-bg); color: var(--danger-color); border-color: rgba(220, 38, 38, 0.2); }
     .btn-danger:hover { background-color: rgba(220, 38, 38, 0.16); }
 
-    .container { max-width: 1040px; margin: 0 auto; padding: 24px 20px 60px; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 24px 20px 70px; }
 
     .login-wrap { max-width: 420px; margin: 60px auto; background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 18px; padding: 28px 24px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 14px; }
     .login-wrap h1 { font-size: 19px; font-weight: 700; }
@@ -60,9 +61,14 @@
     .field { width: 100%; height: 42px; border-radius: 12px; border: 1px solid var(--border-strong); padding: 0 14px; font-size: 14px; background-color: var(--bg-page); color: var(--text-primary); outline: none; }
     .field:focus { border-color: var(--accent); background-color: var(--bg-surface); }
 
-    .main-nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px; flex-wrap: wrap; }
-    .main-tab { padding: 9px 18px; border-radius: 12px; border: 1px solid var(--border); background-color: var(--bg-surface); font-size: 14px; font-weight: 700; color: var(--text-secondary); cursor: pointer; }
+    .main-nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .main-nav-tabs { display: flex; gap: 10px; flex-wrap: wrap; }
+    .main-tab { padding: 9px 18px; border-radius: 12px; border: 1px solid var(--border); background-color: var(--bg-surface); font-size: 14px; font-weight: 700; color: var(--text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
     .main-tab.active { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+    .count-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 7px; border-radius: 999px; font-size: 12px; font-weight: 700; background-color: var(--bg-subtle); color: var(--text-secondary); }
+    .count-badge.has-pending { background-color: #D97706; color: #FFFFFF; }
+    .main-tab.active .count-badge:not(.has-pending), .tab.active .count-badge:not(.has-pending) { background-color: rgba(255,255,255,0.22); color: #FFFFFF; }
 
     .publish-card { background-color: var(--bg-surface); border: 1px solid var(--border-strong); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
     .publish-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
@@ -70,35 +76,51 @@
     .publish-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
     .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
-    .metric { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-sm); }
+    .metric { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-sm); cursor: pointer; transition: 0.15s; }
+    .metric:hover { border-color: var(--border-strong); }
     .metric span { font-size: 12px; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 4px; }
     .metric strong { font-size: 22px; font-weight: 700; }
+    .metric.metric-warn strong { color: #B45309; }
 
     .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    .tab { padding: 7px 16px; border-radius: 999px; border: 1px solid var(--border); background-color: var(--bg-surface); color: var(--text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; }
+    .tab { padding: 7px 15px; border-radius: 999px; border: 1px solid var(--border); background-color: var(--bg-surface); color: var(--text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
     .tab.active { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
+    .bulk-bar { position: sticky; top: 68px; z-index: 20; background-color: var(--accent); color: var(--on-accent); border-radius: 14px; padding: 12px 18px; margin-bottom: 16px; box-shadow: var(--shadow-md); display: none; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .bulk-bar.visible { display: flex; }
+    .bulk-bar-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .btn-bulk-save { background-color: #FFFFFF; color: var(--accent); border: none; font-weight: 700; }
+    .btn-bulk-save:hover { background-color: #F0EFEA; }
+    .btn-bulk-cancel { background-color: rgba(255,255,255,0.16); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.3); }
+    .btn-bulk-cancel:hover { background-color: rgba(255,255,255,0.25); }
+
     .cards { display: flex; flex-direction: column; gap: 12px; }
-    .card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px; }
+    .card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px; transition: border-color 0.15s, background-color 0.15s; }
     .card.admin-authored { border-right: 4px solid var(--accent); }
+    .card.pending-highlight { border-right: 4px solid #D97706; }
+    .card.price-dirty { border-color: #D97706; background-color: #FFFDF7; }
+    .card.price-overridden { border-right: 4px solid var(--ok-color); }
+
     .card-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     .pill { padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
     .pill-pending { background-color: var(--warn-bg); color: var(--warn-color); }
     .pill-approved { background-color: var(--ok-bg); color: var(--ok-color); }
     .pill-rejected { background-color: var(--danger-bg); color: var(--danger-color); }
     .pill-admin { background-color: var(--accent-soft); color: var(--accent); }
-    .card-content { font-size: 15.5px; font-weight: 700; color: var(--text-primary); }
+    .card-content { font-size: 15px; font-weight: 700; color: var(--text-primary); }
     .reply-box { width: 100%; min-height: 64px; border-radius: 12px; border: 1px solid var(--border-strong); padding: 10px 12px; font-size: 13px; background-color: var(--bg-page); resize: vertical; outline: none; }
     .reply-box:focus { border-color: var(--accent); background-color: var(--bg-surface); }
     .card-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
     .price-row { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; gap: 10px; align-items: center; }
+    .price-row-actions { display: flex; gap: 6px; align-items: center; }
     .empty { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: center; color: var(--text-secondary); }
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: #fff; padding: 9px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; display: none; z-index: 50; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: #fff; padding: 9px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; display: none; z-index: 50; box-shadow: var(--shadow-md); }
 
     @media (max-width: 780px) {
       .metrics { grid-template-columns: repeat(2, 1fr); }
       .publish-grid { grid-template-columns: 1fr; }
       .price-row { grid-template-columns: 1fr; }
+      .price-row-actions { justify-content: flex-end; }
     }
   </style>
 </head>
@@ -122,15 +144,24 @@
     <section id="loginSection" class="login-wrap">
       <h1>تسجيل دخول الإدارة</h1>
       <p>أدخل البريد الإلكتروني وكلمة المرور المسجلين في Supabase لإدارة البلاغات وتحديث الأسعار.</p>
-      <input type="email" id="adminEmail" class="field" placeholder="البريد الإلكتروني للمسؤول" dir="ltr" />
-      <input type="password" id="adminPassword" class="field" placeholder="كلمة المرور" dir="ltr" />
+      <input type="email" id="adminEmail" class="field" placeholder="البريد الإلكتروني للمسؤول" dir="ltr" onkeydown="if(event.key==='Enter') handleLogin()" />
+      <input type="password" id="adminPassword" class="field" placeholder="كلمة المرور" dir="ltr" onkeydown="if(event.key==='Enter') handleLogin()" />
       <button id="loginBtn" class="btn btn-primary" style="height:42px; border-radius:12px;" onclick="handleLogin()">دخول إلى لوحة الإدارة</button>
     </section>
 
     <section id="dashboardSection" style="display:none;">
       <div class="main-nav">
-        <button class="main-tab active" onclick="switchAdminTab('reports', this)">إدارة البلاغات وسجل المسؤول</button>
-        <button class="main-tab" onclick="switchAdminTab('prices', this)">تحديث الأسعار الفوري</button>
+        <div class="main-nav-tabs">
+          <button class="main-tab active" data-maintab="reports" onclick="switchAdminTab('reports', this)">
+            <span>إدارة البلاغات وسجل المسؤول</span>
+            <span id="navPendingBadge" class="count-badge">0</span>
+          </button>
+          <button class="main-tab" data-maintab="prices" onclick="switchAdminTab('prices', this)">
+            <span>تحديث الأسعار الفوري</span>
+            <span id="navModifiedPricesBadge" class="count-badge">0</span>
+          </button>
+        </div>
+        <button class="btn" onclick="exportBackupJSON()" title="تنزيل نسخة احتياطية من البلاغات والأسعار">تصدير نسخة احتياطية (JSON)</button>
       </div>
 
       <!-- قسم البلاغات وسجل المسؤول -->
@@ -161,19 +192,46 @@
         </div>
 
         <div class="metrics">
-          <div class="metric"><span>سجل منشورات الإدارة</span><strong id="mAdminLog">0</strong></div>
-          <div class="metric"><span>بلاغات قيد المراجعة</span><strong id="mPending">0</strong></div>
-          <div class="metric"><span>إجمالي المنشور للجمهور</span><strong id="mApproved">0</strong></div>
-          <div class="metric"><span>بلاغات مرفوضة</span><strong id="mRejected">0</strong></div>
+          <div class="metric metric-warn" onclick="quickSelectFilter('pending')">
+            <span>بلاغات قيد المراجعة</span>
+            <strong id="mPending">0</strong>
+          </div>
+          <div class="metric" onclick="quickSelectFilter('admin_log')">
+            <span>سجل منشورات الإدارة</span>
+            <strong id="mAdminLog">0</strong>
+          </div>
+          <div class="metric" onclick="quickSelectFilter('approved')">
+            <span>إجمالي المنشور للجمهور</span>
+            <strong id="mApproved">0</strong>
+          </div>
+          <div class="metric" onclick="quickSelectFilter('rejected')">
+            <span>بلاغات مرفوضة</span>
+            <strong id="mRejected">0</strong>
+          </div>
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
           <div class="tabs" style="margin-bottom:0;">
-            <button class="tab active" onclick="setFilter('admin_log', this)">سجل منشورات الإدارة</button>
-            <button class="tab" onclick="setFilter('pending', this)">بلاغات قيد المراجعة</button>
-            <button class="tab" onclick="setFilter('approved', this)">كافة المنشور للجميع</button>
-            <button class="tab" onclick="setFilter('rejected', this)">المرفوضة</button>
-            <button class="tab" onclick="setFilter('all', this)">الكل</button>
+            <button class="tab active" data-repfilter="pending" onclick="setFilter('pending', this)">
+              <span>بلاغات قيد المراجعة</span>
+              <span id="tabPendingBadge" class="count-badge">0</span>
+            </button>
+            <button class="tab" data-repfilter="admin_log" onclick="setFilter('admin_log', this)">
+              <span>سجل منشورات الإدارة</span>
+              <span id="tabAdminLogBadge" class="count-badge">0</span>
+            </button>
+            <button class="tab" data-repfilter="approved" onclick="setFilter('approved', this)">
+              <span>كافة المنشور للجميع</span>
+              <span id="tabApprovedBadge" class="count-badge">0</span>
+            </button>
+            <button class="tab" data-repfilter="rejected" onclick="setFilter('rejected', this)">
+              <span>المرفوضة</span>
+              <span id="tabRejectedBadge" class="count-badge">0</span>
+            </button>
+            <button class="tab" data-repfilter="all" onclick="setFilter('all', this)">
+              <span>الكل</span>
+              <span id="tabAllBadge" class="count-badge">0</span>
+            </button>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <input type="text" id="reportSearchInput" class="field" style="height:36px; width:210px;" placeholder="بحث في السجل..." oninput="renderReports()" />
@@ -186,10 +244,33 @@
 
       <!-- قسم الأسعار -->
       <div id="tab-prices" style="display:none;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
-          <input type="text" id="priceFilterInput" class="field" style="max-width:340px;" placeholder="ابحث عن سلعة لتعديل سعرها..." oninput="renderAdminPrices()" />
-          <span style="font-size:12px; color:var(--text-muted);">أي تعديل يُحفظ هنا يظهر فوراً في التطبيق العام</span>
+        <div id="bulkSaveBar" class="bulk-bar">
+          <span id="bulkSaveText" style="font-weight:700;">لديك 0 تعديلات أسعار غير محفوظة</span>
+          <div class="bulk-bar-actions">
+            <button class="btn btn-bulk-cancel" onclick="discardPendingPriceChanges()">تراجع عن التعديلات</button>
+            <button id="bulkSaveBtn" class="btn btn-bulk-save" onclick="saveAllModifiedPrices()">حفظ جميع التعديلات ونشرها فوراً</button>
+          </div>
         </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <input type="text" id="priceFilterInput" class="field" style="max-width:340px;" placeholder="ابحث عن سلعة لتعديل سعرها..." oninput="renderAdminPrices()" />
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <button class="btn" onclick="copyUpdatedPricesJSON()">نسخ مصفوفة الأسعار المحدّثة</button>
+            <span style="font-size:12px; color:var(--text-muted);">أي تعديل يُحفظ هنا يظهر فوراً في التطبيق العام</span>
+          </div>
+        </div>
+
+        <div class="tabs" id="priceCatTabs">
+          <button class="tab active" onclick="setPriceCategory('الكل', this)">جميع الأصناف (29)</button>
+          <button class="tab" onclick="setPriceCategory('المعدلة', this)">المعدّلة يدوياً فقط</button>
+          <button class="tab" onclick="setPriceCategory('الخبز والحبوب', this)">الخبز والحبوب</button>
+          <button class="tab" onclick="setPriceCategory('البقوليات والمعلبات', this)">البقوليات والمعلبات</button>
+          <button class="tab" onclick="setPriceCategory('الزيوت والألبان', this)">الزيوت والألبان</button>
+          <button class="tab" onclick="setPriceCategory('الخضروات', this)">الخضروات</button>
+          <button class="tab" onclick="setPriceCategory('البروتينات والبدائل', this)">البروتينات</button>
+          <button class="tab" onclick="setPriceCategory('المحروقات', this)">المحروقات</button>
+        </div>
+
         <div id="adminPricesList" class="cards"></div>
       </div>
     </section>
@@ -200,21 +281,40 @@
     const SUPABASE_KEY = "sb_publishable_RRFHVFQ3IJeyOOO2Kd672w_rRhllhpZ";
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+    const STATUS_LABELS = {
+      green: 'متوفر بالأسواق',
+      amber: 'كمية محدودة',
+      red: 'شحيح حاليا'
+    };
+
     let allReports = [];
-    let currentFilter = 'admin_log';
+    let currentFilter = 'pending';
     let baseMarketItems = [];
     let priceOverrides = {};
+    let pendingPriceDrafts = {}; // { item_name: { fair, status } }
+    let selectedPriceCat = 'الكل';
+    let realtimeSub = null;
 
     function showToast(msg) {
       const el = document.getElementById('toast');
       el.textContent = msg;
       el.style.display = 'block';
       clearTimeout(window._t);
-      window._t = setTimeout(() => { el.style.display = 'none'; }, 2600);
+      window._t = setTimeout(() => { el.style.display = 'none'; }, 2800);
     }
 
     function escapeHtml(str) {
       return String(str || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function normalizeAr(text) {
+      return String(text || '')
+        .toLowerCase()
+        .replace(/[\u064B-\u065F\u0670]/g, '')
+        .replace(/[أإآ]/g, 'ا')
+        .replace(/ة/g, 'ه')
+        .replace(/ى/g, 'ي')
+        .trim();
     }
 
     function getAdminLogContents() {
@@ -246,6 +346,8 @@
         document.getElementById('dashboardSection').style.display = 'block';
         document.getElementById('logoutBtn').style.display = 'inline-flex';
         loadReports();
+        loadMarketForAdmin();
+        subscribeAdminRealtime();
       } else {
         document.getElementById('loginSection').style.display = 'flex';
         document.getElementById('dashboardSection').style.display = 'none';
@@ -272,6 +374,22 @@
       await sb.auth.signOut();
       showToast('تم تسجيل الخروج');
       checkSession();
+    }
+
+    function subscribeAdminRealtime() {
+      if (realtimeSub) return;
+      try {
+        realtimeSub = sb
+          .channel('burhan-admin-live')
+          .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reports' }, (payload) => {
+            const row = payload.new;
+            loadReports();
+            if (row && row.status === 'pending') {
+              showToast('وصل بلاغ جديد قيد المراجعة من: ' + (row.area || 'غزة'));
+            }
+          })
+          .subscribe();
+      } catch (e) {}
     }
 
     async function publishDirectReport() {
@@ -319,22 +437,49 @@
       localStorage.setItem('burhan_admin_reports_backup', JSON.stringify(allReports));
 
       const adminSet = getAdminLogContents();
-      document.getElementById('mAdminLog').textContent = allReports.filter(r => isAdminAuthored(r, adminSet)).length;
-      document.getElementById('mPending').textContent = allReports.filter(r => r.status === 'pending').length;
-      document.getElementById('mApproved').textContent = allReports.filter(r => r.status === 'approved').length;
-      document.getElementById('mRejected').textContent = allReports.filter(r => r.status === 'rejected').length;
+      const pendingCount = allReports.filter(r => r.status === 'pending').length;
+      const adminLogCount = allReports.filter(r => isAdminAuthored(r, adminSet)).length;
+      const approvedCount = allReports.filter(r => r.status === 'approved').length;
+      const rejectedCount = allReports.filter(r => r.status === 'rejected').length;
+
+      document.getElementById('mPending').textContent = pendingCount;
+      document.getElementById('mAdminLog').textContent = adminLogCount;
+      document.getElementById('mApproved').textContent = approvedCount;
+      document.getElementById('mRejected').textContent = rejectedCount;
+
+      document.getElementById('tabPendingBadge').textContent = pendingCount;
+      document.getElementById('tabAdminLogBadge').textContent = adminLogCount;
+      document.getElementById('tabApprovedBadge').textContent = approvedCount;
+      document.getElementById('tabRejectedBadge').textContent = rejectedCount;
+      document.getElementById('tabAllBadge').textContent = allReports.length;
+
+      const navBadge = document.getElementById('navPendingBadge');
+      const tabBadge = document.getElementById('tabPendingBadge');
+      navBadge.textContent = pendingCount;
+      navBadge.classList.toggle('has-pending', pendingCount > 0);
+      tabBadge.classList.toggle('has-pending', pendingCount > 0);
+
       renderReports();
+    }
+
+    function quickSelectFilter(status) {
+      const btn = document.querySelector(`.tab[data-repfilter="${status}"]`);
+      if (btn) setFilter(status, btn);
     }
 
     function setFilter(status, btn) {
       currentFilter = status;
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tabs .tab[data-repfilter]').forEach(t => t.classList.remove('active'));
       btn.classList.add('active');
       renderReports();
     }
 
-    function copyAdminItem(content, reply) {
-      const text = "برهان — توضيح رسمي:\n" + content + "\nالنتيجة: " + reply;
+    function copyAdminItemById(id) {
+      const row = allReports.find(x => x.id === id);
+      if (!row) return;
+      const replyEl = document.getElementById('reply_' + id);
+      const reply = replyEl ? replyEl.value.trim() : (row.admin_reply || '');
+      const text = "برهان — توضيح رسمي:\n" + row.content + "\nالنتيجة: " + reply;
       if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => showToast('تم نسخ نص المنشور'));
       }
@@ -342,7 +487,7 @@
 
     function renderReports() {
       const container = document.getElementById('reportsList');
-      const q = (document.getElementById('reportSearchInput')?.value || '').trim();
+      const q = normalizeAr(document.getElementById('reportSearchInput')?.value || '');
       const adminSet = getAdminLogContents();
 
       const filtered = allReports.filter(r => {
@@ -351,7 +496,7 @@
           : currentFilter === 'admin_log'
             ? isAdminAuthored(r, adminSet)
             : r.status === currentFilter;
-        const matchesSearch = !q || (r.content || '').includes(q) || (r.admin_reply || '').includes(q) || (r.area || '').includes(q);
+        const matchesSearch = !q || normalizeAr(r.content).includes(q) || normalizeAr(r.admin_reply).includes(q) || normalizeAr(r.area).includes(q);
         return matchesTab && matchesSearch;
       });
 
@@ -371,8 +516,9 @@
         const typeLabel = r.report_type === 'price' ? 'بلاغ سعر ميداني' : 'تحقق من شائعة';
         const dateStr = new Date(r.created_at).toLocaleString('ar-EG', { dateStyle: 'medium', timeStyle: 'short' });
         const byAdmin = isAdminAuthored(r, adminSet);
+        const cardExtra = r.status === 'pending' ? 'pending-highlight' : (byAdmin ? 'admin-authored' : '');
         return `
-          <article class="card ${byAdmin ? 'admin-authored' : ''}">
+          <article class="card ${cardExtra}">
             <div class="card-top">
               <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                 <span class="pill ${st.cls}">${st.text}</span>
@@ -384,7 +530,7 @@
             <div class="card-content">${escapeHtml(r.content)}</div>
             <textarea id="reply_${r.id}" class="reply-box" placeholder="اكتب رد الإدارة أو نتيجة التحقق التي ستظهر للمستخدمين...">${escapeHtml(r.admin_reply || '')}</textarea>
             <div class="card-actions">
-              <button class="btn" onclick="copyAdminItem(${JSON.stringify(r.content)}, document.getElementById('reply_${r.id}').value)">نسخ النص</button>
+              <button class="btn" onclick="copyAdminItemById(${r.id})">نسخ النص</button>
               <button class="btn btn-ok" onclick="updateReportStatus(${r.id}, 'approved')">${r.status === 'approved' ? 'حفظ التعديل' : 'اعتماد ونشر للجميع'}</button>
               ${r.status === 'pending' ? `<button class="btn" onclick="updateReportStatus(${r.id}, 'rejected')">رفض</button>` : ''}
               <button class="btn btn-danger" onclick="deleteReport(${r.id})">حذف نهائي</button>
@@ -410,6 +556,7 @@
       loadReports();
     }
 
+    /* إدارة الأسعار والتعديل الجماعي */
     async function loadMarketForAdmin() {
       try {
         const res = await fetch('./data.json?v=' + Date.now());
@@ -421,36 +568,151 @@
       const { data } = await sb.from('price_overrides').select('*');
       priceOverrides = {};
       (data || []).forEach(row => { priceOverrides[row.item_name] = row; });
+      pendingPriceDrafts = {};
+      updateBulkSaveBar();
       renderAdminPrices();
     }
 
+    function setPriceCategory(cat, btn) {
+      selectedPriceCat = cat;
+      document.querySelectorAll('#priceCatTabs .tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderAdminPrices();
+    }
+
+    function updateBulkSaveBar() {
+      const count = Object.keys(pendingPriceDrafts).length;
+      const bar = document.getElementById('bulkSaveBar');
+      const txt = document.getElementById('bulkSaveText');
+      const ovCount = Object.keys(priceOverrides).length;
+      const navBadge = document.getElementById('navModifiedPricesBadge');
+      if (navBadge) navBadge.textContent = ovCount;
+
+      if (count > 0) {
+        txt.textContent = `لديك (${count}) ${count === 1 ? 'تعديل سعر غير محفوظ' : 'تعديلات أسعار غير محفوظة'}`;
+        bar.classList.add('visible');
+      } else {
+        bar.classList.remove('visible');
+      }
+    }
+
+    function onPriceRowInput(idx) {
+      const item = window._filteredAdminItems[idx];
+      if (!item) return;
+      const fairInput = document.getElementById('p_fair_' + idx);
+      const statusSel = document.getElementById('p_status_' + idx);
+      const cardEl = document.getElementById('p_card_' + idx);
+      if (!fairInput || !statusSel) return;
+
+      const newFair = fairInput.value.trim();
+      const newStatus = statusSel.value;
+
+      const savedOv = priceOverrides[item.name] || {};
+      const baselineFair = savedOv.fair || item.fair;
+      const baselineStatus = savedOv.status || item.status;
+
+      if (newFair !== baselineFair || newStatus !== baselineStatus) {
+        pendingPriceDrafts[item.name] = { fair: newFair, status: newStatus };
+        if (cardEl) cardEl.classList.add('price-dirty');
+      } else {
+        delete pendingPriceDrafts[item.name];
+        if (cardEl) cardEl.classList.remove('price-dirty');
+      }
+      updateBulkSaveBar();
+    }
+
+    function discardPendingPriceChanges() {
+      pendingPriceDrafts = {};
+      updateBulkSaveBar();
+      renderAdminPrices();
+      showToast('تم التراجع عن التعديلات غير المحفوظة');
+    }
+
+    async function saveAllModifiedPrices() {
+      const entries = Object.entries(pendingPriceDrafts);
+      if (!entries.length) return;
+      const btn = document.getElementById('bulkSaveBtn');
+      btn.disabled = true;
+      btn.textContent = 'جاري حفظ الجميع...';
+
+      const nowIso = new Date().toISOString();
+      const payload = entries.map(([itemName, vals]) => ({
+        item_name: itemName,
+        fair: vals.fair,
+        status: vals.status,
+        label: STATUS_LABELS[vals.status] || 'متوفر بالأسواق',
+        updated_at: nowIso
+      }));
+
+      const { error } = await sb.from('price_overrides').upsert(payload);
+      btn.disabled = false;
+      btn.textContent = 'حفظ جميع التعديلات ونشرها فوراً';
+
+      if (error) {
+        showToast('تعذر الحفظ الجماعي: ' + error.message);
+        return;
+      }
+
+      payload.forEach(row => { priceOverrides[row.item_name] = row; });
+      pendingPriceDrafts = {};
+      updateBulkSaveBar();
+      renderAdminPrices();
+      showToast(`تم حفظ ونشر (${payload.length}) تعديلات أسعار دفعة واحدة بنجاح`);
+    }
+
     function renderAdminPrices() {
-      const q = document.getElementById('priceFilterInput').value.trim();
+      const q = normalizeAr(document.getElementById('priceFilterInput').value);
       const container = document.getElementById('adminPricesList');
-      const items = baseMarketItems.filter(i => !q || i.name.includes(q));
+
+      const items = baseMarketItems.filter(i => {
+        const catOk = selectedPriceCat === 'الكل'
+          ? true
+          : selectedPriceCat === 'المعدلة'
+            ? Boolean(priceOverrides[i.name] || pendingPriceDrafts[i.name])
+            : (i.category || '') === selectedPriceCat;
+        const qOk = !q || normalizeAr(i.name).includes(q) || normalizeAr(i.category).includes(q);
+        return catOk && qOk;
+      });
+
+      window._filteredAdminItems = items;
+
+      if (!items.length) {
+        container.innerHTML = '<div class="empty">لا توجد سلع مطابقة للتصفية الحالية.</div>';
+        return;
+      }
+
       container.innerHTML = items.map((item, idx) => {
-        const ov = priceOverrides[item.name] || {};
-        const currentFair = ov.fair || item.fair;
-        const currentStatus = ov.status || item.status;
+        const ov = priceOverrides[item.name];
+        const draft = pendingPriceDrafts[item.name];
+        const currentFair = draft ? draft.fair : (ov ? ov.fair : item.fair);
+        const currentStatus = draft ? draft.status : (ov ? ov.status : item.status);
+        const isDirty = Boolean(draft);
+        const isOverridden = Boolean(ov);
+
         return `
-          <div class="card">
+          <div id="p_card_${idx}" class="card ${isDirty ? 'price-dirty' : ''} ${isOverridden ? 'price-overridden' : ''}">
             <div class="price-row">
               <div>
-                <div class="card-content">${escapeHtml(item.name)}</div>
-                <span style="font-size:12px; color:var(--text-muted);">${escapeHtml(item.category || '')}</span>
+                <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap;">
+                  <div class="card-content">${escapeHtml(item.name)}</div>
+                  ${isOverridden ? '<span class="pill pill-approved">معدّل يدوياً</span>' : ''}
+                </div>
+                <span style="font-size:12px; color:var(--text-muted);">${escapeHtml(item.category || '')} · التسعيرة الأساسية: ${escapeHtml(item.fair)}</span>
               </div>
-              <input type="text" id="p_fair_${idx}" class="field" value="${escapeHtml(currentFair)}" placeholder="السعر الحالي" />
-              <select id="p_status_${idx}" class="field">
+              <input type="text" id="p_fair_${idx}" class="field" value="${escapeHtml(currentFair)}" placeholder="السعر الحالي" oninput="onPriceRowInput(${idx})" />
+              <select id="p_status_${idx}" class="field" onchange="onPriceRowInput(${idx})">
                 <option value="green" ${currentStatus === 'green' ? 'selected' : ''}>متوفر / سعر مدعوم</option>
                 <option value="amber" ${currentStatus === 'amber' ? 'selected' : ''}>تذبذب / كمية محدودة</option>
                 <option value="red" ${currentStatus === 'red' ? 'selected' : ''}>شحيح حالياً</option>
               </select>
-              <button class="btn btn-primary" onclick="savePriceOverride(${idx})">حفظ السعر</button>
+              <div class="price-row-actions">
+                <button class="btn btn-primary" onclick="savePriceOverride(${idx})">حفظ</button>
+                ${isOverridden ? `<button class="btn" onclick="resetPriceOverride(${idx})" title="إلغاء التعديل والعودة للسعر الأساسي">إعادة للأصل</button>` : ''}
+              </div>
             </div>
           </div>
         `;
       }).join('');
-      window._filteredAdminItems = items;
     }
 
     async function savePriceOverride(idx) {
@@ -458,17 +720,59 @@
       if (!item) return;
       const fair = document.getElementById('p_fair_' + idx).value.trim();
       const status = document.getElementById('p_status_' + idx).value;
-      const labels = { green: 'متوفر بالأسواق', amber: 'كمية محدودة', red: 'شحيح حاليا' };
+      const nowIso = new Date().toISOString();
       const { error } = await sb.from('price_overrides').upsert({
         item_name: item.name,
         fair: fair,
         status: status,
-        label: labels[status] || 'متوفر بالأسواق',
-        updated_at: new Date().toISOString()
+        label: STATUS_LABELS[status] || 'متوفر بالأسواق',
+        updated_at: nowIso
       });
       if (error) { showToast('تعذر حفظ السعر: ' + error.message); return; }
-      priceOverrides[item.name] = { item_name: item.name, fair, status, label: labels[status] };
+      priceOverrides[item.name] = { item_name: item.name, fair, status, label: STATUS_LABELS[status], updated_at: nowIso };
+      delete pendingPriceDrafts[item.name];
+      updateBulkSaveBar();
+      renderAdminPrices();
       showToast('تم تحديث سعر «' + item.name + '» ونشره فوراً');
+    }
+
+    async function resetPriceOverride(idx) {
+      const item = window._filteredAdminItems[idx];
+      if (!item) return;
+      const { error } = await sb.from('price_overrides').delete().eq('item_name', item.name);
+      if (error) { showToast('تعذر استعادة السعر: ' + error.message); return; }
+      delete priceOverrides[item.name];
+      delete pendingPriceDrafts[item.name];
+      updateBulkSaveBar();
+      renderAdminPrices();
+      showToast('تمت إعادة «' + item.name + '» للتسعيرة الأساسية');
+    }
+
+    function copyUpdatedPricesJSON() {
+      const merged = baseMarketItems.map(item => {
+        const ov = priceOverrides[item.name];
+        return ov ? { ...item, fair: ov.fair, status: ov.status, label: ov.label } : item;
+      });
+      const text = JSON.stringify(merged, null, 2);
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ مصفوفة الأسعار المحدّثة (29 سلعة)'));
+      }
+    }
+
+    function exportBackupJSON() {
+      const backup = {
+        exportedAt: new Date().toISOString(),
+        reports: allReports,
+        priceOverrides: priceOverrides
+      };
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'burhan-admin-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('تم تنزيل ملف النسخة الاحتياطية');
     }
 
     checkSession();
