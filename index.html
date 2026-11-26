@@ -106,42 +106,17 @@
     .conn-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--ok-dot); flex-shrink: 0; }
     .conn-status.offline-state .conn-dot { background-color: var(--warn-dot); }
 
-    /* شريط الإشعار المباشر للتحديثات */
-    .live-banner {
-      display: none;
-      background-color: var(--accent);
-      color: var(--on-accent);
-      padding: 10px clamp(14px, 3vw, 28px);
-      font-size: var(--fs-sm);
-      font-weight: 600;
-    }
-    .live-banner-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .live-banner-btn {
-      background-color: rgba(255,255,255,0.18);
-      color: inherit;
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 999px;
-      padding: 4px 12px;
-      font-size: var(--fs-xs);
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .live-banner { display: none; background-color: var(--accent); color: var(--on-accent); padding: 10px clamp(14px, 3vw, 28px); font-size: var(--fs-sm); font-weight: 600; }
+    .live-banner-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .live-banner-btn { background-color: rgba(255,255,255,0.18); color: inherit; border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: 4px 12px; font-size: var(--fs-xs); font-weight: 700; cursor: pointer; }
 
-    .inline-status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; padding: 3px 10px; border-radius: 999px; border: 1px solid transparent; }
+    .inline-status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; padding: 4px 11px; border-radius: 999px; border: 1px solid transparent; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .st-ok { color: var(--ok-color); background-color: var(--ok-bg); border-color: rgba(22, 101, 52, 0.14); }
+    .st-ok { color: var(--ok-color); background-color: var(--ok-bg); border-color: rgba(22, 101, 52, 0.18); }
     .st-ok .status-dot { background-color: var(--ok-dot); }
-    .st-warn { color: var(--warn-color); background-color: var(--warn-bg); border-color: rgba(217, 119, 6, 0.16); }
+    .st-warn { color: var(--warn-color); background-color: var(--warn-bg); border-color: rgba(217, 119, 6, 0.18); }
     .st-warn .status-dot { background-color: var(--warn-dot); }
-    .st-danger { color: var(--danger-color); background-color: var(--danger-bg); border-color: rgba(220, 38, 38, 0.16); }
+    .st-danger { color: var(--danger-color); background-color: var(--danger-bg); border-color: rgba(220, 38, 38, 0.2); }
     .st-danger .status-dot { background-color: var(--danger-dot); }
 
     .source-note { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; color: var(--accent); }
@@ -171,7 +146,7 @@
     .field-input { width: 100%; height: 41px; background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 12px; padding: 0 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
     .field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 
-    .cards-stack { display: flex; flex-direction: column; gap: 12px; }
+    .cards-stack { display: flex; flex-direction: column; gap: 13px; }
     .item-card {
       background-color: var(--bg-surface);
       border: 1px solid var(--border);
@@ -181,7 +156,7 @@
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 10px;
       transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
     }
     .item-card:hover {
@@ -189,8 +164,11 @@
       box-shadow: var(--shadow-md);
       border-color: var(--border-strong);
     }
+    .item-card.rumor-false-card { border-color: rgba(220, 38, 38, 0.22); }
+    .item-card.rumor-true-card { border-color: rgba(22, 101, 52, 0.22); }
+
     .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-    .card-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.45; }
+    .card-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.5; }
     .card-sub { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
     .card-divider { height: 1px; background-color: var(--border); margin: 2px 0; }
     .card-meta-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
@@ -208,8 +186,75 @@
     .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .rumors-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
-    .fact-callout { background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
-    .fact-callout strong { color: var(--text-primary); font-weight: 700; }
+
+    /* تصميم صندوق نتيجة التحقق (مضللة vs صحيحة وإيجابية) */
+    .fact-callout {
+      border-radius: 13px;
+      padding: 13px 15px;
+      font-size: var(--fs-sm);
+      line-height: 1.7;
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      border: 1px solid transparent;
+      border-right-width: 4px;
+    }
+    .fact-callout.verdict-false {
+      background-color: var(--danger-bg);
+      border-color: rgba(220, 38, 38, 0.22);
+      border-right-color: var(--danger-dot);
+      color: var(--text-primary);
+    }
+    .fact-callout.verdict-true {
+      background-color: var(--ok-bg);
+      border-color: rgba(22, 101, 52, 0.22);
+      border-right-color: var(--ok-dot);
+      color: var(--text-primary);
+    }
+    .fact-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .verdict-false .fact-icon {
+      background-color: rgba(220, 38, 38, 0.15);
+      color: var(--danger-color);
+    }
+    .verdict-true .fact-icon {
+      background-color: rgba(22, 101, 52, 0.15);
+      color: var(--ok-color);
+    }
+    .fact-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .fact-body {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+    }
+    .fact-label {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1px;
+    }
+    .verdict-false .fact-label { color: var(--danger-color); }
+    .verdict-true .fact-label { color: var(--ok-color); }
+    .fact-text {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
 
     .btn-soft { height: 34px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); padding: 0 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; transition: background-color 0.15s ease, transform 0.12s ease; }
     .btn-soft:hover { background-color: var(--bg-hover); }
@@ -409,7 +454,7 @@
               <div class="filter-group" id="verdictFilters">
                 <button class="filter-pill active" onclick="setVerdictFilter('all', this)">الكل</button>
                 <button class="filter-pill" onclick="setVerdictFilter('false', this)">ادعاءات مضللة</button>
-                <button class="filter-pill" onclick="setVerdictFilter('true', this)">توضيحات رسمية</button>
+                <button class="filter-pill" onclick="setVerdictFilter('true', this)">معلومات صحيحة وتوضيحات</button>
               </div>
               <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
             </div>
@@ -470,6 +515,8 @@
     const SUN_SVG = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
     const MOON_SVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
     const SHIELD_ICON = '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+    const FALSE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+    const TRUE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
 
     function applyTheme(theme) {
       const root = document.documentElement;
@@ -498,7 +545,6 @@
 
     applyTheme(localStorage.getItem('burhan_theme') || 'light');
 
-    /* نظام الإشعارات والتنبيهات الفورية */
     let liveBannerTargetTab = 'rumors';
 
     function updateNotifButtonUI() {
@@ -648,7 +694,7 @@
         { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.", truth: "بالتحقق من الادعاء وجد فريق (مسبار) أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025" },
         { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.", truth: "كشف فريق (مسبار) أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نفذت في يوليو 2024، وليس لمساعدات وصلت حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025" },
         { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.", truth: "أوضح تحقيق (مسبار) أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025" },
-        { verdict: "true", tag: "توضيح رسمي", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحا أن ما حدث كان خللا مؤقتا في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
+        { verdict: "true", tag: "معلومة صحيحة وتوضيح رسمي", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحا أن ما حدث كان خللا مؤقتا في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
       ]
     };
 
@@ -909,14 +955,24 @@
       }
       list.innerHTML = filtered.map((r) => {
         const isFalse = r.verdict === 'false';
+        const boxClass = isFalse ? 'verdict-false' : 'verdict-true';
+        const cardClass = isFalse ? 'rumor-false-card' : 'rumor-true-card';
+        const iconSvg = isFalse ? FALSE_VERDICT_ICON : TRUE_VERDICT_ICON;
+        const boxHeading = isFalse ? 'نتيجة التحقق: ادعاء مضلل / غير صحيح' : 'نتيجة التحقق: معلومة صحيحة ومؤكدة';
         return `
-          <article class="item-card">
+          <article class="item-card ${cardClass}">
             <div class="card-header">
               <span class="inline-status ${isFalse ? 'st-danger' : 'st-ok'}"><span class="status-dot"></span>${escapeHtml(r.tag)}</span>
               <button class="btn-soft" onclick="copyFactByClaim(this)" data-claim="${escapeHtml(r.claim)}">نسخ النص</button>
             </div>
             <div class="card-title">"${escapeHtml(r.claim)}"</div>
-            <div class="fact-callout"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div>
+            <div class="fact-callout ${boxClass}">
+              <span class="fact-icon">${iconSvg}</span>
+              <div class="fact-body">
+                <span class="fact-label">${boxHeading}</span>
+                <span class="fact-text">${escapeHtml(r.truth)}</span>
+              </div>
+            </div>
             <div class="card-meta-row">
               <span class="source-note">${SHIELD_ICON}<span>${escapeHtml(getRumorAccreditation(r))}</span></span>
               <span class="card-detail">${escapeHtml(r.meta)}</span>
@@ -1003,18 +1059,30 @@
       }
     }
 
+    function detectReportMisleading(row) {
+      const combined = ((row.content || '') + ' ' + (row.admin_reply || '')).trim();
+      const falseKeywords = ['كاذب', 'مضلل', 'غير صحيح', 'تحذير', 'شائعة', 'لا أساس له', 'وهمية', 'ارتفاع غير مبرر', 'مخالف'];
+      return falseKeywords.some(k => combined.includes(k));
+    }
+
     function mergeApprovedReportsIntoRumors(approvedRows) {
       if (!Array.isArray(approvedRows) || !approvedRows.length) return;
       const existingClaims = new Set(rumorsData.map(r => r.claim));
       const mapped = approvedRows.map(row => {
         const isPrice = row.report_type === 'price';
+        const isFalse = detectReportMisleading(row);
+        const areaName = row.area || 'غزة';
         const d = row.created_at ? new Date(row.created_at).toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }) : 'محدث';
+        const tagLabel = isPrice
+          ? (isFalse ? 'تنبيه سعر مخالف · ' + areaName : 'تحديث سعر معتمد · ' + areaName)
+          : (isFalse ? 'ادعاء مضلل · ' + areaName : 'معلومة صحيحة ومؤكدة · ' + areaName);
+
         return {
-          verdict: isPrice ? 'false' : 'true',
-          tag: isPrice ? ('بلاغ سعر ميداني · ' + (row.area || 'غزة')) : ('تحقق مجتمعي معتمد · ' + (row.area || 'غزة')),
+          verdict: isFalse ? 'false' : 'true',
+          tag: tagLabel,
           claim: row.content,
           truth: row.admin_reply || 'تمت مراجعة البلاغ واعتماده من إدارة تطبيق برهان.',
-          meta: 'المصدر: بلاغات المواطنين المعتمدة (إدارة برهان) | ' + d
+          meta: 'المصدر: إدارة التحقق الميداني (برهان) | ' + d
         };
       });
       mapped.reverse().forEach(item => {
