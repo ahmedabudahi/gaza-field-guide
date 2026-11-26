@@ -47,6 +47,26 @@
       --fs-base: 14px;
       --fs-md: 15.5px;
       --fs-lg: 19px;
+      --fs-price: 17px;
+      --fs-num: 21px;
+    }
+    [data-font="large"] {
+      --fs-xs: 14px;
+      --fs-sm: 15.5px;
+      --fs-base: 16.5px;
+      --fs-md: 18px;
+      --fs-lg: 22px;
+      --fs-price: 20px;
+      --fs-num: 24px;
+    }
+    [data-font="xlarge"] {
+      --fs-xs: 16px;
+      --fs-sm: 17.5px;
+      --fs-base: 18.5px;
+      --fs-md: 20.5px;
+      --fs-lg: 24px;
+      --fs-price: 22px;
+      --fs-num: 27px;
     }
     [data-theme="dark"] {
       --bg-page: #131312;
@@ -96,12 +116,13 @@
     .top-tab.active { background-color: var(--accent-soft); border-color: rgba(30, 58, 95, 0.14); color: var(--accent); font-weight: 700; box-shadow: var(--shadow-xs); }
     [data-theme="dark"] .top-tab.active { border-color: rgba(147, 197, 253, 0.2); }
 
-    .topbar-tools { display: flex; align-items: center; gap: 7px; margin-right: auto; }
+    .topbar-tools { display: flex; align-items: center; gap: 6px; margin-right: auto; }
     .icon-btn { width: 35px; height: 35px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: background-color 0.15s ease, transform 0.12s ease; flex-shrink: 0; }
     .icon-btn:hover { background-color: var(--bg-hover); }
     .icon-btn:active { transform: scale(0.96); }
     .icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .icon-btn.notif-enabled { background-color: var(--accent-soft); color: var(--accent); border-color: rgba(30, 58, 95, 0.2); }
+    .icon-btn.notif-enabled, .font-btn.font-active { background-color: var(--accent-soft); color: var(--accent); border-color: rgba(30, 58, 95, 0.2); }
+    .font-btn { width: auto; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 700; }
     .notif-badge-dot { position: absolute; top: 6px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background-color: var(--warn-dot); }
     .icon-btn.notif-enabled .notif-badge-dot { background-color: var(--ok-dot); }
 
@@ -133,14 +154,42 @@
     .panel { display: none; width: 100%; }
     .panel.active { display: block; }
 
-    .section-top { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
+    .section-top { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .section-top-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .section-top h1 { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); line-height: 1.4; }
     .section-top span { font-size: var(--fs-xs); color: var(--text-muted); }
+    .section-top-actions { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+
+    .saved-area-bar { display: none; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; background-color: var(--accent-soft); border: 1px solid rgba(30, 58, 95, 0.16); color: var(--accent); padding: 7px 13px; border-radius: 12px; font-size: var(--fs-xs); font-weight: 600; }
 
     .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-bottom: 16px; }
     .metric-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; padding: 13px 16px; border-radius: 14px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 6px; }
     .metric-top { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; width: fit-content; }
-    .metric-num { font-size: 21px; font-weight: 700; color: var(--text-primary); padding-right: 4px; }
+    .metric-num { font-size: var(--fs-num); font-weight: 700; color: var(--text-primary); padding-right: 4px; }
+
+    /* نشرة المعابر والسيولة النقدية */
+    .field-status-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+    .status-brief-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 15px 17px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 8px; }
+    .status-brief-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .status-brief-title { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); display: inline-flex; align-items: center; gap: 7px; }
+    .status-brief-title svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .status-brief-val { font-size: var(--fs-md); font-weight: 700; color: var(--accent); }
+    .status-brief-note { font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.6; }
+
+    /* دليل الروابط الرسمية والأرقام المجانية */
+    .official-dir-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .official-dir-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .official-dir-head h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 7px; }
+    .official-dir-head h2 svg { width: 17px; height: 17px; stroke: var(--ok-color); fill: none; stroke-width: 2.1; flex-shrink: 0; }
+    .official-dir-sub { font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.6; }
+    .official-list { display: flex; flex-direction: column; gap: 9px; }
+    .official-row { background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .official-row-info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 210px; }
+    .official-row-title { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); }
+    .official-row-desc { font-size: var(--fs-xs); color: var(--text-secondary); }
+    .official-row-code { font-size: var(--fs-xs); font-weight: 700; color: var(--accent); direction: ltr; unicode-bidi: embed; width: fit-content; }
+    .official-row-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .anti-fraud-note { background-color: var(--warn-bg); border: 1px solid rgba(217, 119, 6, 0.2); border-right: 4px solid var(--warn-dot); border-radius: 11px; padding: 10px 13px; font-size: var(--fs-xs); color: var(--text-primary); line-height: 1.65; }
 
     /* حاسبة السعر العادل */
     .calc-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 14px 16px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
@@ -186,7 +235,7 @@
     .item-updated-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: var(--accent); background-color: var(--accent-soft); padding: 2px 8px; border-radius: 999px; }
 
     .price-block { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-    .price-main { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+    .price-main { font-size: var(--fs-price); font-weight: 700; color: var(--text-primary); }
     .price-ref { font-size: var(--fs-xs); color: var(--text-muted); }
 
     .sync-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
@@ -236,7 +285,7 @@
     .toast { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: var(--bg-surface); box-shadow: var(--shadow-md); padding: 9px 18px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; display: none; z-index: 50; white-space: nowrap; }
 
     @media (max-width: 680px) {
-      .metrics-grid { grid-template-columns: 1fr; }
+      .metrics-grid, .field-status-grid { grid-template-columns: 1fr; }
       .metric-card { flex-direction: row; align-items: center; justify-content: space-between; }
       .calc-grid { grid-template-columns: 1fr; }
       .install-pill span { display: none; }
@@ -285,6 +334,7 @@
           <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>تثبيت التطبيق</span>
         </button>
+        <button id="fontToggle" class="icon-btn font-btn" onclick="cycleFontSize()" title="تكبير حجم الخط لكبار السن" aria-label="تكبير حجم الخط">ع+</button>
         <button id="notifBtn" class="icon-btn" onclick="requestAppNotifications()" title="تفعيل إشعارات التحديثات الفورية" aria-label="تفعيل الإشعارات">
           <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="notif-badge-dot"></span>
@@ -315,20 +365,31 @@
   <main class="container">
     <section id="view-outlets" class="panel active">
       <div class="section-top">
-        <h1>نقاط التوزيع ومكاتب المساعدة المعتمدة</h1>
-        <span>المصدر: برنامج الأغذية العالمي (WFP)، وكالة الأونروا (UNRWA)، وتقارير OCHA</span>
+        <div class="section-top-row">
+          <div>
+            <h1>نقاط التوزيع ومكاتب المساعدة المعتمدة</h1>
+            <span>المصدر: برنامج الأغذية العالمي (WFP)، وكالة الأونروا (UNRWA)، وتقارير OCHA</span>
+          </div>
+          <div class="section-top-actions">
+            <button class="btn-soft" onclick="jumpToOfficialDirectory()">الروابط الرسمية والأرقام المجانية ↗</button>
+          </div>
+        </div>
       </div>
       <div class="controls-wrap">
         <div class="controls-row">
           <div class="filter-group" id="outletAreaFilters">
-            <button class="filter-pill active" onclick="setOutletArea('الكل', this)">كل المحافظات</button>
-            <button class="filter-pill" onclick="setOutletArea('المفضلة', this)">المفضلة ★</button>
-            <button class="filter-pill" onclick="setOutletArea('خان يونس', this)">خان يونس والمواصي</button>
-            <button class="filter-pill" onclick="setOutletArea('دير البلح', this)">دير البلح</button>
-            <button class="filter-pill" onclick="setOutletArea('المحافظة الوسطى', this)">المحافظة الوسطى</button>
-            <button class="filter-pill" onclick="setOutletArea('مدينة غزة', this)">مدينة غزة</button>
+            <button class="filter-pill active" data-area="الكل" onclick="setOutletArea('الكل', this)">كل المحافظات</button>
+            <button class="filter-pill" data-area="المفضلة" onclick="setOutletArea('المفضلة', this)">المفضلة ★</button>
+            <button class="filter-pill" data-area="خان يونس" onclick="setOutletArea('خان يونس', this)">خان يونس والمواصي</button>
+            <button class="filter-pill" data-area="دير البلح" onclick="setOutletArea('دير البلح', this)">دير البلح</button>
+            <button class="filter-pill" data-area="المحافظة الوسطى" onclick="setOutletArea('المحافظة الوسطى', this)">المحافظة الوسطى</button>
+            <button class="filter-pill" data-area="مدينة غزة" onclick="setOutletArea('مدينة غزة', this)">مدينة غزة</button>
           </div>
           <input type="text" id="outletSearch" class="field-input" placeholder="ابحث بالشارع أو المعلم أو الجهة..." oninput="renderOutlets()" />
+        </div>
+        <div id="savedAreaBar" class="saved-area-bar">
+          <span id="savedAreaText">المحافظة المحفوظة: خان يونس (تُفتح تلقائياً في كل زيارة)</span>
+          <button class="btn-soft" style="height:26px; font-size:11px;" onclick="resetDefaultOutletArea()">إلغاء التثبيت</button>
         </div>
       </div>
       <div class="cards-stack" id="outletsList"></div>
@@ -336,8 +397,19 @@
 
     <section id="view-market" class="panel">
       <div class="section-top">
-        <h1>متوسطات أسعار السلع الأساسية والمحروقات</h1>
-        <span>المصدر: التسعيرة الاسترشادية لوزارة الاقتصاد الوطني ورصد أسواق خان يونس والوسطى</span>
+        <div class="section-top-row">
+          <div>
+            <h1>متوسطات أسعار السلع الأساسية والمحروقات</h1>
+            <span>المصدر: التسعيرة الاسترشادية لوزارة الاقتصاد الوطني ورصد أسواق خان يونس والوسطى</span>
+          </div>
+          <div class="section-top-actions">
+            <button class="btn-soft" onclick="copyDailyMarketBulletin()">نسخ نشرة أسعار اليوم</button>
+            <button class="btn-wa" onclick="shareDailyMarketBulletinWA()">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <span>نشر النشرة عبر واتساب</span>
+            </button>
+          </div>
+        </div>
       </div>
       <div class="metrics-grid">
         <div class="metric-card">
@@ -420,6 +492,93 @@
           <a href="./privacy.html" class="btn-soft">سياسة الخصوصية</a>
         </div>
       </div>
+
+      <!-- نشرة حالة المعابر والسيولة النقدية (الكاش) -->
+      <div class="field-status-grid" id="fieldStatusGrid">
+        <article class="status-brief-card">
+          <div class="status-brief-head">
+            <span class="status-brief-title">
+              <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span>حالة المعابر وتدفق الشاحنات</span>
+            </span>
+            <span id="crossingBadge" class="inline-status st-ok"><span class="status-dot"></span>دخول منتظم جزئياً</span>
+          </div>
+          <div id="crossingStatusValue" class="status-brief-val">معبر كرم أبو سالم ومعبر كيسوفيم يعملان لإدخال المساعدات والتجارة</div>
+          <p id="crossingStatusNote" class="status-brief-note">أولوية الدخول للمواد الغذائية الأساسية والطحين والمستلزمات الطبية وغاز الطهي وفق تنسيق OCHA ووزارة الاقتصاد.</p>
+        </article>
+
+        <article class="status-brief-card">
+          <div class="status-brief-head">
+            <span class="status-brief-title">
+              <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+              <span>مؤشر السيولة النقدية (عمولة الكاش)</span>
+            </span>
+            <span id="cashBadge" class="inline-status st-warn"><span class="status-dot"></span>رصد ميداني</span>
+          </div>
+          <div id="cashStatusValue" class="status-brief-val">متوسط عمولة السحب النقدي: 18% – 24%</div>
+          <p id="cashStatusNote" class="status-brief-note">يُنصح باستخدام الدفع الإلكتروني المباشر (PalPay / Jawwal Pay / التحويل البنكي) عند التجار المعتمدين لتفادي خسارة عمولة السحب النقدي.</p>
+        </article>
+      </div>
+
+      <!-- دليل الروابط الرسمية والأرقام المجانية -->
+      <section class="official-dir-card" id="officialDirectoryCard">
+        <div class="official-dir-head">
+          <div>
+            <h2>
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <span>دليل الروابط الرسمية والأرقام المجانية (حماية من الاحتيال)</span>
+            </h2>
+            <p class="official-dir-sub">استخدم هذه الروابط والأرقام الموثقة فقط لفحص الكابونات أو تقديم الشكاوى وتجنب الروابط المجهولة.</p>
+          </div>
+          <button class="btn-wa" onclick="shareOfficialDirectoryWA()">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span>مشاركة الدليل الرسمي</span>
+          </button>
+        </div>
+
+        <div class="official-list">
+          <div class="official-row">
+            <div class="official-row-info">
+              <span class="official-row-title">فحص كابونات ومساعدات وكالة الأونروا (UNRWA)</span>
+              <span class="official-row-desc">البوابة الرسمية الوحيدة للاستعلام عن دور استلام الطرود الغذائية وتحديث بيانات الأسرة.</span>
+              <span class="official-row-code">https://aid.unrwa.org</span>
+            </div>
+            <div class="official-row-actions">
+              <button class="btn-soft" onclick="copyPlainText('https://aid.unrwa.org', 'تم نسخ رابط الأونروا الرسمي')">نسخ الرابط</button>
+              <a href="https://aid.unrwa.org" target="_blank" rel="noopener" class="btn-soft">فتح الموقع ↗</a>
+            </div>
+          </div>
+
+          <div class="official-row">
+            <div class="official-row-info">
+              <span class="official-row-title">الخط المجاني لبرنامج الأغذية العالمي (WFP)</span>
+              <span class="official-row-desc">للاستفسار عن رسائل المساعدات الغذائية، نقاط التوزيع، وتحديث أرقام الجوال.</span>
+              <span class="official-row-code">1800124126</span>
+            </div>
+            <div class="official-row-actions">
+              <button class="btn-soft" onclick="copyPlainText('1800124126', 'تم نسخ الرقم المجاني لـ WFP')">نسخ الرقم</button>
+              <a href="tel:1800124126" class="btn-soft">اتصال مجاني</a>
+            </div>
+          </div>
+
+          <div class="official-row">
+            <div class="official-row-info">
+              <span class="official-row-title">الرقم المجاني لحماية المستهلك — وزارة الاقتصاد الوطني</span>
+              <span class="official-row-desc">للإبلاغ الفوري عن احتكار السلع، التلاعب بالأسعار، أو رفض البيع بالتسعيرة الاسترشادية.</span>
+              <span class="official-row-code">1800112233</span>
+            </div>
+            <div class="official-row-actions">
+              <button class="btn-soft" onclick="copyPlainText('1800112233', 'تم نسخ رقم حماية المستهلك')">نسخ الرقم</button>
+              <a href="tel:1800112233" class="btn-soft">اتصال مجاني</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="anti-fraud-note">
+          <strong>تنبيه أمان مهم:</strong> لا تطلب وكالة الأونروا أو برنامج الأغذية العالمي أو أي مؤسسة دولية رمز التحقق (OTP) المرسل لهاتفك، ولا تطلب بيانات حسابك البنكي أو محفظتك الإلكترونية عبر روابط فيسبوك أو تيليغرام.
+        </div>
+      </section>
+
       <div class="cards-stack" id="alertsList"></div>
     </section>
 
@@ -527,6 +686,34 @@
 
     applyTheme(localStorage.getItem('burhan_theme') || 'light');
 
+    /* تكبير الخط لكبار السن */
+    function applyFontSize(size) {
+      const root = document.documentElement;
+      const btn = document.getElementById('fontToggle');
+      root.removeAttribute('data-font');
+      if (btn) btn.classList.remove('font-active');
+      if (size === 'large') {
+        root.setAttribute('data-font', 'large');
+        if (btn) { btn.textContent = 'ع++'; btn.classList.add('font-active'); }
+      } else if (size === 'xlarge') {
+        root.setAttribute('data-font', 'xlarge');
+        if (btn) { btn.textContent = 'ع-'; btn.classList.add('font-active'); }
+      } else {
+        if (btn) { btn.textContent = 'ع+'; }
+      }
+    }
+
+    function cycleFontSize() {
+      const current = localStorage.getItem('burhan_font_size') || 'normal';
+      const next = current === 'normal' ? 'large' : current === 'large' ? 'xlarge' : 'normal';
+      localStorage.setItem('burhan_font_size', next);
+      applyFontSize(next);
+      const labels = { normal: 'تمت إعادة حجم الخط للوضع العادي', large: 'تم تكبير حجم الخط (كبير)', xlarge: 'تم تكبير حجم الخط (كبير جداً لكبار السن)' };
+      showToast(labels[next]);
+    }
+
+    applyFontSize(localStorage.getItem('burhan_font_size') || 'normal');
+
     /* تثبيت التطبيق على الهاتف */
     let deferredInstallPrompt = null;
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -627,6 +814,14 @@
     const FALLBACK_DATASET = {
       lastUpdated: "2026-11-23T10:00:00Z",
       lastSourceStatus: "محدث من تقارير OCHA و WFP و UNRWA",
+      fieldStatus: {
+        crossingBadge: "دخول منتظم جزئياً",
+        crossingValue: "معبر كرم أبو سالم ومعبر كيسوفيم يعملان لإدخال المساعدات والتجارة",
+        crossingNote: "أولوية الدخول للمواد الغذائية الأساسية والطحين والمستلزمات الطبية وغاز الطهي وفق تنسيق OCHA ووزارة الاقتصاد.",
+        cashBadge: "رصد ميداني",
+        cashValue: "متوسط عمولة السحب النقدي: 18% – 24%",
+        cashNote: "يُنصح باستخدام الدفع الإلكتروني المباشر (PalPay / Jawwal Pay / التحويل البنكي) عند التجار المعتمدين لتفادي خسارة عمولة السحب النقدي."
+      },
       outlets: [
         { name: "نقطة القرارة – شارع الحية", area: "خان يونس", address: "خان يونس – القرارة – شارع الحية", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة أنيرا (ANERA)", hours: "الخط المجاني WFP: 1800124126" },
         { name: "نقطة شرق سجن أصداء – شارع 5", area: "خان يونس", address: "خان يونس – شارع 5 – شرق سجن أصداء بمسافة 500 متر", items: "إشراف برنامج الأغذية العالمي (WFP) | الشريك المنفذ: مؤسسة مجتمعات عالمية (Global Communities)", hours: "الخط المجاني WFP: 1800124126" },
@@ -707,6 +902,7 @@
     const tabTitles = { outlets: "الأسواق المعتمدة", market: "الأسعار والوفرة", offline: "التنبيه والتخزين", rumors: "التحقق من الشائعات" };
     let selectedOutletArea = 'الكل', selectedMarketCategory = 'الكل', selectedMarketStatus = 'all', selectedVerdict = 'all';
     let isOfflineMode = !navigator.onLine;
+    let currentDatasetUpdatedLabel = '23 نوفمبر 2026';
 
     function escapeHtml(str) {
       return String(str).replace(/[&<>"']/g, function(ch) {
@@ -732,6 +928,14 @@
       el.style.display = 'block';
       clearTimeout(window._toastTimer);
       window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 2800);
+    }
+
+    function copyPlainText(text, toastMsg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => showToast(toastMsg)).catch(() => fallbackCopy(text, toastMsg));
+      } else {
+        fallbackCopy(text, toastMsg);
+      }
     }
 
     /* المفضلة */
@@ -770,6 +974,61 @@
       const raw = btn.getAttribute('data-share') || '';
       const msg = raw + '\n\nالمصدر: تطبيق برهان\nhttps://ahmedabudahi.github.io/gaza-field-guide/';
       window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    }
+
+    function shareOfficialDirectoryWA() {
+      const msg =
+        'دليل الروابط الرسمية والأرقام المجانية في قطاع غزة (حماية من الروابط الوهمية):\n\n' +
+        '• فحص كابونات الأونروا (UNRWA):\nhttps://aid.unrwa.org\n' +
+        '• الخط المجاني لبرنامج الأغذية العالمي (WFP):\n1800124126\n' +
+        '• الرقم المجاني لحماية المستهلك (وزارة الاقتصاد):\n1800112233\n\n' +
+        'تنبيه: لا تشارك رمز التحقق (OTP) مع أي رابط غير رسمي.\n' +
+        'المصدر: تطبيق برهان\nhttps://ahmedabudahi.github.io/gaza-field-guide/';
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    }
+
+    /* نشرة أسعار اليوم بضغطة واحدة */
+    function buildDailyMarketBulletinText() {
+      const staples = [
+        'ربطة خبز مدعومة (وزن 2 كغم)',
+        'طحين أبيض (1 كغم)',
+        'سكر أبيض (1 كغم)',
+        'زيت ذرة / عباد الشمس (عبوة 3 لتر)',
+        'أرز حبة قصيرة / متوسطة (1 كغم)',
+        'بطاطا (1 كغم)',
+        'بندورة (1 كغم)',
+        'كرتونة بيض مائدة (30 بيضة)',
+        'أسطوانة غاز طهي (12 كغم)'
+      ];
+      const lines = staples.map(name => {
+        const found = marketData.find(m => m.name === name);
+        return found ? `• ${found.name}: ${found.fair} (${found.label})` : null;
+      }).filter(Boolean);
+
+      return (
+        `نشرة الأسعار الاسترشادية في قطاع غزة — تطبيق برهان\n` +
+        `التحديث: ${currentDatasetUpdatedLabel}\n\n` +
+        lines.join('\n') +
+        `\n\nللاطلاع على القائمة الكاملة (29 سلعة) ونقاط التوزيع:\nhttps://ahmedabudahi.github.io/gaza-field-guide/`
+      );
+    }
+
+    function copyDailyMarketBulletin() {
+      const text = buildDailyMarketBulletinText();
+      copyPlainText(text, 'تم نسخ نشرة أسعار اليوم جاهزة للنشر');
+    }
+
+    function shareDailyMarketBulletinWA() {
+      const text = buildDailyMarketBulletinText();
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    }
+
+    function jumpToOfficialDirectory() {
+      switchView('offline');
+      setTimeout(() => {
+        const el = document.getElementById('officialDirectoryCard');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 60);
     }
 
     function getOutletAccreditation(item) {
@@ -844,6 +1103,23 @@
       renderMarket();
     }
 
+    function renderFieldStatus(dataset) {
+      const fs = (dataset && dataset.fieldStatus) || FALLBACK_DATASET.fieldStatus;
+      if (!fs) return;
+      const cBadge = document.getElementById('crossingBadge');
+      const cVal = document.getElementById('crossingStatusValue');
+      const cNote = document.getElementById('crossingStatusNote');
+      const mBadge = document.getElementById('cashBadge');
+      const mVal = document.getElementById('cashStatusValue');
+      const mNote = document.getElementById('cashStatusNote');
+      if (cBadge && fs.crossingBadge) cBadge.innerHTML = '<span class="status-dot"></span>' + escapeHtml(fs.crossingBadge);
+      if (cVal && fs.crossingValue) cVal.textContent = fs.crossingValue;
+      if (cNote && fs.crossingNote) cNote.textContent = fs.crossingNote;
+      if (mBadge && fs.cashBadge) mBadge.innerHTML = '<span class="status-dot"></span>' + escapeHtml(fs.cashBadge);
+      if (mVal && fs.cashValue) mVal.textContent = fs.cashValue;
+      if (mNote && fs.cashNote) mNote.textContent = fs.cashNote;
+    }
+
     function applyDataset(dataset) {
       outletsData = Array.isArray(dataset.outlets) && dataset.outlets.length ? dataset.outlets : FALLBACK_DATASET.outlets;
       marketData = Array.isArray(dataset.market) && dataset.market.length ? dataset.market : FALLBACK_DATASET.market;
@@ -863,8 +1139,10 @@
         } : item);
       }
 
-      document.getElementById('lastSyncTime').textContent = formatLastUpdated(dataset.lastUpdated);
+      currentDatasetUpdatedLabel = formatLastUpdated(dataset.lastUpdated);
+      document.getElementById('lastSyncTime').textContent = currentDatasetUpdatedLabel;
       if (dataset.lastSourceStatus) document.getElementById('sourceStatusBadge').textContent = dataset.lastSourceStatus;
+      renderFieldStatus(dataset);
       updateMetrics();
       populateFairCalcItems();
       renderOutlets();
@@ -959,11 +1237,54 @@
       `;
     }
 
-    function setOutletArea(area, btn) {
+    /* حفظ المحافظة الافتراضية للمستخدم */
+    const SAVEABLE_AREAS = ['خان يونس', 'دير البلح', 'المحافظة الوسطى', 'مدينة غزة'];
+
+    function updateSavedAreaUI(area) {
+      const bar = document.getElementById('savedAreaBar');
+      const txt = document.getElementById('savedAreaText');
+      if (!bar || !txt) return;
+      if (SAVEABLE_AREAS.includes(area)) {
+        txt.textContent = 'المحافظة الافتراضية المحفوظة: ' + area + ' (تُفتح تلقائياً في كل زيارة)';
+        bar.style.display = 'flex';
+      } else {
+        bar.style.display = 'none';
+      }
+    }
+
+    function setOutletArea(area, btn, skipToast) {
       selectedOutletArea = area;
       document.querySelectorAll('#outletAreaFilters .filter-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
+
+      if (SAVEABLE_AREAS.includes(area)) {
+        const prev = localStorage.getItem('burhan_default_area');
+        localStorage.setItem('burhan_default_area', area);
+        const repArea = document.getElementById('reportArea');
+        if (repArea) repArea.value = area;
+        if (!skipToast && prev !== area) showToast('تم حفظ «' + area + '» كمحافظتك الافتراضية');
+      } else if (area === 'الكل') {
+        localStorage.removeItem('burhan_default_area');
+      }
+      updateSavedAreaUI(SAVEABLE_AREAS.includes(area) ? area : localStorage.getItem('burhan_default_area'));
       renderOutlets();
+    }
+
+    function resetDefaultOutletArea() {
+      localStorage.removeItem('burhan_default_area');
+      const allBtn = document.querySelector('#outletAreaFilters .filter-pill[data-area="الكل"]');
+      setOutletArea('الكل', allBtn, true);
+      showToast('تم إلغاء تثبيت المحافظة الافتراضية');
+    }
+
+    function initSavedOutletArea() {
+      const saved = localStorage.getItem('burhan_default_area');
+      if (saved && SAVEABLE_AREAS.includes(saved)) {
+        const targetBtn = document.querySelector(`#outletAreaFilters .filter-pill[data-area="${saved}"]`);
+        if (targetBtn) {
+          setOutletArea(saved, targetBtn, true);
+        }
+      }
     }
 
     function renderOutlets() {
@@ -1156,19 +1477,17 @@
       const item = rumorsData.find(r => r.claim === claim);
       if (!item) return;
       const text = "تحقق موثق:\nالخبر المتداول: " + item.claim + "\nالنتيجة: " + item.truth + "\n" + item.meta;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ نص التحقق')).catch(() => fallbackCopy(text));
-      } else { fallbackCopy(text); }
+      copyPlainText(text, 'تم نسخ نص التحقق');
     }
 
-    function fallbackCopy(text) {
+    function fallbackCopy(text, toastMsg) {
       const area = document.createElement('textarea');
       area.value = text;
       document.body.appendChild(area);
       area.select();
       document.execCommand('copy');
       document.body.removeChild(area);
-      showToast('تم نسخ نص التحقق');
+      showToast(toastMsg || 'تم النسخ');
     }
 
     const SUPABASE_URL = "https://oovenrpwpgbbarzumzqk.supabase.co";
@@ -1415,6 +1734,7 @@
     renderUserReports();
     const cachedApproved = JSON.parse(localStorage.getItem('burhan_approved_reports') || '[]');
     autoSyncData(false).then(() => {
+      initSavedOutletArea();
       mergeApprovedReportsIntoRumors(cachedApproved);
       syncPendingOfflineReports();
       fetchApprovedCommunityReports(true);
