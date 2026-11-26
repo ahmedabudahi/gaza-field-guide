@@ -36,6 +36,8 @@
       --danger-color: #991B1B;
       --danger-dot: #DC2626;
       --danger-bg: rgba(220, 38, 38, 0.08);
+      --wa-color: #15803D;
+      --wa-bg: rgba(21, 128, 61, 0.09);
       --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.04);
       --shadow-sm: 0 2px 5px -1px rgba(28, 25, 23, 0.06), 0 1px 2px -1px rgba(28, 25, 23, 0.04);
       --shadow-md: 0 6px 14px -3px rgba(28, 25, 23, 0.08), 0 2px 4px -2px rgba(28, 25, 23, 0.04);
@@ -70,6 +72,8 @@
       --danger-color: #FCA5A5;
       --danger-dot: #F87171;
       --danger-bg: rgba(248, 113, 113, 0.11);
+      --wa-color: #86EFAC;
+      --wa-bg: rgba(74, 222, 128, 0.12);
       --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.22);
       --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.28), 0 1px 2px rgba(0, 0, 0, 0.2);
       --shadow-md: 0 8px 18px rgba(0, 0, 0, 0.36), 0 2px 4px rgba(0, 0, 0, 0.24);
@@ -92,8 +96,8 @@
     .top-tab.active { background-color: var(--accent-soft); border-color: rgba(30, 58, 95, 0.14); color: var(--accent); font-weight: 700; box-shadow: var(--shadow-xs); }
     [data-theme="dark"] .top-tab.active { border-color: rgba(147, 197, 253, 0.2); }
 
-    .topbar-tools { display: flex; align-items: center; gap: 8px; margin-right: auto; }
-    .icon-btn { width: 35px; height: 35px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: background-color 0.15s ease, transform 0.12s ease; }
+    .topbar-tools { display: flex; align-items: center; gap: 7px; margin-right: auto; }
+    .icon-btn { width: 35px; height: 35px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: background-color 0.15s ease, transform 0.12s ease; flex-shrink: 0; }
     .icon-btn:hover { background-color: var(--bg-hover); }
     .icon-btn:active { transform: scale(0.96); }
     .icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -101,8 +105,11 @@
     .notif-badge-dot { position: absolute; top: 6px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background-color: var(--warn-dot); }
     .icon-btn.notif-enabled .notif-badge-dot { background-color: var(--ok-dot); }
 
-    .conn-status { background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 999px; padding: 5px 11px; color: var(--text-secondary); font-size: var(--fs-xs); font-weight: 600; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; white-space: nowrap; transition: background-color 0.15s ease, color 0.15s ease; }
-    .conn-status:hover { background-color: var(--bg-hover); color: var(--text-primary); }
+    .install-pill { background-color: var(--accent); color: var(--on-accent); border: none; border-radius: 999px; padding: 6px 12px; font-size: var(--fs-xs); font-weight: 700; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; box-shadow: var(--shadow-xs); }
+    .install-pill:hover { background-color: var(--accent-hover); }
+    .install-pill svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .conn-status { background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 999px; padding: 5px 11px; color: var(--text-secondary); font-size: var(--fs-xs); font-weight: 600; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; white-space: nowrap; }
     .conn-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--ok-dot); flex-shrink: 0; }
     .conn-status.offline-state .conn-dot { background-color: var(--warn-dot); }
 
@@ -135,28 +142,50 @@
     .metric-top { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; width: fit-content; }
     .metric-num { font-size: 21px; font-weight: 700; color: var(--text-primary); padding-right: 4px; }
 
+    /* حاسبة السعر العادل */
+    .calc-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 14px 16px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+    .calc-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; }
+    .calc-title { display: flex; align-items: center; gap: 8px; font-size: var(--fs-sm); font-weight: 700; color: var(--accent); }
+    .calc-title svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .calc-body { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); flex-direction: column; gap: 10px; }
+    .calc-body.open { display: flex; }
+    .calc-grid { display: grid; grid-template-columns: 2fr 1fr 1.2fr; gap: 9px; }
+    .calc-result { background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; font-size: var(--fs-sm); }
+
     .controls-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
     .controls-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
     .filter-group { display: flex; align-items: center; gap: 7px; overflow-x: auto; scrollbar-width: none; max-width: 100%; padding: 2px 0; }
     .filter-group::-webkit-scrollbar { display: none; }
-    .filter-pill { background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-secondary); padding: 6px 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
+    .filter-pill { background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-secondary); padding: 6px 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
     .filter-pill:hover { background-color: var(--bg-subtle); border-color: var(--border-strong); color: var(--text-primary); }
     .filter-pill.active { background-color: var(--accent); border-color: var(--accent); color: var(--on-accent); box-shadow: var(--shadow-sm); }
 
-    .field-input { width: 100%; height: 41px; background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 12px; padding: 0 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    .field-input { width: 100%; height: 41px; background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 12px; padding: 0 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; }
     .field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 
     .cards-stack { display: flex; flex-direction: column; gap: 12px; }
     .item-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 9px; transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease; }
     .item-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
-    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+    .item-card.fav-pinned { border-color: rgba(217, 119, 6, 0.35); background-color: var(--bg-elevated); }
+    .item-card.rumor-false-card { border-color: rgba(220, 38, 38, 0.22); }
+    .item-card.rumor-true-card { border-color: rgba(22, 101, 52, 0.22); }
+
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .card-title-wrap { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 200px; }
     .card-title { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); line-height: 1.45; }
+    .card-actions-inline { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .card-sub { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
     .card-divider { height: 1px; background-color: var(--border); margin: 2px 0; }
     .card-meta-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
     .card-detail { font-size: var(--fs-xs); color: var(--text-muted); }
 
-    .price-block { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .fav-btn { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border); background-color: var(--bg-subtle); color: var(--text-muted); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; flex-shrink: 0; transition: transform 0.12s ease, background-color 0.15s ease; }
+    .fav-btn:hover { background-color: var(--bg-hover); }
+    .fav-btn.active { background-color: var(--warn-bg); border-color: rgba(217, 119, 6, 0.35); color: var(--warn-dot); }
+
+    .item-updated-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: var(--accent); background-color: var(--accent-soft); padding: 2px 8px; border-radius: 999px; }
+
+    .price-block { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
     .price-main { font-size: 17px; font-weight: 700; color: var(--text-primary); }
     .price-ref { font-size: var(--fs-xs); color: var(--text-muted); }
 
@@ -168,16 +197,27 @@
     .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .rumors-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
-    .fact-callout { background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
-    .fact-callout strong { color: var(--text-primary); font-weight: 700; }
+    .fact-callout { border-radius: 13px; padding: 13px 15px; font-size: var(--fs-sm); line-height: 1.7; display: flex; align-items: flex-start; gap: 11px; border: 1px solid transparent; border-right-width: 4px; }
+    .fact-callout.verdict-false { background-color: var(--danger-bg); border-color: rgba(220, 38, 38, 0.22); border-right-color: var(--danger-dot); }
+    .fact-callout.verdict-true { background-color: var(--ok-bg); border-color: rgba(22, 101, 52, 0.22); border-right-color: var(--ok-dot); }
+    .fact-icon { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .verdict-false .fact-icon { background-color: rgba(220, 38, 38, 0.15); color: var(--danger-color); }
+    .verdict-true .fact-icon { background-color: rgba(22, 101, 52, 0.15); color: var(--ok-color); }
+    .fact-icon svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.3; }
+    .fact-body { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+    .fact-label { font-size: var(--fs-xs); font-weight: 700; }
+    .verdict-false .fact-label { color: var(--danger-color); }
+    .verdict-true .fact-label { color: var(--ok-color); }
+    .fact-text { color: var(--text-primary); font-weight: 500; }
 
-    .btn-soft { height: 34px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); padding: 0 14px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; transition: background-color 0.15s ease, transform 0.12s ease; }
+    .btn-soft { height: 32px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); padding: 0 12px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; white-space: nowrap; }
     .btn-soft:hover { background-color: var(--bg-hover); }
-    .btn-soft:active { transform: translateY(1px); }
+    .btn-wa { height: 32px; background-color: var(--wa-bg); border: 1px solid rgba(21, 128, 61, 0.2); color: var(--wa-color); padding: 0 12px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; white-space: nowrap; }
+    .btn-wa:hover { filter: brightness(0.96); }
+    .btn-wa svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
     .btn-danger-text { background: var(--danger-bg); border: 1px solid rgba(220, 38, 38, 0.14); color: var(--danger-color); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; padding: 4px 10px; border-radius: 999px; }
-    .btn-submit { width: 100%; height: 42px; background-color: var(--accent); color: var(--on-accent); border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2); box-shadow: var(--shadow-sm); border-radius: 12px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; transition: background-color 0.15s ease, transform 0.12s ease; }
+    .btn-submit { width: 100%; height: 42px; background-color: var(--accent); color: var(--on-accent); border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2); box-shadow: var(--shadow-sm); border-radius: 12px; font-size: var(--fs-sm); font-weight: 700; cursor: pointer; }
     .btn-submit:hover { background-color: var(--accent-hover); }
-    .btn-submit:active { transform: translateY(1px); }
 
     .form-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 11px; }
     .form-card h2 { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
@@ -187,19 +227,19 @@
 
     .app-footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: var(--fs-xs); color: var(--text-muted); }
     .app-footer a { color: var(--accent); font-weight: 700; text-decoration: none; }
-    .app-footer a:hover { text-decoration: underline; }
 
     .bottom-tabs { position: fixed; bottom: 0; right: 0; left: 0; width: 100%; height: 64px; background-color: var(--bg-surface); border-top: 1px solid var(--border); box-shadow: var(--shadow-nav); display: grid; grid-template-columns: repeat(4, 1fr); z-index: 30; padding: 5px 6px; gap: 4px; }
-    .bottom-tab { background: transparent; border: 1px solid transparent; border-radius: 12px; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 11px; font-weight: 600; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease; }
+    .bottom-tab { background: transparent; border: 1px solid transparent; border-radius: 12px; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 11px; font-weight: 600; cursor: pointer; }
     .bottom-tab svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
     .bottom-tab.active { color: var(--accent); background-color: var(--accent-soft); border-color: rgba(30, 58, 95, 0.14); font-weight: 700; }
-    [data-theme="dark"] .bottom-tab.active { border-color: rgba(147, 197, 253, 0.2); }
 
     .toast { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: var(--bg-surface); box-shadow: var(--shadow-md); padding: 9px 18px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; display: none; z-index: 50; white-space: nowrap; }
 
-    @media (max-width: 600px) {
+    @media (max-width: 680px) {
       .metrics-grid { grid-template-columns: 1fr; }
       .metric-card { flex-direction: row; align-items: center; justify-content: space-between; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .install-pill span { display: none; }
     }
     @media (min-width: 680px) { .controls-wrap .field-input { max-width: 310px; } }
     @media (min-width: 820px) {
@@ -241,6 +281,10 @@
         </button>
       </nav>
       <div class="topbar-tools">
+        <button id="installAppBtn" class="install-pill" onclick="triggerInstallApp()" title="تثبيت تطبيق برهان على هاتفك">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>تثبيت التطبيق</span>
+        </button>
         <button id="notifBtn" class="icon-btn" onclick="requestAppNotifications()" title="تفعيل إشعارات التحديثات الفورية" aria-label="تفعيل الإشعارات">
           <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="notif-badge-dot"></span>
@@ -278,12 +322,13 @@
         <div class="controls-row">
           <div class="filter-group" id="outletAreaFilters">
             <button class="filter-pill active" onclick="setOutletArea('الكل', this)">كل المحافظات</button>
+            <button class="filter-pill" onclick="setOutletArea('المفضلة', this)">المفضلة ★</button>
             <button class="filter-pill" onclick="setOutletArea('خان يونس', this)">خان يونس والمواصي</button>
             <button class="filter-pill" onclick="setOutletArea('دير البلح', this)">دير البلح</button>
             <button class="filter-pill" onclick="setOutletArea('المحافظة الوسطى', this)">المحافظة الوسطى</button>
             <button class="filter-pill" onclick="setOutletArea('مدينة غزة', this)">مدينة غزة</button>
           </div>
-          <input type="text" id="outletSearch" class="field-input" placeholder="ابحث بالشارع أو المعلم أو الجهة المشرفة..." oninput="renderOutlets()" />
+          <input type="text" id="outletSearch" class="field-input" placeholder="ابحث بالشارع أو المعلم أو الجهة..." oninput="renderOutlets()" />
         </div>
       </div>
       <div class="cards-stack" id="outletsList"></div>
@@ -308,10 +353,30 @@
           <span id="countRed" class="metric-num">0</span>
         </div>
       </div>
+
+      <div class="calc-card">
+        <div class="calc-header" onclick="toggleCalcBox()">
+          <span class="calc-title">
+            <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+            <span>حاسبة السعر العادل ومقارنة سعر البائع</span>
+          </span>
+          <span id="calcToggleLabel" class="btn-soft">فتح الحاسبة</span>
+        </div>
+        <div id="calcBody" class="calc-body">
+          <div class="calc-grid">
+            <select id="calcItemSelect" class="field-input" onchange="updateFairCalc()"></select>
+            <input id="calcQtyInput" type="number" min="0.25" step="0.25" value="1" class="field-input" placeholder="الكمية" oninput="updateFairCalc()" />
+            <input id="calcSellerPrice" type="number" min="0" step="0.5" class="field-input" placeholder="سعر البائع الإجمالي (اختياري)" oninput="updateFairCalc()" />
+          </div>
+          <div id="calcResultBox" class="calc-result"></div>
+        </div>
+      </div>
+
       <div class="controls-wrap">
         <div class="controls-row">
           <div class="filter-group" id="categoryFilters">
             <button class="filter-pill active" onclick="setCategoryFilter('الكل', this)">جميع الأصناف (29)</button>
+            <button class="filter-pill" onclick="setCategoryFilter('المفضلة', this)">المفضلة ★</button>
             <button class="filter-pill" onclick="setCategoryFilter('الخبز والحبوب', this)">الخبز والحبوب</button>
             <button class="filter-pill" onclick="setCategoryFilter('البقوليات والمعلبات', this)">البقوليات والمعلبات</button>
             <button class="filter-pill" onclick="setCategoryFilter('الزيوت والألبان', this)">الزيوت والألبان</button>
@@ -349,7 +414,8 @@
           <span class="card-detail">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
         </div>
         <div class="sync-actions">
-          <button class="btn-soft" onclick="requestAppNotifications()">تفعيل إشعارات التحديثات</button>
+          <button class="btn-soft" onclick="triggerInstallApp()">تثبيت التطبيق على الهاتف</button>
+          <button class="btn-soft" onclick="requestAppNotifications()">تفعيل الإشعارات</button>
           <button class="btn-soft" onclick="manualSync()">فحص التحديثات الآن</button>
           <a href="./privacy.html" class="btn-soft">سياسة الخصوصية</a>
         </div>
@@ -369,7 +435,7 @@
               <div class="filter-group" id="verdictFilters">
                 <button class="filter-pill active" onclick="setVerdictFilter('all', this)">الكل</button>
                 <button class="filter-pill" onclick="setVerdictFilter('false', this)">ادعاءات مضللة</button>
-                <button class="filter-pill" onclick="setVerdictFilter('true', this)">توضيحات رسمية</button>
+                <button class="filter-pill" onclick="setVerdictFilter('true', this)">معلومات صحيحة وتوضيحات</button>
               </div>
               <input type="text" id="rumorSearch" class="field-input" placeholder="ابحث في سجل التحقق..." oninput="renderRumors()" />
             </div>
@@ -430,6 +496,9 @@
     const SUN_SVG = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
     const MOON_SVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
     const SHIELD_ICON = '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+    const WA_ICON = '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
+    const FALSE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+    const TRUE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
 
     function applyTheme(theme) {
       const root = document.documentElement;
@@ -458,6 +527,36 @@
 
     applyTheme(localStorage.getItem('burhan_theme') || 'light');
 
+    /* تثبيت التطبيق على الهاتف */
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      const btn = document.getElementById('installAppBtn');
+      if (btn) btn.style.display = 'inline-flex';
+    });
+
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+      const btn = document.getElementById('installAppBtn');
+      if (btn) btn.style.display = 'none';
+    }
+
+    async function triggerInstallApp() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const { outcome } = await deferredInstallPrompt.userChoice;
+        if (outcome === 'accepted') {
+          showToast('جاري تثبيت تطبيق برهان على هاتفك');
+          const btn = document.getElementById('installAppBtn');
+          if (btn) btn.style.display = 'none';
+        }
+        deferredInstallPrompt = null;
+      } else {
+        showToast('لتثبيت التطبيق: اضغط قائمة المتصفح (⋮ أو زر المشاركة) ثم اختر «إضافة إلى الشاشة الرئيسية»');
+      }
+    }
+
+    /* الإشعارات الفورية */
     let liveBannerTargetTab = 'rumors';
 
     function updateNotifButtonUI() {
@@ -485,11 +584,7 @@
       updateNotifButtonUI();
       if (perm === 'granted') {
         showToast('تم تفعيل إشعارات برهان بنجاح');
-        triggerSystemNotification(
-          'تم تفعيل إشعارات برهان',
-          'ستصلك تنبيهات فورية عند تحديث أسعار السلع أو نشر تحقق ميداني جديد.',
-          'market'
-        );
+        triggerSystemNotification('تم تفعيل إشعارات برهان', 'ستصلك تنبيهات فورية عند تحديث أسعار السلع أو نشر تحقق ميداني جديد.', 'market');
       } else {
         showToast('لم يتم منح إذن الإشعارات من المتصفح');
       }
@@ -508,7 +603,6 @@
         bannerText.textContent = title + ' — ' + body;
         banner.style.display = 'block';
       }
-
       if ('Notification' in window && Notification.permission === 'granted') {
         try {
           if ('serviceWorker' in navigator) {
@@ -526,9 +620,7 @@
           } else {
             new Notification(title, { body: body, icon: './icon-192.png' });
           }
-        } catch (e) {
-          console.warn('Notification display skipped:', e);
-        }
+        } catch (e) {}
       }
     }
 
@@ -607,7 +699,7 @@
         { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو متداول على منصة إكس يزعم توثيق إنزال مساعدات جوية حديث على قطاع غزة وسط فرحة الأهالي بعد أشهر من النقص.", truth: "بالتحقق من الادعاء وجد فريق (مسبار) أنه مضلل؛ إذ إن مقطع الفيديو قديم ويعود إلى عملية إنزال مساعدات جوية على قطاع غزة في أكتوبر 2024 وليس حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 31 يوليو 2025" },
         { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو متداول على مواقع التواصل الاجتماعي يدعي إظهار فرحة أهالي قطاع غزة بوصول مساعدات سعودية حديثة.", truth: "كشف فريق (مسبار) أن الادعاء مضلل، وأن المقطع قديم يعود إلى عملية إنزال جوي للمساعدات نفذت في يوليو 2024، وليس لمساعدات وصلت حديثا.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 28 يوليو 2025" },
         { verdict: "false", tag: "ادعاء مضلل", claim: "مقطع فيديو منشور على فيسبوك وتيك توك يدعي كسر الصين الحصار المفروض على قطاع غزة عبر إسقاط مساعدات جوية على شمالي القطاع.", truth: "أوضح تحقيق (مسبار) أن الفيديو قديم ومنشور منذ عام 2024، ولا يوثق أي عملية إنزال جوي صينية حديثة على شمالي قطاع غزة.", meta: "المصدر: منصة مسبار لتقصي الحقائق | 18 مايو 2025" },
-        { verdict: "true", tag: "توضيح رسمي", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحا أن ما حدث كان خللا مؤقتا في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
+        { verdict: "true", tag: "معلومة صحيحة وتوضيح رسمي", claim: "تساؤلات حول توفر كميات الطحين المخصصة للقطاع التجاري في غزة وتراجع سعر الكيس بعد وصوله إلى 80 شيكل.", truth: "أكد مدير عام السياسات والتخطيط بوزارة الاقتصاد في غزة، محمد بربخ، توفر الكميات المخصصة للقطاع التجاري من الطحين، موضحا أن ما حدث كان خللا مؤقتا في التوريد وبدأ السعر بالتراجع مع انتظام دخول الشحنات.", meta: "المصدر: تصريح رسمي لوزارة الاقتصاد الوطني - غزة | سبتمبر 2026" }
       ]
     };
 
@@ -622,12 +714,62 @@
       });
     }
 
+    function normalizeAr(text) {
+      return String(text || '')
+        .toLowerCase()
+        .replace(/[\u064B-\u065F\u0670]/g, '')
+        .replace(/[أإآ]/g, 'ا')
+        .replace(/ة/g, 'ه')
+        .replace(/ى/g, 'ي')
+        .replace(/ؤ/g, 'و')
+        .replace(/ئ/g, 'ي')
+        .trim();
+    }
+
     function showToast(msg) {
       const el = document.getElementById('toast');
       el.textContent = msg;
       el.style.display = 'block';
       clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 2500);
+      window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 2800);
+    }
+
+    /* المفضلة */
+    function getFavList(key) {
+      try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { return []; }
+    }
+    function toggleFavOutlet(btn) {
+      const name = btn.getAttribute('data-name');
+      let favs = getFavList('burhan_fav_outlets');
+      if (favs.includes(name)) {
+        favs = favs.filter(x => x !== name);
+        showToast('تمت الإزالة من المفضلة');
+      } else {
+        favs.unshift(name);
+        showToast('تمت الإضافة إلى نقاط التوزيع المفضلة ★');
+      }
+      localStorage.setItem('burhan_fav_outlets', JSON.stringify(favs));
+      renderOutlets();
+    }
+    function toggleFavMarket(btn) {
+      const name = btn.getAttribute('data-name');
+      let favs = getFavList('burhan_fav_market');
+      if (favs.includes(name)) {
+        favs = favs.filter(x => x !== name);
+        showToast('تمت الإزالة من المفضلة');
+      } else {
+        favs.unshift(name);
+        showToast('تمت الإضافة إلى السلع المفضلة ★');
+      }
+      localStorage.setItem('burhan_fav_market', JSON.stringify(favs));
+      renderMarket();
+    }
+
+    /* المشاركة عبر واتساب */
+    function shareCardWhatsApp(btn) {
+      const raw = btn.getAttribute('data-share') || '';
+      const msg = raw + '\n\nالمصدر: تطبيق برهان\nhttps://ahmedabudahi.github.io/gaza-field-guide/';
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
     }
 
     function getOutletAccreditation(item) {
@@ -671,6 +813,21 @@
       return exact + ' (' + rel + ')';
     }
 
+    function formatItemRelativeTime(isoDateString) {
+      if (!isoDateString) return '';
+      const d = new Date(isoDateString);
+      if (isNaN(d.getTime())) return '';
+      const diffMins = Math.floor((new Date() - d) / 60000);
+      if (diffMins < 60) return 'محدّث منذ دقائق';
+      const diffHours = Math.floor(diffMins / 60);
+      if (diffHours === 1) return 'محدّث منذ ساعة';
+      if (diffHours === 2) return 'محدّث منذ ساعتين';
+      if (diffHours < 24) return 'محدّث منذ ' + diffHours + ' ساعات';
+      const diffDays = Math.floor(diffHours / 24);
+      if (diffDays === 1) return 'تحديث أمس';
+      return 'تحديث ' + d.toLocaleDateString('ar-EG', { month: 'short', day: 'numeric' });
+    }
+
     function applyPriceOverridesMap(rows) {
       if (!Array.isArray(rows) || !rows.length) return;
       const map = {};
@@ -679,9 +836,11 @@
         ...item,
         fair: map[item.name].fair,
         status: map[item.name].status,
-        label: map[item.name].label
+        label: map[item.name].label,
+        updatedAt: map[item.name].updated_at || ''
       } : item);
       updateMetrics();
+      populateFairCalcItems();
       renderMarket();
     }
 
@@ -699,13 +858,15 @@
           ...item,
           fair: map[item.name].fair,
           status: map[item.name].status,
-          label: map[item.name].label
+          label: map[item.name].label,
+          updatedAt: map[item.name].updated_at || ''
         } : item);
       }
 
       document.getElementById('lastSyncTime').textContent = formatLastUpdated(dataset.lastUpdated);
       if (dataset.lastSourceStatus) document.getElementById('sourceStatusBadge').textContent = dataset.lastSourceStatus;
       updateMetrics();
+      populateFairCalcItems();
       renderOutlets();
       renderMarket();
       renderAlerts();
@@ -736,11 +897,7 @@
         applyDataset(freshData);
         updateConnUI(false);
         if (prevLastUpdated && freshData.lastUpdated && prevLastUpdated !== freshData.lastUpdated) {
-          triggerSystemNotification(
-            'تحديث رسمي جديد في برهان',
-            freshData.lastSourceStatus || 'تم تحديث نشرة الأسعار والبيانات الميدانية.',
-            'market'
-          );
+          triggerSystemNotification('تحديث رسمي جديد في برهان', freshData.lastSourceStatus || 'تم تحديث نشرة الأسعار والبيانات الميدانية.', 'market');
         }
         if (isManual) showToast('تم تحديث البيانات من المصدر الرسمي بنجاح');
       } catch (err) {
@@ -756,6 +913,52 @@
       if (heading && tabTitles[name]) heading.textContent = tabTitles[name];
     }
 
+    /* حاسبة السعر العادل */
+    function toggleCalcBox() {
+      const body = document.getElementById('calcBody');
+      const label = document.getElementById('calcToggleLabel');
+      const isOpen = body.classList.toggle('open');
+      label.textContent = isOpen ? 'إغلاق' : 'فتح الحاسبة';
+      if (isOpen) updateFairCalc();
+    }
+
+    function populateFairCalcItems() {
+      const sel = document.getElementById('calcItemSelect');
+      if (!sel || !marketData.length) return;
+      const prev = sel.value;
+      sel.innerHTML = marketData.map((item, idx) => `<option value="${idx}">${escapeHtml(item.name)} — (${escapeHtml(item.fair)})</option>`).join('');
+      if (prev && sel.options[prev]) sel.value = prev;
+      updateFairCalc();
+    }
+
+    function updateFairCalc() {
+      const sel = document.getElementById('calcItemSelect');
+      const box = document.getElementById('calcResultBox');
+      if (!sel || !box || !marketData.length) return;
+      const item = marketData[Number(sel.value) || 0];
+      const unitPrice = parseFloat(String(item.fair).replace(/[^\d.]/g, '')) || 0;
+      const qty = Math.max(0.1, parseFloat(document.getElementById('calcQtyInput').value) || 1);
+      const fairTotal = +(unitPrice * qty).toFixed(2);
+      const sellerVal = parseFloat(document.getElementById('calcSellerPrice').value);
+
+      let diffHtml = '<span class="card-detail">أدخل سعر البائع الإجمالي للمقارنة</span>';
+      if (!isNaN(sellerVal) && sellerVal > 0) {
+        const diff = +(sellerVal - fairTotal).toFixed(2);
+        if (Math.abs(diff) < 0.2) {
+          diffHtml = '<span class="inline-status st-ok"><span class="status-dot"></span>مطابق للتسعيرة الاسترشادية</span>';
+        } else if (diff > 0) {
+          diffHtml = `<span class="inline-status st-danger"><span class="status-dot"></span>أعلى من التسعيرة بـ ${diff} شيكل</span>`;
+        } else {
+          diffHtml = `<span class="inline-status st-ok"><span class="status-dot"></span>أقل من التسعيرة بـ ${Math.abs(diff)} شيكل</span>`;
+        }
+      }
+
+      box.innerHTML = `
+        <div>التكلفة العادلة لعدد (<strong>${qty}</strong>): <strong style="font-size:16px; color:var(--accent);">${fairTotal} شيكل</strong> <span class="card-detail">(${escapeHtml(item.fair)} للوحدة)</span></div>
+        <div>${diffHtml}</div>
+      `;
+    }
+
     function setOutletArea(area, btn) {
       selectedOutletArea = area;
       document.querySelectorAll('#outletAreaFilters .filter-pill').forEach(b => b.classList.remove('active'));
@@ -764,24 +967,47 @@
     }
 
     function renderOutlets() {
-      const q = document.getElementById('outletSearch').value.trim();
+      const q = normalizeAr(document.getElementById('outletSearch').value);
       const list = document.getElementById('outletsList');
-      const filtered = outletsData.filter(o => (selectedOutletArea === 'الكل' || o.area === selectedOutletArea) && (!q || o.name.includes(q) || o.address.includes(q) || o.items.includes(q)));
+      const favs = getFavList('burhan_fav_outlets');
+
+      let filtered = outletsData.filter(o => {
+        const areaOk = selectedOutletArea === 'الكل'
+          ? true
+          : selectedOutletArea === 'المفضلة'
+            ? favs.includes(o.name)
+            : o.area === selectedOutletArea;
+        const qOk = !q || normalizeAr(o.name).includes(q) || normalizeAr(o.address).includes(q) || normalizeAr(o.items).includes(q);
+        return areaOk && qOk;
+      });
+
+      filtered = filtered.slice().sort((a, b) => (favs.includes(b.name) ? 1 : 0) - (favs.includes(a.name) ? 1 : 0));
+
       if (!filtered.length) {
         list.innerHTML = '<div class="empty-state">لا توجد نقاط توزيع مطابقة لخيارات البحث الحالية.</div>';
         return;
       }
-      list.innerHTML = filtered.map(o => `
-        <article class="item-card">
-          <h2 class="card-title">${escapeHtml(o.name)}</h2>
-          <p class="card-sub">${escapeHtml(o.address)}</p>
-          <div class="card-divider"></div>
-          <div class="card-meta-row">
-            <span class="source-note">${SHIELD_ICON}<span>${escapeHtml(getOutletAccreditation(o))}</span></span>
-            <span class="card-detail">${escapeHtml(o.hours)}</span>
-          </div>
-        </article>
-      `).join('');
+      list.innerHTML = filtered.map(o => {
+        const isFav = favs.includes(o.name);
+        const shareText = `نقطة توزيع معتمدة (${o.area}):\n${o.name}\nالعنوان: ${o.address}\n${o.items}\n${o.hours}`;
+        return `
+          <article class="item-card ${isFav ? 'fav-pinned' : ''}">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavOutlet(this)" data-name="${escapeHtml(o.name)}" title="${isFav ? 'إزالة من المفضلة' : 'تثبيت في المفضلة'}">${isFav ? '★' : '☆'}</button>
+                <h2 class="card-title">${escapeHtml(o.name)}</h2>
+              </div>
+              <button class="btn-wa" onclick="shareCardWhatsApp(this)" data-share="${escapeHtml(shareText)}">${WA_ICON}<span>مشاركة</span></button>
+            </div>
+            <p class="card-sub">${escapeHtml(o.address)}</p>
+            <div class="card-divider"></div>
+            <div class="card-meta-row">
+              <span class="source-note">${SHIELD_ICON}<span>${escapeHtml(getOutletAccreditation(o))}</span></span>
+              <span class="card-detail">${escapeHtml(o.hours)}</span>
+            </div>
+          </article>
+        `;
+      }).join('');
     }
 
     function updateMetrics() {
@@ -805,9 +1031,23 @@
     }
 
     function renderMarket() {
-      const q = document.getElementById('marketSearch').value.trim();
+      const q = normalizeAr(document.getElementById('marketSearch').value);
       const list = document.getElementById('marketList');
-      const filtered = marketData.filter(item => (selectedMarketCategory === 'الكل' || (item.category || 'أخرى') === selectedMarketCategory) && (selectedMarketStatus === 'all' || item.status === selectedMarketStatus) && (!q || item.name.includes(q) || item.source.includes(q)));
+      const favs = getFavList('burhan_fav_market');
+
+      let filtered = marketData.filter(item => {
+        const catOk = selectedMarketCategory === 'الكل'
+          ? true
+          : selectedMarketCategory === 'المفضلة'
+            ? favs.includes(item.name)
+            : (item.category || 'أخرى') === selectedMarketCategory;
+        const stOk = selectedMarketStatus === 'all' || item.status === selectedMarketStatus;
+        const qOk = !q || normalizeAr(item.name).includes(q) || normalizeAr(item.source).includes(q);
+        return catOk && stOk && qOk;
+      });
+
+      filtered = filtered.slice().sort((a, b) => (favs.includes(b.name) ? 1 : 0) - (favs.includes(a.name) ? 1 : 0));
+
       if (!filtered.length) {
         list.innerHTML = '<div class="empty-state">لا توجد سلع مطابقة لخيارات التصفية الحالية.</div>';
         return;
@@ -815,15 +1055,27 @@
       const availMap = { green: 'st-ok', amber: 'st-warn', red: 'st-danger' };
       list.innerHTML = filtered.map(item => {
         const cls = availMap[item.status] || 'st-warn';
+        const isFav = favs.includes(item.name);
+        const relTime = formatItemRelativeTime(item.updatedAt);
+        const shareText = `تسعيرة السوق (${item.area}):\n${item.name}\nالسعر الاسترشادي: ${item.fair} (${item.label})\n${item.ref}`;
         return `
-          <article class="item-card">
+          <article class="item-card ${isFav ? 'fav-pinned' : ''}">
             <div class="card-header">
-              <h2 class="card-title">${escapeHtml(item.name)}</h2>
-              <span class="inline-status ${cls}"><span class="status-dot"></span>${escapeHtml(item.label)}</span>
+              <div class="card-title-wrap">
+                <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavMarket(this)" data-name="${escapeHtml(item.name)}" title="${isFav ? 'إزالة من المفضلة' : 'تثبيت في المفضلة'}">${isFav ? '★' : '☆'}</button>
+                <h2 class="card-title">${escapeHtml(item.name)}</h2>
+              </div>
+              <div class="card-actions-inline">
+                <span class="inline-status ${cls}"><span class="status-dot"></span>${escapeHtml(item.label)}</span>
+                <button class="btn-wa" onclick="shareCardWhatsApp(this)" data-share="${escapeHtml(shareText)}">${WA_ICON}<span>واتساب</span></button>
+              </div>
             </div>
             <div class="price-block">
-              <span class="price-main">${escapeHtml(item.fair)}</span>
-              <span class="price-ref">${escapeHtml(item.ref)}</span>
+              <div>
+                <span class="price-main">${escapeHtml(item.fair)}</span>
+                <span class="price-ref" style="margin-right:8px;">${escapeHtml(item.ref)}</span>
+              </div>
+              ${relTime ? `<span class="item-updated-tag">${escapeHtml(relTime)}</span>` : ''}
             </div>
             <div class="card-divider"></div>
             <div class="card-meta-row">
@@ -859,23 +1111,37 @@
     }
 
     function renderRumors() {
-      const q = document.getElementById('rumorSearch').value.trim();
+      const q = normalizeAr(document.getElementById('rumorSearch').value);
       const list = document.getElementById('rumorsList');
-      const filtered = rumorsData.filter(r => (selectedVerdict === 'all' || r.verdict === selectedVerdict) && (!q || r.claim.includes(q) || r.truth.includes(q)));
+      const filtered = rumorsData.filter(r => (selectedVerdict === 'all' || r.verdict === selectedVerdict) && (!q || normalizeAr(r.claim).includes(q) || normalizeAr(r.truth).includes(q)));
       if (!filtered.length) {
         list.innerHTML = '<div class="empty-state">لا توجد نتائج مطابقة في سجل التحقق.</div>';
         return;
       }
       list.innerHTML = filtered.map((r) => {
         const isFalse = r.verdict === 'false';
+        const boxClass = isFalse ? 'verdict-false' : 'verdict-true';
+        const cardClass = isFalse ? 'rumor-false-card' : 'rumor-true-card';
+        const iconSvg = isFalse ? FALSE_VERDICT_ICON : TRUE_VERDICT_ICON;
+        const boxHeading = isFalse ? 'نتيجة التحقق: ادعاء مضلل / غير صحيح' : 'نتيجة التحقق: معلومة صحيحة ومؤكدة';
+        const shareText = `تحقق موثق (${r.tag}):\nالخبر المتداول: "${r.claim}"\nالنتيجة: ${r.truth}\n${r.meta}`;
         return `
-          <article class="item-card">
+          <article class="item-card ${cardClass}">
             <div class="card-header">
               <span class="inline-status ${isFalse ? 'st-danger' : 'st-ok'}"><span class="status-dot"></span>${escapeHtml(r.tag)}</span>
-              <button class="btn-soft" onclick="copyFactByClaim(this)" data-claim="${escapeHtml(r.claim)}">نسخ النص</button>
+              <div class="card-actions-inline">
+                <button class="btn-soft" onclick="copyFactByClaim(this)" data-claim="${escapeHtml(r.claim)}">نسخ</button>
+                <button class="btn-wa" onclick="shareCardWhatsApp(this)" data-share="${escapeHtml(shareText)}">${WA_ICON}<span>واتساب</span></button>
+              </div>
             </div>
             <div class="card-title">"${escapeHtml(r.claim)}"</div>
-            <div class="fact-callout"><strong>نتيجة التحقق الموثقة:</strong> ${escapeHtml(r.truth)}</div>
+            <div class="fact-callout ${boxClass}">
+              <span class="fact-icon">${iconSvg}</span>
+              <div class="fact-body">
+                <span class="fact-label">${boxHeading}</span>
+                <span class="fact-text">${escapeHtml(r.truth)}</span>
+              </div>
+            </div>
             <div class="card-meta-row">
               <span class="source-note">${SHIELD_ICON}<span>${escapeHtml(getRumorAccreditation(r))}</span></span>
               <span class="card-detail">${escapeHtml(r.meta)}</span>
@@ -922,16 +1188,10 @@
         if (notifyOnChange && prevRaw !== nextRaw && data.length) {
           const latest = [...data].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))[0];
           if (latest) {
-            triggerSystemNotification(
-              'تحديث سعر في الأسواق · برهان',
-              latest.item_name + ': ' + latest.fair + ' (' + latest.label + ')',
-              'market'
-            );
+            triggerSystemNotification('تحديث سعر في الأسواق · برهان', latest.item_name + ': ' + latest.fair + ' (' + latest.label + ')', 'market');
           }
         }
-      } catch (e) {
-        console.warn('تعذر جلب تعديلات الأسعار الفورية', e);
-      }
+      } catch (e) {}
     }
 
     async function fetchApprovedCommunityReports(notifyOnNew) {
@@ -957,9 +1217,13 @@
             triggerSystemNotification(title, brandNew.content, 'rumors');
           }
         }
-      } catch (e) {
-        console.warn('تعذر جلب البلاغات المعتمدة من Supabase', e);
-      }
+      } catch (e) {}
+    }
+
+    function detectReportMisleading(row) {
+      const combined = ((row.content || '') + ' ' + (row.admin_reply || '')).trim();
+      const falseKeywords = ['كاذب', 'مضلل', 'غير صحيح', 'تحذير', 'شائعة', 'لا أساس له', 'وهمية', 'ارتفاع غير مبرر', 'مخالف'];
+      return falseKeywords.some(k => combined.includes(k));
     }
 
     function mergeApprovedReportsIntoRumors(approvedRows) {
@@ -967,13 +1231,18 @@
       const existingClaims = new Set(rumorsData.map(r => r.claim));
       const mapped = approvedRows.map(row => {
         const isPrice = row.report_type === 'price';
+        const isFalse = detectReportMisleading(row);
+        const areaName = row.area || 'غزة';
         const d = row.created_at ? new Date(row.created_at).toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }) : 'محدث';
+        const tagLabel = isPrice
+          ? (isFalse ? 'تنبيه سعر مخالف · ' + areaName : 'تحديث سعر معتمد · ' + areaName)
+          : (isFalse ? 'ادعاء مضلل · ' + areaName : 'معلومة صحيحة ومؤكدة · ' + areaName);
         return {
-          verdict: isPrice ? 'false' : 'true',
-          tag: isPrice ? ('بلاغ سعر ميداني · ' + (row.area || 'غزة')) : ('تحقق مجتمعي معتمد · ' + (row.area || 'غزة')),
+          verdict: isFalse ? 'false' : 'true',
+          tag: tagLabel,
           claim: row.content,
           truth: row.admin_reply || 'تمت مراجعة البلاغ واعتماده من إدارة تطبيق برهان.',
-          meta: 'المصدر: بلاغات المواطنين المعتمدة (إدارة برهان) | ' + d
+          meta: 'المصدر: إدارة التحقق الميداني (برهان) | ' + d
         };
       });
       mapped.reverse().forEach(item => {
@@ -1004,17 +1273,11 @@
             const row = payload.new;
             if (row && row.item_name) {
               fetchLivePriceOverrides(false);
-              triggerSystemNotification(
-                'تحديث سعر فوري · برهان',
-                row.item_name + ': ' + row.fair + ' (' + row.label + ')',
-                'market'
-              );
+              triggerSystemNotification('تحديث سعر فوري · برهان', row.item_name + ': ' + row.fair + ' (' + row.label + ')', 'market');
             }
           })
           .subscribe();
-      } catch (e) {
-        console.warn('Realtime subscription fallback to polling:', e);
-      }
+      } catch (e) {}
     }
 
     async function addUserReport() {
@@ -1032,13 +1295,9 @@
         btn.disabled = true;
         btn.textContent = 'جاري الإرسال...';
         try {
-          const { error } = await sbClient
-            .from('reports')
-            .insert([{ report_type: reportType, area: area, content: val, status: 'pending' }]);
+          const { error } = await sbClient.from('reports').insert([{ report_type: reportType, area: area, content: val, status: 'pending' }]);
           if (!error) remoteSaved = true;
-        } catch (e) {
-          console.warn('Supabase insert fallback to local', e);
-        } finally {
+        } catch (e) {} finally {
           btn.disabled = false;
           btn.textContent = 'إرسال للمراجعة والنشر';
         }
@@ -1066,22 +1325,18 @@
       let sentCount = 0;
       for (const item of pendingItems) {
         try {
-          const { error } = await sbClient
-            .from('reports')
-            .insert([{
-              report_type: item.report_type || 'rumor',
-              area: item.area || 'خان يونس',
-              content: item.text,
-              status: 'pending'
-            }]);
+          const { error } = await sbClient.from('reports').insert([{
+            report_type: item.report_type || 'rumor',
+            area: item.area || 'خان يونس',
+            content: item.text,
+            status: 'pending'
+          }]);
           if (!error) {
             item.synced = true;
             item.status = 'تم الإرسال تلقائياً للإدارة · قيد المراجعة';
             sentCount++;
           }
-        } catch (e) {
-          console.warn('تعذر مزامنة بلاغ معلق', e);
-        }
+        } catch (e) {}
       }
       if (sentCount > 0) {
         localStorage.setItem('burhan_reports', JSON.stringify(saved));
@@ -1151,7 +1406,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(err => console.warn('SW registration failed:', err));
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
       });
     }
 
