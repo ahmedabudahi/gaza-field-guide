@@ -36,7 +36,6 @@
       --danger-color: #991B1B;
       --danger-dot: #DC2626;
       --danger-bg: rgba(220, 38, 38, 0.08);
-      /* Flat 2.0 / Semi-Flat Layered Elevation Shadows */
       --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.04);
       --shadow-sm: 0 2px 5px -1px rgba(28, 25, 23, 0.06), 0 1px 2px -1px rgba(28, 25, 23, 0.04);
       --shadow-md: 0 6px 14px -3px rgba(28, 25, 23, 0.08), 0 2px 4px -2px rgba(28, 25, 23, 0.04);
@@ -80,9 +79,8 @@
     html, body { width: 100%; overflow-x: hidden; font-size: var(--fs-base); line-height: 1.65; font-variant-numeric: tabular-nums; }
     body { background-color: var(--bg-page); color: var(--text-primary); min-height: 100vh; }
 
-    /* الشريط العلوي - Flat 2.0 */
     .topbar { width: 100%; background-color: var(--bg-surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-xs); position: sticky; top: 0; z-index: 30; }
-    .topbar-inner { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 clamp(14px, 3vw, 28px); height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .topbar-inner { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 clamp(14px, 3vw, 28px); height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .brand-mini { display: flex; align-items: center; gap: 9px; }
     .brand-dot { width: 9px; height: 9px; border-radius: 50%; background-color: #166534; flex-shrink: 0; }
     .mobile-heading { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
@@ -94,19 +92,49 @@
     .top-tab.active { background-color: var(--accent-soft); border-color: rgba(30, 58, 95, 0.14); color: var(--accent); font-weight: 700; box-shadow: var(--shadow-xs); }
     [data-theme="dark"] .top-tab.active { border-color: rgba(147, 197, 253, 0.2); }
 
-    .topbar-tools { display: flex; align-items: center; gap: 10px; margin-right: auto; }
-    .icon-btn { width: 35px; height: 35px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.15s ease, transform 0.12s ease; }
+    .topbar-tools { display: flex; align-items: center; gap: 8px; margin-right: auto; }
+    .icon-btn { width: 35px; height: 35px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: background-color 0.15s ease, transform 0.12s ease; }
     .icon-btn:hover { background-color: var(--bg-hover); }
     .icon-btn:active { transform: scale(0.96); }
     .icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-btn.notif-enabled { background-color: var(--accent-soft); color: var(--accent); border-color: rgba(30, 58, 95, 0.2); }
+    .notif-badge-dot { position: absolute; top: 6px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background-color: var(--warn-dot); }
+    .icon-btn.notif-enabled .notif-badge-dot { background-color: var(--ok-dot); }
 
-    /* مؤشر الاتصال */
     .conn-status { background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 999px; padding: 5px 11px; color: var(--text-secondary); font-size: var(--fs-xs); font-weight: 600; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; white-space: nowrap; transition: background-color 0.15s ease, color 0.15s ease; }
     .conn-status:hover { background-color: var(--bg-hover); color: var(--text-primary); }
     .conn-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--ok-dot); flex-shrink: 0; }
     .conn-status.offline-state .conn-dot { background-color: var(--warn-dot); }
 
-    /* شارات الحالة Semi-Flat */
+    /* شريط الإشعار المباشر للتحديثات */
+    .live-banner {
+      display: none;
+      background-color: var(--accent);
+      color: var(--on-accent);
+      padding: 10px clamp(14px, 3vw, 28px);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+    }
+    .live-banner-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .live-banner-btn {
+      background-color: rgba(255,255,255,0.18);
+      color: inherit;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .inline-status { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; padding: 3px 10px; border-radius: 999px; border: 1px solid transparent; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .st-ok { color: var(--ok-color); background-color: var(--ok-bg); border-color: rgba(22, 101, 52, 0.14); }
@@ -119,7 +147,6 @@
     .source-note { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; color: var(--accent); }
     .source-note svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
 
-    /* الحاوية الرئيسية */
     .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 20px clamp(14px, 3vw, 28px) 88px; }
     .panel { display: none; width: 100%; }
     .panel.active { display: block; }
@@ -128,13 +155,11 @@
     .section-top h1 { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); line-height: 1.4; }
     .section-top span { font-size: var(--fs-xs); color: var(--text-muted); }
 
-    /* ملخص الأسعار السريع - Semi-Flat */
     .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-bottom: 16px; }
     .metric-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; padding: 13px 16px; border-radius: 14px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 6px; }
     .metric-top { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; width: fit-content; }
     .metric-num { font-size: 21px; font-weight: 700; color: var(--text-primary); padding-right: 4px; }
 
-    /* شريط البحث والتصفية */
     .controls-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
     .controls-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
     .filter-group { display: flex; align-items: center; gap: 7px; overflow-x: auto; scrollbar-width: none; max-width: 100%; padding: 2px 0; }
@@ -146,7 +171,6 @@
     .field-input { width: 100%; height: 41px; background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 12px; padding: 0 14px; color: var(--text-primary); font-size: var(--fs-sm); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
     .field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 
-    /* البطاقات - Flat 2.0 / Semi-Flat */
     .cards-stack { display: flex; flex-direction: column; gap: 12px; }
     .item-card {
       background-color: var(--bg-surface);
@@ -176,7 +200,6 @@
     .price-main { font-size: 17px; font-weight: 700; color: var(--text-primary); }
     .price-ref { font-size: var(--fs-xs); color: var(--text-muted); }
 
-    /* بطاقة التخزين المحلي */
     .sync-card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
     .sync-info { display: flex; flex-direction: column; gap: 6px; max-width: 600px; }
     .sync-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
@@ -184,7 +207,6 @@
     .sync-info p { font-size: var(--fs-sm); color: var(--text-secondary); }
     .sync-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
-    /* قسم التحقق من الشائعات */
     .rumors-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
     .fact-callout { background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
     .fact-callout strong { color: var(--text-primary); font-weight: 700; }
@@ -203,12 +225,10 @@
     .saved-header { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); margin: 18px 0 10px; }
     .empty-state { background-color: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-xs); border-radius: 16px; padding: 28px 16px; text-align: center; font-size: var(--fs-sm); color: var(--text-secondary); }
 
-    /* التذييل */
     .app-footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: var(--fs-xs); color: var(--text-muted); }
     .app-footer a { color: var(--accent); font-weight: 700; text-decoration: none; }
     .app-footer a:hover { text-decoration: underline; }
 
-    /* شريط التنقل السفلي للهاتف - Flat 2.0 */
     .bottom-tabs { position: fixed; bottom: 0; right: 0; left: 0; width: 100%; height: 64px; background-color: var(--bg-surface); border-top: 1px solid var(--border); box-shadow: var(--shadow-nav); display: grid; grid-template-columns: repeat(4, 1fr); z-index: 30; padding: 5px 6px; gap: 4px; }
     .bottom-tab { background: transparent; border: 1px solid transparent; border-radius: 12px; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 11px; font-weight: 600; cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease; }
     .bottom-tab svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
@@ -261,6 +281,10 @@
         </button>
       </nav>
       <div class="topbar-tools">
+        <button id="notifBtn" class="icon-btn" onclick="requestAppNotifications()" title="تفعيل إشعارات التحديثات الفورية" aria-label="تفعيل الإشعارات">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-badge-dot"></span>
+        </button>
         <button id="themeToggle" class="icon-btn" onclick="toggleTheme()" title="تفعيل الوضع المظلم" aria-label="تبديل المظهر">
           <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
@@ -271,6 +295,16 @@
       </div>
     </div>
   </header>
+
+  <div id="liveBanner" class="live-banner">
+    <div class="live-banner-inner">
+      <span id="liveBannerText">وصل تحديث ميداني جديد في تطبيق برهان</span>
+      <div style="display:flex; gap:8px;">
+        <button id="liveBannerAction" class="live-banner-btn" onclick="openLiveBannerTarget()">عرض التحديث</button>
+        <button class="live-banner-btn" onclick="document.getElementById('liveBanner').style.display='none'">إغلاق</button>
+      </div>
+    </div>
+  </div>
 
   <div id="toast" class="toast"></div>
 
@@ -355,6 +389,7 @@
           <span class="card-detail">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
         </div>
         <div class="sync-actions">
+          <button class="btn-soft" onclick="requestAppNotifications()">تفعيل إشعارات التحديثات</button>
           <button class="btn-soft" onclick="manualSync()">فحص التحديثات الآن</button>
           <a href="./privacy.html" class="btn-soft">سياسة الخصوصية</a>
         </div>
@@ -462,6 +497,81 @@
     }
 
     applyTheme(localStorage.getItem('burhan_theme') || 'light');
+
+    /* نظام الإشعارات والتنبيهات الفورية */
+    let liveBannerTargetTab = 'rumors';
+
+    function updateNotifButtonUI() {
+      const btn = document.getElementById('notifBtn');
+      if (!btn || !('Notification' in window)) return;
+      if (Notification.permission === 'granted') {
+        btn.classList.add('notif-enabled');
+        btn.setAttribute('title', 'الإشعارات مفعّلة: ستصلك تنبيهات الأسعار والأخبار');
+      } else {
+        btn.classList.remove('notif-enabled');
+        btn.setAttribute('title', 'اضغط لتفعيل إشعارات التحديثات الفورية');
+      }
+    }
+
+    async function requestAppNotifications() {
+      if (!('Notification' in window)) {
+        showToast('متصفحك الحالي لا يدعم إشعارات النظام');
+        return;
+      }
+      if (Notification.permission === 'granted') {
+        showToast('إشعارات التحديثات الفورية مفعّلة بالفعل');
+        return;
+      }
+      const perm = await Notification.requestPermission();
+      updateNotifButtonUI();
+      if (perm === 'granted') {
+        showToast('تم تفعيل إشعارات برهان بنجاح');
+        triggerSystemNotification(
+          'تم تفعيل إشعارات برهان',
+          'ستصلك تنبيهات فورية عند تحديث أسعار السلع أو نشر تحقق ميداني جديد.',
+          'market'
+        );
+      } else {
+        showToast('لم يتم منح إذن الإشعارات من المتصفح');
+      }
+    }
+
+    function openLiveBannerTarget() {
+      document.getElementById('liveBanner').style.display = 'none';
+      switchView(liveBannerTargetTab);
+    }
+
+    async function triggerSystemNotification(title, body, targetTab) {
+      liveBannerTargetTab = targetTab || 'rumors';
+      const banner = document.getElementById('liveBanner');
+      const bannerText = document.getElementById('liveBannerText');
+      if (banner && bannerText) {
+        bannerText.textContent = title + ' — ' + body;
+        banner.style.display = 'block';
+      }
+
+      if ('Notification' in window && Notification.permission === 'granted') {
+        try {
+          if ('serviceWorker' in navigator) {
+            const reg = await navigator.serviceWorker.ready;
+            await reg.showNotification(title, {
+              body: body,
+              icon: './icon-192.png',
+              badge: './icon-192.png',
+              dir: 'rtl',
+              lang: 'ar',
+              tag: 'burhan-live-update',
+              renotify: true,
+              data: { url: './index.html' }
+            });
+          } else {
+            new Notification(title, { body: body, icon: './icon-192.png' });
+          }
+        } catch (e) {
+          console.warn('Notification display skipped:', e);
+        }
+      }
+    }
 
     const FALLBACK_DATASET = {
       lastUpdated: "2026-11-23T10:00:00Z",
@@ -645,8 +755,13 @@
 
     async function autoSyncData(isManual) {
       const cachedRaw = localStorage.getItem('burhan_auto_dataset_v5');
+      let prevLastUpdated = null;
       if (cachedRaw) {
-        try { applyDataset(JSON.parse(cachedRaw)); } catch (e) { applyDataset(FALLBACK_DATASET); }
+        try {
+          const parsedCache = JSON.parse(cachedRaw);
+          prevLastUpdated = parsedCache.lastUpdated;
+          applyDataset(parsedCache);
+        } catch (e) { applyDataset(FALLBACK_DATASET); }
       } else {
         applyDataset(FALLBACK_DATASET);
       }
@@ -661,6 +776,13 @@
         localStorage.setItem('burhan_auto_dataset_v5', JSON.stringify(freshData));
         applyDataset(freshData);
         updateConnUI(false);
+        if (prevLastUpdated && freshData.lastUpdated && prevLastUpdated !== freshData.lastUpdated) {
+          triggerSystemNotification(
+            'تحديث رسمي جديد في برهان',
+            freshData.lastSourceStatus || 'تم تحديث نشرة الأسعار والبيانات الميدانية.',
+            'market'
+          );
+        }
         if (isManual) showToast('تم تحديث البيانات من المصدر الرسمي بنجاح');
       } catch (err) {
         if (isManual) showToast('تم التحقق من الذاكرة المحلية بنجاح');
@@ -828,21 +950,35 @@
     const SUPABASE_KEY = "sb_publishable_RRFHVFQ3IJeyOOO2Kd672w_rRhllhpZ";
     const sbClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
-    async function fetchLivePriceOverrides() {
+    async function fetchLivePriceOverrides(notifyOnChange) {
       if (!sbClient || isOfflineMode) return;
       try {
+        const prevRaw = localStorage.getItem('burhan_price_overrides') || '[]';
         const { data, error } = await sbClient.from('price_overrides').select('*');
         if (error || !Array.isArray(data)) return;
-        localStorage.setItem('burhan_price_overrides', JSON.stringify(data));
+        const nextRaw = JSON.stringify(data);
+        localStorage.setItem('burhan_price_overrides', nextRaw);
         applyPriceOverridesMap(data);
+
+        if (notifyOnChange && prevRaw !== nextRaw && data.length) {
+          const latest = [...data].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))[0];
+          if (latest) {
+            triggerSystemNotification(
+              'تحديث سعر في الأسواق · برهان',
+              latest.item_name + ': ' + latest.fair + ' (' + latest.label + ')',
+              'market'
+            );
+          }
+        }
       } catch (e) {
         console.warn('تعذر جلب تعديلات الأسعار الفورية', e);
       }
     }
 
-    async function fetchApprovedCommunityReports() {
+    async function fetchApprovedCommunityReports(notifyOnNew) {
       if (!sbClient || isOfflineMode) return;
       try {
+        const prevIds = new Set(JSON.parse(localStorage.getItem('burhan_approved_reports') || '[]').map(r => r.id));
         const { data, error } = await sbClient
           .from('reports')
           .select('*')
@@ -852,6 +988,16 @@
         if (error || !Array.isArray(data)) return;
         localStorage.setItem('burhan_approved_reports', JSON.stringify(data));
         mergeApprovedReportsIntoRumors(data);
+
+        if (notifyOnNew && prevIds.size > 0) {
+          const brandNew = data.find(r => !prevIds.has(r.id));
+          if (brandNew) {
+            const title = brandNew.report_type === 'price'
+              ? 'تنبيه سعر ميداني جديد · ' + (brandNew.area || 'غزة')
+              : 'تحقق رسمي جديد · ' + (brandNew.area || 'غزة');
+            triggerSystemNotification(title, brandNew.content, 'rumors');
+          }
+        }
       } catch (e) {
         console.warn('تعذر جلب البلاغات المعتمدة من Supabase', e);
       }
@@ -878,6 +1024,38 @@
         }
       });
       renderRumors();
+    }
+
+    function subscribeRealtimeUpdates() {
+      if (!sbClient) return;
+      try {
+        sbClient
+          .channel('burhan-live-channel')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'reports' }, (payload) => {
+            const row = payload.new;
+            if (row && row.status === 'approved') {
+              fetchApprovedCommunityReports(false);
+              const title = row.report_type === 'price'
+                ? 'تنبيه سعر ميداني جديد · ' + (row.area || 'غزة')
+                : 'تحقق رسمي جديد · ' + (row.area || 'غزة');
+              triggerSystemNotification(title, row.content, 'rumors');
+            }
+          })
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'price_overrides' }, (payload) => {
+            const row = payload.new;
+            if (row && row.item_name) {
+              fetchLivePriceOverrides(false);
+              triggerSystemNotification(
+                'تحديث سعر فوري · برهان',
+                row.item_name + ': ' + row.fair + ' (' + row.label + ')',
+                'market'
+              );
+            }
+          })
+          .subscribe();
+      } catch (e) {
+        console.warn('Realtime subscription fallback to polling:', e);
+      }
     }
 
     async function addUserReport() {
@@ -991,8 +1169,8 @@
       if (!isOfflineMode) {
         autoSyncData(false);
         syncPendingOfflineReports();
-        fetchApprovedCommunityReports();
-        fetchLivePriceOverrides();
+        fetchApprovedCommunityReports(true);
+        fetchLivePriceOverrides(true);
       }
     }
 
@@ -1001,15 +1179,15 @@
       updateConnUI(false);
       autoSyncData(false);
       syncPendingOfflineReports();
-      fetchApprovedCommunityReports();
-      fetchLivePriceOverrides();
+      fetchApprovedCommunityReports(true);
+      fetchLivePriceOverrides(true);
     });
     window.addEventListener('offline', () => { isOfflineMode = true; updateConnUI(true); });
     function manualSync() {
       autoSyncData(true);
       syncPendingOfflineReports();
-      fetchApprovedCommunityReports();
-      fetchLivePriceOverrides();
+      fetchApprovedCommunityReports(true);
+      fetchLivePriceOverrides(true);
     }
 
     if ('serviceWorker' in navigator) {
@@ -1018,14 +1196,16 @@
       });
     }
 
+    updateNotifButtonUI();
     updateConnUI(isOfflineMode);
     renderUserReports();
     const cachedApproved = JSON.parse(localStorage.getItem('burhan_approved_reports') || '[]');
     autoSyncData(false).then(() => {
       mergeApprovedReportsIntoRumors(cachedApproved);
       syncPendingOfflineReports();
-      fetchApprovedCommunityReports();
-      fetchLivePriceOverrides();
+      fetchApprovedCommunityReports(true);
+      fetchLivePriceOverrides(true);
+      subscribeRealtimeUpdates();
     });
   </script>
 </body>
