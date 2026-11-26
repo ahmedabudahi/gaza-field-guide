@@ -64,6 +64,12 @@
     .main-tab { padding: 9px 18px; border-radius: 12px; border: 1px solid var(--border); background-color: var(--bg-surface); font-size: 14px; font-weight: 700; color: var(--text-secondary); cursor: pointer; }
     .main-tab.active { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
+    /* بطاقة النشر المباشر من الإدارة */
+    .publish-card { background-color: var(--bg-surface); border: 1px solid var(--border-strong); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .publish-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .publish-header h2 { font-size: 16px; font-weight: 700; color: var(--accent); }
+    .publish-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
     .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
     .metric { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-sm); }
     .metric span { font-size: 12px; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 4px; }
@@ -89,7 +95,7 @@
     .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: #fff; padding: 9px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; display: none; z-index: 50; }
 
     @media (max-width: 720px) {
-      .metrics { grid-template-columns: 1fr; }
+      .metrics, .publish-grid { grid-template-columns: 1fr; }
       .price-row { grid-template-columns: 1fr; }
     }
   </style>
@@ -127,6 +133,32 @@
 
       <!-- قسم البلاغات -->
       <div id="tab-reports">
+        <!-- نموذج نشر بلاغ أو تحقق مباشر من الإدارة -->
+        <div class="publish-card">
+          <div class="publish-header">
+            <h2>نشر تحقق أو تنبيه جديد مباشرة للجميع</h2>
+            <span style="font-size:12px; color:var(--text-muted);">يُنشر فوراً في التطبيق العام دون انتظار مراجعة</span>
+          </div>
+          <div class="publish-grid">
+            <select id="newRepType" class="field">
+              <option value="rumor">النوع: تحقق من شائعة / توضيح رسمي</option>
+              <option value="price">النوع: تنبيه / بلاغ سعر ميداني</option>
+            </select>
+            <select id="newRepArea" class="field">
+              <option value="عموم قطاع غزة">المنطقة: عموم قطاع غزة</option>
+              <option value="خان يونس">المحافظة: خان يونس</option>
+              <option value="دير البلح">المحافظة: دير البلح</option>
+              <option value="المحافظة الوسطى">المحافظة: الوسطى</option>
+              <option value="مدينة غزة">المحافظة: مدينة غزة</option>
+            </select>
+          </div>
+          <input type="text" id="newRepContent" class="field" placeholder="نص الشائعة المتداولة أو عنوان التنبيه الميداني..." />
+          <textarea id="newRepReply" class="reply-box" placeholder="نتيجة التحقق الرسمية أو تفاصيل التنبيه التي ستظهر للمواطنين..."></textarea>
+          <div style="display:flex; justify-content:flex-end;">
+            <button id="publishDirectBtn" class="btn btn-primary" style="height:40px; padding:0 22px; border-radius:12px;" onclick="publishDirectReport()">نشر للجميع فوراً</button>
+          </div>
+        </div>
+
         <div class="metrics">
           <div class="metric"><span>بلاغات قيد المراجعة</span><strong id="mPending">0</strong></div>
           <div class="metric"><span>بلاغات معتمدة ومنشورة</span><strong id="mApproved">0</strong></div>
@@ -220,6 +252,39 @@
       await sb.auth.signOut();
       showToast('تم تسجيل الخروج');
       checkSession();
+    }
+
+    async function publishDirectReport() {
+      const reportType = document.getElementById('newRepType').value;
+      const area = document.getElementById('newRepArea').value;
+      const content = document.getElementById('newRepContent').value.trim();
+      const adminReply = document.getElementById('newRepReply').value.trim();
+      const btn = document.getElementById('publishDirectBtn');
+
+      if (!content) { showToast('يرجى كتابة نص الخبر أو التنبيه أولاً'); return; }
+      if (!adminReply) { showToast('يرجى كتابة نتيجة التحقق أو التفاصيل'); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'جاري النشر...';
+      const { error } = await sb.from('reports').insert([{
+        report_type: reportType,
+        area: area,
+        content: content,
+        admin_reply: adminReply,
+        status: 'approved'
+      }]);
+      btn.disabled = false;
+      btn.textContent = 'نشر للجميع فوراً';
+
+      if (error) {
+        showToast('تعذر النشر: ' + error.message);
+        return;
+      }
+
+      document.getElementById('newRepContent').value = '';
+      document.getElementById('newRepReply').value = '';
+      showToast('تم نشر التحقق للجميع في التطبيق بنجاح');
+      loadReports();
     }
 
     async function loadReports() {
