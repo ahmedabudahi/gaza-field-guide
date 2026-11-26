@@ -183,11 +183,16 @@
     .official-dir-head h2 svg { width: 17px; height: 17px; stroke: var(--ok-color); fill: none; stroke-width: 2.1; flex-shrink: 0; }
     .official-dir-sub { font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.6; }
     .official-list { display: flex; flex-direction: column; gap: 9px; }
-    .official-row { background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-    .official-row-info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 210px; }
+    .official-row { background-color: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .official-row-info { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 220px; }
+    .official-row-top { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
     .official-row-title { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); }
+    .official-cat-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background-color: var(--accent-soft); color: var(--accent); }
     .official-row-desc { font-size: var(--fs-xs); color: var(--text-secondary); }
-    .official-row-code { font-size: var(--fs-xs); font-weight: 700; color: var(--accent); direction: ltr; unicode-bidi: embed; width: fit-content; }
+    .official-row-codes { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+    .official-row-code { font-size: var(--fs-xs); font-weight: 700; color: var(--accent); direction: ltr; unicode-bidi: embed; width: fit-content; text-decoration: none; }
+    .official-row-code:hover { text-decoration: underline; }
+    .official-hotline-tag { font-size: var(--fs-xs); font-weight: 700; color: var(--ok-color); background-color: var(--ok-bg); padding: 1px 8px; border-radius: 999px; }
     .official-row-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .anti-fraud-note { background-color: var(--warn-bg); border: 1px solid rgba(217, 119, 6, 0.2); border-right: 4px solid var(--warn-dot); border-radius: 11px; padding: 10px 13px; font-size: var(--fs-xs); color: var(--text-primary); line-height: 1.65; }
 
@@ -261,6 +266,8 @@
 
     .btn-soft { height: 32px; background-color: var(--bg-subtle); border: 1px solid var(--border); box-shadow: var(--shadow-xs); color: var(--text-primary); padding: 0 12px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; white-space: nowrap; }
     .btn-soft:hover { background-color: var(--bg-hover); }
+    .btn-primary-pill { height: 32px; background-color: var(--accent); border: 1px solid var(--accent); color: var(--on-accent); padding: 0 13px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; white-space: nowrap; }
+    .btn-primary-pill:hover { background-color: var(--accent-hover); }
     .btn-wa { height: 32px; background-color: var(--wa-bg); border: 1px solid rgba(21, 128, 61, 0.2); color: var(--wa-color); padding: 0 12px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px; white-space: nowrap; }
     .btn-wa:hover { filter: brightness(0.96); }
     .btn-wa svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
@@ -322,7 +329,7 @@
         </button>
         <button class="top-tab" data-tab="offline" onclick="switchView('offline')">
           <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <span>التنبيه والتخزين</span>
+          <span>روابط المساعدات والتنبيهات</span>
         </button>
         <button class="top-tab" data-tab="rumors" onclick="switchView('rumors')">
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
@@ -371,7 +378,7 @@
             <span>المصدر: برنامج الأغذية العالمي (WFP)، وكالة الأونروا (UNRWA)، وتقارير OCHA</span>
           </div>
           <div class="section-top-actions">
-            <button class="btn-soft" onclick="jumpToOfficialDirectory()">الروابط الرسمية والأرقام المجانية ↗</button>
+            <button class="btn-primary-pill" onclick="jumpToOfficialDirectory()">جميع روابط المساعدات الرسمية ↗</button>
           </div>
         </div>
       </div>
@@ -470,28 +477,40 @@
 
     <section id="view-offline" class="panel">
       <div class="section-top">
-        <h1>النشرة الإحصائية والتقارير الرسمية وحالة التخزين</h1>
+        <h1>البوابات الرسمية للمساعدات في غزة والتقارير الإحصائية</h1>
         <span id="sourceStatusBadge">مزامنة تلقائية مع المصادر الرسمية</span>
       </div>
-      <div class="sync-card">
-        <div class="sync-info">
-          <div class="sync-title-row">
-            <h2>النسخة المحفوظة على ذاكرة الجهاز</h2>
-            <span class="source-note">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              بيانات رسمية موثقة
-            </span>
+
+      <!-- دليل الروابط الرسمية والأرقام المجانية -->
+      <section class="official-dir-card" id="officialDirectoryCard">
+        <div class="official-dir-head">
+          <div>
+            <h2>
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <span>جميع الروابط الرسمية للمساعدات والأرقام المجانية في قطاع غزة</span>
+            </h2>
+            <p class="official-dir-sub">بوابات رسمية معتمدة لفحص الكابونات، التسجيل للمساعدات الإغاثية والنقدية، الطوارئ الطبية، وحماية المستهلك.</p>
           </div>
-          <p>يجلب التطبيق التحديثات تلقائيا من ملف البيانات الرسمي ويحفظها محليا للعمل عند انقطاع الشبكة.</p>
-          <span class="card-detail">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
+          <button class="btn-wa" onclick="shareOfficialDirectoryWA()">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span>مشاركة جميع الروابط عبر واتساب</span>
+          </button>
         </div>
-        <div class="sync-actions">
-          <button class="btn-soft" onclick="triggerInstallApp()">تثبيت التطبيق على الهاتف</button>
-          <button class="btn-soft" onclick="requestAppNotifications()">تفعيل الإشعارات</button>
-          <button class="btn-soft" onclick="manualSync()">فحص التحديثات الآن</button>
-          <a href="./privacy.html" class="btn-soft">سياسة الخصوصية</a>
+
+        <div class="filter-group" id="officialCatFilters">
+          <button class="filter-pill active" onclick="setOfficialCategory('الكل', this)">جميع الجهات (11)</button>
+          <button class="filter-pill" onclick="setOfficialCategory('غذاء وكابونات', this)">غذاء وكابونات</button>
+          <button class="filter-pill" onclick="setOfficialCategory('مساعدات نقدية وحكومية', this)">مساعدات نقدية وحكومية</button>
+          <button class="filter-pill" onclick="setOfficialCategory('صحة وطوارئ ومفقودين', this)">صحة وطوارئ ومفقودين</button>
+          <button class="filter-pill" onclick="setOfficialCategory('حماية المستهلك', this)">حماية المستهلك</button>
         </div>
-      </div>
+
+        <div class="official-list" id="officialLinksList"></div>
+
+        <div class="anti-fraud-note">
+          <strong>تنبيه أمان مهم:</strong> لا تطلب وكالة الأونروا أو برنامج الأغذية العالمي أو يونيسف أو أي مؤسسة رسمية رمز التحقق (OTP) المرسل لهاتفك، ولا تطلب بيانات حسابك البنكي أو محفظتك الإلكترونية عبر روابط فيسبوك أو تيليغرام.
+        </div>
+      </section>
 
       <!-- نشرة حالة المعابر والسيولة النقدية (الكاش) -->
       <div class="field-status-grid" id="fieldStatusGrid">
@@ -520,64 +539,25 @@
         </article>
       </div>
 
-      <!-- دليل الروابط الرسمية والأرقام المجانية -->
-      <section class="official-dir-card" id="officialDirectoryCard">
-        <div class="official-dir-head">
-          <div>
-            <h2>
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-              <span>دليل الروابط الرسمية والأرقام المجانية (حماية من الاحتيال)</span>
-            </h2>
-            <p class="official-dir-sub">استخدم هذه الروابط والأرقام الموثقة فقط لفحص الكابونات أو تقديم الشكاوى وتجنب الروابط المجهولة.</p>
+      <div class="sync-card">
+        <div class="sync-info">
+          <div class="sync-title-row">
+            <h2>النسخة المحفوظة على ذاكرة الجهاز</h2>
+            <span class="source-note">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              بيانات رسمية موثقة
+            </span>
           </div>
-          <button class="btn-wa" onclick="shareOfficialDirectoryWA()">
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>مشاركة الدليل الرسمي</span>
-          </button>
+          <p>يجلب التطبيق التحديثات تلقائيا من ملف البيانات الرسمي ويحفظها محليا للعمل عند انقطاع الشبكة.</p>
+          <span class="card-detail">آخر تحديث للبيانات: <strong id="lastSyncTime">23 نوفمبر 2026</strong></span>
         </div>
-
-        <div class="official-list">
-          <div class="official-row">
-            <div class="official-row-info">
-              <span class="official-row-title">فحص كابونات ومساعدات وكالة الأونروا (UNRWA)</span>
-              <span class="official-row-desc">البوابة الرسمية الوحيدة للاستعلام عن دور استلام الطرود الغذائية وتحديث بيانات الأسرة.</span>
-              <span class="official-row-code">https://aid.unrwa.org</span>
-            </div>
-            <div class="official-row-actions">
-              <button class="btn-soft" onclick="copyPlainText('https://aid.unrwa.org', 'تم نسخ رابط الأونروا الرسمي')">نسخ الرابط</button>
-              <a href="https://aid.unrwa.org" target="_blank" rel="noopener" class="btn-soft">فتح الموقع ↗</a>
-            </div>
-          </div>
-
-          <div class="official-row">
-            <div class="official-row-info">
-              <span class="official-row-title">الخط المجاني لبرنامج الأغذية العالمي (WFP)</span>
-              <span class="official-row-desc">للاستفسار عن رسائل المساعدات الغذائية، نقاط التوزيع، وتحديث أرقام الجوال.</span>
-              <span class="official-row-code">1800124126</span>
-            </div>
-            <div class="official-row-actions">
-              <button class="btn-soft" onclick="copyPlainText('1800124126', 'تم نسخ الرقم المجاني لـ WFP')">نسخ الرقم</button>
-              <a href="tel:1800124126" class="btn-soft">اتصال مجاني</a>
-            </div>
-          </div>
-
-          <div class="official-row">
-            <div class="official-row-info">
-              <span class="official-row-title">الرقم المجاني لحماية المستهلك — وزارة الاقتصاد الوطني</span>
-              <span class="official-row-desc">للإبلاغ الفوري عن احتكار السلع، التلاعب بالأسعار، أو رفض البيع بالتسعيرة الاسترشادية.</span>
-              <span class="official-row-code">1800112233</span>
-            </div>
-            <div class="official-row-actions">
-              <button class="btn-soft" onclick="copyPlainText('1800112233', 'تم نسخ رقم حماية المستهلك')">نسخ الرقم</button>
-              <a href="tel:1800112233" class="btn-soft">اتصال مجاني</a>
-            </div>
-          </div>
+        <div class="sync-actions">
+          <button class="btn-soft" onclick="triggerInstallApp()">تثبيت التطبيق على الهاتف</button>
+          <button class="btn-soft" onclick="requestAppNotifications()">تفعيل الإشعارات</button>
+          <button class="btn-soft" onclick="manualSync()">فحص التحديثات الآن</button>
+          <a href="./privacy.html" class="btn-soft">سياسة الخصوصية</a>
         </div>
-
-        <div class="anti-fraud-note">
-          <strong>تنبيه أمان مهم:</strong> لا تطلب وكالة الأونروا أو برنامج الأغذية العالمي أو أي مؤسسة دولية رمز التحقق (OTP) المرسل لهاتفك، ولا تطلب بيانات حسابك البنكي أو محفظتك الإلكترونية عبر روابط فيسبوك أو تيليغرام.
-        </div>
-      </section>
+      </div>
 
       <div class="cards-stack" id="alertsList"></div>
     </section>
@@ -643,7 +623,7 @@
     </button>
     <button class="bottom-tab" data-tab="offline" onclick="switchView('offline')">
       <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      <span>التنبيهات</span>
+      <span>المساعدات</span>
     </button>
     <button class="bottom-tab" data-tab="rumors" onclick="switchView('rumors')">
       <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
@@ -658,6 +638,121 @@
     const WA_ICON = '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
     const FALSE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
     const TRUE_VERDICT_ICON = '<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+
+    const OFFICIAL_AID_LINKS = [
+      {
+        title: "فحص كابونات ومساعدات وكالة الأونروا (UNRWA)",
+        category: "غذاء وكابونات",
+        desc: "البوابة الرسمية الوحيدة للاستعلام عن دور استلام الطرود الغذائية وتحديث بيانات الأسرة في قطاع غزة.",
+        url: "https://aid.unrwa.org",
+        hotline: ""
+      },
+      {
+        title: "الموقع الرسمي للأونروا — صفحة طوارئ غزة",
+        category: "غذاء وكابونات",
+        desc: "التحديثات اليومية للمراكز الإيوائية، النقاط الطبية، وجداول المساعدات الإنسانية التابعة للأونروا.",
+        url: "https://www.unrwa.org/gaza",
+        hotline: ""
+      },
+      {
+        title: "برنامج الأغذية العالمي في فلسطين (WFP)",
+        category: "غذاء وكابونات",
+        desc: "الاستعلام عن رسائل المساعدات الغذائية، القسائم الإلكترونية، ونقاط التوزيع المعتمدة.",
+        url: "https://www.wfp.org/countries/palestine",
+        hotline: "1800124126"
+      },
+      {
+        title: "وزارة التنمية الاجتماعية الفلسطينية (MOSD)",
+        category: "مساعدات نقدية وحكومية",
+        desc: "البوابة الرسمية لبرامج الحماية الاجتماعية، المساعدات الإغاثية الموحدة، وتحديث بيانات الأسر المتضررة.",
+        url: "https://www.mosd.gov.ps",
+        hotline: ""
+      },
+      {
+        title: "البوابة الإلكترونية الموحدة للخدمات الحكومية (فلسطين)",
+        category: "مساعدات نقدية وحكومية",
+        desc: "الدخول الموحد للاستعلام عن المنح والمساعدات الحكومية والخدمات الإلكترونية للمواطنين.",
+        url: "https://eservices.gov.ps",
+        hotline: ""
+      },
+      {
+        title: "منظمة الأمم المتحدة للطفولة (يونيسف — دولة فلسطين)",
+        category: "مساعدات نقدية وحكومية",
+        desc: "برامج المساعدات النقدية الطارئة للأسر والأطفال وذوي الإعاقة وتوفير المياه النظيفة في غزة.",
+        url: "https://www.unicef.org/sop",
+        hotline: "1800100108"
+      },
+      {
+        title: "مكتب الأمم المتحدة لتنسيق الشؤون الإنسانية (OCHA oPt)",
+        category: "غذاء وكابونات",
+        desc: "التقارير الميدانية المعتمدة حول مواقع الاستجابة الإنسانية، المخابز المدعومة، وحركة المعابر.",
+        url: "https://www.ochaopt.org",
+        hotline: ""
+      },
+      {
+        title: "اللجنة الدولية للصليب الأحمر (ICRC — فلسطين)",
+        category: "صحة وطوارئ ومفقودين",
+        desc: "خدمات البحث عن المفقودين، إعادة الروابط العائلية، والمساعدات الإنسانية والطبية.",
+        url: "https://www.icrc.org/ar",
+        hotline: ""
+      },
+      {
+        title: "جمعية الهلال الأحمر الفلسطيني (PRCS)",
+        category: "صحة وطوارئ ومفقودين",
+        desc: "خدمات الإسعاف والطوارئ، المستشفيات الميدانية، والإغاثة العاجلة في محافظات قطاع غزة.",
+        url: "https://www.palestinercs.org",
+        hotline: "101"
+      },
+      {
+        title: "منظمة الصحة العالمية (WHO — الأرض الفلسطينية المحتلة)",
+        category: "صحة وطوارئ ومفقودين",
+        desc: "بيانات المستشفيات والنقاط الطبية العاملة في غزة وتنسيق الإجلاء الطبي للمرضى والجرحى.",
+        url: "https://www.emro.who.int/opt",
+        hotline: ""
+      },
+      {
+        title: "وزارة الاقتصاد الوطني — حماية المستهلك (غزة)",
+        category: "حماية المستهلك",
+        desc: "الاطلاع على التسعيرة الاسترشادية والإبلاغ الفوري عن الغلاء والاحتكار أو رفض البيع بالسعر الرسمي.",
+        url: "https://www.mne.gov.ps",
+        hotline: "1800112233"
+      }
+    ];
+
+    let selectedOfficialCategory = 'الكل';
+
+    function setOfficialCategory(cat, btn) {
+      selectedOfficialCategory = cat;
+      document.querySelectorAll('#officialCatFilters .filter-pill').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderOfficialLinks();
+    }
+
+    function renderOfficialLinks() {
+      const container = document.getElementById('officialLinksList');
+      if (!container) return;
+      const items = OFFICIAL_AID_LINKS.filter(item => selectedOfficialCategory === 'الكل' || item.category === selectedOfficialCategory);
+      container.innerHTML = items.map(item => `
+        <div class="official-row">
+          <div class="official-row-info">
+            <div class="official-row-top">
+              <span class="official-row-title">${escapeHtml(item.title)}</span>
+              <span class="official-cat-tag">${escapeHtml(item.category)}</span>
+            </div>
+            <span class="official-row-desc">${escapeHtml(item.desc)}</span>
+            <div class="official-row-codes">
+              <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="official-row-code">${escapeHtml(item.url)}</a>
+              ${item.hotline ? `<span class="official-hotline-tag">الرقم المجاني / الطوارئ: ${escapeHtml(item.hotline)}</span>` : ''}
+            </div>
+          </div>
+          <div class="official-row-actions">
+            <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="btn-primary-pill">فتح الموقع ↗</a>
+            <button class="btn-soft" onclick="copyPlainText('${escapeHtml(item.url)}', 'تم نسخ الرابط الرسمي')">نسخ الرابط</button>
+            ${item.hotline ? `<a href="tel:${escapeHtml(item.hotline)}" class="btn-soft">اتصال (${escapeHtml(item.hotline)})</a>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
 
     function applyTheme(theme) {
       const root = document.documentElement;
@@ -899,7 +994,7 @@
     };
 
     let outletsData = [], marketData = [], alertsData = [], rumorsData = [];
-    const tabTitles = { outlets: "الأسواق المعتمدة", market: "الأسعار والوفرة", offline: "التنبيه والتخزين", rumors: "التحقق من الشائعات" };
+    const tabTitles = { outlets: "الأسواق المعتمدة", market: "الأسعار والوفرة", offline: "روابط المساعدات", rumors: "التحقق من الشائعات" };
     let selectedOutletArea = 'الكل', selectedMarketCategory = 'الكل', selectedMarketStatus = 'all', selectedVerdict = 'all';
     let isOfflineMode = !navigator.onLine;
     let currentDatasetUpdatedLabel = '23 نوفمبر 2026';
@@ -973,18 +1068,20 @@
     function shareCardWhatsApp(btn) {
       const raw = btn.getAttribute('data-share') || '';
       const msg = raw + '\n\nالمصدر: تطبيق برهان\nhttps://ahmedabudahi.github.io/gaza-field-guide/';
-      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
     }
 
     function shareOfficialDirectoryWA() {
+      const lines = OFFICIAL_AID_LINKS.map(item => {
+        const phonePart = item.hotline ? ` (الرقم المجاني: ${item.hotline})` : '';
+        return `• ${item.title}${phonePart}:\n${item.url}`;
+      });
       const msg =
-        'دليل الروابط الرسمية والأرقام المجانية في قطاع غزة (حماية من الروابط الوهمية):\n\n' +
-        '• فحص كابونات الأونروا (UNRWA):\nhttps://aid.unrwa.org\n' +
-        '• الخط المجاني لبرنامج الأغذية العالمي (WFP):\n1800124126\n' +
-        '• الرقم المجاني لحماية المستهلك (وزارة الاقتصاد):\n1800112233\n\n' +
-        'تنبيه: لا تشارك رمز التحقق (OTP) مع أي رابط غير رسمي.\n' +
+        'دليل الروابط الرسمية للمساعدات والأرقام المجانية في قطاع غزة (حماية من الروابط الوهمية):\n\n' +
+        lines.join('\n\n') +
+        '\n\nتنبيه: لا تشارك رمز التحقق (OTP) مع أي رابط غير رسمي.\n' +
         'المصدر: تطبيق برهان\nhttps://ahmedabudahi.github.io/gaza-field-guide/';
-      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
     }
 
     /* نشرة أسعار اليوم بضغطة واحدة */
@@ -1020,7 +1117,7 @@
 
     function shareDailyMarketBulletinWA() {
       const text = buildDailyMarketBulletinText();
-      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
     }
 
     function jumpToOfficialDirectory() {
@@ -1729,6 +1826,7 @@
       });
     }
 
+    renderOfficialLinks();
     updateNotifButtonUI();
     updateConnUI(isOfflineMode);
     renderUserReports();
