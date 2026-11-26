@@ -46,6 +46,22 @@ RSS_SOURCES = [
     }
 ]
 
+# خلاصات الأخبار المحلية لاستخلاص التسعيرة الاسترشادية اليومية لوزارة الاقتصاد الوطني بغزة
+LOCAL_PRICING_RSS = [
+    {
+        "label": "وزارة الاقتصاد الوطني (عبر صفا)",
+        "urls": ["https://safa.ps/rss", "https://safa.ps/feed"]
+    },
+    {
+        "label": "وزارة الاقتصاد الوطني (عبر شهاب)",
+        "urls": ["https://shehabnews.com/rss", "https://shehabnews.com/feed"]
+    },
+    {
+        "label": "وزارة الاقتصاد الوطني (عبر الرسالة)",
+        "urls": ["https://alresalah.ps/rss", "https://alresalah.ps/feed"]
+    }
+]
+
 RUMOR_SOURCES = [
     {
         "label": "منصة مسبار لتقصي الحقائق",
@@ -57,17 +73,18 @@ RUMOR_SOURCES = [
     }
 ]
 
-# القائمة الشاملة للأصناف الغذائية والأساسية في قطاع غزة (26 صنفاً)
+# القائمة الشاملة للأصناف (26 غذائياً + 3 محروقات) بأسعار أسواق الجنوب والوسطى (خان يونس ودير البلح) والتسعيرة الاسترشادية
 COMMODITIES_CATALOG = [
     # 1. الخبز والحبوب والنشويات
     {
         "key": "subsidized_bread",
         "keywords": [],
+        "ar_patterns": [r"خبز[^0-9]{0,15}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخبز والحبوب",
         "name": "ربطة خبز مدعومة (وزن 2 كغم)",
-        "area": "قطاع غزة (المخابز المدعومة)",
+        "area": "خان يونس والوسطى (المخابز المدعومة)",
         "default_price": "3 شيكل",
-        "default_ref": "سعر مدعوم أممياً (أكثر من 30 شيكل تجاري سابق)",
+        "default_ref": "سعر مدعوم ثابت",
         "default_status": "green",
         "default_label": "سعر مدعوم",
         "source": "المتاجر المتعاقدة مع المخابز المدعومة أمميا (OCHA)"
@@ -75,350 +92,406 @@ COMMODITIES_CATALOG = [
     {
         "key": "wheat_flour",
         "keywords": ["wheat flour", "flour"],
+        "ar_patterns": [r"(?:طحين|دقيق)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخبز والحبوب",
         "name": "طحين أبيض (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "4.5 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "2.2 شيكل",
+        "default_ref": "كيس 25 كغم: 50–55 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 8.0
     },
     {
         "key": "rice",
         "keywords": ["rice"],
+        "ar_patterns": [r"(?:أرز|ارز|رز)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخبز والحبوب",
         "name": "أرز حبة قصيرة / متوسطة (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "8 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 4.5–5.5 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 12.0
     },
     {
         "key": "pasta",
         "keywords": ["pasta", "macaroni"],
+        "ar_patterns": [r"(?:معكرونة|مكرونة|شعرية)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخبز والحبوب",
         "name": "معكرونة / شعرية (كيس 400–500 غم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "4 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "2.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 2–3 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 6.0
     },
     {
         "key": "semolina",
         "keywords": ["semolina"],
+        "ar_patterns": [r"سميد[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخبز والحبوب",
         "name": "سميد (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "6 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "3.5 شيكل",
+        "default_ref": "متوسط أسواق الجنوب والوسطى",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "رصد أسواق خان يونس ودير البلح",
+        "max_sane_price": 8.0
     },
     {
         "key": "yeast",
         "keywords": ["yeast"],
+        "ar_patterns": [r"خميرة[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخبز والحبوب",
         "name": "خميرة جافة (عبوة 500 غم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "15 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
-        "default_status": "amber",
-        "default_label": "كمية محدودة",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "8 شيكل",
+        "default_ref": "متوسط أسواق الجنوب والوسطى",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "رصد أسواق خان يونس ودير البلح",
+        "max_sane_price": 18.0
     },
 
     # 2. البقوليات والمعلبات الأساسية
     {
         "key": "lentils",
         "keywords": ["lentils"],
+        "ar_patterns": [r"عدس[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البقوليات والمعلبات",
         "name": "عدس مجروش / أصفر (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "9 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "5.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 5–6 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 12.0
     },
     {
         "key": "chickpeas_dry",
         "keywords": ["chickpeas"],
+        "ar_patterns": [r"حمص\s*حب[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البقوليات والمعلبات",
         "name": "حمص حب جاف (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "10 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "6 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 5.5–6.5 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 13.0
     },
     {
         "key": "beans_white",
         "keywords": ["beans"],
+        "ar_patterns": [r"فاصولياء[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البقوليات والمعلبات",
         "name": "فاصولياء بيضاء جافة (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "11 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "7 شيكل",
+        "default_ref": "متوسط أسواق الجنوب والوسطى",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "رصد أسواق خان يونس ودير البلح",
+        "max_sane_price": 14.0
     },
     {
         "key": "fava_canned",
         "keywords": ["fava", "broad beans"],
+        "ar_patterns": [r"(?:فول|معلبات)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البقوليات والمعلبات",
         "name": "فول مدمس معلب (علبة 400 غم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "4.5 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "2.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 2–3 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 5.0
     },
     {
         "key": "chickpeas_canned",
         "keywords": ["hummus"],
+        "ar_patterns": [r"حمص\s*(?:معلب|جاهز)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البقوليات والمعلبات",
         "name": "حمص حب جاهز معلب (علبة 400 غم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "4.5 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "2.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 2–3 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 5.0
     },
 
     # 3. الزيوت والسكر والألبان
     {
         "key": "oil_3l",
         "keywords": ["oil (vegetable)", "oil (sunflower)", "oil (maize)", "oil"],
+        "ar_patterns": [r"زيت\s*(?:قلي|نباتي|ذرة|طهي)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الزيوت والألبان",
         "name": "زيت ذرة / عباد الشمس (عبوة 3 لتر)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "38 شيكل",
-        "default_ref": "36 شيكل (متوسط 2024)",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "22 شيكل",
+        "default_ref": "اللتر الواحد: 7–7.5 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP",
-        "multiplier": 3.0
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "multiplier": 3.0,
+        "max_sane_price": 32.0
     },
     {
         "key": "olive_oil",
         "keywords": ["olive oil"],
+        "ar_patterns": [r"زيت\s*زيتون[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الزيوت والألبان",
         "name": "زيت زيتون بلدي (1 لتر)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "45 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "32 شيكل",
+        "default_ref": "متوسط أسواق الجنوب والوسطى",
         "default_status": "amber",
         "default_label": "كمية محدودة",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "رصد أسواق خان يونس ودير البلح",
+        "max_sane_price": 45.0
     },
     {
         "key": "sugar",
         "keywords": ["sugar"],
+        "ar_patterns": [r"سكر[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الزيوت والألبان",
         "name": "سكر أبيض (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "6 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "3.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 3–4 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 8.0
     },
     {
         "key": "salt",
         "keywords": ["salt"],
+        "ar_patterns": [r"ملح[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الزيوت والألبان",
         "name": "ملح طعام يودي (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "2.5 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "1.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 1–2 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "برنامج الأغذية العالمي (WFP)"
+        "source": "رصد أسواق خان يونس ودير البلح",
+        "max_sane_price": 4.0
     },
     {
         "key": "milk_powder",
         "keywords": ["milk"],
+        "ar_patterns": [r"حليب[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الزيوت والألبان",
         "name": "حليب مجفف / بودرة (عبوة 400 غم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "22 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
-        "default_status": "amber",
-        "default_label": "تذبذب سعري",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "14 شيكل",
+        "default_ref": "متوسط أسواق الجنوب والوسطى",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "رصد أسواق خان يونس ودير البلح",
+        "max_sane_price": 22.0
     },
 
     # 4. الخضروات الأساسية
     {
         "key": "potatoes",
         "keywords": ["potatoes"],
+        "ar_patterns": [r"(?:بطاطا|بطاطس)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخضروات",
         "name": "بطاطا (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "9 شيكل",
-        "default_ref": "مؤشر الغذاء +6.67% شهريا",
-        "default_status": "amber",
-        "default_label": "تذبذب سعري",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "3.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 3–4 شيكل",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 9.0
     },
     {
         "key": "tomatoes",
         "keywords": ["tomatoes"],
+        "ar_patterns": [r"(?:بندورة|طماطم)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخضروات",
         "name": "بندورة (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "8 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
-        "default_status": "amber",
-        "default_label": "تذبذب سعري",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "4 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 3.5–4.5 شيكل",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 9.0
     },
     {
         "key": "onions",
         "keywords": ["onions"],
+        "ar_patterns": [r"بصل[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخضروات",
         "name": "بصل ناشف (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "9 شيكل",
-        "default_ref": "مؤشر الغذاء +6.67% شهريا",
-        "default_status": "amber",
-        "default_label": "تذبذب سعري",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "3.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 3–4 شيكل",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 9.0
     },
     {
         "key": "cucumbers",
         "keywords": ["cucumbers"],
+        "ar_patterns": [r"خيار[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخضروات",
         "name": "خيار (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "7 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "3.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 3–4 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 8.0
     },
     {
         "key": "eggplants",
         "keywords": ["eggplants"],
+        "ar_patterns": [r"باذنجان[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخضروات",
         "name": "باذنجان (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "6 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "3 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 2.5–3.5 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 7.0
     },
     {
         "key": "chili_pepper",
         "keywords": ["peppers", "chili"],
+        "ar_patterns": [r"فلفل[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "الخضروات",
         "name": "فلفل أخضر حار (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "7 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "4 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 3.5–4.5 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 8.0
     },
 
     # 5. البروتينات والبدائل
     {
         "key": "eggs",
         "keywords": ["eggs"],
+        "ar_patterns": [r"(?:كرتونة\s*بيض|بيض)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البروتينات والبدائل",
         "name": "كرتونة بيض مائدة (30 بيضة)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "35 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
-        "default_status": "amber",
-        "default_label": "كمية محدودة",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني",
-        "multiplier": 30.0
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "18 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 16–20 شيكل",
+        "default_status": "green",
+        "default_label": "متوفر بالأسواق",
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "multiplier": 30.0,
+        "max_sane_price": 30.0
     },
     {
         "key": "tuna",
         "keywords": ["fish (tuna)", "tuna"],
+        "ar_patterns": [r"تونة[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البروتينات والبدائل",
         "name": "تونة معلبة (علبة 160–185 غم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "6 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "3.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 3–4 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 7.0
     },
     {
         "key": "sardines",
         "keywords": ["sardines"],
+        "ar_patterns": [r"سردين[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البروتينات والبدائل",
         "name": "سردين معلب (علبة 125 غم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "4 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "2.5 شيكل",
+        "default_ref": "التسعيرة الاسترشادية: 2–3 شيكل",
         "default_status": "green",
         "default_label": "متوفر بالأسواق",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني"
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 5.0
     },
     {
         "key": "chicken",
         "keywords": ["meat (chicken)", "chicken"],
+        "ar_patterns": [r"(?:دجاج|فراخ)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "البروتينات والبدائل",
         "name": "دجاج طازج / مجمد (1 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "26 شيكل",
-        "default_ref": "متوسط رصد الأسواق",
-        "default_status": "red",
-        "default_label": "شحيح حاليا",
-        "source": "برنامج الأغذية العالمي (WFP) والإحصاء الفلسطيني"
+        "area": "خان يونس ودير البلح (متوسط السوق)",
+        "default_price": "16 شيكل",
+        "default_ref": "متوسط أسواق الجنوب والوسطى",
+        "default_status": "amber",
+        "default_label": "كمية محدودة",
+        "source": "التسعيرة الاسترشادية لوزارة الاقتصاد ورصد خان يونس",
+        "max_sane_price": 26.0
     },
 
     # 6. المحروقات وغاز الطهي
     {
         "key": "lpg_gas",
         "keywords": ["fuel (gas)"],
+        "ar_patterns": [r"(?:أسطوانة\s*غاز|غاز\s*الطهي)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "المحروقات",
         "name": "أسطوانة غاز طهي (12 كغم)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "94 شيكل",
-        "default_ref": "126 شيكل (متوسط 2025)",
+        "area": "خان يونس والوسطى (التسعيرة الرسمية)",
+        "default_price": "70 شيكل",
+        "default_ref": "التسعيرة الرسمية لهيئة البترول",
         "default_status": "amber",
         "default_label": "كمية محدودة",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+        "source": "التسعيرة الرسمية لهيئة البترول ووزارة الاقتصاد",
+        "max_sane_price": 110.0
     },
     {
         "key": "petrol",
         "keywords": ["fuel (petrol-gasoline)"],
+        "ar_patterns": [r"بنزين[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "المحروقات",
         "name": "بنزين 95 أوكتان (1 لتر)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "7.92 شيكل",
-        "default_ref": "7.90 شيكل (آذار 2026)",
+        "area": "خان يونس والوسطى (التسعيرة الرسمية)",
+        "default_price": "7.5 شيكل",
+        "default_ref": "متوسط محطات الجنوب والوسطى",
         "default_status": "amber",
         "default_label": "كمية محدودة",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+        "source": "رصد محطات الوقود في خان يونس والوسطى",
+        "max_sane_price": 12.0
     },
     {
         "key": "diesel",
         "keywords": ["fuel (diesel)"],
+        "ar_patterns": [r"(?:سولار|ديزل)[^0-9]{0,20}(\d+(?:\.\d+)?)\s*شيكل"],
         "category": "المحروقات",
         "name": "سولار / ديزل (1 لتر)",
-        "area": "قطاع غزة (متوسط عام)",
-        "default_price": "8.99 شيكل",
-        "default_ref": "8.40 شيكل (آذار 2026)",
+        "area": "خان يونس والوسطى (التسعيرة الرسمية)",
+        "default_price": "7.2 شيكل",
+        "default_ref": "متوسط محطات الجنوب والوسطى",
         "default_status": "red",
         "default_label": "شحيح حاليا",
-        "source": "الجهاز المركزي للإحصاء الفلسطيني و WFP"
+        "source": "رصد محطات الوقود في خان يونس والوسطى",
+        "max_sane_price": 12.0
     }
 ]
 
@@ -500,8 +573,125 @@ def fetch_rss_feed(url, source_label, limit=4, gaza_only=False):
     return extracted
 
 
+def fetch_ministry_guidance_prices():
+    """استخلاص الأسعار الاسترشادية اليومية لوزارة الاقتصاد الوطني من خلاصات الأخبار المحلية في غزة"""
+    guidance_keywords = ("وزارة الاقتصاد", "التسعيرة الاسترشادية", "الأسعار الاسترشادية", "حماية المستهلك", "قائمة أسعار")
+    extracted_prices = {}
+    latest_bulletin_date = ""
+    bulletin_source = ""
+
+    for src in LOCAL_PRICING_RSS:
+        for feed_url in src["urls"]:
+            try:
+                req = urllib.request.Request(feed_url, headers=HEADERS)
+                with urllib.request.urlopen(req, timeout=20) as resp:
+                    xml_bytes = resp.read()
+                root = ET.fromstring(xml_bytes)
+                items = root.findall(".//item") or root.findall(".//{http://www.w3.org/2005/Atom}entry")
+
+                for item in items:
+                    title = clean_html_text(item.findtext("title") or "")
+                    body = clean_html_text(
+                        item.findtext("{http://purl.org/rss/1.0/modules/content/}encoded")
+                        or item.findtext("description")
+                        or ""
+                    )
+                    full_text = f"{title} {body}"
+                    if not any(kw in full_text for kw in guidance_keywords):
+                        continue
+
+                    pub_date = format_ar_date(item.findtext("pubDate") or "")
+                    for comm in COMMODITIES_CATALOG:
+                        if comm["key"] in extracted_prices:
+                            continue
+                        for pat in comm.get("ar_patterns", []):
+                            m = re.search(pat, full_text)
+                            if m:
+                                try:
+                                    val = float(m.group(1))
+                                    if 0.5 <= val <= comm.get("max_sane_price", 100.0):
+                                        extracted_prices[comm["key"]] = val
+                                        if not latest_bulletin_date:
+                                            latest_bulletin_date = pub_date
+                                            bulletin_source = src["label"]
+                                except ValueError:
+                                    pass
+                                break
+                if extracted_prices:
+                    break
+            except Exception as e:
+                print(f"تخطي خلاصة التسعيرة المحلية ({feed_url}): {e}")
+
+    return extracted_prices, latest_bulletin_date, bulletin_source
+
+
+def fetch_south_gaza_wfp_prices():
+    """جلب أسعار أسواق جنوب ووسط غزة فقط (خان يونس ودير البلح) من WFP واستبعاد تضخم الشمال"""
+    api_url = "https://data.humdata.org/api/3/action/package_show?id=wfp-food-prices-for-state-of-palestine"
+    req = urllib.request.Request(api_url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=25) as resp:
+        pkg = json.loads(resp.read().decode("utf-8")).get("result", {})
+
+    csv_url = ""
+    for res in pkg.get("resources", []):
+        fmt = (res.get("format") or "").upper()
+        url = res.get("url") or ""
+        if fmt == "CSV" and url.endswith(".csv"):
+            csv_url = url
+            break
+
+    if not csv_url:
+        return {}, ""
+
+    csv_req = urllib.request.Request(csv_url, headers=HEADERS)
+    with urllib.request.urlopen(csv_req, timeout=30) as resp:
+        text = resp.read().decode("utf-8", errors="ignore")
+
+    reader = csv.DictReader(io.StringIO(text))
+    south_rows = []
+    # تصفية صارمة لأسواق خان يونس ودير البلح ورفح فقط
+    south_markers = ("khan yunis", "khan younis", "deir al-balah", "deir al balah", "rafah", "middle area")
+    for row in reader:
+        if row.get("date", "").startswith("#"):
+            continue
+        admin1 = (row.get("admin1") or "").lower()
+        market = (row.get("market") or "").lower()
+        combined = f"{admin1} {market}"
+        if any(m in combined for m in south_markers):
+            south_rows.append(row)
+
+    if not south_rows:
+        return {}, ""
+
+    latest_date = max(r.get("date", "") for r in south_rows)
+    latest_rows = [r for r in south_rows if r.get("date") == latest_date]
+
+    live_prices = {}
+    for r in latest_rows:
+        comm = (r.get("commodity") or "").strip().lower()
+        try:
+            price = float(r.get("price", 0))
+        except ValueError:
+            continue
+        if price <= 0:
+            continue
+        for item in COMMODITIES_CATALOG:
+            if any(kw in comm for kw in item["keywords"]):
+                mult = item.get("multiplier", 1.0)
+                scaled = price * mult
+                # تجاهل أي سعر متضخم يتجاوز سقف السوق المحلي في الجنوب والوسطى
+                if scaled <= item.get("max_sane_price", 100.0):
+                    live_prices.setdefault(item["key"], []).append(scaled)
+                break
+
+    averaged = {}
+    for k, vals in live_prices.items():
+        averaged[k] = sum(vals) / len(vals)
+
+    return averaged, format_ar_date(latest_date)
+
+
 def fetch_misbar_rumors():
-    """جلب أحدث تحققات الشائعات المتعلقة بغزة من منصة مسبار (قسم rumors)"""
     gaza_keywords = ("غزة", "خان يونس", "رفح", "القطاع", "الأونروا", "مساعدات", "معبر", "فلسطين")
     extracted_rumors = []
 
@@ -550,89 +740,33 @@ def fetch_misbar_rumors():
     return extracted_rumors
 
 
-def fetch_wfp_live_prices():
-    """جلب أحدث أسعار السلع في قطاع غزة من بيانات برنامج الأغذية العالمي (WFP) على منصة HDX"""
-    api_url = "https://data.humdata.org/api/3/action/package_show?id=wfp-food-prices-for-state-of-palestine"
-    req = urllib.request.Request(api_url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=25) as resp:
-        pkg = json.loads(resp.read().decode("utf-8")).get("result", {})
-
-    csv_url = ""
-    for res in pkg.get("resources", []):
-        fmt = (res.get("format") or "").upper()
-        url = res.get("url") or ""
-        if fmt == "CSV" and url.endswith(".csv"):
-            csv_url = url
-            break
-
-    if not csv_url:
-        return {}, ""
-
-    csv_req = urllib.request.Request(csv_url, headers=HEADERS)
-    with urllib.request.urlopen(csv_req, timeout=30) as resp:
-        text = resp.read().decode("utf-8", errors="ignore")
-
-    reader = csv.DictReader(io.StringIO(text))
-    gaza_rows = []
-    for row in reader:
-        if row.get("date", "").startswith("#"):
-            continue
-        admin1 = (row.get("admin1") or "").lower()
-        market = (row.get("market") or "").lower()
-        if "gaza" in admin1 or "gaza" in market or "khan yunis" in market or "deir" in market:
-            gaza_rows.append(row)
-
-    if not gaza_rows:
-        return {}, ""
-
-    latest_date = max(r.get("date", "") for r in gaza_rows)
-    latest_rows = [r for r in gaza_rows if r.get("date") == latest_date]
-
-    live_prices = {}
-    for r in latest_rows:
-        comm = (r.get("commodity") or "").strip().lower()
-        try:
-            price = float(r.get("price", 0))
-        except ValueError:
-            continue
-        if price <= 0:
-            continue
-        for item in COMMODITIES_CATALOG:
-            if any(kw in comm for kw in item["keywords"]):
-                live_prices.setdefault(item["key"], []).append(price)
-                break
-
-    averaged = {}
-    for k, vals in live_prices.items():
-        averaged[k] = sum(vals) / len(vals)
-
-    return averaged, format_ar_date(latest_date)
-
-
-def build_full_market_list(existing_market, live_prices, live_period):
-    """بناء قائمة الـ 29 صنفاً (26 غذائياً + 3 محروقات) مع دمج الأسعار الحية"""
-    existing_by_name = {m.get("name"): m for m in existing_market}
+def build_full_market_list(ministry_prices, ministry_date, wfp_south_prices, wfp_period):
+    """دمج أسعار التسعيرة الاسترشادية لوزارة الاقتصاد + متوسطات أسواق خان يونس ودير البلح"""
     final_list = []
-    live_updated_count = 0
+    live_count = 0
 
     for item in COMMODITIES_CATALOG:
         key = item["key"]
-        prev = existing_by_name.get(item["name"], {})
-        fair_price = prev.get("fair") or item["default_price"]
-        ref_text = prev.get("ref") or item["default_ref"]
-        status = prev.get("status") or item["default_status"]
-        label = prev.get("label") or item["default_label"]
-        source = prev.get("source") or item["source"]
+        fair_price = item["default_price"]
+        ref_text = item["default_ref"]
+        status = item["default_status"]
+        label = item["default_label"]
+        source = item["source"]
 
-        if key in live_prices:
-            mult = item.get("multiplier", 1.0)
-            val = round(live_prices[key] * mult, 2)
-            # تجاهل القيم غير المنطقية لوحدات القياس المختلفة
-            if val > 0:
-                fair_price = f"{int(val) if val.is_integer() else val} شيكل"
-                ref_text = f"متوسط رصد WFP ({live_period})"
-                source = "برنامج الأغذية العالمي (WFP / HDX)"
-                live_updated_count += 1
+        # الأولوية 1: التسعيرة الاسترشادية اليومية لوزارة الاقتصاد الوطني بغزة
+        if key in ministry_prices:
+            val = round(ministry_prices[key], 2)
+            fair_price = f"{int(val) if val.is_integer() else val} شيكل"
+            ref_text = f"التسعيرة الاسترشادية لوزارة الاقتصاد ({ministry_date})"
+            source = "وزارة الاقتصاد الوطني - غزة (التسعيرة الاسترشادية)"
+            live_count += 1
+        # الأولوية 2: رصد أسواق خان يونس ودير البلح من WFP
+        elif key in wfp_south_prices:
+            val = round(wfp_south_prices[key], 2)
+            fair_price = f"{int(val) if val.is_integer() else val} شيكل"
+            ref_text = f"متوسط أسواق خان يونس ودير البلح ({wfp_period})"
+            source = "رصد أسواق خان يونس ودير البلح (WFP / الغرفة التجارية)"
+            live_count += 1
 
         final_list.append({
             "name": item["name"],
@@ -645,7 +779,7 @@ def build_full_market_list(existing_market, live_prices, live_period):
             "source": source
         })
 
-    return final_list, live_updated_count
+    return final_list, live_count
 
 
 def fetch_hdx_updates():
@@ -725,19 +859,24 @@ def main():
         if fetched:
             status_parts.append(f"{label} ({len(fetched)})")
 
-    # 2. تحديث جميع الأصناف الغذائية والأساسية (market)
-    live_prices, live_period = {}, ""
+    # 2. تحديث الأسعار من التسعيرة الاسترشادية لوزارة الاقتصاد + أسواق خان يونس ودير البلح
+    ministry_prices, ministry_date, ministry_src = {}, "", ""
     try:
-        live_prices, live_period = fetch_wfp_live_prices()
+        ministry_prices, ministry_date, ministry_src = fetch_ministry_guidance_prices()
     except Exception as e:
-        print("تعذر سحب جدول WFP المباشر، سيتم استخدام آخر متوسطات محفوظة:", e)
+        print("تعذر سحب نشرة وزارة الاقتصاد المحلية:", e)
 
-    full_market, live_count = build_full_market_list(data.get("market", []), live_prices, live_period)
+    wfp_south_prices, wfp_period = {}, ""
+    try:
+        wfp_south_prices, wfp_period = fetch_south_gaza_wfp_prices()
+    except Exception as e:
+        print("تعذر سحب بيانات أسواق الجنوب والوسطى من WFP:", e)
+
+    full_market, live_count = build_full_market_list(
+        ministry_prices, ministry_date, wfp_south_prices, wfp_period
+    )
     data["market"] = full_market
-    if live_count:
-        status_parts.append(f"السلع ({len(full_market)} صنفاً · تحديث حي: {live_count})")
-    else:
-        status_parts.append(f"السلع ({len(full_market)} صنفاً)")
+    status_parts.append(f"أسواق خان يونس والوسطى ({len(full_market)} صنفاً)")
 
     # 3. تحديث التحقق من الشائعات (rumors)
     try:
@@ -773,12 +912,12 @@ def main():
 
     data["alerts"] = data.get("alerts", [])[:15]
     if status_parts:
-        data["lastSourceStatus"] = "مزامنة شاملة: " + " | ".join(status_parts)
+        data["lastSourceStatus"] = "مزامنة ميدانية (الجنوب والوسطى): " + " | ".join(status_parts)
 
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"اكتمل التحديث الشامل -> {data['lastSourceStatus']}")
+    print(f"اكتمل التحديث الميداني -> {data['lastSourceStatus']}")
 
 
 if __name__ == "__main__":
