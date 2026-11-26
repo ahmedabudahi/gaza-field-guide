@@ -233,6 +233,7 @@
       .sidebar-sticky { position: sticky; top: 76px; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <header class="topbar">
@@ -382,16 +383,20 @@
         </div>
         <aside class="sidebar-sticky">
           <div class="form-card">
-            <h2>حفظ خبر متداول للتحقق</h2>
-            <p>أدخل نص الخبر المتداول لحفظه محليا على جهازك ومراجعته مقابل المصادر الرسمية.</p>
-            <input type="text" id="reportInput" class="field-input" placeholder="اكتب نص الخبر المراد التحقق منه..." />
+            <h2>إرسال بلاغ سعر أو خبر للتحقق</h2>
+            <p>أرسل بلاغاً عن سعر مخالف في السوق أو شائعة متداولة ليتم التحقق منه ونشره للجميع بعد المراجعة.</p>
+            <select id="reportType" class="field-input">
+              <option value="rumor">النوع: خبر / شائعة للتحقق</option>
+              <option value="price">النوع: بلاغ سعر في السوق</option>
+            </select>
             <select id="reportArea" class="field-input">
               <option value="خان يونس">المحافظة: خان يونس</option>
               <option value="دير البلح">المحافظة: دير البلح</option>
               <option value="المحافظة الوسطى">المحافظة: الوسطى</option>
               <option value="مدينة غزة">المحافظة: مدينة غزة</option>
             </select>
-            <button class="btn-submit" onclick="addUserReport()">حفظ في سجل الجهاز</button>
+            <input type="text" id="reportInput" class="field-input" placeholder="اكتب تفاصيل الخبر أو السلعة وسعرها..." />
+            <button id="submitReportBtn" class="btn-submit" onclick="addUserReport()">إرسال للمراجعة والنشر</button>
           </div>
           <div id="userReportsContainer"></div>
         </aside>
@@ -400,7 +405,10 @@
 
     <footer class="app-footer">
       <span>تطبيق برهان (Burhan) — دليل الأسعار والتحقق الميداني في قطاع غزة</span>
-      <a href="./privacy.html">سياسة الخصوصية وحماية البيانات</a>
+      <div style="display:flex; gap:14px; align-items:center;">
+        <a href="./privacy.html">سياسة الخصوصية وحماية البيانات</a>
+        <a href="./admin.html" style="color:var(--text-muted); font-weight:600;">إدارة التطبيق</a>
+      </div>
     </footer>
   </main>
 
@@ -1050,17 +1058,86 @@
       showToast('تم نسخ نص التحقق');
     }
 
-    function addUserReport() {
+    const SUPABASE_URL = "https://oovenrpwpgbbarzumzqk.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_RRFHVFQ3IJeyOOO2Kd672w_rRhllhpZ";
+    const sbClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+
+    async function fetchApprovedCommunityReports() {
+      if (!sbClient || isOfflineMode) return;
+      try {
+        const { data, error } = await sbClient
+          .from('reports')
+          .select('*')
+          .eq('status', 'approved')
+          .order('created_at', { ascending: false })
+          .limit(20);
+        if (error || !Array.isArray(data)) return;
+        localStorage.setItem('burhan_approved_reports', JSON.stringify(data));
+        mergeApprovedReportsIntoRumors(data);
+      } catch (e) {
+        console.warn('تعذر جلب البلاغات المعتمدة من Supabase', e);
+      }
+    }
+
+    function mergeApprovedReportsIntoRumors(approvedRows) {
+      if (!Array.isArray(approvedRows) || !approvedRows.length) return;
+      const existingClaims = new Set(rumorsData.map(r => r.claim));
+      const mapped = approvedRows.map(row => {
+        const isPrice = row.report_type === 'price';
+        const d = row.created_at ? new Date(row.created_at).toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }) : 'محدث';
+        return {
+          verdict: isPrice ? 'false' : 'true',
+          tag: isPrice ? ('بلاغ سعر ميداني · ' + (row.area || 'غزة')) : ('تحقق مجتمعي معتمد · ' + (row.area || 'غزة')),
+          claim: row.content,
+          truth: row.admin_reply || 'تمت مراجعة البلاغ واعتماده من إدارة تطبيق برهان.',
+          meta: 'المصدر: بلاغات المواطنين المعتمدة (إدارة برهان) | ' + d
+        };
+      });
+      mapped.reverse().forEach(item => {
+        if (!existingClaims.has(item.claim)) {
+          rumorsData.unshift(item);
+          existingClaims.add(item.claim);
+        }
+      });
+      renderRumors();
+    }
+
+    async function addUserReport() {
       const input = document.getElementById('reportInput');
       const area = document.getElementById('reportArea').value;
+      const reportType = document.getElementById('reportType').value;
+      const btn = document.getElementById('submitReportBtn');
       const val = input.value.trim();
-      if (!val) { showToast('يرجى كتابة نص الخبر اولا'); return; }
+      if (!val) { showToast('يرجى كتابة نص البلاغ أو الخبر أولاً'); return; }
+
       const saved = JSON.parse(localStorage.getItem('burhan_reports') || '[]');
-      saved.unshift({ text: val, area: area, status: 'محفوظ محليا على الجهاز' });
+      let remoteSaved = false;
+
+      if (sbClient && !isOfflineMode) {
+        btn.disabled = true;
+        btn.textContent = 'جاري الإرسال...';
+        try {
+          const { error } = await sbClient
+            .from('reports')
+            .insert([{ report_type: reportType, area: area, content: val, status: 'pending' }]);
+          if (!error) remoteSaved = true;
+        } catch (e) {
+          console.warn('Supabase insert fallback to local', e);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'إرسال للمراجعة والنشر';
+        }
+      }
+
+      saved.unshift({
+        text: val,
+        area: area,
+        status: remoteSaved ? 'تم الإرسال للإدارة · قيد المراجعة' : 'محفوظ محلياً (سيُرسل عند توفر الإنترنت)'
+      });
       localStorage.setItem('burhan_reports', JSON.stringify(saved));
       input.value = '';
       renderUserReports();
-      showToast('تم حفظ الخبر محليا بنجاح');
+      showToast(remoteSaved ? 'تم إرسال بلاغك لإدارة برهان بنجاح' : 'تم حفظ البلاغ على جهازك لعدم توفر اتصال');
     }
 
     function deleteUserReport(idx) {
@@ -1107,7 +1184,11 @@
 
     updateConnUI(isOfflineMode);
     renderUserReports();
-    autoSyncData(false);
+    const cachedApproved = JSON.parse(localStorage.getItem('burhan_approved_reports') || '[]');
+    autoSyncData(false).then(() => {{
+      mergeApprovedReportsIntoRumors(cachedApproved);
+      fetchApprovedCommunityReports();
+    }});
   </script>
 </body>
 </html>
