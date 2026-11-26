@@ -54,14 +54,16 @@
 
     .container { max-width: 1040px; margin: 0 auto; padding: 24px 20px 60px; }
 
-    /* Login Card */
     .login-wrap { max-width: 420px; margin: 60px auto; background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 18px; padding: 28px 24px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 14px; }
     .login-wrap h1 { font-size: 19px; font-weight: 700; }
     .login-wrap p { font-size: 13px; color: var(--text-secondary); }
     .field { width: 100%; height: 42px; border-radius: 12px; border: 1px solid var(--border-strong); padding: 0 14px; font-size: 14px; background-color: var(--bg-page); color: var(--text-primary); outline: none; }
     .field:focus { border-color: var(--accent); background-color: var(--bg-surface); }
 
-    /* Dashboard */
+    .main-nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 12px; flex-wrap: wrap; }
+    .main-tab { padding: 9px 18px; border-radius: 12px; border: 1px solid var(--border); background-color: var(--bg-surface); font-size: 14px; font-weight: 700; color: var(--text-secondary); cursor: pointer; }
+    .main-tab.active { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
     .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
     .metric { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-sm); }
     .metric span { font-size: 12px; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 4px; }
@@ -82,10 +84,14 @@
     .reply-box { width: 100%; min-height: 64px; border-radius: 12px; border: 1px solid var(--border-strong); padding: 10px 12px; font-size: 13px; background-color: var(--bg-page); resize: vertical; outline: none; }
     .reply-box:focus { border-color: var(--accent); background-color: var(--bg-surface); }
     .card-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .price-row { display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; gap: 10px; align-items: center; }
     .empty { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: center; color: var(--text-secondary); }
     .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: #fff; padding: 9px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; display: none; z-index: 50; }
 
-    @media (max-width: 640px) { .metrics { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) {
+      .metrics { grid-template-columns: 1fr; }
+      .price-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -105,34 +111,49 @@
   <div id="toast" class="toast"></div>
 
   <main class="container">
-    <!-- شاشة تسجيل الدخول -->
     <section id="loginSection" class="login-wrap">
       <h1>تسجيل دخول الإدارة</h1>
-      <p>أدخل البريد الإلكتروني وكلمة المرور المسجلين في Supabase لإدارة ومراجعة بلاغات المواطنين.</p>
+      <p>أدخل البريد الإلكتروني وكلمة المرور المسجلين في Supabase لإدارة البلاغات وتحديث الأسعار.</p>
       <input type="email" id="adminEmail" class="field" placeholder="البريد الإلكتروني للمسؤول" dir="ltr" />
       <input type="password" id="adminPassword" class="field" placeholder="كلمة المرور" dir="ltr" />
       <button id="loginBtn" class="btn btn-primary" style="height:42px; border-radius:12px;" onclick="handleLogin()">دخول إلى لوحة الإدارة</button>
     </section>
 
-    <!-- لوحة الإدارة -->
     <section id="dashboardSection" style="display:none;">
-      <div class="metrics">
-        <div class="metric"><span>بلاغات قيد المراجعة</span><strong id="mPending">0</strong></div>
-        <div class="metric"><span>بلاغات معتمدة ومنشورة</span><strong id="mApproved">0</strong></div>
-        <div class="metric"><span>بلاغات مرفوضة</span><strong id="mRejected">0</strong></div>
+      <div class="main-nav">
+        <button class="main-tab active" onclick="switchAdminTab('reports', this)">إدارة البلاغات والشائعات</button>
+        <button class="main-tab" onclick="switchAdminTab('prices', this)">تحديث الأسعار الفوري</button>
       </div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
-        <div class="tabs" style="margin-bottom:0;">
-          <button class="tab active" onclick="setFilter('pending', this)">قيد المراجعة</button>
-          <button class="tab" onclick="setFilter('approved', this)">المعتمدة والمنشورة</button>
-          <button class="tab" onclick="setFilter('rejected', this)">المرفوضة</button>
-          <button class="tab" onclick="setFilter('all', this)">الكل</button>
+      <!-- قسم البلاغات -->
+      <div id="tab-reports">
+        <div class="metrics">
+          <div class="metric"><span>بلاغات قيد المراجعة</span><strong id="mPending">0</strong></div>
+          <div class="metric"><span>بلاغات معتمدة ومنشورة</span><strong id="mApproved">0</strong></div>
+          <div class="metric"><span>بلاغات مرفوضة</span><strong id="mRejected">0</strong></div>
         </div>
-        <button class="btn" onclick="loadReports()">تحديث القائمة</button>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+          <div class="tabs" style="margin-bottom:0;">
+            <button class="tab active" onclick="setFilter('pending', this)">قيد المراجعة</button>
+            <button class="tab" onclick="setFilter('approved', this)">المعتمدة والمنشورة</button>
+            <button class="tab" onclick="setFilter('rejected', this)">المرفوضة</button>
+            <button class="tab" onclick="setFilter('all', this)">الكل</button>
+          </div>
+          <button class="btn" onclick="loadReports()">تحديث القائمة</button>
+        </div>
+
+        <div id="reportsList" class="cards"></div>
       </div>
 
-      <div id="reportsList" class="cards"></div>
+      <!-- قسم الأسعار -->
+      <div id="tab-prices" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+          <input type="text" id="priceFilterInput" class="field" style="max-width:340px;" placeholder="ابحث عن سلعة لتعديل سعرها..." oninput="renderAdminPrices()" />
+          <span style="font-size:12px; color:var(--text-muted);">أي تعديل يُحفظ هنا يظهر فوراً في التطبيق العام</span>
+        </div>
+        <div id="adminPricesList" class="cards"></div>
+      </div>
     </section>
   </main>
 
@@ -143,6 +164,8 @@
 
     let allReports = [];
     let currentFilter = 'pending';
+    let baseMarketItems = [];
+    let priceOverrides = {};
 
     function showToast(msg) {
       const el = document.getElementById('toast');
@@ -154,6 +177,14 @@
 
     function escapeHtml(str) {
       return String(str || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function switchAdminTab(tab, btn) {
+      document.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-reports').style.display = tab === 'reports' ? 'block' : 'none';
+      document.getElementById('tab-prices').style.display = tab === 'prices' ? 'block' : 'none';
+      if (tab === 'prices' && !baseMarketItems.length) loadMarketForAdmin();
     }
 
     async function checkSession() {
@@ -180,10 +211,7 @@
       const { error } = await sb.auth.signInWithPassword({ email, password });
       btn.disabled = false;
       btn.textContent = 'دخول إلى لوحة الإدارة';
-      if (error) {
-        showToast('بيانات الدخول غير صحيحة: ' + error.message);
-        return;
-      }
+      if (error) { showToast('بيانات الدخول غير صحيحة: ' + error.message); return; }
       showToast('تم تسجيل الدخول بنجاح');
       checkSession();
     }
@@ -195,14 +223,8 @@
     }
 
     async function loadReports() {
-      const { data, error } = await sb
-        .from('reports')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (error) {
-        showToast('خطأ في جلب البلاغات: ' + error.message);
-        return;
-      }
+      const { data, error } = await sb.from('reports').select('*').order('created_at', { ascending: false });
+      if (error) { showToast('خطأ في جلب البلاغات: ' + error.message); return; }
       allReports = data || [];
       document.getElementById('mPending').textContent = allReports.filter(r => r.status === 'pending').length;
       document.getElementById('mApproved').textContent = allReports.filter(r => r.status === 'approved').length;
@@ -256,14 +278,8 @@
 
     async function updateReportStatus(id, newStatus) {
       const replyText = document.getElementById('reply_' + id).value.trim();
-      const { error } = await sb
-        .from('reports')
-        .update({ status: newStatus, admin_reply: replyText })
-        .eq('id', id);
-      if (error) {
-        showToast('تعذر تحديث البلاغ: ' + error.message);
-        return;
-      }
+      const { error } = await sb.from('reports').update({ status: newStatus, admin_reply: replyText }).eq('id', id);
+      if (error) { showToast('تعذر تحديث البلاغ: ' + error.message); return; }
       showToast(newStatus === 'approved' ? 'تم اعتماد البلاغ ونشره في التطبيق' : 'تم رفض البلاغ');
       loadReports();
     }
@@ -271,12 +287,70 @@
     async function deleteReport(id) {
       if (!confirm('هل أنت متأكد من حذف هذا البلاغ نهائياً؟')) return;
       const { error } = await sb.from('reports').delete().eq('id', id);
-      if (error) {
-        showToast('تعذر الحذف: ' + error.message);
-        return;
-      }
+      if (error) { showToast('تعذر الحذف: ' + error.message); return; }
       showToast('تم حذف البلاغ');
       loadReports();
+    }
+
+    async function loadMarketForAdmin() {
+      try {
+        const res = await fetch('./data.json?v=' + Date.now());
+        const json = await res.json();
+        baseMarketItems = json.market || [];
+      } catch (e) {
+        showToast('تعذر تحميل قائمة السلع من data.json');
+      }
+      const { data } = await sb.from('price_overrides').select('*');
+      priceOverrides = {};
+      (data || []).forEach(row => { priceOverrides[row.item_name] = row; });
+      renderAdminPrices();
+    }
+
+    function renderAdminPrices() {
+      const q = document.getElementById('priceFilterInput').value.trim();
+      const container = document.getElementById('adminPricesList');
+      const items = baseMarketItems.filter(i => !q || i.name.includes(q));
+      container.innerHTML = items.map((item, idx) => {
+        const ov = priceOverrides[item.name] || {};
+        const currentFair = ov.fair || item.fair;
+        const currentStatus = ov.status || item.status;
+        return `
+          <div class="card">
+            <div class="price-row">
+              <div>
+                <div class="card-content">${escapeHtml(item.name)}</div>
+                <span style="font-size:12px; color:var(--text-muted);">${escapeHtml(item.category || '')}</span>
+              </div>
+              <input type="text" id="p_fair_${idx}" class="field" value="${escapeHtml(currentFair)}" placeholder="السعر الحالي" />
+              <select id="p_status_${idx}" class="field">
+                <option value="green" ${currentStatus === 'green' ? 'selected' : ''}>متوفر / سعر مدعوم</option>
+                <option value="amber" ${currentStatus === 'amber' ? 'selected' : ''}>تذبذب / كمية محدودة</option>
+                <option value="red" ${currentStatus === 'red' ? 'selected' : ''}>شحيح حالياً</option>
+              </select>
+              <button class="btn btn-primary" onclick="savePriceOverride(${idx})">حفظ السعر</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+      window._filteredAdminItems = items;
+    }
+
+    async function savePriceOverride(idx) {
+      const item = window._filteredAdminItems[idx];
+      if (!item) return;
+      const fair = document.getElementById('p_fair_' + idx).value.trim();
+      const status = document.getElementById('p_status_' + idx).value;
+      const labels = { green: 'متوفر بالأسواق', amber: 'كمية محدودة', red: 'شحيح حاليا' };
+      const { error } = await sb.from('price_overrides').upsert({
+        item_name: item.name,
+        fair: fair,
+        status: status,
+        label: labels[status] || 'متوفر بالأسواق',
+        updated_at: new Date().toISOString()
+      });
+      if (error) { showToast('تعذر حفظ السعر: ' + error.message); return; }
+      priceOverrides[item.name] = { item_name: item.name, fair, status, label: labels[status] };
+      showToast('تم تحديث سعر «' + item.name + '» ونشره فوراً');
     }
 
     checkSession();
