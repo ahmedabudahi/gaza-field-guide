@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F7F6F2" />
+  <title>برهان — لوحة تحكم المسؤول</title>
+  <link rel="icon" type="image/png" href="icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-page: #F7F6F2;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F0EFEA;
+      --bg-hover: #E7E5DE;
+      --border: rgba(28, 25, 23, 0.09);
+      --border-strong: rgba(28, 25, 23, 0.16);
+      --text-primary: #1C1917;
+      --text-secondary: #57534E;
+      --text-muted: #78716C;
+      --accent: #1E3A5F;
+      --accent-hover: #172E4C;
+      --accent-soft: rgba(30, 58, 95, 0.09);
+      --on-accent: #FFFFFF;
+      --ok-color: #166534;
+      --ok-bg: rgba(22, 101, 52, 0.09);
+      --warn-color: #92400E;
+      --warn-bg: rgba(217, 119, 6, 0.1);
+      --danger-color: #991B1B;
+      --danger-bg: rgba(220, 38, 38, 0.09);
+      --shadow-sm: 0 2px 5px -1px rgba(28, 25, 23, 0.06), 0 1px 2px -1px rgba(28, 25, 23, 0.04);
+      --shadow-md: 0 8px 18px -4px rgba(28, 25, 23, 0.09);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; }
+    body { background-color: var(--bg-page); color: var(--text-primary); min-height: 100vh; font-size: 14px; line-height: 1.65; }
+
+    .topbar { background-color: var(--bg-surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+    .topbar-inner { max-width: 1040px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .brand-badge { background-color: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+    .top-actions { display: flex; align-items: center; gap: 8px; }
+
+    .btn { height: 36px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background-color: var(--bg-subtle); color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: 0.15s; }
+    .btn:hover { background-color: var(--bg-hover); }
+    .btn-primary { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+    .btn-primary:hover { background-color: var(--accent-hover); }
+    .btn-ok { background-color: var(--ok-bg); color: var(--ok-color); border-color: rgba(22, 101, 52, 0.2); }
+    .btn-ok:hover { background-color: rgba(22, 101, 52, 0.16); }
+    .btn-danger { background-color: var(--danger-bg); color: var(--danger-color); border-color: rgba(220, 38, 38, 0.2); }
+    .btn-danger:hover { background-color: rgba(220, 38, 38, 0.16); }
+
+    .container { max-width: 1040px; margin: 0 auto; padding: 24px 20px 60px; }
+
+    /* Login Card */
+    .login-wrap { max-width: 420px; margin: 60px auto; background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 18px; padding: 28px 24px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 14px; }
+    .login-wrap h1 { font-size: 19px; font-weight: 700; }
+    .login-wrap p { font-size: 13px; color: var(--text-secondary); }
+    .field { width: 100%; height: 42px; border-radius: 12px; border: 1px solid var(--border-strong); padding: 0 14px; font-size: 14px; background-color: var(--bg-page); color: var(--text-primary); outline: none; }
+    .field:focus { border-color: var(--accent); background-color: var(--bg-surface); }
+
+    /* Dashboard */
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .metric { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 14px; padding: 14px 18px; box-shadow: var(--shadow-sm); }
+    .metric span { font-size: 12px; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 4px; }
+    .metric strong { font-size: 22px; font-weight: 700; }
+
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tab { padding: 7px 16px; border-radius: 999px; border: 1px solid var(--border); background-color: var(--bg-surface); color: var(--text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; }
+    .tab.active { background-color: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+    .cards { display: flex; flex-direction: column; gap: 12px; }
+    .card { background-color: var(--bg-surface); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 16px; padding: 18px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 10px; }
+    .card-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .pill { padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .pill-pending { background-color: var(--warn-bg); color: var(--warn-color); }
+    .pill-approved { background-color: var(--ok-bg); color: var(--ok-color); }
+    .pill-rejected { background-color: var(--danger-bg); color: var(--danger-color); }
+    .card-content { font-size: 15.5px; font-weight: 700; color: var(--text-primary); }
+    .reply-box { width: 100%; min-height: 64px; border-radius: 12px; border: 1px solid var(--border-strong); padding: 10px 12px; font-size: 13px; background-color: var(--bg-page); resize: vertical; outline: none; }
+    .reply-box:focus { border-color: var(--accent); background-color: var(--bg-surface); }
+    .card-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .empty { background-color: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: center; color: var(--text-secondary); }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background-color: var(--text-primary); color: #fff; padding: 9px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; display: none; z-index: 50; }
+
+    @media (max-width: 640px) { .metrics { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span>برهان</span>
+        <span class="brand-badge">لوحة تحكم المسؤول</span>
+      </div>
+      <div class="top-actions">
+        <a href="./index.html" class="btn">عرض التطبيق العام</a>
+        <button id="logoutBtn" class="btn btn-danger" style="display:none;" onclick="handleLogout()">تسجيل الخروج</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="toast" class="toast"></div>
+
+  <main class="container">
+    <!-- شاشة تسجيل الدخول -->
+    <section id="loginSection" class="login-wrap">
+      <h1>تسجيل دخول الإدارة</h1>
+      <p>أدخل البريد الإلكتروني وكلمة المرور المسجلين في Supabase لإدارة ومراجعة بلاغات المواطنين.</p>
+      <input type="email" id="adminEmail" class="field" placeholder="البريد الإلكتروني للمسؤول" dir="ltr" />
+      <input type="password" id="adminPassword" class="field" placeholder="كلمة المرور" dir="ltr" />
+      <button id="loginBtn" class="btn btn-primary" style="height:42px; border-radius:12px;" onclick="handleLogin()">دخول إلى لوحة الإدارة</button>
+    </section>
+
+    <!-- لوحة الإدارة -->
+    <section id="dashboardSection" style="display:none;">
+      <div class="metrics">
+        <div class="metric"><span>بلاغات قيد المراجعة</span><strong id="mPending">0</strong></div>
+        <div class="metric"><span>بلاغات معتمدة ومنشورة</span><strong id="mApproved">0</strong></div>
+        <div class="metric"><span>بلاغات مرفوضة</span><strong id="mRejected">0</strong></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+        <div class="tabs" style="margin-bottom:0;">
+          <button class="tab active" onclick="setFilter('pending', this)">قيد المراجعة</button>
+          <button class="tab" onclick="setFilter('approved', this)">المعتمدة والمنشورة</button>
+          <button class="tab" onclick="setFilter('rejected', this)">المرفوضة</button>
+          <button class="tab" onclick="setFilter('all', this)">الكل</button>
+        </div>
+        <button class="btn" onclick="loadReports()">تحديث القائمة</button>
+      </div>
+
+      <div id="reportsList" class="cards"></div>
+    </section>
+  </main>
+
+  <script>
+    const SUPABASE_URL = "https://oovenrpwpgbbarzumzqk.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_RRFHVFQ3IJeyOOO2Kd672w_rRhllhpZ";
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let allReports = [];
+    let currentFilter = 'pending';
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.style.display = 'block';
+      clearTimeout(window._t);
+      window._t = setTimeout(() => { el.style.display = 'none'; }, 2600);
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    async function checkSession() {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('dashboardSection').style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'inline-flex';
+        loadReports();
+      } else {
+        document.getElementById('loginSection').style.display = 'flex';
+        document.getElementById('dashboardSection').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'none';
+      }
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      const btn = document.getElementById('loginBtn');
+      if (!email || !password) { showToast('أدخل البريد الإلكتروني وكلمة المرور'); return; }
+      btn.disabled = true;
+      btn.textContent = 'جاري التحقق...';
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+      btn.disabled = false;
+      btn.textContent = 'دخول إلى لوحة الإدارة';
+      if (error) {
+        showToast('بيانات الدخول غير صحيحة: ' + error.message);
+        return;
+      }
+      showToast('تم تسجيل الدخول بنجاح');
+      checkSession();
+    }
+
+    async function handleLogout() {
+      await sb.auth.signOut();
+      showToast('تم تسجيل الخروج');
+      checkSession();
+    }
+
+    async function loadReports() {
+      const { data, error } = await sb
+        .from('reports')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) {
+        showToast('خطأ في جلب البلاغات: ' + error.message);
+        return;
+      }
+      allReports = data || [];
+      document.getElementById('mPending').textContent = allReports.filter(r => r.status === 'pending').length;
+      document.getElementById('mApproved').textContent = allReports.filter(r => r.status === 'approved').length;
+      document.getElementById('mRejected').textContent = allReports.filter(r => r.status === 'rejected').length;
+      renderReports();
+    }
+
+    function setFilter(status, btn) {
+      currentFilter = status;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderReports();
+    }
+
+    function renderReports() {
+      const container = document.getElementById('reportsList');
+      const filtered = allReports.filter(r => currentFilter === 'all' || r.status === currentFilter);
+      if (!filtered.length) {
+        container.innerHTML = '<div class="empty">لا توجد بلاغات في هذا القسم حالياً.</div>';
+        return;
+      }
+      const statusMap = {
+        pending: { cls: 'pill-pending', text: 'قيد المراجعة' },
+        approved: { cls: 'pill-approved', text: 'معتمد ومنشور' },
+        rejected: { cls: 'pill-rejected', text: 'مرفوض' }
+      };
+      container.innerHTML = filtered.map(r => {
+        const st = statusMap[r.status] || statusMap.pending;
+        const typeLabel = r.report_type === 'price' ? 'بلاغ سعر' : 'تحقق من شائعة';
+        const dateStr = new Date(r.created_at).toLocaleString('ar-EG', { dateStyle: 'medium', timeStyle: 'short' });
+        return `
+          <article class="card">
+            <div class="card-top">
+              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <span class="pill ${st.cls}">${st.text}</span>
+                <span style="font-size:12px; font-weight:700; color:var(--accent);">${typeLabel} · ${escapeHtml(r.area)}</span>
+              </div>
+              <span style="font-size:12px; color:var(--text-muted);">${dateStr}</span>
+            </div>
+            <div class="card-content">${escapeHtml(r.content)}</div>
+            <textarea id="reply_${r.id}" class="reply-box" placeholder="اكتب رد الإدارة أو نتيجة التحقق التي ستظهر للمستخدمين عند الاعتماد...">${escapeHtml(r.admin_reply || '')}</textarea>
+            <div class="card-actions">
+              <button class="btn btn-ok" onclick="updateReportStatus(${r.id}, 'approved')">اعتماد ونشر للجميع</button>
+              <button class="btn" onclick="updateReportStatus(${r.id}, 'rejected')">رفض البلاغ</button>
+              <button class="btn btn-danger" onclick="deleteReport(${r.id})">حذف نهائي</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    async function updateReportStatus(id, newStatus) {
+      const replyText = document.getElementById('reply_' + id).value.trim();
+      const { error } = await sb
+        .from('reports')
+        .update({ status: newStatus, admin_reply: replyText })
+        .eq('id', id);
+      if (error) {
+        showToast('تعذر تحديث البلاغ: ' + error.message);
+        return;
+      }
+      showToast(newStatus === 'approved' ? 'تم اعتماد البلاغ ونشره في التطبيق' : 'تم رفض البلاغ');
+      loadReports();
+    }
+
+    async function deleteReport(id) {
+      if (!confirm('هل أنت متأكد من حذف هذا البلاغ نهائياً؟')) return;
+      const { error } = await sb.from('reports').delete().eq('id', id);
+      if (error) {
+        showToast('تعذر الحذف: ' + error.message);
+        return;
+      }
+      showToast('تم حذف البلاغ');
+      loadReports();
+    }
+
+    checkSession();
+  </script>
+</body>
+</html>
